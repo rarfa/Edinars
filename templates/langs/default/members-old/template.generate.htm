@@ -1,0 +1,66 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>SOLDE:</span> <?=balance($data['Balance'])?> </span></h2>
+						<p></p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('outil')?>
+						</article>
+						<article class="col-2">
+<?if(isset($data['ScriptLoaded'])){?>
+     
+	  
+	  <center>
+	   <h2>Gestion des Codes</h2>
+				Copiez ce code et coller dans votre page <br><br>
+			   <form id="contacts-form" action="">
+					<fieldset>
+						<label class="field text">CODE #1 - En utilisant la m&egrave;thode POST </label> 
+						<textarea readonly ><?=$post['PostHtmlCode']?></textarea>
+						<label class="field text">CODE #2 - En utilisant la m&egrave;thode GET</label> 
+						<textarea readonly ><?=$post['GetHtmlCode']?></textarea></div>
+					</fieldset>
+				</form>	
+			<br><br>
+					<center>
+						<h2>EXEMPLES</h2>
+					<div>POST :<br> <?=unhtmlentities($post['OrgPostHtml'])?></div>
+					<br>
+					<form>
+				    <div>GET : <br><?=unhtmlentities($post['OrgGetHtml'])?></div>
+					</form>
+			<br>Besoin de description de tous champ utilis&egrave; s'il vous pla&icirc;t <a href="payment.htm#ipn">CLIQUEZ ICI</a>.
+			<br><br>
+			</center>
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+	
+	
+	
+	</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+function send(obj ,objvalue) {
+	document.getElementById('action').value = objvalue ;
+	document.getElementById('action').name = obj ;
+	document.getElementById('sigup-form').submit()
+}
+
+</script>
+	
+	
+	
+	
+	

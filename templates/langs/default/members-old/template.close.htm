@@ -1,0 +1,78 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>SOLDE:</span> <?=balance($data['Balance'])?> </span></h2>
+						<p></p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('account')?>
+						</article>
+						<article class="col-2">
+<?if(isset($data['ScriptLoaded'])){?>
+<?if(!$post['send']){?>
+
+			<form method=post id="sigup-form">
+			     <h2>Fermer Mon Compte</h2>
+				 <center>
+				 <br>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+									S'IL VOUS PLA&Icirc;T confirmer que vous voulez de fermer votre compte?
+								</p>
+							</div>
+							</div>
+							<br>
+				  <div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">
+							<br>
+							Si vous s&eacute;lectionnez "Fermer mon compte" ci-dessous, vous ne pourrez plus avoir acc&eacute;s aux informations de votre compte
+							</p>
+						</div>
+					</div>
+					<br>
+				 <div class="alignright">
+				            <a href="#" class="link4" onClick="send('cancel','cancel')"><span><span>Annuler</span></span></a>
+							<a href="#" class="link2" onClick="send('send','Fermer')"><span><span>Fermer mon compte</span></span></a>
+							<input type="hidden" id="action" name="action" value="" >
+					</div>
+					 
+				 </center>
+				 
+			</form>	 
+<?}else{?>
+	
+	      <div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">
+							<br>
+							Votre  <?=prntext($data['SiteName'])?>  compte a egrave;tegrave; fermegrave;.	
+							<br>Merci d'utiliser notre service.
+							</p>
+						</div>
+					</div>
+<?}?>
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+function send(obj ,objvalue) {
+	document.getElementById('action').value = objvalue ;
+	document.getElementById('action').name = obj ;
+	document.getElementById('sigup-form').submit();
+}
+
+</script>

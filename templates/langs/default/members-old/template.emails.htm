@@ -1,0 +1,139 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>SOLDE:</span> <?=balance($data['Balance'])?> </span></h2>
+						<p></p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('account')?>
+						</article>
+						<article class="col-2">
+
+<?if(isset($data['ScriptLoaded'])){?>
+	<?if(!$data['PostSent']){?>
+		<form method="post" id="sigup-form">
+			<center>
+					<H2>MANAGE YOUR EMAIL ADDRESSES (MAX <?=$data['maxemails']?>)</H2>
+					<?if($data['Error']){?>
+						<br>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+							</div>
+							<br>
+					<?}elseif(isset($_POST['addnow'])) {?>
+							<div class="ui-widget">
+							<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p><span class="ui-icon ui-icon-info" style="float: centre; margin-right: .3em;"></span>
+								New e-mail address has been successfully submitted. Check your e-mail to activate it.
+								</p>
+							</div>
+							</div>
+							<br>
+					<?}elseif(isset($_GET['c'])) {?>
+							<div class="ui-widget">
+							<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p><span class="ui-icon ui-icon-info" style="float: centre; margin-right: .3em;"></span>
+								Your new e-mail address has been sucessfully activated.
+								</p>
+							</div>
+							</div>
+							<br>
+					<?}elseif(isset($_POST['primbtn'])) {?>
+							<div class="ui-widget">
+							<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p><span class="ui-icon ui-icon-info" style="float: centre; margin-right: .3em;"></span>
+								Your default e-mail address has been sucessfully changed.
+								</p>
+							</div>
+							</div>
+							<br>
+					<?}elseif(isset($_POST['deletebtn'])) {?>
+						<div class="ui-widget">
+							<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p><span class="ui-icon ui-icon-info" style="float: centre; margin-right: .3em;"></span>
+									Your e-mail has been successfully deleted.
+								</p>
+							</div>
+							</div>
+							<br>
+					<?}?>
+				
+					<?if(isset($_GET['addnew'])||isset($post['add'])) {?>
+						<div class="ui-state-highlight-big ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+						<br>
+						<div class="field text">
+								<label>Your new e-mail address : </label>
+								<input type=text name=newmail size=41 maxlength=32><br>
+						</div>
+						<div class="alignright">
+								<a class="link2" href="#" onClick="document.getElementById('sigup-form').submit()"><span><span>Ajouter</span></span></a>
+								<input type="hidden" name="addnow" value="Add">				
+							</div>
+							<br>
+						
+									
+					
+					</div>
+				
+			</center>
+		</form>
+	<?}else{?>
+	
+		<div class="ui-state-highlight-big ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+					<br>
+					
+					<? foreach($data['emails'] as $ind=>$email) {?>
+					<div class="field">
+							<input type="radio" name="choice" value="<?=$email['email']?>">
+								<b><?=$email['email']?> </b>
+								<? if(!$email['active']) echo("Non confirm&eacute;");
+							elseif($email['primary']) echo("Primaire");
+							else echo("Confirm&eacute;e");
+						?>
+						</div>
+					
+					<?}?>
+					<br>
+					</div>
+					
+					<div class="alignright">
+							<br>
+								<a class="link4" href="#" onClick="send('deletebtn','SUPPRIMER')"><span><span>SUPPRIMER</span></span></a>
+								<a class="link2" href="#" onClick="send('primbtn','primaires')"><span><span>R&eacute;eglez primaires</span></span></a>
+								<a class="link2" href="#" onClick="send('add','AJOUTER')"><span><span>AJOUTER NOUVEAU EMAIL</span></span></a>
+								<input type="hidden" id="action" value="">	
+							</div>
+							<br>
+				
+				
+</center>
+</form>
+<?}?>
+<?}?><?}else{?>SECURITY ALERT: Access Denied<?}?>
+</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+function send(obj ,objvalue) {
+	document.getElementById('action').value = objvalue ;
+	document.getElementById('action').name = obj ;
+	alert(document.getElementById('action').name);
+	document.getElementById('sigup-form').submit()
+}
+
+</script>
+

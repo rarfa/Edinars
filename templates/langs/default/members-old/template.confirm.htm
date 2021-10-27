@@ -1,0 +1,92 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>Your Domain Name</span> Helps the World  to Find You</h2>
+						<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+							<h2>Login</h2>
+							<ul class="list1">
+								<li><a href="#">Sed ut perspiciatis unde</a></li>
+								<li><a href="#">Omnis iste natus error sit volupta</a></li>
+								<li><a href="#">Tem accusantium doloreque</a></li>
+								<li><a href="#">Laudantiumtotam rem aperiam</a></li>
+								<li><a href="#">Eaque ipsa quae</a></li>
+								<li><a href="#">Lnventore veritatis et quasi</a></li>
+								<li><a href="#">Architecto beatae vitae</a></li>
+								<li><a href="#">Dicta sunt explicabo</a></li>
+								<li><a href="#">Nemo enim ipsam voluptatem</a></li>
+								<li><a href="#">Quia voluptas sit aspernatur</a></li>
+								<li><a href="#">Aut odit aut fugit, sed quia</a></li>
+								<li><a href="#">Consequuntur magni</a></li>
+							</ul>
+							<a href="#" class="link2"><span><span>More Solutions</span></span></a> </article>
+						<article class="col-2">
+							
+<?if(isset($data['ScriptLoaded'])){?>
+	<?if(!$data['PostSent']){?>
+
+		<form method=post id="sigup-form" >
+		<center>
+		<h2>Ouvrir un compte Etape 2</h2>
+		
+				<div class="img-box">
+					<fieldset>
+					<?if($data['Error']){?>
+						<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+						</div>
+					<br>
+					<?}?>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">S'IL VOUS PLA&Icirc;T ENTRER VOTRE CODE DE CONFIRMATION</p>
+						</div>
+				    </div>
+					<br>
+					<div class="field text">
+							<label>Confirmation Code (*):</label>
+							<input type="text" id="cid" name="cid" size="30" maxlength="32" value="<?=prntext($post['cid'])?>">
+					</div>
+					<div class="alignright">
+				   <a href="#" class="link2" onClick="document.getElementById('sigup-form').submit()"><span><span>CONTINUER D'INSCRIPTION &raquo;</span></span></a>
+					</div>
+					
+						<input type="hidden"  name="confirm" value="CONTINUER D'INSCRIPTION!"></td>
+			</fieldset>
+		
+<?}else{?>
+		<center>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">
+							Votre compte a &egrave;t&egrave; cr&egrave;&egrave;, <br> S'il vous pla&icirc;tt Connectez vous et poursuivre les &egrave;tapes d'autorisation
+							</p>
+						</div>
+				    </div>
+					<br>
+					<div class="alignright">
+						<a href="login.htm" class="link2"><span><span>Connectez-vous</span></span></a>
+					</div>
+<?}?>
+</form>
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+</center>
+							
+						</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

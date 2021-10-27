@@ -1,0 +1,276 @@
+<html lang="en">
+<head>
+  <title><?=prntext($data['SiteTitle'])?></title>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name=Title content="<?=prntext($data['SiteTitle'])?>">
+  <meta name=Description content="<?=prntext($data['SiteDescription'])?>">
+  <meta name=Keywords content="<?=prntext($data['SiteKeywords'])?>">
+  <meta name=Copyright content="<?=prntext($data['SiteCopyrights'])?>">
+  <meta name=Classification content="Business">
+  <meta name=Rating content="General">
+  <meta name=Robots content="index,nofollow">
+  <meta name=Revisit-After content="7 Days">
+  <meta http-equiv="pragma" content="no-cache"/>
+
+<meta http-equiv=Content-Type content="text/html; charset=<?=prntext($data['SiteCharset'])?>">
+
+<link rel="stylesheet" href="<?=$data['Host']?>/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="<?=$data['Host']?>/css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="<?=$data['Host']?>/css/style.css" type="text/css" media="all">
+<link type="text/css" href="<?=$data['Host']?>/css/jquery-ui-1.8.14.custom.css" rel="stylesheet" />	
+		
+<script type="text/javascript" src="<?=$data['Host']?>/js/maxheight.js"></script>
+<script type="text/javascript" src="<?=$data['Host']?>/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<?=$data['Host']?>/js/cufon-yui.js"></script>
+<script type="text/javascript" src="<?=$data['Host']?>/js/cufon-replace.js"></script>
+<script type="text/javascript" src="<?=$data['Host']?>/js/Myriad_Pro_300.font.js"></script>
+<script type="text/javascript" src="<?=$data['Host']?>/js/Myriad_Pro_400.font.js"></script>
+
+<script type="text/javascript" src="<?=$data['Host']?>/js/script.js"></script>
+
+<script type="text/javascript" src="<?=$data['Host']?>/js/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="<?=$data['Host']?>/js/jquery-ui-1.8.14.custom.min.js"></script>
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="<?=$data['Host']?>/js/html5.js"></script>
+<![endif]-->
+</head>
+<body id="page1">
+<div class="tail-top">
+<!-- header -->
+	<header>
+		<div class="container">
+					<div class="header-box">
+					<span class="top-info"> 
+					<img src="<?=$data['Host']?>/images/logo.png"> 
+					
+					</span>				
+		</div>
+	</header>
+<!-- content -->
+<section id="content">
+		<div class="container">
+			<div class="inside">
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+
+<form method="post" id="payment" >
+<input type="hidden" name="step" value="<?=$post['step']?>"><br><BR>
+
+<table id="rounded-corner" summary="Detail de votre Commande">
+    <thead>
+    	<tr>
+        	<th scope="col"  class="rounded-company">D&egrave;tail de votre Commande</span></th>
+			<th scope="col" class="rounded-q1"></th>
+        </tr>
+    </thead>
+        <tfoot>
+    	<tr>
+        	<td colspan="2" class="rounded-foot-left"><em><?if($post['comments']){?>Description :<?}?></em><br>
+        	<?if($post['comments']){?><?=str_replace( $data['line'], $data['replace'], prntext($post['comments']))?><?}?></td>
+        </tr>
+    </tfoot>
+    <tbody>
+    	<tr>
+        	<td><?if($post['action']!='donation'){?>Paiement <?}else{?>Faire un don<?}?> pour :</td>
+            <td><?=prntext($post['member'])?></td>
+        </tr>
+        <tr>
+        	<td><?if($post['action']!='donation'){?>Produit / Service<?}else{?>Faire un don Vers<?}?> :</td>
+            <td><?=prntext($post['produit'])?></td>
+        </tr>
+        <tr>
+        	<td><?if($post['action']!='donation'){?>Prix :<?}else{?>Montant, <?=prntext($data['Currency'])?><?}?></td>
+            <td><?if($post['action']!='donation'){?>
+					<?=prnsumm($post['prix'])?>&nbsp;<?=prntext($data['Currency'])?>
+				<?}else{?>
+					<input type=text name=price size=10 maxlength=8 value="<?=prnsumm($post['prix'])?>">
+				<?}?>
+			</td>
+        </tr>
+		<?if($post['action']!='donation'){?>
+			<?if($post['quantite']>0){?>
+			<tr>
+				<td>Quantit&egrave :</td>
+				<td><?=prnintg($post['quantite'])?></td>
+			</tr>
+			<?}?>
+			<?if($post['installation']>0){?>
+				<tr>
+					<td>Frais d'installation :</td>
+					<td><?=prnsumm($post['installation'])?>&nbsp; <?=prntext($data['Currency'])?></td>
+				</tr>
+			<?}?>
+			<?if($post['tva']>0){?><tr><td>TVA :</td><td><?=prnsumm($post['tva'])?> &nbsp; <?=prntext($data['Currency'])?></td></tr><?}?>
+			<?if($post['livraison']>0){?><tr><td>La livraison / Manipulation :</td><td ><?=prnsumm($post['livraison'])?> &nbsp; <?=prntext($data['Currency'])?></td></tr><?}?>
+			<?if($post['periode']>0){?><tr><td>Dur&egrave:</td><td><?=prnintg($post['periode'])?> jour (s)</td></tr><?}?>
+			<?if($post['essai']>0){?><tr><td>P&egraveriode d'essai:</td><td><?=prnintg($post['essai'])?> jour (s)</td></tr><?}?>
+			
+		<?}?>
+		<tr>
+				<td> <em>Total:</em></td>
+				<td><?=prnsumm($post['total'])?>&nbsp;<?=prntext($data['Currency'])?></td>
+			</tr>
+        
+    </tbody>
+</table>
+			
+						</article>
+						<article class="col-2">
+<center>
+
+
+
+<?if($post['step']==1){?>
+<h2>&Egrave;tape 1 - Connection aux compte</h2>
+
+					 
+                        <div class="ui-widget" style="margin-top: 0px; width: 500px;">
+									<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+										<br>
+										<p align="center">SI VOUS N'AVEZ PAS DE COMPTE, <a href="<?=$data['Members']?>/signup.htm?rid=<?=$post['member']?>" target=new>CLIQUEZ ICI</a>
+										<br>
+										</p>
+								</div>	
+								
+						<?if($data['Error']){?>
+						<br>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+							</div>
+							<br>
+					<?}?>
+					 
+							 <br>
+							 
+							<table id="hor-minimalist-a" summary="PAIMENT-STEP1">
+							<thead>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Identifiant (*): </td>
+									<td><input type="text" id="username" name="username" size="30" maxlength="128" value="<?=prntext($post['username'])?>"></td>
+								</tr>
+								<tr>
+									<td>Mot de passe (*):</td>
+									<td><input type="password" id="password" name="password" size="30" maxlength="30" value="<?=prntext($post['password'])?>"></td>
+								</tr>
+								<tr>
+									<td>Code de s&egrave;curit&egrave; (*):</td>
+									<td><input type="text" id="turing" name="turing" size="30" maxlength="32""></td>
+								</tr>
+								<?if($data['UseTuringNumber']){?>
+									<tr>
+										<td colspan=2 align="center" ><img src="<?=$data['Host']?>/turing.htm" width="150" height="30" border="1"></td>
+									
+									</tr>
+									<?}?>
+							</tbody>
+							</table>
+						
+					    <br>
+							
+							<div class="alignright">
+							       <?if($post['step']==1){?>
+									<a href="#" class="link4" onclick="document.location.href='<?=$post['ucancel']?>'"><span><span>Annuler</span></span></a>
+									<?}?>
+									<a href="#" class="link2" onClick="document.getElementById('payment').submit()"><span><span>Connectez-vous</span></span></a>
+									<input type="hidden" name="send" value="Connectez-vous" >
+							</div>
+
+
+<?}elseif($post['step']==2){?>
+<h2>&Egrave;tape 2 - Confirmation de Paiement</h2>
+
+   <div class="ui-state-highlight-big ui-corner-all" style="margin-top: 20px; padding: 0 .7em;  width: 500px; "> 
+   <br><b>
+								
+								<div class="field">
+									<label>Paiement Pour : <?=prntext($post['member'])?></label>
+								</div>	
+								<div class="field">
+									<label>Produit / Service : <?=prntext($post['produit'])?></label>
+								</div>	
+								<div class="field">
+									<label>Total: <?=prnsumm($post['total'])?> &nbsp;  <?=prntext($data['Currency'])?></label>
+								</div>
+								<div class="field">
+									<label>Notes:<em>(En option)</em></label><br>
+									<textarea name="notes" cols=30 rows=5><?=prntext($post['notes'])?></textarea>
+								</div>
+
+							<br>
+						</b>	
+	</div>
+		<br>
+							<div class="alignright">
+							        <a class="link4" href="#" onClick="send('back','BACK')"><span><span>Retour</span></span></a>
+							    	<a class="link2" href="#" onClick="send('send','CHECKOUT')"><span><span>payer</span></span></a>
+								     <input type="hidden" id="action" value="">	
+									
+							</div>
+	
+<?}elseif($post['step']==3){?>
+	 <div class="ui-widget" style="margin-top: 0px; width: 500px;">
+									<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+										<br>
+										<p align="center">
+										Vous commandez a &egrave;t&egrave; envoy&egrave; &agrave; l'acheteur. Merci beaucoup pour l'utilisation de notre syst&egrave;me de paiement Edinars.
+											
+										</a>
+										<br>
+										</p>
+								</div>	
+
+<?}?>
+</form>
+</center>
+	</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<!-- CONTENT -->
+<!-- aside -->
+<aside>
+	<div class="container">
+		<div class="inside">
+			<div class="line-ver1">
+				<div class="line-ver2">
+					<div class="line-ver3">
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+<!-- footer -->
+<footer>
+	<div class="container">
+		<div class="inside">
+			<a href="www.hostdz.com" class="new_window">Powered by Hostdz</a><br>
+		</div>
+	</div>
+</footer>
+</body>
+</html>
+<script>
+function send(obj ,objvalue) {
+	document.getElementById('action').value = objvalue ;
+	document.getElementById('action').name = obj ;
+	document.getElementById('payment').submit()
+}
+</script>

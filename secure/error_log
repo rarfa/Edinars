@@ -1,0 +1,6 @@
+[20-Dec-2016 13:21:10 Africa/Algiers] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ed1nar3/public_html/templates/langs/French/secure/template.ussd.php on line 136
+[20-Dec-2016 13:21:20 Africa/Algiers] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ed1nar3/public_html/templates/langs/French/secure/template.ussd.php on line 136
+[20-Dec-2016 13:23:24 Africa/Algiers] PHP Parse error:  syntax error, unexpected ')' in /home/ed1nar3/public_html/templates/langs/French/secure/template.ussd.php on line 136
+[20-Dec-2016 13:23:39 Africa/Algiers] PHP Parse error:  syntax error, unexpected ')' in /home/ed1nar3/public_html/templates/langs/French/secure/template.ussd.php on line 136
+[24-Dec-2016 19:39:09 Africa/Algiers] PHP Parse error:  syntax error, unexpected '}' in /home/ed1nar3/public_html/templates/langs/French/secure/template.ussd.php on line 163
+[25-Dec-2016 00:35:27 Africa/Algiers] PHP Parse error:  syntax error, unexpected end of file in /home/ed1nar3/public_html/templates/langs/French/secure/template.ussd.php on line 150

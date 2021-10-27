@@ -1,0 +1,172 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>SOLDE:</span> <?=balance($data['Balance'])?> </span></h2>
+						<p></p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('outil')?>
+						</article>
+						<article class="col-2">
+						
+
+<?if(isset($data['ScriptLoaded'])){?>
+	<center>
+		<form method="post" name="data" id="sigup-form"  >
+		<input type=hidden name=step value="<?=$post['step']?>">
+	
+ 	<?if($post['step']==1){?>
+			 <h2>Gestion des Produits</h2>
+			<center>
+			<div class="img-box">
+				<fieldset>
+			
+					<table class=frame width=100% border=0 cellspacing=1 cellpadding=2>
+						<tr>
+							<td class=capc>NOM</td>
+							<td class=capc>PRIX</td>
+							<td class=capc>TVA</td>
+							<td class=capc>LIVRAISON</td>
+							<td class=capc>VENDU</td>
+							<td class=capc width=1%>ACTION</td>
+						</tr>
+						<?$idx=0;foreach($data['Products'] as $value){$bgcolor=$idx%2?'#EEEEEE':'#E7E7E7'?>
+							<tr bgcolor=<?=$bgcolor?> onmouseover="setPointer(this, <?=$idx?>, 'over', '<?=$bgcolor?>', '#CCFFCC', '#FFCC99')" onmouseout="setPointer(this, <?=$idx?>, 'out', '<?=$bgcolor?>', '#CCFFCC', '#FFCC99')" onmousedown="setPointer(this, <?=$idx?>, 'click', '<?=$bgcolor?>', '#CCFFCC', '#FFCC99')">
+								<td><?=prntext($value['name'])?></td>
+								<td align=right><?=prnsumm($value['price'])?> <?=prntext($data['Currency'])?></td>
+								<td align=center nowrap><?=prnsumm($value['tax'])?> <?=prntext($data['Currency'])?></td>
+								<td align=center nowrap><?=prnsumm($value['shipping'])?> <?=prntext($data['Currency'])?></td>
+								<td align=center nowrap><?=($value['sold']?$value['sold']:'0')?><br><font class=remark> (<?=prnsumm($value['price']*$value['sold'])?><?=prntext($data['Currency'])?>)</font></td>
+								<td align=center nowrap>
+									<a href="products.htm?id=<?=$value['id']?>&action=update">MODIFIER</a> 
+									|<a href="products.htm?id=<?=$value['id']?>&action=supprimer" onclick="return cfmform()">SUPPRIMER</a>
+									<br><a href="generate.htm?id=<?=$value['id']?>&action=products">G&Eacute;N&Eacute;RER CODE</a>
+									|<a href="generate.htm?id=<?=$value['id']?>&action=products&status=crypt">CRYPTER CODE</a>
+								</td>
+							</tr>
+						<?$idx++;}?>
+						</table>
+				<br>
+				<div class="alignright">
+							<a href="#" class="link2" onClick="document.getElementById('sigup-form').submit()"><span><span>AJOUTER NOUVEAU PRODUIT</span></span></a>
+							<input type="hidden" name="send" value="send" >
+					</div>
+					</fieldset>
+			</div>	
+		<?}elseif($post['step']==2){?>
+			<?if($post['gid']){?>
+				<input type=hidden name=gid value="<?=$post['gid']?>"><?}?>
+				 <h2>Informations de Produit</h2>
+				
+			<center>
+			
+				<fieldset>
+						<?if($data['Error']){?>
+						<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+						</div>
+					<br>
+					<?}?>
+					<div class="field text">
+							<label>Nom de produit/serice (*) :</label>
+							<input type="text" id="name" name="name"  maxlength="64" value="<?=prntext($post['name'])?>">
+					</div>
+					
+					<div class="field text">
+							<label>Prix/Montant, <?=prntext($data['Currency'])?> (*):</label>
+							<input type="text" id="price" name="price"  maxlength="10" value="<?=prntext($post['price'])?>" >
+							<a href="#" class="hintanchor" onMouseover="showhint('Ne mettez pas de signes de Dinar DA, entrez seulement un nombre comme 100', this, event, '200px')">
+								 <img src="../images/info.png" width="30"  height="30">
+							</a> 
+						
+							
+					</div>
+					<div class="field text">
+							<label>TVA, <?=prntext($data['Currency'])?> (*):</label>
+							<input type="text" id="tax" name="tax"  maxlength="10" value="<?=prntext($post['tax'])?>">
+								<a href="#" class="hintanchor" onMouseover="showhint('Ne mettez pas de signes de Dinar DA, entrez seulement un nombre comme 100', this, event, '200px')">
+								 <img src="../images/info.png" width="30"  height="30">
+							</a> 
+					</div>
+					<div class="field text">
+							<label>Shipping, <?=prntext($data['Currency'])?> (*):</label>
+							<input type="text" id="shipping" name="shipping"  maxlength="10" value="<?=prntext($post['shipping'])?>">
+								<a href="#" class="hintanchor" onMouseover="showhint('Ne mettez pas de signes de Dinar DA, entrez seulement un nombre comme 100', this, event, '200px')">
+								 <img src="../images/info.png" width="30"  height="30">
+							</a> 
+					</div>
+					<div class="field text">
+							<label>Return URL (*):</label>
+							<input type="text" id="ureturn" name="ureturn"  value="<?=prntext($post['ureturn'])?>">
+					</div>
+					<div class="field text">
+							<label>Notify URL (*):</label>
+							<input type="text" id="unotify" name="unotify"  value="<?=prntext($post['unotify'])?>">
+					</div>
+					<div class="field text">
+							<label>Cancel URL:</label>
+							<input type="text" id="ucancel" name="ucancel"  value="<?=prntext($post['ucancel'])?>">
+					</div>
+					<center>
+					<div class="field">
+							<label>Please select a button:</label>
+							<?$idx=1;foreach($post['Buttons'] as $key=>$value)
+								{$bgcolor=$idx%2?'#EEEEEE':'#E7E7E7'?>
+							<div class="field">
+								<label for=button_<?=$idx?> style="cursor:hand">
+								<input class=checkbox type=radio id=button_<?=$idx?> name=button value="<?=$value?>"
+								<?if($post['button']==$value){?> checked<?}?>>&nbsp;
+									<img src="<?=$data['SinBtns']?>/<?=$value?>" align=middle onclick="javascript:document.all['button_<?=$idx?>'].checked=true"></label>
+									<br>
+								</div>	
+									<?$idx++;}?>
+					</div>
+					<div class="field">
+						<label>Description:<small>(En option)</small></label>
+						<textarea name="comments"><?=prntext($post['comments'])?></textarea>
+					</div>
+					</center>
+					<div class="alignright">
+							<br>
+								<a class="link4" href="#" onClick="send('cancel','cancel')"><span><span>ANNULER</span></span></a>
+								<a class="link2" href="#" onClick="send('send','CONTINUE')"><span><span>CONTINUE</span></span></a>
+								<input type="hidden" id="action" value="">	
+							</div>
+							<br>
+				
+			
+				</fieldset>
+			</div>	
+			
+			<?}?>
+		</form>
+	</center>
+<?}else{?>
+	SECURITY ALERT: Access Denied
+<?}?>
+	
+	</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+function send(obj ,objvalue) {
+	document.getElementById('action').value = objvalue ;
+	document.getElementById('action').name = obj ;
+	document.getElementById('sigup-form').submit()
+}
+
+</script>

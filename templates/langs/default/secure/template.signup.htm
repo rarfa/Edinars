@@ -1,0 +1,224 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>Your Domain Name</span> Helps the World  to Find You</h2>
+						<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+							<h2>Login</h2>
+							<ul class="list1">
+								<li><a href="#">Sed ut perspiciatis unde</a></li>
+								<li><a href="#">Omnis iste natus error sit volupta</a></li>
+								<li><a href="#">Tem accusantium doloreque</a></li>
+								<li><a href="#">Laudantiumtotam rem aperiam</a></li>
+								<li><a href="#">Eaque ipsa quae</a></li>
+								<li><a href="#">Lnventore veritatis et quasi</a></li>
+								<li><a href="#">Architecto beatae vitae</a></li>
+								<li><a href="#">Dicta sunt explicabo</a></li>
+								<li><a href="#">Nemo enim ipsam voluptatem</a></li>
+								<li><a href="#">Quia voluptas sit aspernatur</a></li>
+								<li><a href="#">Aut odit aut fugit, sed quia</a></li>
+								<li><a href="#">Consequuntur magni</a></li>
+							</ul>
+							<a href="#" class="link2"><span><span>More Solutions</span></span></a> </article>
+						<article class="col-2">
+							<center>
+							<h2>Ouvrir un compte</h2>
+							
+							
+							
+<?if(isset($data['ScriptLoaded'])){?>
+	<?if(!$data['PostSent']){?>
+		<form method=post id="sigup-form">
+			<center>
+					
+					<?if($data['Error']){?>
+						<br>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+							</div>
+							<br>
+					<?}?>
+					<fieldset>
+						<div class="field text">
+												<label>Identifiant (*): </label>
+												<input type="text" id="newuser" name="newuser" size="30" maxlength="128" value="<?=prntext($post['newuser'])?>">
+						</div>
+						<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">Votre mot de passe est sensible &agrave; la casse et doit &ecirc;tre d'au moins 9 caract&egrave;res, y compris au moins une lettre (AZ),
+							un chiffre (0-9) et l'un des caract&egrave;res sp&egrave;ciaux suivants:
+							<br>!=+*;:-,._{[()]}#%?@</p>
+						</div>
+						</div>
+						<br>
+						<div class="field text">
+												<label>Choisir un mot de passe (*):</label>
+												<input type="password" id="newpass" name="newpass" size="30" maxlength="100" value="<?=prntext($post['newpass'])?>">
+											
+						</div>
+						<div class="field text">
+												<label>Confirmer le mot de passe (*):</label>
+												<input type="password" id="cfmpass" name="cfmpass" size="30" maxlength="100" value="<?=prntext($post['cfmpass'])?>">
+						</div>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">Si vous oubliez votre mot de passe, nous allons vous poser la question que vous soumettez ci-dessous. S'il vous pla&icirc;t, essayez de trouver une question 
+											personnelle et une r&egrave;ponse qui vous seul connaissez.</p>
+						</div>
+						</div>
+						<br>
+				
+					<div class="field text">
+							<label>Question de S&egrave;curit&egrave;(*):</label>
+							<input type="text" id="newques" name="newques" size="30" maxlength="255" value="<?=prntext($post['newques'])?>">
+					</div>
+					<div class="field text">
+							<label>R&egrave;ponse de s&egrave;curit&egrave; (*):</label>
+							<input type="text" id="newansw" name="newansw" size="30" maxlength="255" value="<?=prntext($post['newansw'])?>">
+					</div>
+					
+					<div class="field text">
+							<label>E-Mail Adresse (*):</label>
+							<input type="text" id="newmail" name="newmail" size="30" maxlength="50" value="<?=prntext($post['newmail'])?>">
+					</div>
+					<?if($data['UseExtRegForm']){?>
+						<tr	 bgcolor=#CCCCCC>
+							<td colspan=2 class=justify>
+								<font class=remark>Your Profile Information - Your name and address should match the info registered with 
+										your Credit Card and/or your Checking Account.</font>
+						</tr>
+						
+						<tr>
+							<td class=field nowrap>First Name (*):</td>
+							<td class=input><input type=text name=newfname size=41 maxlength=32 value="<?=prntext($post['newfname'])?>">
+							<br><font class=remark>This name will be displayed to others.</font></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Last Name (*):</td>
+							<td class=input><input type=text name=newlname size=41 maxlength=32 value="<?=prntext($post['newlname'])?>">
+							<br><font class=remark>This name will be displayed to others.</font></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Company Name<br><small>(optional)</small>:</td>
+							<td class=input><input type=text name=newcompany size=41 maxlength=128 value="<?=prntext($post['newcompany'])?>">
+							<br><font class=remark>This name will be displayed to others.</font></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Company Registration No:<br><small>(optional)</small></td>
+							<td class=input><input type=text name=newregnum size=20 maxlength=32 value="<?=prntext($post['newregnum'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Drivers License No:<br><small>(US only)</small></td>
+							<td class=input><input type=text name=newdrvnum size=41 maxlength=32 value="<?=prntext($post['newdrvnum'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Address (*):</td>
+							<td class=input><input type=text name=newaddress size=41 maxlength=128 value="<?=prntext($post['newaddress'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>City (*):</td>
+							<td class=input><input type=text name=newcity size=41 maxlength=64 value="<?=prntext($post['newcity'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Country (*):</td>
+							<td class=input><select name=newcountry><?=showselect($data['Countries'], $post['newcountry'])?></select></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>State<br><small>(optional)</small>:</td>
+							<td class=input><input type=text name=newstate size=20 maxlength=32 value="<?=prntext($post['newstate'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Postal Code (*):</td>
+							<td class=input><input type=text name=newzip size=20 maxlength=32 value="<?=prntext($post['newzip'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Phone (*):</td>
+							<td class=input><input type=text name=newphone size=20 maxlength=64 value="<?=prntext($post['newphone'])?>"></td>
+						</tr>
+						<tr>
+							<td class=field nowrap>Fax<br><small>(optional)</small>:</td>
+							<td class=input><input type=text name=newfax size=20 maxlength=64 value="<?=prntext($post['newfax'])?>"></td>
+						
+						</tr>
+					<?}?>
+					<?if($data['UseTuringNumber']){?>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">Dans nos efforts continus pour fournir le service le plus s&egrave;curis&egrave; possible,
+							nous avons ajout&egrave; un test de s&egrave;curit&egrave; pour emp&ecirc;cher les enregistrements automatiques.
+							Entrez les num&egrave;ros tels qu'ils figurent dans l'image ci-dessous.
+							<br>
+							<img src="<?=$data['Host']?>/turing.htm" width="150" height="30" border="1">
+							</p>
+
+						</div>
+						</div>
+						<br>
+						
+						<div class="field text">
+							<label>Code de s&egrave;curit&egrave; (*):</label>
+							<input type="text" id="turing" name="turing" size="30" maxlength="32"">&nbsp;&nbsp;&nbsp;
+								
+						</div>	
+					
+					<?}?>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">Accord utilisateur et Politique de confidentialit&egrave; - L'Accord de l'utilisateur et Politique 
+							de confidentialit&egrave;
+							sont con&ccedil;ues pour prot&egrave;ger et vous informer de vos droits au sein du service.
+							<br>
+							<input type="checkbox" id="terms"  name="terms"<?if($post['terms']=='on'){?> checked<?}?>>
+							   OUI, J'ai lu les
+								<a href="javascript:view('<?=$data['Host']?>/terms.htm',400,500)">Termes et Conditions</a> 
+								avant de vous inscrire.
+							</p>
+						</div>
+						</div>
+						<br>
+					
+				
+					<div class="alignright">
+							<a href="#" class="link2" onClick="document.getElementById('sigup-form').submit()"><span><span>Ouvrir un compte</span></span></a>
+							<input type="hidden" name="send" value="Ouvrir un compte" >
+					</div>
+			
+				</center>
+				</fieldset>
+		</form>
+	<?}else{?>
+	<br>
+			<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p align="center">Un message a &egrave;t&egrave; envoy&egrave; &egrave; l'adresse e-mail..<br>
+			<br>S'il vous pla&icirc;t naviguer vers le lien contenu dans l'e-mail pour continuer le processus d'inscription..<br>
+			<br>Ce code de confirmation ne sera valable que 48 heures.
+							</p>
+						</div>
+						</div>
+						<br>
+			<br>
+	<?}?>
+	<?}else{?>SECURITY ALERT: Access Denied<?}?>
+							</center>
+							
+						</article>
+						<div class="clear"></div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+	

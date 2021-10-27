@@ -1,0 +1,46 @@
+/**************************
+General Class
+**************************/
+a{color:#090;}
+a:hover{color: #171616}
+
+
+/**************************
+Admin Box Style
+**************************/
+.admin_box_header {background:#242623;}
+.box_header_left {background:#242623;}
+
+.content_box{box-shadow: 0 1px #d6d8da;border-radius: 5px;}
+
+.admin_box_bottom {}
+.box_bottom_left {}
+
+/**************************
+tabs class
+**************************/
+
+.header_tabs a span.tab{background:#006400}
+.header_tabs a span.tab_right{ }
+.header_tabs a:hover span.tab , .header_tabs a.current span.tab
+{background:#fff; color:#333333}
+.header_tabs a:hover span.tab_right , .header_tabs a.current span.tab_right
+{background:#fff;}
+
+
+/**************************
+table class
+**************************/
+.common_table thead tr th{background:#F2FFE6;}
+
+
+/**************************
+page no. class
+**************************/
+.page_area .current {background:#64AE00; color:#fff}
+
+
+/**************************
+search class
+**************************/
+.searchbox {background: url(../images/search_g.gif) no-repeat;}

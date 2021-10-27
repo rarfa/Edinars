@@ -1,0 +1,193 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>Your Domain Name</span> Helps the World  to Find You</h2>
+						<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+					</div>
+				</div>
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+							  <?showmenu('account')?>
+							</article>
+						<article class="col-2">
+						<center>
+						
+<?if(isset($data['ScriptLoaded'])){?>
+	<?if(!$data['PostSent']){?>
+		<?if($data['InfoIsProfileEmpty']){?>
+						<br>
+						<center>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<b><u>REMARQUE</u>
+								<blockquote>Avant l'utilisation de notre syst&egrave;me, vous devez remplir le formulaire de votre profil et Address.</blockquote>
+								<p>
+							</div>
+							</div>
+							</center>
+							<br>
+			
+		<?}?>
+		
+			<center>
+					<?if($data['Error']){?>
+						<br>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+							</div>
+							<br>
+					<?}?>
+					
+					<div id="tabs">
+						<ul>
+							<li><a href="#tabs-1">Mon Profile</a></li>
+							<li><a href="#tabs-2">Mon Address</a></li>
+							<li><a href="#tabs-3">Mon Status</a></li>
+							<?php if($post['type'] == 1){?>
+								<li><a href="#tabs-4">Mon Entreprise</a></li>
+							<?php } ?>
+						</ul>
+						<div id="tabs-1">
+						   <form method="post"  action="#tabs-1" id="sigup-form-step1" >
+							<table id="hor-minimalist-a" summary="PROFILE">
+							<tbody>
+									<tr>
+										<td>Identifiant</td>
+										<td><?=prntext($post['username'])?> </td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td><?=$post['emails']?></td>
+									</tr>
+									<tr>
+										<td>Nom (*)</td>
+										<td><input type="text" name="fname" size="41" maxlength="32" value="<?=prntext($post['fname'])?>"></td>
+									</tr>
+									<tr>
+										<td>Pr&egrave;nom (*)</td>
+										<td><input type="text" name="lname" size="41" maxlength="32" value="<?=prntext($post['lname'])?>"></td>
+									</tr>
+									<tr>
+										<td>Type de compte (*)</td>
+										<td>
+											<?php if ($data['InfoIsEmpty']) { ?>
+												<select name="type"><?=showselect($data['MemberType'], $post['type'])?></select>
+											<?php } else {?>
+												<?=$data['MemberType'][$post['type']] ?>
+											<?php }?>
+										</td>
+									</tr>
+									<tr>
+										<td>T&egrave;l&egrave;phone</td>
+										<td><input type="text" name="phone" size="41" maxlength="64" value="<?=prntext($post['phone'])?>"></td>
+									</tr>
+									<tr>
+										<td>Mobile (*)</td>
+										<td><input type="text" name="mobile" size="41" maxlength="64" value="<?=prntext($post['mobile'])?>"></td>
+									</tr>
+									<tr>
+										<td>Fax</td>
+										<td><input type="text" name="fax" size="41" maxlength="64" value="<?=prntext($post['fax'])?>"></td>
+									</tr>
+							</tbody>
+						</table>
+							    <div class="alignright">
+									<a href="#" class="link2" onClick="document.getElementById('sigup-form-step1').submit()"><span><span>VALIDER</span></span></a>
+									<input type="hidden" name="change" value="updateProfile" >
+							     </div>
+						</form>		 
+						</div>
+						<div id="tabs-2">
+						<form method="post" action="#tabs-2" id="sigup-form-step2" >
+						    <table id="hor-minimalist-a" summary="PROFILE ADDRESS">
+							<tbody>
+									<tr>
+										<td>Address (*):</td>
+										<td><input type="text" name="address" size="41" maxlength="128" value="<?=prntext($post['address'])?>"></td>
+									</tr>
+									<tr>
+										<td>Commune (*):</td>
+										<td><input type="text" name="city" size="41" maxlength="64" value="<?=prntext($post['city'])?>"></td>
+									</tr>
+									<tr>
+										<td>Code postal (*):</td>
+										<td><input type="text" name="postcode" size="41" maxlength="64" value="<?=prntext($post['postcode'])?>"></td>
+									</tr>
+									<tr>
+										<td>Wilaya(*):</td>
+										<td><select name="wilaya"><?=showselect($data['Wilayas'], $post['wilaya'])?></select></td>
+									</tr>
+									
+							</tbody>
+						</table>
+								 <div class="alignright">
+									<a href="#" class="link2" onClick="document.getElementById('sigup-form-step2').submit()"><span><span>VALIDER</span></span></a>
+									<input type="hidden" name="change" value="updateAddress" >
+							     </div>
+					</form>			 
+						</div>
+						<div id="tabs-3">
+						                <br>
+										<a class="link4" href="verify.htm?action=help"><span><span><font color=<?if($post['status']<2){?>#FF0000<?}else{?>#0066CC<?}?>><?=prntext($data['MemberStatus'][$post['status']]['status'])?></font></span></span></a>
+										<?if(!empty($data['MemberStatus'][$post['status']]['action'])){?>
+											<a  class="link2" href="verify.htm?action='<?=$data['MemberStatus'][$post['status']]['action']?>'"><span><span><?=prntext($data['MemberStatus'][$post['status']]['button'])?></span></span></a>
+										 <?}?>
+										 <br>
+						</div>
+						<?php if($post['type'] == 1){?>
+								<div id="tabs-4">
+								 <form method="post"  id="sigup-form-step3" >
+									  <table id="hor-minimalist-a" summary="PROFILE ENTREPRISE">
+									<tbody>
+											<tr>
+												<td>Nom de soci&eacute;t&eacute; (*) :</td>
+												<td><input type="text" name="company" size="41" maxlength="128" value="<?=prntext($post['company'])?>"></td>
+											</tr>
+									</tbody>
+								</table>
+									 <div class="alignright">
+									<a href="#" class="link2" onClick="document.getElementById('sigup-form-step3').submit()"><span><span>VALIDER</span></span></a>
+									<input type="hidden" name="change" value="updateEntreprise" >
+							     </div>
+								</div>
+								</form>
+						<?php } ?>		
+					</div>	
+					
+			
+	<?}else{?>
+	  
+		<div class="ui-widget">
+			<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+			<center>
+			<p>Votre profil &egrave;t&egrave; sauvegard&egrave;</p>
+			</center>
+			</div>
+		</div>						
+		<br>
+				<div class="alignright">
+					<a href="profile.htm" class="link2"><span><span>Mon Profile</span></span></a>
+				</div>
+		<br>
+	<?}?>
+<?}else{?>
+	SECURITY ALERT: Access Denied
+	
+<?}?>
+</article>
+						
+						<div class="clear"></div>
+
+</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

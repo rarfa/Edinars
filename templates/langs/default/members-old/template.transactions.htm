@@ -1,0 +1,229 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>SOLDE:</span> <?=balance($data['Balance'])?> </span></h2>
+						<p></p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('account')?>
+						</article>
+						<article class="col-2">
+<?if(isset($data['ScriptLoaded'])){?>
+<center>
+	<?if($post['action']=='select'){?>
+		<?if(!$post['SearchResult']){?>
+			 <form id="sigup-form">
+			  <div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">TOUTES LES TRANSACTIONS</a></li>
+				<li><a href="#tabs-2">EN ATTENTE</a></li>
+				<li><a href="#tabs-3">TERMIN&Egrave;</a></li>
+				<li><a href="#tabs-4">ANNUL&Egrave;</a></li>
+				<li><a href="#tabs-5">REMBOURSE</a></li>
+				
+			</ul>
+			<div id="tabs-1">
+							<table id="hor-minimalist-a" summary="TOUTES LES TRANSACTIONS">
+							<thead>
+								<tr>
+									<th scope="col">Dir</th>
+									<th scope="col">Member</th>
+									<th scope="col">Montant</th>
+									<th scope="col">Frais</th>
+									<th scope="col">Pay&egrave</th>
+									<th scope="col">Date</th>
+									<th scope="col">Type</th>
+									<th scope="col">Statut</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<?php if($post['Transactions']){
+									$idx=1;
+									foreach($post['Transactions'] as $value){ ?>
+									<tr>
+										<td><?=prntext($value['direction'])?></td>
+										<td><?if($value['userid']>0){?><a href="userinfo.htm?id=<?=$value['userid']?>&bp=<?=$data['PageFile']?><?if(isset($post['StartPage'])){?>&page=<?=$post['StartPage']?><?}?>&action=view"><?=prntext($value['username'])?></a><?}else{?><?=prntext($value['username'])?><?}?></td>
+										<td><?=$value['amount']?></td>
+										<td><?=$value['fees']?></td>
+										<td><?=$value['nets']?></td>
+										<td><?=$value['tdate']?></td>
+										<td><?=$value['type']?></td>
+										<td><?=$value['status']?></td>
+										<td>
+											<?if($value['canview']){?>
+												<a href="transactions.htm?id=<?=$value['id']?><?if(isset($post['StartPage'])){?>&page=<?=$post['StartPage']?><?}?>&action=details">INFO</a>
+											<?}?>
+											<?if($value['canrefund']){?>
+												<br>
+												<a href="transactions.htm?id=<?=$value['id']?><?if(isset($post['StartPage'])){?>&page=<?=$post['StartPage']?><?}?>&action=refund" onclick="return cfmform()">REMBOUSER</a>
+											<?}?>
+										</td>
+									
+									</tr>
+						   
+							  <?php 
+							     }
+							   }else{?>
+								<tr>
+									<td colspan=9 align=center >AUCUNE TRANSACTION TROUV&Egrave;</td>
+								</tr>
+								<?}?>
+								<tr>
+									<td colspan="9" align="center">
+										<?$count=count($data['Pages']);
+										if($count>0){
+											for($i=0; $i<$count; $i++){?>
+											<?if($data['Pages'][$i]==$post['StartPage']){?>
+												<?=$i+1?>
+											<?}else{?>
+												<a href="transactions.htm?page=<?=$data['Pages'][$i]?>"><?=$i+1?></a>
+											<?}?>
+											<?if($i<$count-1)echo(" | ");}?><?}else{?>1<?}?>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+			</div>
+			<div id="tabs-2"></div>
+			<div id="tabs-3"></div>
+			<div id="tabs-4"></div>
+			<div id="tabs-5"></div>
+			
+		</div>
+		
+			
+			 </form>
+			 <br>
+					<div class="alignright">
+							<a class="link2" href="transactions.htm<?if($post['StartPage']){?>?page=<?=$post['StartPage']?>&<?}else{?>?<?}?>type=<?=$post['type']?>&status=<?=$post['status']?>"><span><span><?if(!$post['SearchResult']){?>Actualiser<?}else{?>ALL TRANSACTIONS<?}?></span></span></a>
+							<a class="link4" href="transactions.htm?action=search&page=<?=$post['StartPage']?>"><span><span>RECHERCHE</span></span></a>
+							
+							<input type="hidden" name="addnow" value="Add">				
+				</div>
+			<br>
+		<?}?>
+		
+		  
+				<br>
+			
+	<?}elseif($post['action']=='details'){?>
+	
+	 <div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">D&egrave;tails de la transaction</a></li>
+				<li><a href="#tabs-2">Description</a></li>
+				<?if($post['Transaction']['ecomments']){?>
+					<li><a href="#tabs-3">Information compl&egrave;mentres</a></li>
+				<?}?>
+			</ul>
+			<div id="tabs-1">
+					<table id="hor-minimalist-a" summary="TOUTES LES TRANSACTIONS">
+							<thead>
+								<tr>
+									<th scope="col">Date</th>
+									<th scope="col">Identifiant</th>
+									<th scope="col">Montant</th>
+									<th scope="col">Frais</th>
+									<th scope="col">Pay&egrave</th>
+									<th scope="col">Type</th>
+									<th scope="col">Statut</th>
+								</tr>
+							</thead>
+							<tbody>
+									<tr>
+										<td><?=$post['Transaction']['tdate']?></td>
+										<td>	<?if($post['Transaction']['userid']>0){?>
+												<a href="userinfo.htm?id=<?=$post['Transaction']['userid']?><?if(isset($post['StartPage'])){?>&page=<?=$post['StartPage']?><?}?>&action=view"><?=$post['Transaction']['username']?></a>
+											<?}else{?>
+												<?=prntext($post['Transaction']['username'])?><?}?>
+										</td>
+						
+										<td><?=$post['Transaction']['amount']?></td>
+										<td><?=prnfees($post['Transaction']['fees'])?></td>
+										<td><?=$post['Transaction']['nets']?></td>
+										<td><?=$post['Transaction']['type']?></td>
+										<td><?=$post['Transaction']['status']?></td>
+										<td><?=$value['status']?></td>
+										<td></td>
+									
+									</tr>
+						   
+							</tbody>
+						</table>
+					
+				
+			</div>
+			<div id="tabs-2">
+				<?=str_replace( $data['line'], $data['replace'], prntext($post['Transaction']['comments']) );?>
+			</div>
+			<?if($post['Transaction']['ecomments']){?>
+				<div id="tabs-3">
+					<?=str_replace($data['line'] ,$data['replace'] , prntext($post['Transaction']['ecomments']));?>
+				</div>
+			<?}?>
+	</div>		
+	
+	 <br>
+					<div class="alignright">
+					<?if($post['Transaction']['canrefund']){?>
+						<a  class="link2" href="transactions.htm?id=<?=$post['Transaction']['id']?><?if($post['StartPage']){?>&page=<?=$post['StartPage']?><?}?>&action=refund" onclick="return cfmform()"><span><span>REMBOURSEMENT<span><span></a>
+					<?}?>
+						<a  class="link4" href="javascript:history.back()"><span><span>RETOUR</span></span></a>
+				</div>
+			<br>
+	
+		<?}else if($post['action']=='search'){?>
+			<form method=post>
+				<input type=hidden name=action value="<?=$post['action']?>">
+				<input type=hidden name=page value="<?=$post['StartPage']?>">
+				<table class=frame width=100% border=0 cellspacing=1 cellpadding=2>
+					<tr>
+						<td class=capc colspan=2>SEARCH OPTIONS</td>
+					</tr>
+					<tr>
+						<td class=field nowrap>
+							<label for=field1>Search by the username 
+							<input type=radio class=checkbox id=field1 name=field value=username checked onclick="username.disabled=false;day.disabled=true;month.disabled=true;year.disabled=true"></label>
+						</td>
+						<td class=input>
+							<input type=text name=username size=40 maxlength=255></td>
+					</tr>
+					<tr>
+						<td class=field nowrap>
+							<label for=field2>Search by the date 
+							<input type=radio class=checkbox id=field2 name=field value=tdate onclick="username.disabled=true;day.disabled=false;month.disabled=false;year.disabled=false"></label>
+						</td>
+						<td class=input>
+							<select name=day disabled><?=showselect($data['StatDays'], $post['day'])?></select>&nbsp;
+							<select name=month disabled><?=showselect($data['StatMonth'], $post['month'])?></select>&nbsp;
+							<select name=year disabled><?=showselect($data['StatYear'], $post['year'])?></select>
+						</td>
+					</tr>
+					<tr>
+						<td class=capc colspan=2>
+							<input type=submit class=submit name=cancel value="BACK">&nbsp;
+							<input type=submit class=submit name=search value="SEARCH NOW!">
+						</td>
+					</tr>
+				</table>
+			</form>
+		<?}?>
+</center>
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+	</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

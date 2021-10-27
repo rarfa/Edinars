@@ -1,0 +1,129 @@
+<?php
+// include("config.php");
+
+define("DIR_ROOT", "./");
+include(DIR_ROOT.'includes/All_files.php');
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="csrf_token" content="<?= $_SESSION['csrf_token'] ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edinars Enterprise - Services de paiements online">
+    <meta name="author" content="Sarl Edinars Enterprise">
+    <title>Edinars - Services de Paiements en Algerie</title>
+
+    <meta name="theme-color" content="#e30613" />
+
+    <base href="<?php echo BASE_URL; ?>/" >
+
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" id="theme" href="css/fontawesome/css/font-awesome.min.css"/>
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.transitions.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon_last.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <?php
+    include("includes/google_analytics.php");
+
+    ?>
+
+    <script src="js/jquery.js"></script>
+</head><!--/head-->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5a4eacebd7591465c70680ff/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+<body id="home" class="homepage" >
+
+    <header id="header">
+        <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner" style="max-height:117px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" height="55"></a>
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!--<li class="scroll active"><a href="#accueil">Accueil</a></li>-->
+                        <li class="scroll"><a href="./#features">Particuliers</a></li>
+                        <li class="scroll"><a href="./#work-process">Professionnels</a></li>
+                        <li class="scroll"><a href="./#services">Services</a></li>
+                        <li class="scroll"><a href="#" data-toggle="modal" data-target="#login-modal" role="button" class="login_btn">Mon Compte</a></li>
+                        <!-- <li class="scroll"><a href="./#animated-number">Mon Compte</a></li> -->
+                        <li class="scroll"><a href="./#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+    </header><!--/header-->
+
+    <?php
+
+    include("includes/header.login.php");
+    include("includes/includer.php");
+    ?>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                     Copyright © 2017 <b>Edinars</b>. Tous droits réservés
+                </div>
+                <div class="col-sm-6">
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/mousescroll.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.inview.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/main.js?update=<?=time()?>"></script>
+    <script src="js/validation-login.js"></script>
+    <script src="js/common.js?update=<?=time()?>"></script>
+
+
+</body>
+</html>

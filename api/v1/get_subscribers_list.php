@@ -1,0 +1,30 @@
+<?php
+// Created by: Yacine Ait Chalal -> 18/08/2017
+#############################################################
+header('Content-Type: application/json');
+
+define("DIR_ROOT", "../../");
+
+include(DIR_ROOT.'includes/All_files.php');
+
+// security
+include('verif_user.php');
+
+$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
+// $subscriber_id = !empty($_GET['subscriber_id'])? clean_var($_GET['subscriber_id']):clean_var($_POST['subscriber_id']);
+
+
+
+$array_reponse = array('success'=>'yes' );
+
+
+$subscribers = select_subscriptions($user_id);
+
+
+$array_reponse["subscribers"] = $subscribers;
+
+// var_dump($subscribers);
+
+echo json_encode ($array_reponse);
+
+?>

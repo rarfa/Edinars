@@ -1,0 +1,123 @@
+AddHandler application/x-httpd-php .html .htm
+#Turn the ReWrite Engine on
+RewriteEngine on
+
+# only local host
+#RewriteCond %{env:HTTPS} off
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+
+# RedirectPermanent http://edinars.dz http://www.edinars.net
+# RedirectPermanent http://www.edinars.dz http://www.edinars.net
+# RedirectPermanent http://edinars.net http://www.edinars.net
+
+
+RewriteCond %{HTTP_HOST} ^(www\.)?edinars\.dz$ [NC]
+RewriteRule ^ http://www.edinars.net/ [R=301,L]
+
+
+
+
+#Static(ish)
+RewriteRule ^acceuil-Edinars.html/?$ /index.php [L]
+RewriteRule ^a-propos-de-Edinars.html/?$ /edinars/edinars.php [L]
+RewriteRule ^comment-ca-marche-Edinars.html/?$ /edinars/comment.php [L]
+RewriteRule ^use/?$ /edinars/comment.php [L]
+RewriteRule ^pourquoi-choisir-Edinars.html/?$ /edinars/pourquoi.php [L]
+RewriteRule ^comment-acheter-Edinars.html/?$ /edinars/achat.php [L]
+RewriteRule ^ou-acheter-Edinars.html/?$ /edinars/shopping.php [L]
+RewriteRule ^comment-vendre-Edinars.html/?$ /edinars/vente.php [L]
+RewriteRule ^envoyer-un-sms-Edinars.html/?$ /edinars/sms.php [L]
+RewriteRule ^recharger-mobile-Edinars.html/?$ /edinars/mobile.php [L]
+RewriteRule ^e-commerce-Edinars.html/?$ /edinars/e-commerce.php [L]
+RewriteRule ^conditions-utilisation-Edinars.html/?$ /edinars/terms.php [L]
+RewriteRule ^questions-frequentes-Edinars.html/?$ /edinars/faq.php [L]
+RewriteRule ^garanties-Edinars.html/?$ /edinars/garanties.php [L]
+RewriteRule ^tarifs-Edinars.html/?$ /edinars/tarif.php [L]
+RewriteRule ^securite-Edinars.html/?$ /edinars/securite.php [L]
+RewriteRule ^contact-Edinars.html/?$ /edinars/contact.php [L]
+RewriteRule ^securite-Edinars.html/?$ /edinars/security.php [L]
+
+RewriteRule ^validation-Edinars.html/?$ /edinars/validation.php [L]
+RewriteRule ^activation.html/([^/\.]+)/?$ /confirm.php?cid=$1 [L]
+RewriteRule ^verifier-Edinars.html/([^/\.]+)/?$ /secure/verify.php?action=$1 [L]
+RewriteRule ^verifer-email-edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/verifemail.php?c=$1&u=$2 [L]
+
+RewriteRule ^ouvrir-un-compte-Edinars.html/?$ /secure/signup.php [L]
+RewriteRule ^ouvrir-un-compte-Edinars.html/([^/\.]+)/?$ /secure/signup.php?rid=$1 [L]
+RewriteRule ^connection-edinars.html/?$ /secure/login.php [L]
+RewriteRule ^mot-de-passe-oublie.html/?$ /secure/forgot.php [L]
+
+RewriteRule ^checkout.html/?$ /checkout.php [L]
+
+
+RewriteRule ^edinars-paiments.html/?$ /checkout.php [L]
+RewriteRule ^secure/edinars-paiments.html/?$ /checkout.php [L]
+# RewriteRule ^edinars-paiments.html/?$ /process.php [L]
+# RewriteRule ^secure/edinars-paiments.html/?$ /process.php [L]
+
+RewriteRule ^secure/acceuil-Edinars.html/?$ /edinars/edinars.php [L]
+RewriteRule ^secure/deconnexion.html/?$ /secure/logout.php [L]
+RewriteRule ^secure/mon-compte-Edinars.html/?$ /secure/index.php [L]
+
+RewriteRule ^secure/mon-historique-Edinars.html/?$ /secure/transactions.php [L]
+RewriteRule ^secure/mon-historique-Edinars.html/([^/\.]+)/?$ /secure/transactions.php?page=$1 [L]
+RewriteRule ^secure/mon-historique-Edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/transactions.php?type=$1&status=$2 [L]
+RewriteRule ^secure/mon-historique-Edinars.html/([^/\.]+)/([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ /secure/transactions.php?page=$1&type=$2&status=$3&action=select [L]
+
+RewriteRule ^secure/mon-historique-Edinars-transaction.html/([^/\.]+)/([^/\.]+)/?$ /secure/transactions.php?id=$1&action=$2
+
+RewriteRule ^secure/mon-profile-Edinars.html/?$ /secure/profile.php [L]
+RewriteRule ^secure/mes-emails-Edinars.html/?$ /secure/emails.php [L]
+RewriteRule ^secure/mes-emails-Edinars.html/ajouter?$ /secure/emails.php?action=add [L]
+RewriteRule ^secure/mes-acces-Edinars.html/?$ /secure/password.php [L]
+RewriteRule ^secure/fermer-mon-compte-Edinars.html/?$ /secure/close.php [L]
+RewriteRule ^secure/products-Edinars.html/?$ /secure/products.php [L]
+RewriteRule ^secure/products-Edinars.html/ajouter?$ /secure/products.php?action=add [L]
+RewriteRule ^secure/products-Edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/products.php?id=$1&action=$2 [L]
+RewriteRule ^secure/code-Edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/generate.php?id=$1&action=$2 [L]
+RewriteRule ^secure/donations-Edinars.html/?$ /secure/donations.php [L]
+RewriteRule ^secure/donations-Edinars.html/ajouter?$ /secure/donations.php?action=add [L]
+RewriteRule ^secure/donations-Edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/donations.php?id=$1&action=$2 [L]
+RewriteRule ^secure/subscriptions-Edinars.html/?$ /secure/subscriptions.php [L]
+RewriteRule ^secure/subscriptions-Edinars.html/ajouter?$ /secure/subscriptions.php?action=add [L]
+RewriteRule ^secure/subscriptions-Edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/subscriptions.php?id=$1&action=$2 [L]
+RewriteRule ^secure/member-Edinars.html/([^/\.]+)/([^/\.]+)/?$ /secure/userinfo.php?id=$1&action=$2 [L]
+RewriteRule ^secure/paiments-Edinars.html/?$ /secure/payment.php [L]
+RewriteRule ^secure/deposit-Edinars.html/?$ /secure/deposit.php [L]
+RewriteRule ^secure/retirer-Edinars.html/?$ /secure/retirer.php [L]
+RewriteRule ^secure/envoyez-Edinars.html/?$ /secure/envoyez.php [L]
+RewriteRule ^secure/demande-Edianrs.html/?$ /secure/demande.php [L]
+RewriteRule ^secure/parrainage-Edinars.html/?$ /secure/affdetails.php [L]
+RewriteRule ^secure/bounus-Edinars.html/?$ /secure/affdownline.php [L]
+RewriteRule ^secure/bannieres-Edinars.html/?$ /secure/affbanners.php [L]
+RewriteRule ^secure/publicite-Edinars.html/?$ /secure/advertising.php [L]
+RewriteRule ^secure/recharger-mobile-Edinars.html/?$ /secure/ussd.php [L]
+RewriteRule ^secure/recharger-mobile-Edinars.html/([^/\.]+)/?$ /secure/ussd.php?page=$1 [L]
+RewriteRule ^secure/envoyer-un-sms-Edinars.html/?$ /secure/sms.php [L]
+
+RewriteRule ^error-Edinars/identifiant.html/?$ /edinars/error.php?error=1 [L]
+RewriteRule ^error-Edinars/produit.html/?$ /edinars/error.php?error=2 [L]
+RewriteRule ^error-Edinars/prix.html/?$ /edinars/error.php?error=3 [L]
+RewriteRule ^error-edinars/action.html/?$ /edinars/error.php?error=4 [L]
+RewriteRule ^error-edinars/identifiant-code.html/?$ /edinars/error.php?error=5 [L]
+RewriteRule ^error-edinars/code.html/?$ /edinars/error.php?error=6 [L]
+
+RewriteRule ^error-edinars/transaction.html/?$ /edinars/error.php?error=7&action=$1 [L]
+RewriteRule ^error-edinars/transaction/([^/\.]+).html?$/?$ /edinars/error.php?error=7&trx=$1 [L]
+
+
+
+RewriteCond %{HTTP_HOST} ^ediffuse\.net$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.ediffuse\.net$
+RewriteRule ^/?$ "http\:\/\/ediffuse\.edinars\.net" [R=301,L]
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 105.103.45.14
+RewriteCond %{HTTP_HOST} ^dzflex\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.dzflex\.com$
+RewriteRule ^/?$ "http\:\/\/dzflex\.edinars\.net\/" [R=301,L]

@@ -1,0 +1,197 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+					<p>
+					
+						<h2><span>SOLDE: </span> <?=balance($data['Balance'])?> </h2>
+					
+						</p>
+					</div>
+				</div>
+				
+			
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('account')?>
+						</article>
+						<article class="col-2">
+			
+<?if(isset($data['ScriptLoaded'])){?>
+
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Informations G&egrave;n&egrave;rales</a></li>
+					<li><a href="#tabs-2">5 R&egrave;centes Transactions</a></li>
+					<li><a href="#tabs-3">Paiements en instance</a></li>
+				</ul>
+				<div id="tabs-1">
+					
+							<table id="hor-minimalist-a" summary="Informations Generales">
+							<thead>
+								<tr>
+									<th scope="col">Nom et Pr&eacute;nom</th>
+									<th scope="col">Identifiant</th>
+									<th scope="col">E-mail principale</th>
+									<th scope="col">Derni&eacute;re connexion</th>
+									<th scope="col">Solde:</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+									<tr>
+										<td><?=prntext($post['fname'])?> <?=prntext($post['lname'])?></td>
+										<td><?=prntext($post['username'])?></td>
+										<td><?=prntext($post['Emails'])?></td>
+										<td><?=prndate($post['ldate'])?> <BR>(<?=prntext($post['last_ip'])?>)</td>
+										<td><?=balance($data['Balance'])?></td>
+										<?if($data['ReferralPays']){?>
+										<td><a href="<?=$data['Host']?>/?rid=<?=$post['username']?>" target=new><?=$data['Host']?>/?rid=<?=$post['username']?></a></td>
+									
+									<?}?>
+									</tr>
+							</tbody>
+						</table>
+						<br>
+						<?if($post['type'] == 1){?>
+							<!-- Professiotnl-->
+						<table id="hor-minimalist-a" summary="Informations Generales">
+							<thead>
+								<tr>
+								    <th scope="col">Logo</th>
+									<th scope="col">Numero RC</th>
+									<th scope="col">Numero NIF</th>
+									<th scope="col">Numero Article</th>
+									<?if($data['ReferralPays']){?>
+										<th scope="col">Votre URL de parrainage</th>
+									<?}?>
+								</tr>
+							</thead>
+							<tbody>
+									<tr>
+										<td><?=prntext($post['username'])?></td>
+										<td><?=prntext($post['username'])?></td>
+										<td><?=prntext($post['username'])?></td>
+										<td><?=prntext($post['username'])?></td>
+										
+										<?if($data['ReferralPays']){?>
+										<td><a href="<?=$data['Host']?>/?rid=<?=$post['username']?>" target=new><?=$data['Host']?>/?rid=<?=$post['username']?></a></td>
+										<?}?>
+									</tr>
+						   </tbody>
+						</table>
+						<?}?>
+						<BR>
+							<div class="alignright">
+												<a class="link4" href="verify.htm?action=help"><span><span><font color=<?if($post['status']<2){?>#FF0000<?}else{?>#0066CC<?}?>><?=prntext($data['MemberStatus'][$post['status']]['status'])?></font></span></span></a>
+												<?if(!empty($data['MemberStatus'][$post['status']]['action'])){?>
+													<a  class="link2" href="verify.htm?action='<?=$data['MemberStatus'][$post['status']]['action']?>'"><span><span><?=prntext($data['MemberStatus'][$post['status']]['button'])?></span></span></a>
+											    <?}?>
+							</div>
+						<br>
+				</div>
+				<div id="tabs-2">
+							<table id="hor-minimalist-a" summary="LES 5 TRANSACTIONS">
+							<thead>
+								<tr>
+									<th scope="col">Dir</th>
+									<th scope="col">Member</th>
+									<th scope="col">Montant</th>
+									<th scope="col">Frais</th>
+									<th scope="col">Pay&egrave</th>
+									<th scope="col">Date</th>
+									<th scope="col">Type</th>
+									<th scope="col">Statut</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<?php if($post['Transactions']){
+									$idx=1;
+									foreach($post['Transactions'] as $value){ ?>
+									<tr>
+										<td><?=prntext($value['direction'])?></td>
+										<td><?if($value['userid']>0){?><a href="userinfo.htm?id=<?=$value['userid']?>&bp=<?=$data['PageFile']?><?if(isset($post['StartPage'])){?>&page=<?=$post['StartPage']?><?}?>&action=view"><?=prntext($value['username'])?></a><?}else{?><?=prntext($value['username'])?><?}?></td>
+										<td><?=$value['amount']?></td>
+										<td><?=$value['fees']?></td>
+										<td><?=$value['nets']?></td>
+										<td><?=$value['tdate']?></td>
+										<td><?=$value['type']?></td>
+										<td><?=$value['status']?></td>
+									</tr>
+						   
+							  <?php 
+							     }
+							   }else{?>
+								<tr>
+									<td colspan=9  align=center>AUCUNE TRANSACTION TROUV&Egrave;</td>
+								</tr>
+								<?}?>
+								
+							</tbody>
+						</table>
+						<br>
+						<div class="alignright">
+							<a href="transactions.htm" class="link2" ><span><span>Visualiser toutes les transactions</span></span></a>
+						</div>	
+				</div>
+				
+				<div id="tabs-3">
+				
+						<table id="hor-minimalist-a" summary="LES 5 TRANSACTIONS">
+							<thead>
+								<tr>
+									<th scope="col">UNREG. Member</th>
+									<th scope="col">Montant</th>
+									<th scope="col">Frais</th>
+									<th scope="col">Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?if($post['PaysToUnregMembers']){?>
+						        <?
+									foreach($post['PaysToUnregMembers'] as $value){ ?>
+							   <tr>
+								<td><?=prntext($value['receiver'])?></td>
+								<td><?=$value['amount']?></td>
+								<td><?=prnfees($value['fees'])?></td>
+								<td><?=prndate($post['tdate'])?></td>
+							</tr>
+							<?}?>
+					<?}else{?>
+							<tr>
+								<td colspan=8 align=center>AUCUNE TRANSACTION TROUV&Egrave;</td>
+							</tr>
+					<?}?>
+								
+							</tbody>
+						</table>
+						
+					<table class=frame width=100% border=0 cellspacing=1 cellpadding=2>
+					
+					
+				</table>
+				
+				
+				</div>
+				
+			
+			</div>	
+			
+  <fieldset>
+				
+
+</center>
+
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

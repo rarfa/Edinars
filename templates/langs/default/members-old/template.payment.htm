@@ -1,0 +1,90 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>SOLDE:</span> <?=balance($data['Balance'])?> </span></h2>
+						<p></p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+						  <?showmenu('outil')?>
+						</article>
+						<article class="col-2">
+<?if(isset($data['ScriptLoaded'])){?>
+
+ 
+	  <center>
+	   <h2>Gestion des Codes</h2>
+				Copiez ce code et coller dans votre page <br><br>
+			   <form id="contacts-form" action="">
+					<fieldset>
+						<label class="field text">CODE #1 - En utilisant la m&egrave;thode POST </label> 
+						<textarea readonly ><?=$post['HtmlCode']?></textarea>
+					
+			<br>
+				
+				 <div class="field">
+					Description for all fields which you can use:
+					</div>
+					<br>
+					
+					For successful payment process you should use next parameters:
+					<br>
+					<div class="field">
+							    username - your username  <br>
+							    product  - product ID or name  <br>
+							    action   - use "product" if this product is pre-defined  <br>
+											use "donation" if this is donation payment  <br>
+											use "subscription" if this product is subscription <br>
+											use "payment" if this is simple payment transaction <br>
+							   price    - price of product, DA <br>
+							   quantity - quantity <br>
+							   period   - subscription rebilling period, days <br>
+							   trial    - trial period, days <br>
+							   setup    - setup fee, DA <br>
+							   tax      - tax fee, DA <br>
+							   shipping - shipping fee, DA <br>
+							   ureturn  - return URL <br>
+							   unotify  - notify URL <br>
+							   ucancel  - cancel URL <br>
+							   comments - product description <br>
+			
+				  </div>
+				  <br>
+				   <div class="field">
+					 <h2>Additional information: </h2>
+					</div>
+					<div class="field">
+							After successful payment process system will forward buyer to your site
+							and some parameters will back to your script by the POST method:
+								<br><br>
+							   action   - type of transaction (product/donation/subscription/payment) <br>
+							   pid      - internal product ID <br>
+							   pname    - product name <br>
+							   buyer    - buyer username <br>
+							   total    - total amount <br>
+							   quantity - quantity <br>
+							   comments - buyer notes <br>
+							   referer  - system referer URL (<?=$data['Host']?>) <br>
+								<br>
+							You can get this parameters by the global POST variable,
+							e.g. $_POST[--VARIABLE-NAME--]...
+								<br><br>
+					</div>
+					</fieldset>
+				</form>	
+	
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+
+	</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

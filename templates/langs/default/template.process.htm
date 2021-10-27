@@ -1,0 +1,199 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></a></div></div>
+		<div class="container">
+			<div class="inside">
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+
+<form method="post" id="payment" >
+<input type="hidden" name="step" value="<?=$post['step']?>"><br>
+<table id="rounded-corner" summary="Detail de votre Commande">
+    <thead>
+    	<tr>
+        	<th scope="col"  class="rounded-company">D&egrave;tail de votre Commande</span></th>
+			<th scope="col" class="rounded-q1"></th>
+        </tr>
+    </thead>
+        <tfoot>
+    	<tr>
+        	<td colspan="2" class="rounded-foot-left"><em><?if($post['comments']){?>Description :<?}?></em><br>
+        	<?if($post['comments']){?><?=str_replace( $data['line'], $data['replace'], prntext($post['comments']))?><?}?></td>
+        </tr>
+    </tfoot>
+    <tbody>
+    	<tr>
+        	<td><?if($post['action']!='donation'){?>Paiement <?}else{?>Faire un don<?}?> pour :</td>
+            <td><?=prntext($post['member'])?></td>
+        </tr>
+        <tr>
+        	<td><?if($post['action']!='donation'){?>Produit / Service<?}else{?>Faire un don Vers<?}?> :</td>
+            <td><?=prntext($post['product'])?></td>
+        </tr>
+        <tr>
+        	<td><?if($post['action']!='donation'){?>Prix :<?}else{?>Montant, <?=prntext($data['Currency'])?><?}?></td>
+            <td><?if($post['action']!='donation'){?>
+					<?=prnsumm($post['price'])?>&nbsp;<?=prntext($data['Currency'])?>
+				<?}else{?>
+					<input type=text name=price size=10 maxlength=8 value="<?=prnsumm($post['price'])?>">
+				<?}?>
+			</td>
+        </tr>
+		<?if($post['action']!='donation'){?>
+			<?if($post['quantity']>0){?>
+			<tr>
+				<td>Quantit&egrave :</td>
+				<td><?=prnintg($post['quantity'])?></td>
+			</tr>
+			<?}?>
+			<?if($post['setup']>0){?>
+				<tr>
+					<td>Frais d'installation :</td>
+					<td><?=prnsumm($post['setup'])?>&nbsp; <?=prntext($data['Currency'])?></td>
+				</tr>
+			<?}?>
+			<?if($post['tax']>0){?><tr><td>TVA :</td><td><?=prnsumm($post['tax'])?> &nbsp; <?=prntext($data['Currency'])?></td></tr><?}?>
+			<?if($post['shipping']>0){?><tr><td>La livraison / Manipulation :</td><td ><?=prnsumm($post['shipping'])?> &nbsp; <?=prntext($data['Currency'])?></td></tr><?}?>
+			<?if($post['period']>0){?><tr><td>Dur&egrave:</td><td><?=prnintg($post['period'])?> jour (s)</td></tr><?}?>
+			<?if($post['trial']>0){?><tr><td>P&egraveriode d'essai:</td><td><?=prnintg($post['trial'])?> jour (s)</td></tr><?}?>
+			
+		<?}?>
+		<tr>
+				<td> <em>Total:</em></td>
+				<td><?=prnsumm($post['total'])?>&nbsp;<?=prntext($data['Currency'])?></td>
+			</tr>
+        
+    </tbody>
+</table>
+			
+						</article>
+						<article class="col-2">
+<center>
+
+
+<?if($post['step']==1){?>
+<h2>&Egrave;tape 1 - Connection aux compte</h2>
+
+					 
+                        <div class="ui-widget" style="margin-top: 0px; width: 500px;">
+									<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+										<br>
+										<p align="center">SI VOUS N'AVEZ PAS DE COMPTE, <a href="<?=$data['Members']?>/signup.htm?rid=<?=$post['member']?>" target=new>CLIQUEZ ICI</a>
+										<br>
+										</p>
+								</div>	
+								
+						<?if($data['Error']){?>
+						<br>
+							<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+							</div>
+							<br>
+					<?}?>
+					 
+							 <br>
+							
+								<div class="field">
+														<label>Identifiant (*): </label>
+														<input type="text" id="username" name="username" size="30" maxlength="128" value="<?=prntext($post['username'])?>">
+								</div>
+								<br>
+								<div class="field">
+														<label>Mot de passe (*):</label>
+														<input type="password" id="password" name="password" size="30" maxlength="30" value="<?=prntext($post['password'])?>">
+													
+								</div>
+						  
+								<br>
+								<div class="field">
+									<label>Code de s&egrave;curit&egrave; (*):</label>
+									<input type="text" id="turing" name="turing" size="30" maxlength="32"">&nbsp;&nbsp;&nbsp;
+										
+								</div>	
+								<?if($data['UseTuringNumber']){?>
+									<div class="field">
+										<p align="center">
+										<br>
+										<img src="<?=$data['Host']?>/turing.htm" width="150" height="30" border="1">
+										</p>
+								</div>	
+							
+							<?}?>
+							 </div>
+					  
+					    <br>
+							
+							<div class="alignright">
+							       <?if($post['step']==1){?>
+									<a href="#" class="link4" onclick="document.location.href='<?=$post['ucancel']?>'"><span><span>Annuler</span></span></a>
+									<?}?>
+									<a href="#" class="link2" onClick="document.getElementById('payment').submit()"><span><span>Connectez-vous</span></span></a>
+									<input type="hidden" name="send" value="Connectez-vous" >
+							</div>
+
+
+<?}elseif($post['step']==2){?>
+<h2>&Egrave;tape 2 - Confirmation de Paiement</h2>
+
+   <div class="ui-state-highlight-big ui-corner-all" style="margin-top: 20px; padding: 0 .7em;  width: 500px; "> 
+   <br><b>
+								<div class="field">
+									<label>Paiement Pour : <?=prntext($post['member'])?></label>
+								</div>	
+								<div class="field">
+									<label>Produit / Service : <?=prntext($post['product'])?></label>
+								</div>	
+								<div class="field">
+									<label>Total: <?=prnsumm($post['total'])?> &nbsp;  <?=prntext($data['Currency'])?></label>
+								</div>
+								<div class="field">
+									<label>Notes:<em>(En option)</em></label><br>
+									<textarea name="notes" cols=30 rows=5><?=prntext($post['notes'])?></textarea>
+								</div>
+
+							<br>
+						</b>	
+	</div>
+		<br>
+							<div class="alignright">
+							        <a class="link4" href="#" onClick="send('back','BACK')"><span><span>Retour</span></span></a>
+							    	<a class="link2" href="#" onClick="send('send','CHECKOUT')"><span><span>payer</span></span></a>
+								     <input type="hidden" id="action" value="">	
+									
+							</div>
+	<input class=submit type=submit name=back value="BACK">&nbsp;<input class=submit type=submit name=send value="CHECKOUT">
+	
+
+<?}elseif($post['step']==3){?>
+	 <div class="ui-widget" style="margin-top: 0px; width: 500px;">
+									<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+										<br>
+										<p align="center">
+										Vous commandez a &egrave;t&egrave; envoy&egrave; &agrave; l'acheteur. Merci beaucoup pour l'utilisation de notre syst&egrave;me de paiement Edinars.
+											
+										</a>
+										<br>
+										</p>
+								</div>	
+
+<?}?>
+</form>
+</center>
+	</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+function send(obj ,objvalue) {
+	document.getElementById('action').value = objvalue ;
+	document.getElementById('action').name = obj ;
+	document.getElementById('payment').submit()
+}
+
+</script>

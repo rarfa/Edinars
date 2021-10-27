@@ -1,0 +1,134 @@
+<section id="content"><div class="inner_copy"><div class="inner_copy"></div></div>
+		<div class="container">
+			<div class="inside">
+				<div id="slogan">
+					<div class="inside">
+						<h2><span>Your Domain Name</span> Helps the World  to Find You</h2>
+						<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+					</div>
+				</div>
+				
+				<div class="inside1">
+					<div class="wrap row-2">
+						<article class="col-1">
+							<h2>Login</h2>
+							<ul class="list1">
+								<li><a href="#">Sed ut perspiciatis unde</a></li>
+								<li><a href="#">Omnis iste natus error sit volupta</a></li>
+								<li><a href="#">Tem accusantium doloreque</a></li>
+								<li><a href="#">Laudantiumtotam rem aperiam</a></li>
+								<li><a href="#">Eaque ipsa quae</a></li>
+								<li><a href="#">Lnventore veritatis et quasi</a></li>
+								<li><a href="#">Architecto beatae vitae</a></li>
+								<li><a href="#">Dicta sunt explicabo</a></li>
+								<li><a href="#">Nemo enim ipsam voluptatem</a></li>
+								<li><a href="#">Quia voluptas sit aspernatur</a></li>
+								<li><a href="#">Aut odit aut fugit, sed quia</a></li>
+								<li><a href="#">Consequuntur magni</a></li>
+							</ul>
+							<a href="#" class="link2"><span><span>More Solutions</span></span></a> </article>
+						<article class="col-2">
+<?if(isset($data['ScriptLoaded'])){?>
+	
+		<form method="post" id="sigup-form" >
+		<input type="hidden" name="step" value="<?=$post['step']?>">
+		<?if($post['step']==1){?>
+		    <center>
+			<h2>Mot de passe oubli&egrave; Etape 1 </h2>
+			
+			<div class="img-box">
+				<fieldset>
+				<?if($data['Error']){?>
+						<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+						</div>
+					<br>
+					<?}?>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p>
+								Pour recevoir vos informations de connexion par E-mail, entrez votre adresse email que vous avez fournies lors de l'ouverture du compte.
+Nous vous enverrons alors votre mot de passe &agrave; l'adresse e-mail..
+							</p>
+						</div>
+				    </div>
+					<br>
+					<div class="field text">
+							<label>Adresse E-Mail (*) :</label>
+							<input type="text" id="email" name="email" size="30" maxlength="250" value="<?=prntext($post['email'])?>">
+					</div>
+					
+					<div class="alignright">
+							<a href="#" class="link2" onClick="document.getElementById('sigup-form').submit()"><span><span>Suivant &raquo;</span></span></a>
+							<input type="hidden" name="send" value="next" >
+					</div>
+					</fieldset>
+		<?}elseif($post['step']==2){?>
+				 <center>
+				<h2>Mot de passe oubli&egrave; Etape 2 </h2>
+				
+				<div class="img-box">
+				<fieldset>
+				<?if($data['Error']){?>
+						<div class="ui-widget">
+							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
+								<p><span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
+								<?=prntext($data['Error'])?>.</p>
+							</div>
+						</div>
+					<br>
+					<?}?>
+					<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p>
+								Si vous oubliez votre mot de passe, nous allons vous poser la question que vous soumettez ci-dessous. S'il vous pla&icirc;t, 
+								essayez de trouver une question personnelle et une r&egrave;ponse qui vous seul connaissez.</p>
+						</div>
+				    </div>
+					<br>
+					<div class="field text">
+							<label>Question de S&egrave;curit&egrave; (*):</label>
+							<b><?=prntext($post['question'])?></b>
+					</div>
+					
+					<div class="field text">
+							<label>R&egrave;ponse de s&egrave;curit&egrave; (*):</label>
+							<input type="text" id="answer" name="answer" size="30" maxlength="250" value="<?=prntext($post['answer'])?>">
+					</div>
+					<div class="alignright">
+						<a href="#" class="link4" onClick="document.getElementById('send').value ='back';document.getElementById('sigup-form').submit()"><span><span>&laquo; Pr&eacute;c&eacute;dent</span></span></a>
+						<a href="#" class="link2" onClick="document.getElementById('sigup-form').submit()"><span><span>Suivant &raquo;</span></span></a>
+					</div>
+						<input type=hidden  id="send" name="send" value="next">&nbsp;
+						
+					</fieldset>
+				</form>
+	</center>
+	<?}elseif($post['step']==3){?>
+	     <center>
+			<div class="ui-widget">
+						<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+							<p>
+								Votre mot de passe a &egrave;t&egrave; envoy&egrave; sur votre adresse e-mail que vous utilisez dans notre service.	</p>
+						</div>
+				    </div>
+			<br><br>
+			<div class="alignright">
+				<a href="login.htm" class="link2" <span><span>Connectez-vous</span></span></a>
+		    </div>
+			
+<?}?>
+<?}else{?>SECURITY ALERT: Access Denied<?}?>
+</center>
+							
+						</article>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
