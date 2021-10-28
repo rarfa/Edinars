@@ -30,10 +30,6 @@ $info_user = select_info($user_id, $post);
 $return_identification = get_member_id($info_user['email'], $old_password);
 
 
-
-
-// var_dump($return_identification);
-
 if(!$old_password){
 	$array_reponse['errors']['old_password'] = "Veuillez saisir l'ancien mot de passe";
 	$array_reponse['success'] = "no";
@@ -60,7 +56,7 @@ if($array_reponse['success']=="yes"){
 
   $CrypPassword =  strtoupper(md5($new_password.'|'.$info_user['mem_id']));
 
-  $sql_edit = mysql_query("UPDATE `{$data['DbPrefix']}members` SET
+  $sql_edit = mysqli_query($data['cid'], "UPDATE `{$data['DbPrefix']}members` SET
                           `password` = '".$CrypPassword."'
                           WHERE id  = '".$return_identification."';");
 
@@ -73,5 +69,3 @@ if($array_reponse['success']=="yes"){
 }
 
 echo json_encode ($array_reponse);
-
-?>
