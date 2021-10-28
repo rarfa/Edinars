@@ -527,7 +527,7 @@ function db_connect(){
 
 	$data['cid']=mysqli_connect(
 
-		$data['Hostname'], $data['Username'], $data['Password']
+		$data['Hostname'], $data['Username'], $data['Password'], $data['Database']
 
 	);
 
@@ -535,20 +535,16 @@ function db_connect(){
 
 		echo(
 
-			'<font style="font:10px Verdana;color:#FF0000">'.mysqli_error().
+			'<font style="font:20px Verdana;color:#FF0000">'.mysqli_error().
 
-			".<br>Please contact to site administrator <a href=\"mailto:{$data['AdminEmail']}\">".
+			"<br>DB error please contact to site administrator <a href=\"mailto:{$data['AdminEmail']}\">".
 
 			"{$data['AdminEmail']}</a>.</font>"
 
 		);
 
-
 		exit;
-
 	}
-
-	mysqli_select_db($data['cid'], $data['Database']);
 
   	mysqli_query($data['cid'], "SET NAMES 'utf8'");
 
@@ -3779,9 +3775,6 @@ function unreg_member_pay($sender, $receiver, $amount, $comments) {
 	$post['comments']=$comments;
 
 	send_email('PAYMENT-TO-UNREGMEMBER', $post);
-
-
-
 }
 
 
