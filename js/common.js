@@ -1,6 +1,6 @@
-var root_path="./";
+var root_path="/";
 var api_url = "api/v1/";
-var espace_client_dir ="./espace_client/";
+var espace_client_dir ="/espace_client/";
 
 // ############################ Global_functions ############################
 function copy_to_clipboard(element){
@@ -177,7 +177,7 @@ function register(){
 	$('.alert-danger').remove();
 
 	var str  = $("#register_form").serialize();
-	str += "&session=yes&from=website" + append_csrf_token_to_form();
+	str += "&session=yes&from=website";
 	// alert(str);
 	$("#btn_register").hide();
 	$("#register_loading").show();

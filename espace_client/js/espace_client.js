@@ -1,7 +1,7 @@
 // Decalarations
-root_path="../";
-api_url = "../api/v1/";
-espace_client_dir ="./";
+root_path="/";
+api_url = "/api/v1/";
+espace_client_dir ="/espace_client";
 
 // ############################ csrf_token & access_token ############################
 function get_csrf_token(){

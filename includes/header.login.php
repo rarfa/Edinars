@@ -160,23 +160,26 @@ var modal_login= $(function() {
     var $msgAnimateTime = 150;
     var $msgShowTime = 2000;
 
-    $("form").submit(function () {
-      switch(this.id) {
-        case "login_form":
-					login();
-          return false;
-          break;
-        case "lost_password_form":
-            lost_password();
-            return false;
-            break;
-        case "register_form":
-            register();
-            return false;
-            break;
-        default:
-            return false;
-      }
+    $("form").submit(function (e) {
+
+		e.preventDefault();
+
+		switch(this.id) {
+			case "login_form":
+						login();
+			return false;
+			break;
+			case "lost_password_form":
+				lost_password();
+				return false;
+				break;
+			case "register_form":
+				register();
+				return false;
+				break;
+			default:
+				return false;
+		}
       return false;
     });
 

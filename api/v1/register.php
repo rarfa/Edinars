@@ -4,13 +4,13 @@ header('Content-Type: application/json');
 define("DIR_ROOT", "../../");
 include(DIR_ROOT.'includes/All_files.php');
 
-$newuser = !empty($_GET['newuser'])? clean_var($_GET['newuser']):clean_var($_POST['newuser']);
-$newmail = !empty($_GET['newmail'])? clean_var($_GET['newmail']):clean_var($_POST['newmail']);
-$newpass = !empty($_GET['newpass'])? clean_var($_GET['newpass']):clean_var($_POST['newpass']);
-$cfmpass = !empty($_GET['cfmpass'])? clean_var($_GET['cfmpass']):clean_var($_POST['cfmpass']);
-$newques = !empty($_GET['newques'])? clean_var($_GET['newques']):clean_var($_POST['newques']);
-$newansw = !empty($_GET['newansw'])? clean_var($_GET['newansw']):clean_var($_POST['newansw']);
-$newtype = !empty($_GET['newtype'])? clean_var($_GET['newtype']):clean_var($_POST['newtype']);
+$newuser = isset($_POST['newuser']) ? clean_var($_POST['newuser']) : '';
+$newmail = isset($_POST['newmail']) ? clean_var($_POST['newmail']) : '';
+$newpass = isset($_POST['newpass']) ? clean_var($_POST['newpass']) : '';
+$cfmpass = isset($_POST['cfmpass']) ? clean_var($_POST['cfmpass']) : '';
+$newques = isset($_POST['newques']) ? clean_var($_POST['newques']) : '';
+$newansw = isset($_POST['newansw']) ? clean_var($_POST['newansw']) : '';
+$newtype = isset($_POST['newtype']) ? clean_var($_POST['newtype']) : '';
 
 $array_reponse = array( 'errors' => array(
                           'newmail' => '',
@@ -62,5 +62,3 @@ if($array_reponse['success']=="yes"){
 }
 
 echo json_encode($array_reponse);
-
-?>

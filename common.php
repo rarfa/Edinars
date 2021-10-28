@@ -997,7 +997,7 @@ function send_email($key, $post){
 
 	$template=db_rows(
 
-		"SELECT `name`,`value` FROM `{$data['DbPrefix']}emails`".
+		"SELECT `id`, `name`,`value` FROM `{$data['DbPrefix']}emails`".
 
 		" WHERE `key`='{$key}'"
 
@@ -1007,9 +1007,9 @@ function send_email($key, $post){
 
 	$subject=$template[0]['name'];
 
+	$post['email-id']=$template[0]['id'];
 
-
-	if($post['username']){
+	if(isset($post['username'])){
 
 		$text=str_replace("[username]", $post['username'], $text);
 
@@ -1017,71 +1017,69 @@ function send_email($key, $post){
 
 	}
 
-	if($post['password'])$text=str_replace("[password]", $post['password'], $text);
+	if(isset($post['password'])) $text=str_replace("[password]", $post['password'], $text);
 
-	if($post['emailadr'])$text=str_replace("[emailadr]", $post['emailadr'], $text);
+	if(isset($post['emailadr'])) $text=str_replace("[emailadr]", $post['emailadr'], $text);
 
-	if($post['buyer'])$text=str_replace("[buyeradr]", $post['buyer'], $text);
+	if(isset($post['buyer'])) $text=str_replace("[buyeradr]", $post['buyer'], $text);
 
-	if($post['seller'])$text=str_replace("[selleradr]", $post['seller'], $text);
+	if(isset($post['seller'])) $text=str_replace("[selleradr]", $post['seller'], $text);
 
-	if($post['sellerusername'])$text=str_replace("[sellerusername]", $post['sellerusername'], $text);
+	if(isset($post['sellerusername'])) $text=str_replace("[sellerusername]", $post['sellerusername'], $text);
 
-	if($post['product'])$text=str_replace("[product]", $post['product'], $text);
+	if(isset($post['product'])) $text=str_replace("[product]", $post['product'], $text);
 
-	if($post['ccode'])$text=str_replace("[confcode]", $post['ccode'], $text);
+	if(isset($post['ccode'])) $text=str_replace("[confcode]", $post['ccode'], $text);
 
-	if($post['chash'])$text=str_replace("[confhash]", $post['chash'], $text);
+	if(isset($post['chash'])) $text=str_replace("[confhash]", $post['chash'], $text);
 
-	if($post['comments'])$text=str_replace("[comments]", $post['comments'], $text);
+	if(isset($post['comments'])) $text=str_replace("[comments]", $post['comments'], $text);
 
 	else $text=str_replace("[comments]", '---', $text);
 
-	if($post['uid'])$text=str_replace("[uid]", $post['uid'], $text);
+	if(isset($post['uid'])) $text=str_replace("[uid]", $post['uid'], $text);
 
-	if($post['nom'])$text=str_replace("[contact_nom]", $post['nom'], $text);
+	if(isset($post['nom'])) $text=str_replace("[contact_nom]", $post['nom'], $text);
 
-	if($post['mail'])$text=str_replace("[contact_email]", $post['mail'], $text);
+	if(isset($post['mail'])) $text=str_replace("[contact_email]", $post['mail'], $text);
 
-	if($post['phone'])$text=str_replace("[contact_phone]", $post['phone'], $text);
+	if(isset($post['phone'])) $text=str_replace("[contact_phone]", $post['phone'], $text);
 
-	if($post['msg'])$text=str_replace("[contact_msg]", $post['msg'], $text);
+	if(isset($post['msg'])) $text=str_replace("[contact_msg]", $post['msg'], $text);
 
-	$text=str_replace("[fullname]", get_member_name($post['uid']), $text);
+	$text=str_replace("[fullname]", isset($post['uid']) ? get_member_name($post['uid']) : 'null', $text);
 
 	$text=str_replace("[date]", date("d/m/Y H:i:s") , $text);
 
-	$text=str_replace("[emailpage]", "{$data['Host']}/verifer-email-edinars.html", $text);
+	$text=str_replace("[emailpage]", $data['Host'] . "/verifer-email-edinars.html", $text);
 
-	$text=str_replace("[email]", $post['email'], $text);
+	$text=str_replace("[email]", $post['email'] ?? 'null', $text);
 
 	$text=str_replace("[sitename]", $data['SiteName'], $text);
 
 	$text=str_replace("[hostname]", $data['Host'], $text);
 
-	$text=str_replace("[singpage]", "{$data['Host']}/ouvrir-un-compte-Edinars.html", $text);
+	$text=str_replace("[singpage]", $data['Host']. "/ouvrir-un-compte-Edinars.html", $text);
 
-	$text=str_replace("[confpage]", "{$data['Host']}/activation.html", $text);
+	$text=str_replace("[confpage]", $data['Host']. "/activation.html", $text);
 
-	$text=str_replace("[forgotpage]", "{$data['Host']}/", $text);
+	$text=str_replace("[forgotpage]", $data['Host']. "/", $text);
 
-	$text=str_replace("[lognpage]", "{$data['Host']}", $text);
+	$text=str_replace("[lognpage]", $data['Host'] , $text);
 
-	$text=str_replace("[montant_payment]", ( prnsumm($post['montant'])).' '.$data['Currency'], $text);
+	$text=str_replace("[montant_payment]", ( isset($post['montant']) ? prnsumm($post['montant']) : 'null' ).' '.$data['Currency'], $text);
 
-	$text=str_replace("[montant]",(prnsumm($post['montant']- $post['fees'])).' '.$data['Currency'], $text);
+	$text=str_replace("[montant]",  ( isset($post['montant']) && isset($post['fees'])   ?  prnsumm($post['montant']- $post['fees'])  : 'null' ).' '.$data['Currency'], $text);
 
-	$text=str_replace("[trxid]", $post['trxid'], $text);
+	$text=str_replace("[trxid]", $post['trxid'] ?? 'null', $text);
 
-	$text=str_replace("[depot_info]", $post['depot_info'], $text);
+	$text=str_replace("[depot_info]", $post['depot_info'] ?? 'null', $text);
 
-	$text=str_replace("[total]",  prnsumm($post['total']).' '.$data['Currency'], $text);
+	$text=str_replace("[total]",  ( isset($post['total']) ? prnsumm($post['total']) : 'null').' '.$data['Currency'] , $text);
 
-	$text=str_replace("[error]", $post['error'] , $text);
+	$text=str_replace("[error]", $post['error'] ?? 'null' , $text);
 
-	$text=str_replace("[email-id]", $post['email-id'] , $text);
-
-//echo  "<BR><BR><BR>".$text."<BR><BR><BR>";
+	$text=str_replace("[email-id]", $post['email-id'] ?? 'null', $text);
 
 
 	switch  ($key) {
@@ -1110,7 +1108,7 @@ function send_email($key, $post){
 		$header="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
 		$header .= "MIME-version: 1.0\n";
 		$header .= "Content-type: text/html; charset=utf-8\n";
-		//insert_sent_email ($post['email-id'],$post['email'],stripslashes($subject) ,htmlspecialchars($text, ENT_QUOTES) ) ;
+		insert_sent_email ($post['email-id'],$post['email'],stripslashes($subject) ,htmlspecialchars($text, ENT_QUOTES) ) ;
 		return @mail($post['email'], stripslashes($subject), stripslashes($text), $header);
 
 }
@@ -1143,9 +1141,9 @@ function insert_sent_email( $pin_id , $mail, $subject, $message){
 
 	db_query(
 		"INSERT INTO `{$data['DbPrefix']}email_sent`(".
-		"`email_id``email_address`,`email_subject`,`email_content`,`email_created_date` )VALUES(".
+		"`email_id`, `email_address`,`email_subject`,`email_content`,`email_created_date` )VALUES(".
 		"'{$pin_id}','{$mail}','{$subject}','{$message}','".date("Y-m-d H:i:s")."')"
-	,true);
+	);
 }
 ###############################################################################
 
@@ -1234,14 +1232,13 @@ function is_mail_available($email){
 
         $emails=db_rows(
 
-                "SELECT `id` FROM `{$data['DbPrefix']}member_emails`".
+                "SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
 
                 " WHERE(`email`='{$email}') LIMIT 1"
 
         );
 
         return (bool)(!$confirms&&!$members&&!$emails);
-
 }
 
 
@@ -2300,11 +2297,11 @@ function get_member_username_pincode($uid){
 }
 
 
-function get_member_name($uid){
+function get_member_name($uid) {
 
 	global $data;
 
-	if($uid<0)return 'system';
+	if($uid < 0 ) return 'system';
 
 	$result=db_rows(
 
@@ -2313,7 +2310,6 @@ function get_member_name($uid){
 		" WHERE `id`={$uid} LIMIT 1");
 
 	return ucfirst($result[0]['fname'])." ".ucfirst($result[0]['lname']);
-
 }
 
 
