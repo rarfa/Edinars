@@ -34,15 +34,9 @@ $data['PostSent']=false;
 
 $data['ScriptLoaded']=true;
 
-if (!$_COOKIE["ln"]){
+$data['lang_ch'] =  $_COOKIE["ln"] ?? $data['DefaultLanguage'];
 
-  $data['lang_ch']=$data['DefaultLanguage'];
-
-  setcookie("ln", $data['lang_ch']);
-
-}
-
-$data['lang_ch'] = $_COOKIE["ln"];
+setcookie("ln", $data['lang_ch']);
 
 ###############################################################################
 
@@ -1822,7 +1816,7 @@ function get_member_id($username, $password='', $where=''){
 
         }
 
-        return $result[0]['id'];
+        return isset($result[0])  ? $result[0]['id'] : null;
 }
 //*****************************************************//
 function insert_member_id_session($member_id)
@@ -3514,7 +3508,7 @@ function get_transactions($uid, $dir='both', $type=-1, $status=-1, $start=0,$cou
 
 	global $data;
 
-	if($suser||$sdata){
+	if(!is_null($suser) || !is_null($sdata)){
 		$start=0;
 		$count=0;
 	}
@@ -5468,7 +5462,7 @@ header("Cache-control: private");
 #################################### CSRF ###########################################
 function generate_csrf_token(){
     if (function_exists('mcrypt_create_iv')) {
-        $csrf_token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+        $csrf_token = bin2hex(@mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
     } else {
         $csrf_token = bin2hex(openssl_random_pseudo_bytes(32));
     }

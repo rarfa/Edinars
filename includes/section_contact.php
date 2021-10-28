@@ -43,6 +43,8 @@ $sql = mysqli_query($data['cid'], "SELECT {$data['DbPrefix']}points_of_sales.*, 
 $num_points = mysqli_num_rows($sql);
 $ii=0;
 $nb_points=0;
+$html = '';
+$list_map_html = '';
 while($res = mysqli_fetch_array($sql)){
   $ii++;
   if($ii==1){

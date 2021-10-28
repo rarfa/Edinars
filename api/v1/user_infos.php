@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
@@ -32,7 +32,7 @@ include('verif_user.php');
 $array_imp =db_rows("SELECT * FROM `{$data['DbPrefix']}members`".
                     " WHERE `id`={$user_id}");
 
-if($post['status']<2){
+if(isset($post['status']) && $post['status'] < 2 ){
   $status_color = "#FF0000"; //non color red
 }else {
   $status_color = "#73be28"; //yes color green
@@ -207,5 +207,3 @@ echo json_encode($array_reponse);
 // var_dump($array_reponse);
 // header('Content-Type: application/json; Charset="UTF-8"');
 // echo json_encode($array_reponse);
-
-?>
