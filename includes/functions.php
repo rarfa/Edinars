@@ -18,7 +18,8 @@ function format_date($time, $format){
 	return $date;
 }
 function clean_var($variable){
-	$variable = trim(mysql_real_escape_string($variable));
+	global $data;
+	$variable = trim(mysqli_real_escape_string($data['cid'], $variable));
 	return($variable);
 }
 
@@ -26,7 +27,3 @@ function redirect($to){
 	echo "<script>location.href='".$to."'</script>";
 	exit();
 }
-
- 
-
-?>

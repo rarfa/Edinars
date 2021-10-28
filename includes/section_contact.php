@@ -36,14 +36,14 @@
 </style>
 
 <?php
-$sql = mysql_query("SELECT {$data['DbPrefix']}points_of_sales.*, {$data['DbPrefix']}wilayas.name as wilaya_name
+$sql = mysqli_query($data['cid'], "SELECT {$data['DbPrefix']}points_of_sales.*, {$data['DbPrefix']}wilayas.name as wilaya_name
                     FROM `{$data['DbPrefix']}points_of_sales`
                     INNER JOIN {$data['DbPrefix']}wilayas ON ({$data['DbPrefix']}wilayas.id = {$data['DbPrefix']}points_of_sales.wilaya_id)");
 
-$num_points = mysql_num_rows($sql);
+$num_points = mysqli_num_rows($sql);
 $ii=0;
 $nb_points=0;
-while($res = mysql_fetch_array($sql)){
+while($res = mysqli_fetch_array($sql)){
   $ii++;
   if($ii==1){
     $nb_points++;

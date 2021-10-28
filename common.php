@@ -531,7 +531,7 @@ function db_connect(){
 
 	global $data;
 
-	$data['cid']=@mysql_connect(
+	$data['cid']=mysqli_connect(
 
 		$data['Hostname'], $data['Username'], $data['Password']
 
@@ -541,7 +541,7 @@ function db_connect(){
 
 		echo(
 
-			'<font style="font:10px Verdana;color:#FF0000">'.mysql_error().
+			'<font style="font:10px Verdana;color:#FF0000">'.mysqli_error().
 
 			".<br>Please contact to site administrator <a href=\"mailto:{$data['AdminEmail']}\">".
 
@@ -554,12 +554,11 @@ function db_connect(){
 
 	}
 
-	@mysql_select_db($data['Database'], $data['cid']);
+	mysqli_select_db($data['cid'], $data['Database']);
 
-  mysql_query("SET NAMES 'utf8'");
+  	mysqli_query($data['cid'], "SET NAMES 'utf8'");
 
 	return (bool)$data['cid'];
-
 }
 
 
@@ -568,7 +567,7 @@ function db_disconnect(){
 
 	global $data;
 
-	return (bool)@mysql_close($data['cid']);
+	return (bool)mysqli_close($data['cid']);
 
 }
 
@@ -580,8 +579,7 @@ function db_query($statement,$print=false){
 
 	if($print) echo("-->{$statement}<--<br>");
 
-	return @mysql_query($statement, $data['cid']);
-
+	return mysqli_query($data['cid'], $statement);
 }
 
 
@@ -590,7 +588,7 @@ function newid(){
 
 	global $data;
 
-	return @mysql_insert_id($data['cid']);
+	return mysqli_insert_id($data['cid']);
 
 }
 
@@ -598,7 +596,7 @@ function newid(){
 
 function db_count($result){
 
-	return (int)@mysql_num_rows($result);
+	return (int) mysqli_num_rows($result);
 
 }
 
@@ -616,7 +614,7 @@ function db_rows($statement,$print=false) {
 
 	for($i=0; $i<$count; $i++){
 
-		$record=@mysql_fetch_array($query, MYSQL_ASSOC);
+		$record=mysqli_fetch_array($query, MYSQLI_ASSOC);
 
 		foreach($record as $key=>$value)$result[$i][$key]=$value;
 
@@ -1824,9 +1822,7 @@ function get_member_id($username, $password='', $where=''){
 
         }
 
-
         return $result[0]['id'];
-
 }
 //*****************************************************//
 function insert_member_id_session($member_id)
@@ -4275,17 +4271,17 @@ function calculate_downline($uid, $clevel, $result=null){
 
 	global $data;
 
-	$members=mysql_query("SELECT * FROM `{$data['DbPrefix']}members` WHERE `sponsor`={$uid}");
+	$members=mysqli_query($data['cid'], "SELECT * FROM `{$data['DbPrefix']}members` WHERE `sponsor`={$uid}");
 
 	if($members){
 
-		while($row=mysql_fetch_array($members, MYSQL_ASSOC)){
+		while($row=mysqli_fetch_array($members, MYSQLI_ASSOC)){
 
 			$nlevel=$clevel+1;
 
 			if($nlevel>$data['ReferralLevels'])return $result;
 
-			$query=mysql_query(
+			$query=mysqli_query($data['cid'],
 
 				"SELECT SUM(`amount`) AS `earned`".
 
@@ -4297,7 +4293,7 @@ function calculate_downline($uid, $clevel, $result=null){
 
 			if($query){
 
-				$arow=mysql_fetch_array($query, MYSQL_ASSOC);
+				$arow=mysqli_fetch_array($query, MYSQLI_ASSOC);
 
 				$result+=$arow['earned'];
 
@@ -5504,9 +5500,9 @@ function get_user_csrf_token($user_id){
 
 ###############################################################################
 
-if($_POST)$post=get_post();
+if($_POST) $post = get_post();
 
-if(isset($post['StartPage']))$post['StartPage']=0;
+if(isset($post['StartPage'])) $post['StartPage'] = 0;
 
 ###############################################################################
 
@@ -5514,7 +5510,7 @@ db_connect();
 
 ###############################################################################
 
-if(!$uid)$uid=$_SESSION['uid'];
+$uid = 0;
 
 if($uid){
 
@@ -5530,6 +5526,8 @@ if($uid){
 
 	set_last_access_date($uid);
 
+}else{
+	$uid = isset($_SESSION['uid']) ? $_SESSION['uid'] : 0;
 }
 
 ###############################################################################
@@ -5633,5 +5631,3 @@ function get_mobile_recharge_offers($inital=""){
 
   return $offers;
 }
-
-?>
