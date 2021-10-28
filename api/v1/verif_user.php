@@ -1,10 +1,7 @@
 <?php
 
 
-$access_token = !empty($_GET['access_token'])? clean_var($_GET['access_token']):clean_var($_POST['access_token']);
-// if(!$access_token){
-//   $access_token = $_SESSION['access_token'];
-// }
+$access_token = isset($_REQUEST['access_token']) ? clean_var($_REQUEST['access_token']) : '';
 
 
 
@@ -15,7 +12,6 @@ $array_reponse = array( 'errors'=> ['access_token' => ''],
 if($access_token == ''){
     $array_reponse['errors']['access_token'] =  'Votre Identification ne peut pas être valider!';
     $array_reponse['success'] = "no";
-
  }else{
 
   $result_access_token = db_rows("SELECT * FROM `{$data['DbPrefix']}members_sessions`
@@ -47,6 +43,3 @@ if($array_reponse['success']!="yes") {
 }else {
   $array_reponse = array();
 }
-
-
-?>
