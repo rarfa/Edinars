@@ -1,4 +1,4 @@
-<?
+<?php
 #################################################################################
 # PROGRAM     : EDINAR APPLICATION                                             	#
 # VERSION     : 0.02                                                          	#
@@ -27,26 +27,24 @@ include('config.php');
 $data['Error'] = "";
 ###############################################################################
 
-if($post['cid']){
-	//echo "cid -> ".$post['cid']."<br>";
+if(isset($post['cid'])){
 
-	if(!isset($post['email']) || empty($post['email'])){
-		$cid=select_confirmation('', '', strtolower($post['cid']));
-		//echo $post['cid']."<br>";
-		//echo $cid."<-cid<br>";
+	$cid = select_confirmation($post['cid'] ?? '', $post['email'] ?? '', $post['cid']);
+	
+	if(!$cid){
 
-	}else{
-		$cid = select_confirmation($post['cid'], $post['email']);
+		echo "Error activating email";
+		header('refresh:1,'. BASE_URL);
+		exit;
 	}
 
-	if($cid){
-		//echo "select_confirmation";
-		update_confirmation($cid);
-		$data['PostSent']=true;
-	}else{
-		$data['Error']="URL de confirmation incorrect";
-	}
-}elseif($post['confirm']){
+	// update confirmation
+	// TODO  still need to fix issue dp_temp_pays (get_unreg_member_pay)
+	update_confirmation($cid);
+
+	var_dump(($confirm));
+
+}elseif(isset($post['confirm'])){
 	if(!$post['ccode']){
 		$data['Error']="S'il vous pla&icirc;t saisissez votre code de confirmation";
 	}elseif(!$cid&&!$eid){
@@ -63,23 +61,8 @@ if($post['cid']){
 	  echo('ACCESS DENIED.');
 	exit;
 	}
-}
-###############################################################################
-//display('secure');
-if($data['Error']==""){
-	echo "<b>Email confirmé</b>";
-	echo "<script>
-				setTimeout(function(){
-					location.href='http://www.edinars.net/';
-				}, 3000);
-				</script>";
 }else{
-	echo $data['Error'];
-	echo "<script>
-				setTimeout(function(){
-					location.href='http://www.edinars.net/';
-				}, 10);
-				</script>";
+
+	echo "Error activating email";
+	header('refresh:1,'. BASE_URL);
 }
-###############################################################################
-?>

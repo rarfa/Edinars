@@ -1258,7 +1258,7 @@ function create_confirmation($newpass, $newques, $newansw, $newmail, $newtype, $
   if($add_query){
     $post['ccode'] = $result;
 
-    $post['email']=$newmail;
+    $post['email'] = $newmail;
 
     $post['chash']=strtoupper(md5($post['ccode'].'|'.$post['email']));
 
@@ -1277,9 +1277,9 @@ function select_confirmation($ccode, $email, $chash=''){
 
 	global $data;
 
-	if(isset($chash)&&!empty($chash)){
+	if(isset($chash) && !empty($chash)){
 
-		$query="WHERE MD5(CONCAT(`confirm`,'|',`newmail`))='{$chash}'";
+		$query="WHERE `newpass`='{$chash}'";
 
 	}else{
 
@@ -1287,14 +1287,13 @@ function select_confirmation($ccode, $email, $chash=''){
 
 	}
 
-	$confirm=db_rows(
+	$confirm = db_rows(
 
 		"SELECT `id` FROM `{$data['DbPrefix']}confirms` {$query} LIMIT 1"
 
 	);
-  //echo "<br>SELECT `id` FROM `{$data['DbPrefix']}confirms` {$query} LIMIT 1<br>";
-  //print_r($confirm);
-	return $confirm[0]['id'];
+
+	return isset($confirm[0]) ? $confirm[0]['id'] : null;
 
 }
 
@@ -1467,6 +1466,7 @@ function update_confirmation($cid){
 
   $pin_code = generate_pin_code(4);
 
+
 	db_query(
 
 		"INSERT INTO `{$data['DbPrefix']}members`(".
@@ -1504,8 +1504,6 @@ function update_confirmation($cid){
       "1,".($data['UseExtRegForm']?'0':'1').",'".date('Y-m-d H:i:s')."')"
 
 	);
-
-
 
 	$code=gencode();
 
@@ -1547,11 +1545,11 @@ function update_confirmation($cid){
 
 	}
 
-	$post['username']=$confirm['newuser'];
+	$post['username'] = $confirm['newuser'] ?? '';
 
-	$post['password']=$confirm['newpass'];
+	$post['password'] = $confirm['newpass'];
 
-	$post['email']=$confirm['newmail'];
+	$post['email']	  = $confirm['newmail'];
 
 	send_email('SIGNUP-TO-MEMBER', $post);
 
@@ -1563,12 +1561,9 @@ function update_confirmation($cid){
 
 	}
 
-	$tmpays=get_unreg_member_pay($receiver,'RECEIVER');
+	$tmpays = get_unreg_member_pay($receiver,'RECEIVER');
 
-
-
-	if($tmpays[0]) update_unreg_member_pays($receiver);
-
+	if(isset($tmpays[0])) update_unreg_member_pays($receiver);
 }
 
 
@@ -1762,17 +1757,21 @@ function get_member_id($username, $password='', $where=''){
 
 	global $data;
 
-	$Crypt = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `email`='{$username}' LIMIT 1");
+	$Crypt 			= db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `email`='{$username}' LIMIT 1");
+	$CrypPassword   = '';
 
 	if(!$Crypt){
 		$result=db_rows("SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails` WHERE `email`='{$username}' LIMIT 1");
+
 		if($result){
-              $result = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `id`={$result[0]['id']} LIMIT 1" );
-              $CrypPassword =  strtoupper(md5($password.'|'.$result[0]['mem_id'])) ;
-			}
-	}
-	else {
-		$CrypPassword =  strtoupper(md5($password.'|'.$Crypt[0]['mem_id']) ) ;
+
+			$result = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `id`={$result[0]['id']} LIMIT 1" );
+			$CrypPassword =  strtoupper(md5($password.'|'.$result[0]['mem_id'])) ;
+		}
+
+	}else{
+
+		$CrypPassword   = strtoupper(md5($password.'|'.$Crypt[0]['mem_id']) );
 	}
 
 	$result=db_rows(
@@ -5246,15 +5245,16 @@ function encryptPerHashKey($keypwd ,$hachkey)
 function decryptPerHashKey($keypwd ,$hachkey)
 {
 	$hachkey = str_replace(array('-','_'),array('+','/'),$hachkey);
-	return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256,$keypwd, base64_decode($hachkey), MCRYPT_MODE_ECB));
+	return trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256,$keypwd, base64_decode($hachkey), MCRYPT_MODE_ECB));
 }
 
 
 
 function generate_pin_code($size=7){
 
-	$code=str_split(strrev(md5(microtime())));
-	$index=0;
+	$code  	= str_split(strrev(md5(microtime())));
+	$index 	= 0;
+	$key  	= '';
 	foreach($code as $value){
 		if((int)$value>0){
 			$key.=$value;
@@ -5270,6 +5270,7 @@ function generate_char_code(){
 
 	$code=str_split(strrev(md5(microtime())));
 	$index=0;
+	$key  	= '';
 	foreach($code as $value){
 		if((int)$value>0){
 			$key.=$value;
@@ -5290,6 +5291,7 @@ function generate_topup_code(){
 
 	$code=str_split(strrev(md5(microtime())));
 	$index=0;
+	$key  	= '';
 	foreach($code as $value){
 		if((int)$value>0){
 			$key.=$value;
@@ -5305,6 +5307,7 @@ function get_trx_id (){
 
 	$code=str_split(strrev(md5(microtime())));
 	$index=0;
+	$key  	= '';
 	foreach($code as $value){
 		if((int)$value>0){
 			$key.=$value;
@@ -5320,10 +5323,10 @@ function get_trx_id (){
 function get_transaction_trx_id($trxid){
 
 global $data;
-if($suser||$sdata){
-	$start=0;
-	$count=0;
-}
+	if(isset($suser) || isset($sdata)){
+		$start=0;
+		$count=0;
+	}
 	$trans=db_rows(
 
 		"SELECT * FROM `{$data['DbPrefix']}transactions`".
@@ -5388,6 +5391,7 @@ function get_pin_id (){
 
 	$code=str_split(strrev(md5(microtime())));
 	$index=0;
+	$key  	= '';
 	foreach($code as $value){
 		if((int)$value>0){
 			$key.=$value;
