@@ -42,7 +42,7 @@ if(isset($post['cid'])){
 	// TODO  still need to fix issue dp_temp_pays (get_unreg_member_pay)
 	update_confirmation($cid);
 
-	var_dump(($confirm));
+	echo "Email activated successfully";
 
 }elseif(isset($post['confirm'])){
 	if(!$post['ccode']){
