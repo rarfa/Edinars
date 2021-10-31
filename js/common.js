@@ -37,6 +37,10 @@ function decodeHtml(str){
 }
 
 // ############################ Form_functions ############################
+function append_csrf_token_to_form(){
+	return "&csrf_token="+ $('[name="csrf_token"]').attr('content');
+}
+
 function prepend_error(where, message){
 	$r_h_s1 = '<div class="alert alert-danger alert-dismissable" id="';
 

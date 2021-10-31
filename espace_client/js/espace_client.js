@@ -12,8 +12,7 @@ function get_csrf_token(){
 }
 
 function append_csrf_token_to_form(){
-  var csrf_token = get_csrf_token();
-  return "&csrf_token="+csrf_token;
+	return "&csrf_token="+ $('[name="csrf_token"]').attr('content');
 }
 
 function append_access_token(){
