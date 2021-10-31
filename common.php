@@ -1161,32 +1161,18 @@ function send_email($key, $post)
     switch  ($key) {
 
     case 'DEPOT-PAYMENT-CCP-ADMIN' :
-        $header ="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-        $header .= "MIME-version: 1.0\n";
-        $header .= "Content-type: text/html; charset=utf-8\n";
-        //insert_sent_email ($post['email-id'],$data['CCP_email'],stripslashes($subject),htmlspecialchars($text,ENT_QUOTES) );
-        return @mail($data['CCP_email'], stripslashes($subject), stripslashes($text), $header);
-                break ;
+        insert_sent_email ($post['email-id'],$data['CCP_email'],stripslashes($subject),htmlspecialchars($text,ENT_QUOTES) );
+        return sendMail($data['CCP_email'], stripslashes($subject), stripslashes($text)); break ;
     case 'WITHDRAW-PAYMENT-ADMIN' :
-        $header.="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-        $header .= "MIME-version: 1.0\n";
-        $header .= "Content-type: text/html; charset=utf-8\n";
-        //insert_sent_email ($post['email-id'],$data['withdraw_email'],stripslashes($subject), htmlspecialchars( $text, ENT_QUOTES) );
-        return @mail($data['withdraw_email'], stripslashes($subject), stripslashes($text), $header);
+        insert_sent_email ($post['email-id'],$data['withdraw_email'],stripslashes($subject), htmlspecialchars( $text, ENT_QUOTES) );
+        return sendMail($data['withdraw_email'], stripslashes($subject), stripslashes($text));
     case 'ERROR-EMAIL-ADMIN' :
-        $header.="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-        $header .= "MIME-version: 1.0\n";
-        $header .= "Content-type: text/html; charset=utf-8\n";
-        //insert_sent_email ($post['email-id'],$data['error_email'],stripslashes($subject),htmlspecialchars($text, ENT_QUOTES) ) ;
-        return @mail($data['error_email'], stripslashes($subject), stripslashes($text), $header);
+        insert_sent_email ($post['email-id'],$data['error_email'],stripslashes($subject),htmlspecialchars($text, ENT_QUOTES) ) ;
+        return sendMail($data['error_email'], stripslashes($subject), stripslashes($text));
     }
 
-    $header="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-    $header .= "MIME-version: 1.0\n";
-    $header .= "Content-type: text/html; charset=utf-8\n";
     insert_sent_email($post['email-id'], $post['email'], stripslashes($subject), htmlspecialchars($text, ENT_QUOTES));
-    return @mail($post['email'], stripslashes($subject), stripslashes($text), $header);
-
+    return sendMail($post['email'], stripslashes($subject), stripslashes($text));
 }
 
 function send_mass_email($subject, $message, $active=-1)
@@ -1431,9 +1417,8 @@ function update_security_question($uid, $question, $answer, $notify=true)
 
 function update_my_profile_empty($uid)
 {
-    $info_user = get_member_info($uid);
-
-    // var_dump($info_user);
+    $info_user  = get_member_info($uid);
+    $post_empty = []; 
 
     if($info_user['type'] == 0) { //Particulier
         if($info_user['fname'] && $info_user['address']) {
@@ -5558,7 +5543,9 @@ if(!session_id()) {
 
 $data['sid']=session_id();
 
-$_SESSION['csrf_token'] = generate_csrf_token();
+if(!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = generate_csrf_token();
+}
 
 header("Cache-control: private");
 
