@@ -27,11 +27,12 @@ jQuery(
             var rangeBottom =   500;
             $('.navbar-collapse').find('.scroll a').each(
                 function () {
-                    var name_link = $(this).attr('href').substr(2, $(this).attr('href').length);
-                    // console.log(name_link);
+                    var name_link = $(this).attr('href').split("#");
+                        name_link = name_link[name_link.length -1];
+
                     if(name_link.length) {
-                          contentTop.push($(name_link).offset().top);
-                          contentBottom.push($(name_link).offset().top + $(name_link).height());
+                          contentTop.push($('#' + name_link).offset().top);
+                          contentBottom.push($('#' + name_link).offset().top + $(name_link).height());
                     }
                 }
             )
