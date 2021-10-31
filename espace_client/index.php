@@ -8,7 +8,7 @@ $esc_url = $base_url . 'espace_client/';
 <html lang="fr">
     <head>
         <!-- META SECTION -->
-        <title>Edinars - Espace client</title>
+        <title>E-Recovery - Espace client</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
