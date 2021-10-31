@@ -11,7 +11,7 @@ if ( $host == "local") {
 
 	define("BASE_URL", "https://V2.edinars.net");
 
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(E_ALL);
 } else {
 	$db_hostname='shareddb1a.hosting.stackcp.net';
 	$db_username='dbusername';
@@ -130,10 +130,8 @@ $flexy_maximal = 10000;
 
 $sms_fee = 5;
 
+$base_url = rtrim(BASE_URL, '/') . '/';
 ################################################################################
 include('consts.php');
 include('common.php');
 ################################################################################
-
-
-?>
