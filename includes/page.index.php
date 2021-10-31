@@ -6,9 +6,9 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="carousel-content">
-                                <h2>Le <span>E-paiment</span> en Algerie.</h2>
+                                <h2>La solution de <span>recouvrement 2.0</span> en Algerie.</h2>
                                 <p>Maintenant c'est possible avec <span>Edinars</span></p>
-                                <button type="button" class="btn btn-success btn-lg register_btn" data-toggle="modal" data-target="#login-modal" >Créer un compte</button>
+                                <button type="button" class="btn btn-danger btn-lg register_btn" data-toggle="modal" data-target="#login-modal" >Créer un compte</button>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
     </div><!--/.owl-carousel-->
 </section><!--/#main-slider-->
 
-<section id="accueil" class="cta" class="wow fadeIn">
+<section id="accueil" class="cta wow fadeIn">
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
@@ -80,7 +80,7 @@
                 </p>
             </div>
             <div class="col-sm-3 text-right">
-                <button type="button" class="btn btn-success btn-lg register_btn" data-toggle="modal" data-target="#login-modal">Créer un compte</button>
+                <button type="button" class="btn btn-danger btn-lg register_btn" data-toggle="modal" data-target="#login-modal">Créer un compte</button>
             </div>
         </div>
     </div>
@@ -225,7 +225,7 @@
 <section id="get-in-touch">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">Contacter Edinars</h2>
+            <h2 class="section-title text-center wow fadeInDown">Contacter E-Recovery</h2>
             <p class="text-center wow fadeInDown"></p>
         </div>
     </div>

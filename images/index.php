@@ -70,7 +70,7 @@ require 'config.php';
                                 <div class="carousel-content">
 <p class="cpaitationslider">Le E-paiment en Algerie </p>
 <p class="cpaitationslider">Maintenant c'est possible avec E-dinar  </p>
-                                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
+							      <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ require 'config.php';
                                 <div class="carousel-content">
                                     <p class="cpaitationslider">Le E-paiment en Algerie </p>
                                     <p class="cpaitationslider">Maintenant c'est possible avec E-dinar  </p>
-                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
+									<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@ require 'config.php';
                             <div class="media-body">
                                 <h4 class="media-heading">Recharger Mobile</h4>
                                 <p>
-                                    Votre mobile et à sec ?!!
+                                    Votre mobile est à sec ?!!
                                 </p>
                                 <p>
                                     Ne vous déplacez plus pour recharger votre mobile, Profité de notre service de recharge pour alimenter votre solde mobile instantanément, 24H/24, 7J/7 et en toute sécurité.
