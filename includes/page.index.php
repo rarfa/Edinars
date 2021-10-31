@@ -6,8 +6,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="carousel-content">
-                                <h2>La solution de <span>recouvrement 2.0</span> en Algerie.</h2>
-                                <p>Maintenant c'est possible avec <span>Edinars</span></p>
+                                <h2>La solution de <span>recouvrement 2.0</span> en Algerie</h2>
+                                <p>Maintenant c'est possible avec <span>E-Recovery</span></p>
                                 <button type="button" class="btn btn-danger btn-lg register_btn" data-toggle="modal" data-target="#login-modal" >Créer un compte</button>
                             </div>
                         </div>

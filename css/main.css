@@ -271,10 +271,13 @@ ul.nostyle i {
 }
 #main-slider .slider-inner h2 {
   margin-top: 180px;
-  font-size: 36px;
+  font-size: 51px;
   line-height: 1;
   text-transform: uppercase;
   color: #fff;
+}
+.carousel-content > p {
+  font-size: 18px;
 }
 #main-slider .slider-inner h2 > span {
   color: #e30613;

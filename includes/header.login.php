@@ -4,7 +4,7 @@
     <div class="modal-dialog" id="modal-dialog-login">
         <div class="modal-content">
             <div class="modal-header" align="center">
-                <img id="img_logo" alt="Vikings Rush logo" src="images/logo.png" height="60">
+                <img id="img_logo" alt="Vikings Rush logo" src="images/logo.svg" height="60">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span class="fa fa-remove" aria-hidden="true"></span>
                 </button>

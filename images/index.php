@@ -9,7 +9,7 @@ require 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Edinars Enterprise - Services de paiements online">
     <meta name="author" content="Sarl Edinars Enterprise">
-    <title>Bienvenue - Edinars Services de Paiements en Algerie</title>
+    <title>Bienvenue - E-Recovery Services de Paiements en Algerie</title>
     <!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">

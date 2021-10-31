@@ -69,7 +69,7 @@ s0.parentNode.insertBefore(s1,s0);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="<?php echo $base_url?>images/logo.png" alt="logo" height="55"></a>
+                    <a class="navbar-brand" href="#"><img src="<?php echo $base_url?>images/logo.svg" alt="logo" height="80"></a>
                 </div>
 
                 <div class="collapse navbar-collapse navbar-right">
