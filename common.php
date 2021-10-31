@@ -591,7 +591,8 @@ function db_query($statement,$print=false)
 
     global $data;
 
-    if($print) { echo("-->{$statement}<--<br>");
+    if($print) {
+        echo("-->{$statement}<--<br>");
     }
 
     return mysqli_query($data['cid'], $statement);
@@ -619,29 +620,30 @@ function db_count($result)
 
 
 
-function db_rows($statement,$print=false)
+function db_rows($statement, $print = false)
 {
 
-    $result=array();
+    $result = array();
 
-    if($print) { echo("-->{$statement}<--<br>");
+    if($print) {
+        echo("-->{$statement}<--<br>");
     }
 
-    $query=db_query($statement);
+    $query = db_query($statement);
 
-    $count=db_count($query);
+    $count = db_count($query);
 
     for($i=0; $i<$count; $i++){
 
-        $record=mysqli_fetch_array($query, MYSQLI_ASSOC);
+        $record = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-        foreach($record as $key=>$value) { $result[$i][$key]=$value;
+        foreach($record as $key=>$value) {
+            $result[$i][$key]=$value;
         }
 
     }
 
     return $result;
-
 }
 
 //
@@ -1121,7 +1123,7 @@ function send_email($key, $post)
     if(isset($post['msg'])) { $text=str_replace("[contact_msg]", $post['msg'], $text);
     }
 
-    $text=str_replace("[fullname]", isset($post['uid']) ? get_member_name($post['uid']) : 'null', $text);
+    $text=str_replace("[fullname]", $post['fullname'] ?? 'null', $text);
 
     $text=str_replace("[date]", date("d/m/Y H:i:s"), $text);
 
@@ -1984,7 +1986,7 @@ function get_member_email_by_username($username)
 
 
 
-function count_member_emails($uid, $primary=false, $confirmed=true)
+function count_member_emails($uid, $primary=false, $confirmed=true): int
 {
 
     global $data;
@@ -2003,8 +2005,11 @@ function count_member_emails($uid, $primary=false, $confirmed=true)
         " LIMIT 1"
     );
 
-    return $result[0]['count'];
+    if(isset($result[0])) {
+        return (int) $result[0]['count'];
+    }
 
+    return 0;
 }
 
 
@@ -2066,21 +2071,19 @@ function add_email($uid,$email)
 
     global $data;
 
-    $max_email=$data['maxemails'];
+    $max_email  = $data['maxemails'];
+    $nb_emails  = count_member_emails($uid, false, false);
 
-    $nb_emails=count_member_emails($uid, false, false);
 
-    if($nb_emails >= $max_email) { return TOO_MANY_EMAILS;
-
-    } elseif(verify_email($email)) { return INVALID_EMAIL_ADDRESS;
-
-    } elseif(email_exists($email)) { return EMAIL_EXISTS;
-
+    if($nb_emails >= $max_email) {
+        return TOO_MANY_EMAILS;
+    } elseif(verify_email($email)) {
+        return INVALID_EMAIL_ADDRESS;
+    } elseif(email_exists($email)) {
+        return EMAIL_EXISTS;
     } else {
 
         $verifcode=gencode($email);
-
-
 
         $result=db_query(
             "INSERT INTO `{$data['DbPrefix']}member_emails`".
@@ -2090,20 +2093,15 @@ function add_email($uid,$email)
             "($uid,'{$email}',0,0,'{$verifcode}')"
         );
 
-        if (!$result) { return DB_ERROR;
+        if (!$result) {
+            return DB_ERROR;
         }
 
-        $info=get_member_info($uid);
-
-        $post['email']=$email;
-
-        $post['fullname']=get_member_name($uid);
-
-        $post['ccode']=$verifcode;
-
-        $post['uid']=$uid;
-
-        $post['emailpage'];
+        $info               = get_member_info($uid);
+        $post['email']      = $email;
+        $post['fullname']   = get_member_name($uid);
+        $post['ccode']      = $verifcode;
+        $post['uid']        = $uid;
 
         send_email('CONFIRM-NEW-EMAIL', $post);
 
@@ -2124,18 +2122,19 @@ function activate_email($uid, $verifcode)
         "SELECT * FROM `{$data['DbPrefix']}member_emails` WHERE `owner`='$uid' AND `verifcode`='$verifcode' AND `active`=0"
     );
 
-    if (!isset($confirm[0])) { return CONFIRMATION_NOT_FOUND;
+    if (!isset($confirm[0])) {
+
+        return CONFIRMATION_NOT_FOUND;
     }
 
     db_query("UPDATE `{$data['DbPrefix']}member_emails` SET `active`=1 WHERE `owner`={$uid} AND `verifcode`='{$verifcode}'");
 
 
+    $info = get_member_info($uid);
 
-    $info=get_member_info($uid);
+    $post['email'] = $confirm[0]['email'];
 
-    $post['email']=$confirm[0]['email'];
-
-    $post['fullname']=get_member_name($uid);
+    $post['fullname'] = get_member_name($uid);
 
     send_email('NEW-EMAIL-ACTIVATED', $post);
 
@@ -2184,22 +2183,23 @@ function make_email_prim($uid, $email)
 
 
 
-function get_email_detail($email, $type=ALL)
+function get_email_detail($email, $type = 'ALL')
 {
 
     global $data;
 
-    if ($type==CONFIRMED) { $result=db_rows(
+    if ($type == 'CONFIRMED') {
+        $result=db_rows(
         "SELECT * FROM {$data['DbPrefix']}member_emails WHERE `email`='$email' AND `active`=1"
         );
 
-    } else { $result=db_rows(
+    } else {
+        $result=db_rows(
         "SELECT * FROM {$data['DbPrefix']}member_emails WHERE `email`='$email'"
     );
     }
 
     return $result[0];
-
 }
 
 
@@ -2229,15 +2229,13 @@ function delete_member_email($uid, $email)
 
 
 
-function email_exists($email)
+function email_exists(string $email): bool
 {
-
     global $data;
 
-    $result=db_rows("SELECT owner FROM {$data['DbPrefix']}members_emails WHERE email='{$email}'");
+    $result = db_rows("SELECT `owner` FROM {$data['DbPrefix']}member_emails WHERE email='{$email}'");
 
-    return (bool)$result['0'];
-
+    return isset($result[0]);
 }
 
 

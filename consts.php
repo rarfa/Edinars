@@ -1,24 +1,24 @@
 <?php
-// 
+//
 // PROGRAM     : EDINAR APPLICATION                                                 #
 // VERSION     : 0.01                                                              #
 // AUTHOR      : Arfa Abderrahim                                                   #
 // COMPANY     : HOSTDZ                                                             #
 // COPYRIGHTS  : (C) HOSTDZ. ALL RIGHTS RESERVED                                    #
 // COPYRIGHTS BY (C)2011 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 // DEVELOPED BY HOSTDZ             `                        #
-// 
+//
 // ALL SOURCE CODE, IMAGES, PROGRAMS, FILES INCLUDED IN THIS DISTRIBUTION       #
 // COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 // ANY REDISTRIBUTION WITHOUT PERMISSION OF HOSTDZ AND IS                  #
 // STRICTLY FORBIDDEN                                 #
-// 
+//
 // COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 
-// 
+//
 
 $data['Hostname']=$db_hostname;
 
@@ -30,15 +30,15 @@ $data['Database']=$db_database;
 
 $data['DbPrefix']=$db_tbprefix;
 
-// 
+//
 
 $data['Folder'] = $folder;
 
-// 
+//
 
 $data['confirmation_mobile_number'] = "‎0541348000";
 
-// 
+//
 
 $data['SiteName']=stripslashes($site_name);
 
@@ -72,11 +72,11 @@ $data['withdraw_email']=$withdraw_email;
 
 $data['error_email'] = $error_email;
 
-// 
+//
 
 // PLEASE DO NOT CHANGE INFORMATION BELOW THIS COMMENT           ###
 
-// 
+//
 
 $data['MaxRowsByPage']=10;
 
@@ -161,7 +161,7 @@ $data['flexy_maximal']=$flexy_maximal;
 
 $data['sms_fee']=$sms_fee;
 
-// 
+//
 
 
 $data['DepositMethod']=array(
@@ -191,7 +191,7 @@ $data['DepositMethod']=array(
     )
 );
 
-// 
+//
 
 $data['WithdrawMinSum']=$wdr_minimal;
 $data['WithdrawMaxSum']=$wdr_maximal;
@@ -211,7 +211,7 @@ $data['WithdrawMethod']=array(
         'cmnt'=>'RETIRER PAR CCP'
     )
 );
-// 
+//
 $data['MemberType']=array(
     ''=>'Choisir type de compte',
     0=>'Particuliers',
@@ -380,7 +380,7 @@ $data['recharge_type']=array(
     'Facture'=>'Facture'
 );
 
-// 
+//
 
 $data['Countries']=array(
 
@@ -438,7 +438,7 @@ $data['Wilayas']=array(
     '15'=>'Tizi-Ouzou',
     '13'=>'Tlemcen'
 );
-// 
+//
 
 $data['CreditCardType']=array(
     '0'        => '--',
@@ -448,7 +448,7 @@ $data['CreditCardType']=array(
     'DISCOVER' => 'Discover'
 );
 
-// 
+//
 
 $data['BankAccountType']=array(
 
@@ -464,14 +464,29 @@ $data['BankAccountType']=array(
 
 );
 
-// 
+//
 
-$data['Months']=array('--');
+$data['Months'] = array('--');
 
-for($i=1;$i<=12;$i++) { $data['Months'][$i]=$i;
+for($i=1;$i<=12;$i++) {
+    $data['Months'][$i] = $i;
 }
 
-$data['Years']=array('--');
+$data['Years'] = array('--');
 
-for($i=(int)date('Y');$i<=(int)date('Y')+10;$i++) { $data['Years'][$i]=$i;
+for($i=(int)date('Y');$i<=(int)date('Y')+10;$i++) {
+    $data['Years'][$i]=$i;
 }
+
+// constants for email edit
+defined('INVALID_EMAIL_ADDRESS') || define('INVALID_EMAIL_ADDRESS', 1);
+defined('EMAIL_EXISTS')          || define('EMAIL_EXISTS', 2);
+defined('TOO_MANY_EMAILS')       || define('TOO_MANY_EMAILS', 3);
+defined('DB_ERROR')              || define('DB_ERROR', 4);
+
+defined('ALREADY_PRIMARY')       || define('ALREADY_PRIMARY', 5);
+defined('EMAIL_NOT_ACTIVE')      || define('EMAIL_NOT_ACTIVE', 6);
+defined('EMAIL_NOT_FOUND')       || define('EMAIL_NOT_FOUND', 7);
+defined('CANNOT_DELETE_PRIMARY') || define('CANNOT_DELETE_PRIMARY', 8);
+defined('SUCCESS')               || define('SUCCESS', 9);
+defined('CONFIRMATION_NOT_FOUND')|| define('CONFIRMATION_NOT_FOUND', 10);
