@@ -1,7 +1,7 @@
 <?php
 define("DIR_ROOT", "");
 // include('config.php');
-include('includes/All_files.php');
+require 'includes/All_files.php';
 
 // var_dump($post);
 
@@ -12,7 +12,7 @@ include('includes/All_files.php');
     <head>
         <!-- META SECTION -->
         <title>Edinars - Services de paiements enline</title>
-        <meta name="csrf_token" content="<?= $_SESSION['csrf_token'] ?>">
+        <meta name="csrf_token" content="<?php echo $_SESSION['csrf_token'] ?>">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,14 +25,14 @@ include('includes/All_files.php');
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="espace_client/css/theme-default.css?update=<?=time()?>"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="espace_client/css/theme-default.css?update=<?php echo time()?>"/>
         <link rel="stylesheet" type="text/css" href="espace_client/css/fontawesome/css/font-awesome.min.css"/>
         <!-- EOF CSS INCLUDE -->
 
         <script type="text/javascript" src="espace_client/js/plugins/jquery/jquery.min.js"></script>
     </head>
     <body>
-        <?php include("includes/header.login.php"); ?>
+        <?php require "includes/header.login.php"; ?>
         <!-- START PAGE CONTAINER -->
         <div class="page-container">
 
@@ -49,17 +49,17 @@ include('includes/All_files.php');
               <div id="included_page" class="margin-top-3-perc">
               </div>
               <form class="" id="get_checkout_form" name="get_checkout_form" action="" method="get" onsubmit="return false;">
-                <input type="hidden" id="pincode" name="pincode" value="<?=$post['pincode']?>">
-                <input type="hidden" id="prehashkey" name="prehashkey" value="<?=$post['prehashkey']?>">
-                <input type="hidden" id="crypt" name="crypt" value="<?=$post['crypt']?>">
-                <input type="hidden" id="quantite" name="quantite" value="<?=$post['quantite']?>">
+                <input type="hidden" id="pincode" name="pincode" value="<?php echo $post['pincode']?>">
+                <input type="hidden" id="prehashkey" name="prehashkey" value="<?php echo $post['prehashkey']?>">
+                <input type="hidden" id="crypt" name="crypt" value="<?php echo $post['crypt']?>">
+                <input type="hidden" id="quantite" name="quantite" value="<?php echo $post['quantite']?>">
               </form>
             </div>
             <!-- END PAGE CONTENT WRAPPER -->
         </div>
         <!-- END PAGE CONTAINER -->
         <footer class="text-center">
-          Copyright © <?=date("Y")?> Edinars. Tous droits réservés
+          Copyright © <?php echo date("Y")?> Edinars. Tous droits réservés
         </footer>
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="espace_client/audio/alert.mp3" preload="auto"></audio>
@@ -113,8 +113,8 @@ include('includes/All_files.php');
         <script type="text/javascript" src="espace_client/js/sammy-latest.min.js"></script>
         <!-- <script type="text/javascript" src="js/angular.min.js"></script> -->
 
-        <script type="text/javascript" src="espace_client/js/espace_client.js?update=<?=time()?>"></script>
-        <script type="text/javascript" src="js/common.js?update=<?=time()?>"></script>
+        <script type="text/javascript" src="espace_client/js/espace_client.js?update=<?php echo time()?>"></script>
+        <script type="text/javascript" src="js/common.js?update=<?php echo time()?>"></script>
 
         <script type="text/javascript">
           espace_client_dir ="./espace_client/";

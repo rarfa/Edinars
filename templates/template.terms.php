@@ -1,22 +1,22 @@
 <!-- Start content  -->
 
 <div class="content">
-	<article class="col-3">
-		<div class="col_title">Conditions d'utilisation de Edinars</div>
-		<div class="col_text">
-			<p class="p1">Voici les termes et conditions applicables lorsque vous consentez à utiliser nos services</p>
+    <article class="col-3">
+        <div class="col_title">Conditions d'utilisation de Edinars</div>
+        <div class="col_text">
+            <p class="p1">Voici les termes et conditions applicables lorsque vous consentez à utiliser nos services</p>
 
-							<p class="pTitle">1. A propos de Edinars </p>
-								<p class="p1">1.1. Sarl Edinars est une société constituée en vertu des lois de la République Algérienne Démocratique et Populaire portant le numéro de matricule fiscale . Inscrit au Registre de Commerce sous le n°: , dont le siège est sis à: </p>
-							<p class="pTitle">2. Portée des présentes conditions d'utilisation</p>
-								<p class="p1">2.1. Les présentes conditions d'utilisation régissent l'ouverture, l’utilisation et la clôture de votre compte Edinars. En même temps que notre Politique en matière de protection de la vie privée, elles constituent le lien légal entre vous et nous. Pour l'usage des services complémentaires, il se peut que vous deviez accepter des conditions générales additionnelles, comme vous y êtes invités lorsque vous commandez ou utilisez de tels services. Il vous est conseillé d'imprimer ou de télécharger une copie des présentes conditions d'utilisation et de la conserver pour référence ultérieure. Vous pouvez toujours consulter les dernières conditions d'utilisation sur notre site.</p>
-								<p class="p1">2.2. Il vous est également conseillé de lire les réponses aux questions fréquemment posées sur notre site.</p>
-								<p class="p1">2.3. Selon le type de compte que vous avez, des conditions générales additionnelles peuvent s'appliquer comme cela vous sera communiqué au moment opportun.</p>
-							<p class="pTitle">3. Votre compte Edinars</p>
-								<p class="p1">3.1. Votre compte Edinars est un compte de gestion de vos opérations de paiement électronique, qui vous permet d'envoyer et de recevoir des paiements électroniques.</p>
-								<p class="p1">3.2. L'argent sur votre compte est un prépaiement sur vos prochaines opérations, vous donne autorisation à la Sarl Edinars à payer les fournisseurs ou les prestataires conventionnés à votre place en utilisant votre solde, qu'est toujours visible dans votre compte.</p>
-								<p class="p1">3.3. Votre compte Edinars est exprimé dans la devise nationale DZD (Dinar Algérien). Et votre compte est valable uniquement pour payer des fournisseurs ou prestataires installés en Algérie.</p>
-								<p class="p1">3.4. L'argent contenu sur votre compte Edinars ne perd jamais sa valeur mais il ne rapportera aucun intérêt.</p>
+                            <p class="pTitle">1. A propos de Edinars </p>
+                                <p class="p1">1.1. Sarl Edinars est une société constituée en vertu des lois de la République Algérienne Démocratique et Populaire portant le numéro de matricule fiscale . Inscrit au Registre de Commerce sous le n°: , dont le siège est sis à: </p>
+                            <p class="pTitle">2. Portée des présentes conditions d'utilisation</p>
+                                <p class="p1">2.1. Les présentes conditions d'utilisation régissent l'ouverture, l’utilisation et la clôture de votre compte Edinars. En même temps que notre Politique en matière de protection de la vie privée, elles constituent le lien légal entre vous et nous. Pour l'usage des services complémentaires, il se peut que vous deviez accepter des conditions générales additionnelles, comme vous y êtes invités lorsque vous commandez ou utilisez de tels services. Il vous est conseillé d'imprimer ou de télécharger une copie des présentes conditions d'utilisation et de la conserver pour référence ultérieure. Vous pouvez toujours consulter les dernières conditions d'utilisation sur notre site.</p>
+                                <p class="p1">2.2. Il vous est également conseillé de lire les réponses aux questions fréquemment posées sur notre site.</p>
+                                <p class="p1">2.3. Selon le type de compte que vous avez, des conditions générales additionnelles peuvent s'appliquer comme cela vous sera communiqué au moment opportun.</p>
+                            <p class="pTitle">3. Votre compte Edinars</p>
+                                <p class="p1">3.1. Votre compte Edinars est un compte de gestion de vos opérations de paiement électronique, qui vous permet d'envoyer et de recevoir des paiements électroniques.</p>
+                                <p class="p1">3.2. L'argent sur votre compte est un prépaiement sur vos prochaines opérations, vous donne autorisation à la Sarl Edinars à payer les fournisseurs ou les prestataires conventionnés à votre place en utilisant votre solde, qu'est toujours visible dans votre compte.</p>
+                                <p class="p1">3.3. Votre compte Edinars est exprimé dans la devise nationale DZD (Dinar Algérien). Et votre compte est valable uniquement pour payer des fournisseurs ou prestataires installés en Algérie.</p>
+                                <p class="p1">3.4. L'argent contenu sur votre compte Edinars ne perd jamais sa valeur mais il ne rapportera aucun intérêt.</p>
 <p class="p1">3.5. Vous avez le droit de retirer votre argent de votre compte Edinars à tout moment ; cependant, il peut vous être demandé de confirmer votre identité au préalable. Il n'y a aucun montant de retrait minimum mais les fonds sur votre compte doivent être suffisants pour couvrir tout éventuel frais de retrait applicable. Vous pouvez choisir la méthode de retrait en soumettant votre demande de retrait.</p>
 <p class="p1">3.6. Les comptes Edinars ne sont pas des comptes bancaires. En acceptant les présentes conditions d’utilisation, vous reconnaissez que les Autorités Financières Algériennes ne s’appliquent pas à votre compte Edinars. Dans le cas peu probable où SARL Edinars devenait insolvable, vous pourriez perdre l'argent placé sur votre compte. Cependant, SARL Edinars respecte rigoureusement les exigences légales prescrites par les autorités pour assurer la sécurité et la liquidité des fonds déposés sur des comptes Edinars. Pour de plus amples informations sur la façon dont nous préservons la sécurité des fonds de nos clients, veuillez consulter notre site Internet.</p>
 <p class="p1">3.7. L'argent placé sur un compte Edinars appartient à la personne ou à la personne morale qui est enregistrée en tant que détenteur du compte. Aucune autre personne que le détenteur du compte n'a de droit sur les fonds placés sur un compte Edinars, excepté dans les cas de succession. Vous ne pouvez pas attribuer ou transférer votre compte Edinars à un tiers ni accorder un intérêt légal ou équitable sur celui-ci à un tiers.</p>
@@ -37,10 +37,10 @@
 Vous devez signaler toutes les irrégularités ou clarifier toutes les questions que vous pourriez avoir dès que possible en contactant le service clientèle.</p>
 <p class="pTitle">6. Maintien de la sécurité de votre compte Edinars</p>
 <p class="p1">6.1. Vous devez préserver la sécurité du mot de passe de votre compte à tout moment et ne jamais le révéler à qui que ce soit. Notre personnel ne vous demandera jamais de lui fournir votre mot de passe ou de le donner à un tiers. Tout message que vous recevez ou tout site que vous consultez vous demandant votre mot de passe, en dehors du site d’Edinars ou d’une passerelle de paiement Edinars sur le site d’un négociant, doit nous être signalé. Si vous doutez de l’authenticité d’un site, vous devez contacter le service clientèle. Vous devez changer votre mot de passe régulièrement et vous ne devez jamais :
-<br>•	Noter ou stocker votre mot de passe où que ce soit ;
-<BR>•	Autoriser quelqu'un à accéder à votre compte ou à vous regarder accéder à votre compte ;
-<br>•	Choisir un mot de passe qui est peut-être facilement deviné par quelqu'un qui pourrait utiliser ou recueillir des informations sur vous; ou
-<br>•	Choisir un mot de passe qui a un sens.</p>
+<br>•    Noter ou stocker votre mot de passe où que ce soit ;
+<BR>•    Autoriser quelqu'un à accéder à votre compte ou à vous regarder accéder à votre compte ;
+<br>•    Choisir un mot de passe qui est peut-être facilement deviné par quelqu'un qui pourrait utiliser ou recueillir des informations sur vous; ou
+<br>•    Choisir un mot de passe qui a un sens.</p>
 <p class="p1">6.2. Si vous avez des signes ou soupçons concernant la perte, le vol, le détournement, l’utilisation non autorisée voire la divulgation de votre login, de votre mot de passe ou de tout autre dispositif de sécurité, vous devez changer votre mot de passe et contacter le service clientèle immédiatement. Si vous tardez de manière injustifiée à nous en informer, cela peut non seulement compromettre la sécurité de votre compte mais vous pourriez également être tenu pour responsable de toutes les pertes qui en résultent. Si vous suspectez que quelqu'un d'autre a accédé à votre compte, vous devez également contacter la police et signaler l'incident.</p>
 <p class="p1">6.3. Nous pouvons à tout moment suspendre ou bien limiter la fonctionnalité de votre compte si nous suspectons qu'on y a accédé sans votre autorisation ou qu'il a été compromis de quelque manière que ce soit.</p>
 <p class="p1">6.4. Vous devez également faire tout ce qui est raisonnablement nécessaire pour vous assurer que vos comptes e-mail sont sécurisés et que vous seul y accédez, car il se peut que votre adresse e-mail soit utilisée pour réinitialiser des mots de passe ou pour communiquer avec vous au sujet de la sécurité de votre compte. Au cas où l'unes des adresses e-mails enregistrées dans votre compte Edinars serait compromise, vous devez immédiatement contacter le service clientèle ainsi que votre fournisseur de services e-mail.</p>
@@ -74,45 +74,45 @@ Vous devez signaler toutes les irrégularités ou clarifier toutes les questions q
 </p><p class="p1">10.2. La confirmation de réception de paiements sur votre compte ne signifie pas nécessairement que ces transactions ne sont pas annulables. Edinars se réserve le droit d'annuler un paiement au cas où le débiteur ou la banque du débiteur ou le fournisseur de services de paiement a rétro facturé ou annulé (ou est vraisemblablement susceptible de rétro facturer ou d'annuler) un chargement ou tout autre paiement qui a été utilisé pour vous verser le paiement.
 </p><p class="p1">10.3. Si une personne reçoit une notification de paiement d’Edinars indiquant que quelqu'un lui a envoyé des fonds à une adresse e-mail qui n'est pas enregistrée, elle ne sera pas créditée du paiement jusqu'à ce qu'elle le réclame selon les instructions présentées dans l'e-mail de notification. Dans le cas contraire, il n'y aura aucun lien contractuel ni fiduciaire entre Edinars et le bénéficiaire prévu. Les fonds restent ceux de l'expéditeur.
 </p><p class="p1">10.4. Vous pouvez réclamer un paiement à quelqu'un en utilisant le service de « Demande de paiement » de votre compte. Vous ne devez utiliser ce service que pour des montants incontestés qui sont dus en intégralité par une personne. Vous ne pouvez pas utiliser ce service plus d'une fois pour le même paiement que vous réclamez. Ce service ne peut être utilisé comme outil de recouvrement de dettes ou de mesure contraignante. Si la personne qui vous doit un paiement vous demande de ne pas utiliser le service de « Demande de paiement » de Edinars pour lui réclamer le paiement, vous devez vous conformer à cette demande indépendamment du bien-fondé de votre réclamation. En utilisant ce service, vous devez vous assurer que vous avez le droit de contacter la personne à laquelle vous réclamez l'argent. Il vous est strictement interdit de réclamer de l'argent à quelqu'un qui
-<br>•	ne vous doit pas le montant demandé ;
-<br>•	serait inéligible pour ouvrir un compte Edinars (par exemple, un mineur) ; ou
-<br>•	n'a pas donné ou a retiré son consentement pour recevoir une demande de paiement par l'intermédiaire du service de «Demande de paiement»;
+<br>•    ne vous doit pas le montant demandé ;
+<br>•    serait inéligible pour ouvrir un compte Edinars (par exemple, un mineur) ; ou
+<br>•    n'a pas donné ou a retiré son consentement pour recevoir une demande de paiement par l'intermédiaire du service de «Demande de paiement»;
 <br> Et nous auront le droit de réclamer une compensation pour tous les dommages ou pertes consécutifs à votre violation de cette interdiction.
 </p><p class="p1">10.5. La réception des paiements est sujette à des frais divers et à des conversions de devise en fonction du type de paiement que vous recevez et du type de compte que vous avez. Veuillez consulter la section 14 pour de plus amples détails.
 </p><p class="pTitle">11. Transactions interdites
 </p><p class="p1">11.1. Il est strictement interdit d'envoyer ou de recevoir des paiements en compensation de la vente ou de la fourniture des articles suivants :
-<br>•	Produits de tabac
-<br>•	Médicaments sous prescription
-<br>•	Drogues et attirails associés à la consommation de drogues
-<br>•	Armes à feu ou munitions
-<br>•	Armes et couteaux
-<br>•	Désembrouiller de télévision par satellite et par câble
-<br>•	Pornographie
-<br>•	Identifications et licences gouvernementales comprenant les reproductions et les originaux
-<br>•	Loteries ou services de jeu non autorisés
-<br>•	Cartes de débit prépayées ou autres cartes à valeur intégrée qui ne sont pas associées à un négociant particulier et ne sont pas limitées aux achats de produits ou de services particuliers
-<br>•	Marketing à plusieurs niveaux, vente pyramidale ou chaîne de Ponzi, programmes matrices ou autre promotion du style « Devenez riche rapidement » ou plans d'investissement à rendement élevé
-<br>•	Biens ou services qui violent les droits de propriété intellectuelle d'un tiers.
+<br>•    Produits de tabac
+<br>•    Médicaments sous prescription
+<br>•    Drogues et attirails associés à la consommation de drogues
+<br>•    Armes à feu ou munitions
+<br>•    Armes et couteaux
+<br>•    Désembrouiller de télévision par satellite et par câble
+<br>•    Pornographie
+<br>•    Identifications et licences gouvernementales comprenant les reproductions et les originaux
+<br>•    Loteries ou services de jeu non autorisés
+<br>•    Cartes de débit prépayées ou autres cartes à valeur intégrée qui ne sont pas associées à un négociant particulier et ne sont pas limitées aux achats de produits ou de services particuliers
+<br>•    Marketing à plusieurs niveaux, vente pyramidale ou chaîne de Ponzi, programmes matrices ou autre promotion du style « Devenez riche rapidement » ou plans d'investissement à rendement élevé
+<br>•    Biens ou services qui violent les droits de propriété intellectuelle d'un tiers.
 <br>
 Edinars se réserve le droit d'ajouter, à sa seule discrétion, des catégories commerciales de transactions interdites en ajoutant de telles catégories aux présentes conditions d'utilisation ou à une politique d'utilisation acceptable publiée sur le site.
 </p><p class="p1">11.2. Il est strictement interdit d'effectuer ou de recevoir des paiements en faveur ou provenant de personnes ou d'entités offrant des services de jeu, dont, entre autres, des paris sportifs, des jeux de casino et des parties de poker illégaux. Nous pouvons suspendre ou clôturer votre compte Edinars à tout moment ou refuser d'exécuter ou annuler une transaction si nous croyons que vous utilisez ou avons utilisé directement ou indirectement votre compte Edinars pour des transactions de jeu illégales ou en rapport avec celles-ci. Il est de votre responsabilité de vous assurer que vous n'utilisez pas nos services pour des transactions qui peuvent être considérées comme illégales dans votre juridiction.
 </p><p class="p1">11.3. Vous ne pouvez pas utiliser les services Edinars si vous résidez dans l'un des pays suivants: Afghanistan, Cuba, Iran, Israël, Birmanie, Nigéria, Corée du Nord, Somalie, Soudan ou Yémen. Cette liste n'est pas exhaustive et nous pouvons, à notre seule discrétion, décider de cesser ou de limiter nos services dans d'autres pays à tout moment et sans préavis. Nous nous réservons le droit de suspendre ou de clôturer votre compte Edinars à tout moment si nous estimons raisonnablement que la loi nous y oblige ou afin de nous conformer aux recommandations émises par une autorité gouvernementale compétente ou un corps reconnu pour la prévention des crimes financiers.
 </p><p class="p1">11.4. Il est strictement interdit d'utiliser votre compte Edinars à des fins illégales incluant, en autres, la fraude et le blanchiment d'argent. Edinars signalera toute activité suspecte à l'organisme compétent chargé de faire appliquer la loi. Il vous est interdit d'utiliser votre compte Edinars pour essayer d'abuser, d'exploiter ou de contourner les restrictions d'utilisation imposées par un marchand sur les services qu'il fournit.
 </p><p class="p1">11.5. Vous ne pouvez accepter des paiements que pour certaines catégories d'affaires après avoir reçu l'aval d’Edinars à sa seule discrétion. De telles catégories d'affaires incluent, sans y être limitées :
-<br>•	les entreprises d'échange ou de virement de fonds, incluant, mais sans y être limitées, les bureaux de change, d’échange de devises et d'achat d'argent de voyage;
-<br>•	la collecte de toute forme de donations ou de paiements destinés à des organismes caritatifs ou non lucratifs;
-<br>•	le commerce de ressources naturelles telles que les bijoux, les pierres ou les métaux précieux ;
-<br>•	la vente ou la fourniture de boissons alcoolisées ; ou
-<br>•	la vente ou la fourniture de compléments diététiques et de produits de santé alternatifs ;
-<br>•	n'importe quelle autre catégorie d'affaires publiée dans les activités interdits sur le site ;
+<br>•    les entreprises d'échange ou de virement de fonds, incluant, mais sans y être limitées, les bureaux de change, d’échange de devises et d'achat d'argent de voyage;
+<br>•    la collecte de toute forme de donations ou de paiements destinés à des organismes caritatifs ou non lucratifs;
+<br>•    le commerce de ressources naturelles telles que les bijoux, les pierres ou les métaux précieux ;
+<br>•    la vente ou la fourniture de boissons alcoolisées ; ou
+<br>•    la vente ou la fourniture de compléments diététiques et de produits de santé alternatifs ;
+<br>•    n'importe quelle autre catégorie d'affaires publiée dans les activités interdits sur le site ;
 <br>Au cas où vous n’arriveriez pas à déterminer si vos affaires tombent dans l'une ou l’autre de ces catégories, vous devez contacter le service clientèle.
 Edinars se réserve le droit d'ajouter, à seule discrétion, des catégories commerciales exigeant une approbation en ajoutant de telles catégories aux présentes conditions d'utilisation ou à une politique d'utilisation acceptable publiée sur le site.
 </p><p class="p1">11.6. Si vous menez ou essayez de mener toute transaction violant les interdictions contenues dans cette section 11 ou sans l'approbation nécessaire comme mentionnée à la section 11.5, nous nous réservons le droit :
-<br>•	d’annuler la transaction ; et/ou
-<br>•	de fermer ou de suspendre votre compte ; et/ou
-<br>•	de signaler la transaction à l'organisme compétent chargé de faire appliquer la loi ; et/ou
-<br>•	de vous réclamer des dommages ; et
-<br>•	de vous imputer des frais de gestion jusqu'à 2500 DA au cas où nous appliquerions l'une des mesures citées ci-dessus.</p>
+<br>•    d’annuler la transaction ; et/ou
+<br>•    de fermer ou de suspendre votre compte ; et/ou
+<br>•    de signaler la transaction à l'organisme compétent chargé de faire appliquer la loi ; et/ou
+<br>•    de vous réclamer des dommages ; et
+<br>•    de vous imputer des frais de gestion jusqu'à 2500 DA au cas où nous appliquerions l'une des mesures citées ci-dessus.</p>
 <p class="p1">11.7. Il est de votre responsabilité et non celle de Edinars de vous assurer que vos paiements concernent uniquement des personnes ou des entités en compensation de la vente ou de la fourniture de biens et de services que vous avez le droit de fournir ou de recevoir conformément à toutes les lois et à tous les règlements applicables. Le seul fait qu'une personne ou une entité accepte des paiements via Edinars n'est pas une indication de la légalité de la fourniture de ses biens ou de la prestation de des services. Si vous êtes dans le doute quant à la légalité d'une fourniture ou d'un achat, vous devez cesser votre paiement.
 </p><p class="pTitle">12. Retrait de fonds
 </p><p class="p1">12.1. Vous pouvez demander le retrait de l'ensemble ou d’une partie des fonds placés sur votre compte Edinars à tout moment. Pour ce faire, vous devez vous connecter à votre compte, choisir un mode de retrait et saisir le montant à retirer. Les modes de retrait sont des services de paiement fournis, au moins en partie, par des institutions financières tierces (par exemple, la banque où vous détenez un compte bancaire). Edinars ne garantit la disponibilité d'aucun mode de retrait particulier et peut rendre disponible, modifier ou cesser un mode de retrait particulier à tout moment sans suivre la procédure présentée dans la clause 18, tant qu'il y a au moins un mode de retrait à votre disposition. Si le paiement par retrait est reçu par vous par l'intermédiaire d'un fournisseur de services de paiement (tel que la banque où vous détenez un compte bancaire), Edinars ne sera plus responsable du paiement par retrait une fois que les fonds retirés sont reçus par votre fournisseur de services de paiement.
@@ -189,14 +189,14 @@ Edinars se réserve le droit d'ajouter, à seule discrétion, des catégories commer
 <p class="pTitle">22. Définitions</p>
 <p class="p1">
 Les diverses clauses des présentes conditions d'utilisation ont une signification bien définie ; vous trouverez les différentes définitions ci-après :
-“Service clientèle” : le service clientèle d’Edinars, que vous pouvez joindre en envoyant un message via le service « Contact » sur le site ou en appelant au <?=$data['ContactNumber']?></p>
+“Service clientèle” : le service clientèle d’Edinars, que vous pouvez joindre en envoyant un message via le service « Contact » sur le site ou en appelant au <?php echo $data['ContactNumber']?></p>
 </p>
 <br>
 <BR>
-	
-		</div>
-	</article>
-	<div class="clr"></div>
+    
+        </div>
+    </article>
+    <div class="clr"></div>
 
 </div>
 

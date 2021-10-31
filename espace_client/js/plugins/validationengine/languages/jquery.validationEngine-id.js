@@ -1,8 +1,8 @@
-(function($){
-    $.fn.validationEngineLanguage = function(){
+(function ($) {
+    $.fn.validationEngineLanguage = function () {
     };
     $.validationEngineLanguage = {
-        newLang: function(){
+        newLang: function () {
             $.validationEngineLanguage.allRules = {
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
@@ -12,7 +12,7 @@
                     "alertTextDateRange": "* Kedua bidang rentang tanggal ini wajib"
                 },
                 "requiredInFunction": { 
-                    "func": function(field, rules, i, options){
+                    "func": function (field, rules, i, options) {
                         return (field.val() == "test") ? true : false;
                     },
                     "alertText": "* Bidang harus sama dengan uji"
@@ -99,8 +99,9 @@
                     "func": function (field) {
                         var pattern = new RegExp(/^(\d{4})[\/\-\.](0?[1-9]|1[012])[\/\-\.](0?[1-9]|[12][0-9]|3[01])$/);
                         var match = pattern.exec(field.val());
-                        if (match == null)
-                         return false;
+                        if (match == null) {
+                            return false;
+                        }
                 
                         var year = match[1];
                         var month = match[2]*1;
@@ -109,7 +110,7 @@
                 
                         return (date.getFullYear() == year && date.getMonth() == (month - 1) && date.getDate() == day);
                     },                    
-                     "alertText": "* Tanggal tidak sah, harus dalam format TTTT-BB-HH"
+                    "alertText": "* Tanggal tidak sah, harus dalam format TTTT-BB-HH"
                 },
                 "ipv4": {
                     "regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
@@ -127,7 +128,7 @@
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Huruf saja"
                 },
-				"onlyLetterAccentSp":{
+                "onlyLetterAccentSp":{
                     "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
                     "alertText": "* Huruf saja"
                 },

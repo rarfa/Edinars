@@ -3,13 +3,15 @@ header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-include(DIR_ROOT.'includes/All_files.php');
+require DIR_ROOT.'includes/All_files.php';
 
 // security
-include('verif_user.php');
+require 'verif_user.php';
 
-$array_imp =db_rows("SELECT * FROM `{$data['DbPrefix']}members`".
-                    "WHERE `id`={$user_id}");
+$array_imp =db_rows(
+    "SELECT * FROM `{$data['DbPrefix']}members`".
+    "WHERE `id`={$user_id}"
+);
 
 //reponse
 $array_reponse = array(
@@ -22,16 +24,15 @@ $array_reponse = array(
 // Check if he is already informed
 $mobile = str_replace(" ", "", $array_imp[0]['mobile']);
 
-$array_notification = db_rows("SELECT * FROM `{$data['DbPrefix']}notifications`".
+$array_notification = db_rows(
+    "SELECT * FROM `{$data['DbPrefix']}notifications`".
                               "WHERE `member_id`={$user_id} ".
                               "AND `type` = 'message' ".
                               "AND `view` = 'no' ".
                               "AND `message` LIKE '%{$mobile}%'"
-                            );
-if($array_notification[0]['id']){
-  $array_reponse['pin_code'] = $array_imp[0]['pin_code'];
+);
+if($array_notification[0]['id']) {
+    $array_reponse['pin_code'] = $array_imp[0]['pin_code'];
 }
 
 echo json_encode($array_reponse);
-
-?>

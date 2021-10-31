@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-include(DIR_ROOT.'includes/All_files.php');
+require DIR_ROOT.'includes/All_files.php';
 
 // security
 
@@ -34,35 +34,35 @@ if($name== '') {
 
 //email
 if($email == '') {
-  $array['email'] = 'Email ne peut pas être vide!';
-	$array['success'] = "no";
+    $array['email'] = 'Email ne peut pas être vide!';
+    $array['success'] = "no";
 }
 
 //subject
 if($subject == '') {
-  $array['subject'] = 'le sujet ne peut pas être vide!';
-	$array['success'] = "no";
+    $array['subject'] = 'le sujet ne peut pas être vide!';
+    $array['success'] = "no";
 }
 
 //message
 if($message == '') {
-  $array['message'] = 'Le message ne peut pas être vide!';
-	$array['success'] = "no";
+    $array['message'] = 'Le message ne peut pas être vide!';
+    $array['success'] = "no";
 }
 
 //envoyer email ()
 if($array['success']=="yes") {
-  // Plusieurs destinataires
-  $to  = 'info@edinars.net,info@createam-dz.com';
-  // $to  = 'yacineaitchalal@gmail.com';
+    // Plusieurs destinataires
+    $to  = 'info@edinars.net,info@createam-dz.com';
+    // $to  = 'yacineaitchalal@gmail.com';
 
-  // Sujet
-  $message = str_replace("\r\n", "<br>", $message);
-  $message = str_replace("\n", "<br>", $message);
-  $message = str_replace('\r\n', "<br>", $message);
-  $message = str_replace('\n', "<br>", $message);
-  // message
-  $message_html = '
+    // Sujet
+    $message = str_replace("\r\n", "<br>", $message);
+    $message = str_replace("\n", "<br>", $message);
+    $message = str_replace('\r\n', "<br>", $message);
+    $message = str_replace('\n', "<br>", $message);
+    // message
+    $message_html = '
   <html>
   <head>
     <title>'.$subject.'</title>
@@ -75,23 +75,21 @@ if($array['success']=="yes") {
   </html>
   ';
 
-  // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
-  $headers  = 'MIME-Version: 1.0' . "\r\n";
-  $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-  // En-têtes additionnels
-  //  $headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
-  $headers .= 'From: Contact formulaire <infos@edinars.net>' . "\r\n";
-  $headers .= 'Reply-To: <'.$email.'>' . "\r\n";
-  //  $headers .= 'Cc: anniversaire_archive@edinars.net' . "\r\n";
-  //  $headers .= 'Bcc: anniversaire_verif@edinars.net' . "\r\n";
+    // En-têtes additionnels
+    //  $headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
+    $headers .= 'From: Contact formulaire <infos@edinars.net>' . "\r\n";
+    $headers .= 'Reply-To: <'.$email.'>' . "\r\n";
+    //  $headers .= 'Cc: anniversaire_archive@edinars.net' . "\r\n";
+    //  $headers .= 'Bcc: anniversaire_verif@edinars.net' . "\r\n";
 
-  // Envoi
-  mail($to, $subject, $message_html, $headers);
+    // Envoi
+    mail($to, $subject, $message_html, $headers);
 }
 //error = 0
 
 
 echo json_encode($array);
-
-?>

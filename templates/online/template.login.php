@@ -9,21 +9,21 @@ $Form->Add(new Base_Submit("send", "Connectez Vous"));
 
 ?>
 <div class="content">
-	<div id="wrapper">
+    <div id="wrapper">
 
-	<img src="<?=$data['Host']?>/images/logo.png">
-	<h2>Bienvenue - Edinars Enterprise</h2>
-	<?php
-	if(!$Form->Processed()){
-		echo $Form;
-	}else{
-		if($data['Error']){
-				echo "<p class='error'>".$data['Error'] ."</p>";
+    <img src="<?php echo $data['Host']?>/images/logo.png">
+    <h2>Bienvenue - Edinars Enterprise</h2>
+    <?php
+    if(!$Form->Processed()) {
+        echo $Form;
+    }else{
+        if($data['Error']) {
+                echo "<p class='error'>".$data['Error'] ."</p>";
 
-		 }
-		echo $Form;
-	}
-	?>
-	</div>
+        }
+        echo $Form;
+    }
+    ?>
+    </div>
 </div>
 <?}else{?>SECURITY ALERT: Access Denied<?}?>

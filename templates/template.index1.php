@@ -14,8 +14,8 @@
 <!-- Start SlideShow -->
 <div id="slideShow">
   <!--<div id="open">
-	
-	</div>-->
+    
+    </div>-->
 </div>
 <!-- End SlideShow -->
 
@@ -51,8 +51,8 @@ E-commerce, Edinars vous offre la possibilité de dé velopper votre activité grâc
 </p>
         <a href="../comment-vendre-Edinars.html" class="readmore">Lire Plus</a>
     </div> 
-	
-	<div class="clr"></div>
+    
+    <div class="clr"></div>
 </div>
 <!-- End Center three blocks  -->
 
@@ -60,9 +60,9 @@ E-commerce, Edinars vous offre la possibilité de dé velopper votre activité grâc
 <!-- Start parade  -->
 
 <div id="makeMeScrollable">
-	    <a href="http://www.hostdz.com" target="new" title="Hostdz utiliser Edinars"><img src="images/parade/hostdz.png" alt="hostdz" border="0"></a>
-		<a href="http://www.le213.com" target="new" title="le213  utiliser Edinars"><img src="images/parade/le213.jpg" alt="le213" border="0"></a>
-		<a href="http://www.eldjamelle.com" target="new" title="eldjamelle utiliser Edinars"><img src="images/parade/eldjamelle.png" alt="eldjamelle" border="0"></a>
+        <a href="http://www.hostdz.com" target="new" title="Hostdz utiliser Edinars"><img src="images/parade/hostdz.png" alt="hostdz" border="0"></a>
+        <a href="http://www.le213.com" target="new" title="le213  utiliser Edinars"><img src="images/parade/le213.jpg" alt="le213" border="0"></a>
+        <a href="http://www.eldjamelle.com" target="new" title="eldjamelle utiliser Edinars"><img src="images/parade/eldjamelle.png" alt="eldjamelle" border="0"></a>
 </div>
 
 <!-- End parade  -->

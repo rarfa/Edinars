@@ -1,123 +1,123 @@
 body{
-	color:#333333;
-	font-family:Arial,sans-serif;
-	text-align: center;	
-	background-color: #FFF;
-	font-size:12px;
+    color:#333333;
+    font-family:Arial,sans-serif;
+    text-align: center;    
+    background-color: #FFF;
+    font-size:12px;
 }
 #wrapper{
-	margin: 0 auto;
-	text-align: left;
-	padding: 30px;
-	width: 700px;
-	border:1px solid #428301;
-	background-color: #FFF;
+    margin: 0 auto;
+    text-align: left;
+    padding: 30px;
+    width: 700px;
+    border:1px solid #428301;
+    background-color: #FFF;
 }
 .top-info {position:absolute;top:20px}
 h2{
-	border-bottom:1px solid #DCE3EB;
-	margin-bottom:15px;	
-	font-size:18px;
-	line-height:1.5em;
-	padding:8px 0 5px;
+    border-bottom:1px solid #DCE3EB;
+    margin-bottom:15px;    
+    font-size:18px;
+    line-height:1.5em;
+    padding:8px 0 5px;
 }
 form li{
-	list-style: none;
-	list-style-type:none;
-	margin-bottom: 5px;
-	display: block;
-	height: 27px;
-	padding: 5px;
+    list-style: none;
+    list-style-type:none;
+    margin-bottom: 5px;
+    display: block;
+    height: 27px;
+    padding: 5px;
 }
 #li_tatext{
-	height: 60px;
+    height: 60px;
 }
 #li_lsttype{
-	height: 120px;	
+    height: 120px;    
 }
 form legend{
-	font-size:18px;	
-	line-height:1.5em;
-	padding:8px 5px;
-	color:#333333;
+    font-size:18px;    
+    line-height:1.5em;
+    padding:8px 5px;
+    color:#333333;
 }
 form fieldset{
-	border:1px solid #428301;
-	margin-bottom:10px;	
-	background-color: #fcfeff;
+    border:1px solid #428301;
+    margin-bottom:10px;    
+    background-color: #fcfeff;
 }
 form #label_option_rndradio label{
-	padding: 0px;	
-	width: 50px;
+    padding: 0px;    
+    width: 50px;
 }
 form label{
-	color:#3E434A;
-	cursor:pointer;
-	float:left;
-	font-size:13px;
-	width:100px;
-	padding: 3px 10px 0px 5px;
-	font-weight:bold;
-	text-align: right;
+    color:#3E434A;
+    cursor:pointer;
+    float:left;
+    font-size:13px;
+    width:100px;
+    padding: 3px 10px 0px 5px;
+    font-weight:bold;
+    text-align: right;
 }
 
 form input, form textarea, form select{
-	font-family:Arial,sans-serif;
-	color:#333333;
-	width:208px;
-	font-size:13px;
-	line-height:1;
-	margin:0;
-	padding:3px;
+    font-family:Arial,sans-serif;
+    color:#333333;
+    width:208px;
+    font-size:13px;
+    line-height:1;
+    margin:0;
+    padding:3px;
 }
 form .description{
-	float: left;
-	padding-left: 10px;
-	padding-top: 3px;
-	color:#666666;
-	font-style:italic;
+    float: left;
+    padding-left: 10px;
+    padding-top: 3px;
+    color:#666666;
+    font-style:italic;
 }
 form .error .description{
-	display: none;	
+    display: none;    
 }
 form .error{
-	background-color:#FFF9D7;
-	border-color:#E2C822;	
+    background-color:#FFF9D7;
+    border-color:#E2C822;    
 }
 form .errormessage{
-	display: block;
-	padding-left: 10px;
-	color:#666666;
-	font-weight: bold;
-	padding-top: 5px;
-	float: left;
+    display: block;
+    padding-left: 10px;
+    color:#666666;
+    font-weight: bold;
+    padding-top: 5px;
+    float: left;
 }
 .error{
-	background-color:#FFF9D7;
-	border-color:#E2C822;
-	padding-left: 10px;
-	padding-top: 10px;
-	height: 30px;	
-	font-weight: bold;
+    background-color:#FFF9D7;
+    border-color:#E2C822;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 30px;    
+    font-weight: bold;
 }
 
 #send {
-	    border:0;
-	    width:160px;
-	    height:40px;
-	    font-size:12px;
-	    background:url("../images/bouton-1.png") no-repeat 0 0;
-		cursor:pointer;
-		text-decoration:none;
-		display:inline-block;
-		line-height:29px;
-		color:#FFFFFF;
-		font-weight:bold;
-		text-transform:uppercase;
-	}
+        border:0;
+        width:160px;
+        height:40px;
+        font-size:12px;
+        background:url("../images/bouton-1.png") no-repeat 0 0;
+        cursor:pointer;
+        text-decoration:none;
+        display:inline-block;
+        line-height:29px;
+        color:#FFFFFF;
+        font-weight:bold;
+        text-transform:uppercase;
+    }
 #send:hover {
-	   
-	   background:url("../images/bouton-2.png") no-repeat 0 0 ;
-	}
-	
-	
+       
+       background:url("../images/bouton-2.png") no-repeat 0 0 ;
+    }
+    
+    

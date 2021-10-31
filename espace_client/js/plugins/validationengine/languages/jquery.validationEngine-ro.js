@@ -1,8 +1,8 @@
-(function($){
-    $.fn.validationEngineLanguage = function(){
+(function ($) {
+    $.fn.validationEngineLanguage = function () {
     };
     $.validationEngineLanguage = {
-        newLang: function(){
+        newLang: function () {
             $.validationEngineLanguage.allRules = {
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
@@ -12,7 +12,7 @@
                     "alertTextDateRange": "* Campurile data cu ajutorul carora se stabileste perioada sunt obligatorii"
                 },
                 "requiredInFunction": { 
-                    "func": function(field, rules, i, options){
+                    "func": function (field, rules, i, options) {
                         return (field.val() == "test") ? true : false;
                     },
                     "alertText": "* Field must equal test"
@@ -114,7 +114,7 @@
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Sunt admise doar literele"
                 },
-				"onlyLetterAccentSp":{
+                "onlyLetterAccentSp":{
                     "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
                     "alertText": "* Sunt admise doar literele"
                 },
@@ -151,12 +151,12 @@
                 },
                 "ajaxNameCallPhp": {
                         // remote json service location
-                        "url": "phpajax/ajaxValidateFieldName.php",
+                    "url": "phpajax/ajaxValidateFieldName.php",
                         // error
-                        "alertText": "* Numele nu este disponibil",
+                    "alertText": "* Numele nu este disponibil",
                         // speaks by itself
-                        "alertTextLoad": "* Se efectueaza validarea. Asteapta..."
-                    },
+                    "alertTextLoad": "* Se efectueaza validarea. Asteapta..."
+                },
                 "validate2fields": {
                     "alertText": "* Scrie: HELLO"
                 },

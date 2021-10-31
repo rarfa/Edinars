@@ -2,14 +2,16 @@
 //Vérification
 $token = clean_var($_GET["token"]);
 
-$member=db_rows("SELECT  * ".
-" FROM `{$data['DbPrefix']}members` ".
-" WHERE MD5(CONCAT(CURDATE(), password, mem_id)) = '".$token."' ".
-" LIMIT 1 ");
+$member=db_rows(
+    "SELECT  * ".
+    " FROM `{$data['DbPrefix']}members` ".
+    " WHERE MD5(CONCAT(CURDATE(), password, mem_id)) = '".$token."' ".
+    " LIMIT 1 "
+);
 
-if(empty($member[0]["mem_id"])){
-  redirect("./");
-  exit();
+if(empty($member[0]["mem_id"])) {
+    redirect("./");
+    exit();
 }
 
 ?>

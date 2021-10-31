@@ -10,43 +10,43 @@ $admin    =  isset($_GET['admin'])    ? clean_var($_GET['admin'])      : ''; //A
 $services =  isset($_GET['services']) ? clean_var($_GET['services'])   : ''; //Accès réservé aux services
 
 
-if($page && file_exists(DIR_ROOT."includes/page.".$page.".php")){
+if($page && file_exists(DIR_ROOT."includes/page.".$page.".php")) {
 
-  include(DIR_ROOT."includes/page.".$page.".php");
+    include DIR_ROOT."includes/page.".$page.".php";
 
-}elseif($process && file_exists(DIR_ROOT."includes/process.".$process.".php")){
+}elseif($process && file_exists(DIR_ROOT."includes/process.".$process.".php")) {
 
-  include(DIR_ROOT."includes/process.".$process.".php");
+    include DIR_ROOT."includes/process.".$process.".php";
 
-}elseif($form && file_exists(DIR_ROOT."includes/form.".$form.".php")){
+}elseif($form && file_exists(DIR_ROOT."includes/form.".$form.".php")) {
 
-  include(DIR_ROOT."includes/form.".$form.".php");
+    include DIR_ROOT."includes/form.".$form.".php";
 
-}elseif($user && file_exists(DIR_ROOT."includes/user.".$user.".php")){
+}elseif($user && file_exists(DIR_ROOT."includes/user.".$user.".php")) {
 
-  if(isset($_SESSION['user_id'])){
-    include(DIR_ROOT."includes/user.".$user.".php");
-  }else{
-    echo "Error: Access for Members only";
-  }
+    if(isset($_SESSION['user_id'])) {
+        include DIR_ROOT."includes/user.".$user.".php";
+    }else{
+        echo "Error: Access for Members only";
+    }
 
-}elseif($admin && file_exists(DIR_ROOT."includes/admin/admin.".$admin.".php")){
+}elseif($admin && file_exists(DIR_ROOT."includes/admin/admin.".$admin.".php")) {
 
-  if (isset($_SESSION['admin_id'])) {
-      include(DIR_ROOT."includes/admin/admin.".$admin.".php");
-  }else {
-    echo "Error: Access for Admins only";
-  }
+    if (isset($_SESSION['admin_id'])) {
+        include DIR_ROOT."includes/admin/admin.".$admin.".php";
+    }else {
+        echo "Error: Access for Admins only";
+    }
 
-}elseif($services && file_exists(DIR_ROOT."includes/services.".$services.".php")){
+}elseif($services && file_exists(DIR_ROOT."includes/services.".$services.".php")) {
 
-  include(DIR_ROOT."includes/services.".$services.".php");
+    include DIR_ROOT."includes/services.".$services.".php";
 
-}elseif($page_par_defaut && file_exists($page_par_defaut)){
+}elseif($page_par_defaut && file_exists($page_par_defaut)) {
 
-  include($page_par_defaut);//il faut la protéger
+    include $page_par_defaut;//il faut la protéger
 
 }else{
 
-  echo "Error: Page not found!";
+    echo "Error: Page not found!";
 }
