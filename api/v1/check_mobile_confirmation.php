@@ -13,7 +13,7 @@ $array_imp =db_rows(
     "WHERE `id`={$user_id}"
 );
 
-//reponse
+//response
 $array_reponse = array(
                         'mobile' => $array_imp[0]['mobile'],
                         'confirm_mobile' => $array_imp[0]['confirm_mobile'],
@@ -31,7 +31,8 @@ $array_notification = db_rows(
                               "AND `view` = 'no' ".
                               "AND `message` LIKE '%{$mobile}%'"
 );
-if($array_notification[0]['id']) {
+
+if(isset($array_notification[0])) {
     $array_reponse['pin_code'] = $array_imp[0]['pin_code'];
 }
 

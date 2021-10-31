@@ -4,10 +4,9 @@ header('Content-Type: application/json');
 define("DIR_ROOT", "../../");
 require DIR_ROOT.'includes/All_files.php';
 
-$token = clean_var($_GET['token']);
-
-$newpass = clean_var($_GET['newpass']);
-$cfmpass = clean_var($_GET['cfmpass']);
+$token   = isset($_REQUEST['token'])   ? clean_var($_REQUEST['token'])  : '';
+$newpass = isset($_REQUEST['newpass']) ? clean_var($_REQUEST['newpass']) : '';
+$cfmpass = isset($_REQUEST['cfmpass']) ? clean_var($_REQUEST['cfmpass']) : '';
 
 $array = array( 'errors' => array(
                   'token' => '',
@@ -52,7 +51,7 @@ if($newpass == '') {
 
 //register ()
 if($array['success']=="yes") {
-    $reset = mysql_query(
+    $reset = mysqli_query($data['cid'], 
         "UPDATE `{$data['DbPrefix']}members` SET
                         `password` = MD5(CONCAT('".$newpass."','|','".$member[0]["mem_id"]."'))
                         WHERE MD5(CONCAT(CURDATE(), password, mem_id)) = '".$token."';"

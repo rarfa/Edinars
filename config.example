@@ -1,40 +1,38 @@
 <?php
-################################################################################
+// 
 $host = "local";
 // $host = "local";
-if ( $host == "local") {
-	$db_hostname='localhost';
-	$db_username='root';
-	$db_password='123456';
-	$db_database='edinar';
-	$db_tbprefix='dp';
+if ($host == "local") {
+    $db_hostname='localhost';
+    $db_username='root';
+    $db_password='';
+    $db_database='';
+    $db_tbprefix='dp';
 
-	define("BASE_URL", "http://127.0.0.1:8080/");
+    define("BASE_URL", "");
 
-	error_reporting(E_ALL);
+    error_reporting(E_ALL);
 } else {
-	$db_hostname='shareddb1a.hosting.stackcp.net';
-	$db_username='dbusername';
-	$db_password='dbpasword001122';
-	$db_database='ed1nar3_live';
-	$db_tbprefix='dp';
-	// $db_username='sysAdmin';
-	// $db_password='TUalm1vc0F0g';
+    $db_hostname='shareddb1a.hosting.stackcp.net';
+    $db_username='dbusername';
+    $db_password='dbpasword001122';
+    $db_database='ed1nar3_live';
+    $db_tbprefix='dp';
+    // $db_username='sysAdmin';
+    // $db_password='TUalm1vc0F0g';
 
-	define("BASE_URL", "https://v2.edinars.dz");
+    define("BASE_URL", "https://v2.edinars.dz");
 
-	error_reporting(0);
+    error_reporting(0);
 }
-################################################################################
+// 
 $folder='';
-################################################################################
+// 
 date_default_timezone_set('Africa/Algiers');
 
-
-
-################################################################################
-###    PLEASE DO NOT CHANGE ANY PARAMETERS MANUALLY! USE ADMIN AREA FOR IT   ###
-################################################################################
+// 
+// PLEASE DO NOT CHANGE ANY PARAMETERS MANUALLY! USE ADMIN AREA FOR IT   ###
+// 
 $site_name='Edinars';
 $site_title='Bienvenue - Edinars Services de Paiements en Algerie';
 $site_charset='UTF-8';
@@ -131,7 +129,19 @@ $flexy_maximal = 10000;
 $sms_fee = 5;
 
 $base_url = rtrim(BASE_URL, '/') . '/';
-################################################################################
-include('consts.php');
-include('common.php');
-################################################################################
+
+// smtp credentials
+$smtp_mailer='smtp';
+$smtp_host='smtp.cpower.software';
+$smtp_port=465;
+$smtp_user='setup@cpower.software';
+$smtp_password='CRzf$QnFN8!';
+$smtp_encryption='ssl';
+$smtp_from_address='setup@cpower.software';
+$smtp_from_name=$site_name;
+
+// 
+require 'consts.php';
+require 'api/v1/mail.php';
+require 'common.php';
+// 

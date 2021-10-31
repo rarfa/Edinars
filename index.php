@@ -9,7 +9,7 @@ require DIR_ROOT.'includes/All_files.php';
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <meta name="csrf_token" content="<?php echo $_SESSION['csrf_token'] ?>">
+    <meta name="csrf_token" content="<?=$_SESSION['csrf_token']?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Edinars Enterprise - Services de paiements online">
     <meta name="author" content="Sarl Edinars Enterprise">
