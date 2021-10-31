@@ -16,7 +16,7 @@ $esc_url = $base_url . 'espace_client/';
 
         <meta name="theme-color" content="#e30613" />
 
-        <link rel="icon" href="<?php echo $esc_url?>images/ico/favicon_last.ico" type="image/x-icon" />
+        <link rel="icon" href="<?=$base_url?>images/ico/favicon_last.ico" type="image/x-icon" />
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
