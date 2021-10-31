@@ -2,7 +2,7 @@
 //** Available/ usage terms at http://www.dynamicdrive.com (March 30th, 09')
 //** v1.1 (April 7th, 09'):
 //** 1) Adds ability to scroll to an absolute position (from top of page) or specific element on the page instead.
-//** 2) Fixes scroll animation not working in Opera. 
+//** 2) Fixes scroll animation not working in Opera.
 
 
 var scrolltotop={
@@ -16,15 +16,18 @@ var scrolltotop={
     state: {isvisible:false, shouldvisible:false},
 
     scrollup:function () {
+
         if (!this.cssfixedsupport) { //if control is positioned using JavaScript
+
             this.$control.css({opacity:0}) //hide control immediately after clicking it
-            var dest=isNaN(this.setting.scrollto)? this.setting.scrollto : parseInt(this.setting.scrollto)
+
+            var dest=isNaN(this.setting.scrollto)? this.setting.scrollto : parseInt(this.setting.scrollto);
+
             if (typeof dest=="string" && jQuery('#'+dest).length==1) { //check element set by string exists
                 dest=jQuery('#'+dest).offset().top
-                else {
+            }else {
                     dest=0
                     this.$body.animate({scrollTop: dest}, this.setting.scrollduration);
-                }
             }
         }
     },
@@ -50,7 +53,7 @@ var scrolltotop={
             this.state.isvisible=false
         }
     },
-    
+
     init:function () {
         jQuery(document).ready(
             function ($) {
