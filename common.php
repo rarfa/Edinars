@@ -1,25 +1,25 @@
 <?php
-// 
+//
 // PROGRAM     : EDINAR APPLICATION                                                 #
 // VERSION     : 0.01                                                              #
 // AUTHOR      : Arfa Abderrahim                                                   #
 // COMPANY     : HOSTDZ                                                             #
 // COPYRIGHTS  : (C) HOSTDZ. ALL RIGHTS RESERVED                                    #
 // COPYRIGHTS BY (C)2011 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 // DEVELOPED BY HOSTDZ             `                        #
-// 
+//
 // ALL SOURCE CODE, IMAGES, PROGRAMS, FILES INCLUDED IN THIS DISTRIBUTION       #
 // COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 // ANY REDISTRIBUTION WITHOUT PERMISSION OF HOSTDZ AND IS                  #
 // STRICTLY FORBIDDEN                                 #
-// 
+//
 // COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 
 
-// 
+//
 
 
 if(function_exists('set_magic_quotes_runtime')) { set_magic_quotes_runtime(0);
@@ -30,7 +30,7 @@ if(!ini_get('safe_mode')) { set_time_limit(3600);
 
 ignore_user_abort(true);
 
-// 
+//
 
 $data['PostSent']=false;
 
@@ -40,7 +40,7 @@ $data['lang_ch'] =  $_COOKIE["ln"] ?? $data['DefaultLanguage'];
 
 setcookie("ln", $data['lang_ch']);
 
-// 
+//
 
 $data['Path']=dirname(__FILE__);
 
@@ -324,7 +324,7 @@ function update_product($id, $post)
 
 }
 
-// 
+//
 
 function get_post()
 {
@@ -342,7 +342,7 @@ function get_post()
 
 }
 
-// 
+//
 
 function protect($buffer)
 {
@@ -491,7 +491,7 @@ function showbar($mode, $path='')
 
 
 }
-// 
+//
 
 $data['cid']=null;
 
@@ -646,7 +646,7 @@ function db_rows($statement,$print=false)
 
 }
 
-// 
+//
 
 function verify_email($email)
 {
@@ -726,7 +726,7 @@ function is_changed($number)
 
 function is_number($text)
 {
-    if (!is_changed($text)) { return true ; 
+    if (!is_changed($text)) { return true ;
     }
     return (bool)is_changed($text);
 
@@ -776,7 +776,7 @@ function read_csv( $filename, $break)
 
 }
 
-// 
+//
 
 function prndate($date)
 {
@@ -1047,7 +1047,7 @@ function get_html_templates()
 
 }
 
-// 
+//
 
 function send_email($key, $post)
 {
@@ -1207,7 +1207,7 @@ function insert_sent_email( $pin_id , $mail, $subject, $message)
         "'{$pin_id}','{$mail}','{$subject}','{$message}','".date("Y-m-d H:i:s")."')"
     );
 }
-// 
+//
 
 function use_curl($href, $post=null)
 {
@@ -1245,7 +1245,7 @@ function use_curl($href, $post=null)
 
 
 
-// 
+//
 
 // function is_user_available($username){
 //
@@ -1418,7 +1418,7 @@ function update_security_question($uid, $question, $answer, $notify=true)
 function update_my_profile_empty($uid)
 {
     $info_user  = get_member_info($uid);
-    $post_empty = []; 
+    $post_empty = [];
 
     if($info_user['type'] == 0) { //Particulier
         if($info_user['fname'] && $info_user['address']) {
@@ -1775,7 +1775,7 @@ function get_members_count_where_pred($where_pred)
 
 
 
-function get_members_list_where_pred($start=0, $count=0, $where_pred)
+function get_members_list_where_pred($where_pred, $start = 0, $count = 0)
 {
 
     global $data;
@@ -2684,7 +2684,7 @@ function select_balance_disponible($uid)
     $incoming=db_rows(
         "SELECT SUM(`amount`-`fees`) AS `summ`".
         " FROM `{$data['DbPrefix']}transactions`".
-        " WHERE `receiver`={$uid} AND (tdate < DATE_SUB( NOW(), INTERVAL 5 DAY)  OR `sender` = -1) AND (`status`=2 OR `status`=4) AND `type` not in (1, 3) LIMIT 1"        
+        " WHERE `receiver`={$uid} AND (tdate < DATE_SUB( NOW(), INTERVAL 5 DAY)  OR `sender` = -1) AND (`status`=2 OR `status`=4) AND `type` not in (1, 3) LIMIT 1"
     );
 
     $incoming_topup=db_rows(
@@ -4060,9 +4060,9 @@ function update_transaction_status_topup( $id, $status,$comments)
         " WHERE `id`={$id}"
     );
 }
-// 
+//
 // ussd function
-// 
+//
 function get_ussd_by_trx_id($trx_id='')
 {
     global $data;
@@ -4098,9 +4098,9 @@ function ussd($user_id,$trx_id ,$operator, $mobile, $montant,$status,$api_trx_id
 
 }
 
-// 
+//
 // Produit function
-// 
+//
 
 
 
@@ -4127,12 +4127,12 @@ function update_sold($id, $quantity)
 
     db_query(
         "UPDATE `{$data['DbPrefix']}products` SET `sold`= `sold` + {$quantity}".
-        " WHERE `id`={$id}" 
+        " WHERE `id`={$id}"
     );
 }
 
 
-// 
+//
 
 function select_button($id)
 {
@@ -4425,7 +4425,7 @@ function get_referrals($uid, $start=0, $count=0)
 
 }
 
-// 
+//
 
 function get_news($where)
 {
@@ -4455,7 +4455,7 @@ function get_latest_news()
 
 }
 
-// 
+//
 
 function select_banners($owner)
 {
@@ -4604,7 +4604,7 @@ function fetch_banners_packages($id)
 
 }
 
-// 
+//
 
 function get_mail_templates()
 {
@@ -4649,7 +4649,7 @@ function update_mail_template($key, $name, $value)
 
 }
 
-// 
+//
 
 function get_categories_tree($categoryid)
 {
@@ -4958,7 +4958,7 @@ function get_category($categoryid)
 
 }
 
-// 
+//
 
 function get_shop_items_count($categoryid)
 {
@@ -5142,7 +5142,7 @@ function delete_shop_item($itemid)
     );
 }
 
-// 
+//
 
 function insert_shopcart_item($productid, $quantity)
 {
@@ -5198,7 +5198,7 @@ function get_shopcart_items_list($id=-1)
         }
     }
 
-    if ($id==-1) { return $result; 
+    if ($id==-1) { return $result;
     } else { return $result[$id];
     }
 
@@ -5265,7 +5265,7 @@ function set_shopitems_paid()
 
 }
 
-// 
+//
 
 function unhtmlentities($text)
 {
@@ -5468,7 +5468,7 @@ function get_pin_id()
     return 'ED-'.$key;
 }
 
-// 
+//
 
 if(isset($_GET['sid'])) { $post['sid']=$_GET['sid'];
 }
@@ -5526,7 +5526,7 @@ if(isset($_GET['prehashkey'])) { $post['prehashkey']=$_GET['prehashkey'];
 
 if(isset($_GET['crypt'])) { $post['crypt']=$_GET['crypt'];
 }
-// 
+//
 
 if(isset($_GET['rid'])) { $post['sponsor']=$_GET['rid'];
 
@@ -5537,7 +5537,7 @@ reset($_GET);
 
 // SESSION ############################################
 
-if(!session_id()) { 
+if(!session_id()) {
     session_start();
 }
 
@@ -5586,7 +5586,7 @@ function get_user_csrf_token($user_id)
 }
 //generate_csrf_token();
 
-// 
+//
 
 if($_POST) { $post = get_post();
 }
@@ -5594,11 +5594,11 @@ if($_POST) { $post = get_post();
 if(isset($post['StartPage'])) { $post['StartPage'] = 0;
 }
 
-// 
+//
 
 db_connect();
 
-// 
+//
 
 $uid = 0;
 
@@ -5620,7 +5620,7 @@ if($uid) {
     $uid = isset($_SESSION['uid']) ? $_SESSION['uid'] : 0;
 }
 
-// 
+//
 
 if($data['ReferralPays']) {
 
