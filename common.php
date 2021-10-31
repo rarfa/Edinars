@@ -618,7 +618,7 @@ function db_rows($statement,$print=false) {
 
 function verify_email($email){
 
-	return !(bool)ereg("^.+@.+\\..+$", $email);
+	return !(bool)preg_match("/^.+@.+\\..+$/", $email);
 
 }
 
@@ -626,8 +626,7 @@ function verify_email($email){
 
 function verify_username($username){
 
-	return !(bool)ereg("^[a-zA-Z0-9]+$", $username);
-
+	return !(bool)preg_match("/^[a-zA-Z0-9]+$/", $username);
 }
 
 
@@ -1011,6 +1010,11 @@ function send_email($key, $post){
 
 		$text=str_replace("[usersite]", "{$data['Host']}/?rid={$post['username']}", $text);
 
+	}
+
+	// if password reset
+	if(isset($post['lost_email'])) {
+		$post['email'] = $post['lost_email'];
 	}
 
 	if(isset($post['password'])) $text=str_replace("[password]", $post['password'], $text);
