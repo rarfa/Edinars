@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -16,16 +16,24 @@ function sendMail(string $to, string $subject, string $content): bool
 
     try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+        $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output _CONNECTION
         $mail->isSMTP();                                            //Send using SMTP
-        $mail -> charSet  = "UTF-8"; 
+        $mail -> charSet  = "UTF-8";
         $mail->Host       = $smtp_host;                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = $smtp_user;                     //SMTP username
         $mail->Password   = $smtp_password;                               //SMTP password
         $mail->SMTPSecure = $smtp_encryption;            //Enable implicit TLS encryption
         $mail->Port       = $smtp_port;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    
+
+        // skip ssl this should be removed and ssl should be forced
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
         //Recipients
         $mail->setFrom($smtp_from_address, $smtp_from_name);
         $mail->addAddress($to);     //Add a recipient
@@ -34,20 +42,20 @@ function sendMail(string $to, string $subject, string $content): bool
         //$mail->addReplyTo('info@example.com', 'Information');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('bcc@example.com');
-    
+
         //Attachments
         //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
         //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-    
+
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $content;
-    
+
         return $mail->send();
-        
+
     } catch (Exception $e) {
-      
+
         return false;
     }
 }
