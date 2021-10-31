@@ -44,9 +44,7 @@ setcookie("ln", $data['lang_ch']);
 
 $data['Path']=dirname(__FILE__);
 
-//if($_SERVER["HTTPS"]=='on')$data['Prot']='https'; else $data['Prot']='http';
-//$data['Prot']='http'; // Locahost
-$data['Prot']='https'; // Live system
+$data['Prot'] = $_SERVER["HTTPS"] ?? 'http';
 
 $data['Templates']="{$data['Path']}/templates";
 $data['BannersPath']="{$data['Path']}/images/banners";
@@ -1303,12 +1301,10 @@ function is_mail_available($email)
 
 function create_confirmation($newpass, $newques, $newansw, $newmail, $newtype, $sponsor=0)
 {
-
     global $data;
 
-    $result=gencode();
-
-    $sponsor=($sponsor?$sponsor:0);
+    $result  = gencode();
+    $sponsor = ($sponsor?$sponsor:0);
 
     $add_query = db_query(
         "INSERT INTO `{$data['DbPrefix']}confirms` ".
@@ -1318,20 +1314,19 @@ function create_confirmation($newpass, $newques, $newansw, $newmail, $newtype, $
 
     if($add_query) {
         $post['ccode'] = $result;
-
         $post['email'] = $newmail;
+                        // before it had a diffent hash to the one inserted in db not sure why
+        $post['chash'] = strtoupper(md5($newpass.'|'.$result));
 
-        $post['chash']=strtoupper(md5($post['ccode'].'|'.$post['email']));
-
+        // send email
         $send_email = send_email('CONFIRM-TO-MEMBER', $post);
+
         if($send_email) {
             return true;
-        }else {
-            return false;
         }
-    }else{
-        return false;
     }
+
+    return false;
 }
 
 function select_confirmation($ccode, $email, $chash='')

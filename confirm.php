@@ -1,36 +1,36 @@
 <?php
-// 
+//
 // PROGRAM     : EDINAR APPLICATION                                                 #
 // VERSION     : 0.02                                                              #
 // AUTHOR      : Arfa Abderrahim                                                   #
 // COMPANY     : HOSTDZ                                                             #
 // COPYRIGHTS  : (C) HOSTDZ. ALL RIGHTS RESERVED                                    #
 // COPYRIGHTS BY (C)2011 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 // DEVELOPED BY HOSTDZ             `                        #
-// 
+//
 // ALL SOURCE CODE, IMAGES, PROGRAMS, FILES INCLUDED IN THIS DISTRIBUTION       #
 // COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 // ANY REDISTRIBUTION WITHOUT PERMISSION OF HOSTDZ AND IS                  #
 // STRICTLY FORBIDDEN                                 #
-// 
+//
 // COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
-// 
+//
 
 
-// 
+//
 $data['PageName']='CONFIRMATION DE VOTRE E-MAIL ON LIGNE';
 $data['PageFile']='confirm';
-// 
+//
 require 'config.php';
 $data['Error'] = "";
-// 
+//
 
 if(isset($post['cid'])) {
 
     $cid = select_confirmation($post['cid'] ?? '', $post['email'] ?? '', $post['cid']);
-    
+
     if(!$cid) {
 
         echo "Error activating email";
@@ -43,6 +43,8 @@ if(isset($post['cid'])) {
     update_confirmation($cid);
 
     echo "Email activated successfully";
+    header('refresh:1,'. BASE_URL);
+    exit;
 
 }elseif(isset($post['confirm'])) {
     if(!$post['ccode']) {
