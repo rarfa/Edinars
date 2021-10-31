@@ -1,14 +1,14 @@
 <?php
 // Created by: Yacine Ait Chalal -> 18/08/2017
-#############################################################
+// 
 header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-include(DIR_ROOT.'includes/All_files.php');
+require DIR_ROOT.'includes/All_files.php';
 
 // security
-include('verif_user.php');
+require 'verif_user.php';
 
 
 $mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
@@ -22,10 +22,10 @@ $array_reponse = array('success'=>'yes' );
 
 // $info_user = select_info($user_id, $post);
 
-if($mode=="single" && $subscription_id!=""){
-  $subscriptions = select_products($user_id, 1, $subscription_id, true);
+if($mode=="single" && $subscription_id!="") {
+    $subscriptions = select_products($user_id, 1, $subscription_id, true);
 }else{
-  $subscriptions = select_products($user_id, 1);
+    $subscriptions = select_products($user_id, 1);
 }
 
 
@@ -33,6 +33,4 @@ $array_reponse["subscriptions"] = $subscriptions;
 
 // var_dump($subscriptions);
 
-echo json_encode ($array_reponse);
-
-?>
+echo json_encode($array_reponse);

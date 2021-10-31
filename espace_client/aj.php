@@ -1,7 +1,7 @@
 <?php
-include('../config.php');
-include('../includes/functions.php');
+require '../config.php';
+require '../includes/functions.php';
 
-include('includes/includer.php');
+require 'includes/includer.php';
 // echo __DIR__.'/includes/includer.php';
 ?>

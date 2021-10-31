@@ -3,7 +3,7 @@
 
 define("DIR_ROOT", "../../");
 
-include(DIR_ROOT.'includes/All_files.php');
+require DIR_ROOT.'includes/All_files.php';
 
 
 // tmp generate code pin
@@ -27,28 +27,30 @@ include(DIR_ROOT.'includes/All_files.php');
 
 
 // security
-include('verif_user.php');
+require 'verif_user.php';
 
-$array_imp =db_rows("SELECT * FROM `{$data['DbPrefix']}members`".
-                    " WHERE `id`={$user_id}");
+$array_imp =db_rows(
+    "SELECT * FROM `{$data['DbPrefix']}members`".
+    " WHERE `id`={$user_id}"
+);
 
-if(isset($post['status']) && $post['status'] < 2 ){
-  $status_color = "#FF0000"; //non color red
+if(isset($post['status']) && $post['status'] < 2 ) {
+    $status_color = "#FF0000"; //non color red
 }else {
-  $status_color = "#73be28"; //yes color green
+    $status_color = "#73be28"; //yes color green
 }
 
 $emails_list = get_email_details($user_id, false, false);
 
 //
-if($array_imp[0]['confirm_mobile_code'] == ""){
-  $array_imp[0]['confirm_mobile_code'] = $confirm_mobile_code = generate_pin_code(6);
+if($array_imp[0]['confirm_mobile_code'] == "") {
+    $array_imp[0]['confirm_mobile_code'] = $confirm_mobile_code = generate_pin_code(6);
 
-  $sql = " UPDATE `{$data['DbPrefix']}members` SET ";
-  $sql .= " confirm_mobile_code = '{$confirm_mobile_code}' ";
-  $sql .= " WHERE `id`={$user_id} ";
+    $sql = " UPDATE `{$data['DbPrefix']}members` SET ";
+    $sql .= " confirm_mobile_code = '{$confirm_mobile_code}' ";
+    $sql .= " WHERE `id`={$user_id} ";
 
-  $edit_profile = db_query($sql);
+    $edit_profile = db_query($sql);
 }
 
 //reponse
@@ -91,10 +93,10 @@ $generated_csrf_token = generate_csrf_token();
 
 $update_csrf_token = update_csrf_token($user_id, $generated_csrf_token);
 
-if(!$update_csrf_token){
-  $array_reponse['success'] = "no";
+if(!$update_csrf_token) {
+    $array_reponse['success'] = "no";
 }else{
-  $array_reponse['csrf_token'] = $generated_csrf_token;
+    $array_reponse['csrf_token'] = $generated_csrf_token;
 }
 
 
@@ -105,16 +107,16 @@ $array_reponse['menu'] = [
   // $mm++ => array("id" => "paiement", "title" => "Paiement", "icon" => "fa-money", "type" => "mb", "action" => "mb-paiement"),
   $mm++ => array("id" => "services", "title" => "Services", "icon" => "fa-shopping-cart", "type" => "mb", "action" => "mb-services")
 ];
-if($array_imp[0]['type']==1){ //pro
-  $array_reponse['menu'] += [
+if($array_imp[0]['type']==1) { //pro
+    $array_reponse['menu'] += [
     $mm++ => array("id" => "traders", "title" => "Marchants", "icon" => "fa-shopping-basket", "type" => "mb", "action" => "mb-traders"),
     $mm++ => array("id" => "generate_order", "title" => "Générer une commande", "icon" => "fa-shopping-bag", "type" => "link", "action" => "./#generate_order/"),
-  ];
+    ];
 }
-if($array_imp[0]['type']==2 || $array_imp[0]['type']==3){ // grossiste ou détallant
-  $array_reponse['menu'] += [
+if($array_imp[0]['type']==2 || $array_imp[0]['type']==3) { // grossiste ou détallant
+    $array_reponse['menu'] += [
     $mm++ => array("id" => "load_account", "title" => "Recharger un compte", "icon" => "fa-sitemap", "type" => "link", "action" => "./#load_account/"),
-  ];
+    ];
 }
 
 
@@ -135,15 +137,15 @@ $array_reponse['menu_app'] = [
 // $array_reponse['menu_app'] += [
 //   $mm++ => array("title" => "Paiement", "icon" => "md-cash", "page" => "PaiementPage"),
 // ];
-if($array_imp[0]['type']==1){ //pro
-  $array_reponse['menu_app'] += [
+if($array_imp[0]['type']==1) { //pro
+    $array_reponse['menu_app'] += [
     $mm++ => array("title" => "Générer une commande", "icon" => "md-basket", "page" => "GenerateOrderPage"),
-  ];
+    ];
 }
-if($array_imp[0]['type']==2 || $array_imp[0]['type']==3){ // grossiste ou détallant
-  $array_reponse['menu_app'] += [
+if($array_imp[0]['type']==2 || $array_imp[0]['type']==3) { // grossiste ou détallant
+    $array_reponse['menu_app'] += [
     $mm++ => array("title" => "Recharger un compte", "icon" => "md-share", "page" => "LoadAccountPage"),
-  ];
+    ];
 }
 
 $array_reponse['menu_app'] += [
@@ -158,21 +160,21 @@ $array_reponse['menu_app'] += [
 $_array = get_transactions($user_id, 'both', -1, 2, 0, 5);
 
 foreach ($_array as $key => $value) {
-	foreach ($value as $key_2 => $value_2) {
-		if(!is_array($value_2)){
-			$array_reponse['last_transactions'][$key][$key_2] = strip_tags(utf8_encode($value_2));
-		}
-	}
+    foreach ($value as $key_2 => $value_2) {
+        if(!is_array($value_2)) {
+            $array_reponse['last_transactions'][$key][$key_2] = strip_tags(utf8_encode($value_2));
+        }
+    }
 }
 
 // Paiements en instance
 $_array = get_transactions($user_id, 'both', -1, 1, 0, 5);
 foreach ($_array as $key => $value) {
-  foreach ($value as $key_2 => $value_2) {
-    if(!is_array($value_2)){
-      $array_reponse['pending_payments'][$key][$key_2] = strip_tags(utf8_encode($value_2));
+    foreach ($value as $key_2 => $value_2) {
+        if(!is_array($value_2)) {
+            $array_reponse['pending_payments'][$key][$key_2] = strip_tags(utf8_encode($value_2));
+        }
     }
-  }
 }
 
 // consts

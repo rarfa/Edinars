@@ -1,8 +1,8 @@
-(function($){
-    $.fn.validationEngineLanguage = function(){
+(function ($) {
+    $.fn.validationEngineLanguage = function () {
     };
     $.validationEngineLanguage = {
-        newLang: function(){
+        newLang: function () {
             $.validationEngineLanguage.allRules = {
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
@@ -11,7 +11,7 @@
                     "alertTextCheckboxe": "* Pole wymagane"
                 },
                 "requiredInFunction": { 
-                    "func": function(field, rules, i, options){
+                    "func": function (field, rules, i, options) {
                         return (field.val() == "test") ? true : false;
                     },
                     "alertText": "* Field must equal test"
@@ -26,9 +26,9 @@
                     "alertText": "* Maksymalna liczba znaków to ",
                     "alertText2": ""
                 },
-	     "groupRequired": {
+                "groupRequired": {
                     "regex": "none",
-                   "alertText": "* Proszę wypełnić wymienione opcje"
+                    "alertText": "* Proszę wypełnić wymienione opcje"
                 },
                 "min": {
                     "regex": "none",
@@ -45,7 +45,7 @@
                 "future": {
                     "regex": "none",
                     "alertText": "* Data musi być późniejsza niż "
-                },	
+                },    
                 "maxCheckbox": {
                     "regex": "none",
                     "alertText": "* Przekroczona maksymalna liczba opcji"
@@ -107,7 +107,7 @@
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Tylko litery"
                 },
-				"onlyLetterAccentSp":{
+                "onlyLetterAccentSp":{
                     "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
                     "alertText": "* Tylko litery"
                 },

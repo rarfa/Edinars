@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     $.noty.layouts.centerLeft = {
         name     : 'centerLeft',
@@ -8,17 +8,19 @@
         container: {
             object  : '<ul id="noty_centerLeft_layout_container" />',
             selector: 'ul#noty_centerLeft_layout_container',
-            style   : function() {
-                $(this).css({
-                    left         : 20,
-                    position     : 'fixed',
-                    width        : '310px',
-                    height       : 'auto',
-                    margin       : 0,
-                    padding      : 0,
-                    listStyleType: 'none',
-                    zIndex       : 10000000
-                });
+            style   : function () {
+                $(this).css(
+                    {
+                        left         : 20,
+                        position     : 'fixed',
+                        width        : '310px',
+                        height       : 'auto',
+                        margin       : 0,
+                        padding      : 0,
+                        listStyleType: 'none',
+                        zIndex       : 10000000
+                    }
+                );
 
                 // getting hidden height
                 var dupe = $(this).clone().css({visibility: "hidden", display: "block", position: "absolute", top: 0, left: 0}).attr('id', 'dupe');
@@ -29,20 +31,26 @@
                 dupe.remove();
 
                 if($(this).hasClass('i-am-new')) {
-                    $(this).css({
-                        top: ($(window).height() - actual_height) / 2 + 'px'
-                    });
+                    $(this).css(
+                        {
+                            top: ($(window).height() - actual_height) / 2 + 'px'
+                        }
+                    );
                 }
                 else {
-                    $(this).animate({
-                        top: ($(window).height() - actual_height) / 2 + 'px'
-                    }, 500);
+                    $(this).animate(
+                        {
+                            top: ($(window).height() - actual_height) / 2 + 'px'
+                        }, 500
+                    );
                 }
 
                 if(window.innerWidth < 600) {
-                    $(this).css({
-                        left: 5
-                    });
+                    $(this).css(
+                        {
+                            left: 5
+                        }
+                    );
                 }
 
             }

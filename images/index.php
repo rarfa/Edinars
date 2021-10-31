@@ -1,7 +1,7 @@
 <?php
-include('config.php');
+require 'config.php';
 
-  ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@ include('config.php');
     <meta name="description" content="Edinars Enterprise - Services de paiements online">
     <meta name="author" content="Sarl Edinars Enterprise">
     <title>Bienvenue - Edinars Services de Paiements en Algerie</title>
-	<!-- core CSS -->
+    <!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@ include('config.php');
                     <ul class="nav navbar-nav">
                         <li class="scroll active"><a href="#home">Accueil</a></li>
                         <li class="scroll"><a href="#features">Particuliers</a></li>
-						<li class="scroll"><a href="#work-process">Professionnels</a></li>
+                        <li class="scroll"><a href="#work-process">Professionnels</a></li>
                         <li class="scroll"><a href="#services">Services</a></li>
                         <!--<li class="scroll"><a href="#">Partners et Developers</a></li>-->
                         <li class="scroll"><a href="#animated-number">Mon Compte</a></li>
@@ -83,7 +83,7 @@ include('config.php');
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="carousel-content">
-								    <p class="cpaitationslider">Le E-paiment en Algerie </p>
+                                    <p class="cpaitationslider">Le E-paiment en Algerie </p>
                                     <p class="cpaitationslider">Maintenant c'est possible avec E-dinar  </p>
 									<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
                                 </div>
@@ -105,7 +105,7 @@ include('config.php');
 
                     <p>
                     Edinars s'inscrit dans une vision global de ce qui sera le web Algérien dans un avenir proche, nous estiment qu'il est urgent de proposer aux internaute Algérien des contenus et des services digne de la révolution du web 2.0, cela pour passées ensuite à une autre étapes , celle de l'innovation pure qui permettra de mettre sur pied une industrie numérique Algérienne compétitive .
-				   </p>
+                   </p>
                 </div>
                 <div class="col-sm-3 text-right">
 
@@ -124,7 +124,7 @@ include('config.php');
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Particuliers</h2>
             </div>
-			<div class="row">
+            <div class="row">
                 <div class="features">
                     <div class="col-sm-12 col-sm-12 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                         <div class="media service-box">
@@ -149,7 +149,7 @@ include('config.php');
                             <div class="media-body">
                                 <h4 class="media-heading">Ou acheter avec Edianrs</h4>
                                <p>Bienvenue sur l’espace shopping Edinars, découvrez les meilleures offres et les meilleurs services proposer par nos partenaires.</p>
-							   <a class="btn btn-primary" href="#">Nos partenaires</a>  </div>
+                               <a class="btn btn-primary" href="#">Nos partenaires</a>  </div>
                         </div>
                     </div><!--/.col-sm-6-->
 
@@ -168,7 +168,7 @@ include('config.php');
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Services</h2>
              </div>
-			<div class="row">
+            <div class="row">
                 <div class="features">
                     <div class="col-sm-12 col-sm-12 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                         <div class="media service-box">
@@ -178,14 +178,14 @@ include('config.php');
                             <div class="media-body">
                                 <h4 class="media-heading">Recharger Mobile</h4>
                                 <p>
-									Votre mobile et à sec ?!!
-								</p>
-								<p>
-									Ne vous déplacez plus pour recharger votre mobile, Profité de notre service de recharge pour alimenter votre solde mobile instantanément, 24H/24, 7J/7 et en toute sécurité.
-								</p>
-								<p>
-									Le rechargement est immédiat et gratuit (hors coût de la recharge) et vous permet de bénéficier des avantages et bonus offerts par votre opérateur.
-								</p>
+                                    Votre mobile est à sec ?!!
+                                </p>
+                                <p>
+                                    Ne vous déplacez plus pour recharger votre mobile, Profité de notre service de recharge pour alimenter votre solde mobile instantanément, 24H/24, 7J/7 et en toute sécurité.
+                                </p>
+                                <p>
+                                    Le rechargement est immédiat et gratuit (hors coût de la recharge) et vous permet de bénéficier des avantages et bonus offerts par votre opérateur.
+                                </p>
                             </div>
                         </div>
                     </div><!--/.col-sm-6-->
@@ -197,10 +197,10 @@ include('config.php');
                             <div class="media-body">
                                 <h4 class="media-heading">Site E-Commerce</h4>
                                 <p>Vous voulez vous lancer dans le e-commerce?</p>
-								<p>Edinars vous accompagne pour développer votre activité sur internet.</p>
-								<p>L’équipe Edinars vous offre la possibilité de profité de sa solution clé en main complète de commerce en ligne, spécialement conçu pour vous permettre de commercialiser vos produit et services en ligne avec une facilité déconcertante.</p>
-								<p>Vous souhaitez en savoir plus sur nos solutions?</p>
-								<p>Contactez-nous au ou par le biais du formulaire de contact, notre équipe vous aidera à mieux comprendre les enjeux du commerce en ligne et choisir la solution la plus adaptée pour vous.</p>
+                                <p>Edinars vous accompagne pour développer votre activité sur internet.</p>
+                                <p>L’équipe Edinars vous offre la possibilité de profité de sa solution clé en main complète de commerce en ligne, spécialement conçu pour vous permettre de commercialiser vos produit et services en ligne avec une facilité déconcertante.</p>
+                                <p>Vous souhaitez en savoir plus sur nos solutions?</p>
+                                <p>Contactez-nous au ou par le biais du formulaire de contact, notre équipe vous aidera à mieux comprendre les enjeux du commerce en ligne et choisir la solution la plus adaptée pour vous.</p>
                             </div>
                         </div>
                     </div><!--/.col-sm-6-->
@@ -210,7 +210,7 @@ include('config.php');
             </div><!--/.row-->
         </div><!--/.container-->
     </section><!--/#services-->
-	<section id="work-process">
+    <section id="work-process">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Professionnels</h2>
@@ -225,7 +225,7 @@ include('config.php');
                             <i class="fa fa-bullhorn fa-2x"></i>
                         </div>
                         <h3>Ouvrez un compte professionnel
-						</h3>
+                        </h3>
                     </div>
                 </div>
                 <div class="col-md-6 col-md-4 col-xs-3">
@@ -255,13 +255,13 @@ include('config.php');
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Mon Compte</h2>
             </div>
-			<div class="contact-form">
+            <div class="contact-form">
                             <form id="login-form" name="login-form" method="post" action="#">
                                 <span id="msgbox" style="display:none"></span>
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" class="form-control" placeholder="Identifiant" required>
                                 </div>
-								<div class="form-group">
+                                <div class="form-group">
                                     <input type="password" name="password" id="password" class="form-control" placeholder="Mot de pass" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Se Connecter</button>
@@ -422,8 +422,8 @@ include('config.php');
             </div><!-- tab-content -->
 
       </div> <!-- /form -->
-          	</div>
-            	<div class="clr"></div>
+              </div>
+                <div class="clr"></div>
             </div>
 
             <!-- End content  -->
@@ -449,7 +449,7 @@ include('config.php');
     <script src="js/jquery.inview.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/main.js"></script>
-	<script src="'../../../js/validation-login.js"></script>
+    <script src="'../../../js/validation-login.js"></script>
 
 
 </body>

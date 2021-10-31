@@ -3,10 +3,10 @@ header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-include(DIR_ROOT.'includes/All_files.php');
+require DIR_ROOT.'includes/All_files.php';
 
 // security
-include('verif_user.php');
+require 'verif_user.php';
 // include('verif_csrf_token.php');
 
 $array_reponse = array( 'success'=>'yes', 'success_viewed' => 'yes' );
@@ -15,19 +15,17 @@ $transaction_id = !empty($_GET['transaction_id'])? prntext($_GET['transaction_id
 
 $transaction = get_transaction_by_id($user_id, $transaction_id);
 
-if($transaction['id']){
-	$array_reponse['transaction'] = $transaction;
+if($transaction['id']) {
+    $array_reponse['transaction'] = $transaction;
 
-	//set_notification_viewed
-	$viewed = set_notification_viewed($user_id, "",$transaction_id);
-	if(!$viewed){
-		$array_reponse['success_viewed'] = "no";
-	}
+    //set_notification_viewed
+    $viewed = set_notification_viewed($user_id, "", $transaction_id);
+    if(!$viewed) {
+        $array_reponse['success_viewed'] = "no";
+    }
 
 }else{
-	$array_reponse['success'] = 'no';
+    $array_reponse['success'] = 'no';
 }
 
 echo json_encode($array_reponse);
-
-?>

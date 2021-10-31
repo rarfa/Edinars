@@ -36,9 +36,11 @@
 </style>
 
 <?php
-$sql = mysqli_query($data['cid'], "SELECT {$data['DbPrefix']}points_of_sales.*, {$data['DbPrefix']}wilayas.name as wilaya_name
+$sql = mysqli_query(
+    $data['cid'], "SELECT {$data['DbPrefix']}points_of_sales.*, {$data['DbPrefix']}wilayas.name as wilaya_name
                     FROM `{$data['DbPrefix']}points_of_sales`
-                    INNER JOIN {$data['DbPrefix']}wilayas ON ({$data['DbPrefix']}wilayas.id = {$data['DbPrefix']}points_of_sales.wilaya_id)");
+                    INNER JOIN {$data['DbPrefix']}wilayas ON ({$data['DbPrefix']}wilayas.id = {$data['DbPrefix']}points_of_sales.wilaya_id)"
+);
 
 $num_points = mysqli_num_rows($sql);
 $ii=0;
@@ -46,31 +48,31 @@ $nb_points=0;
 $html = '';
 $list_map_html = '';
 while($res = mysqli_fetch_array($sql)){
-  $ii++;
-  if($ii==1){
-    $nb_points++;
-    $html .='<ol id="list_points_ventes_'.$nb_points.'" class="list_points_ventes">';
-  }
-  $html .= "
+    $ii++;
+    if($ii==1) {
+        $nb_points++;
+        $html .='<ol id="list_points_ventes_'.$nb_points.'" class="list_points_ventes">';
+    }
+    $html .= "
   <li>
     <h2>".$res["establishment"]."</h2>
     <p>".$res["adresse"]."</p>
   </li>";
 
-  if($ii==5){
-    $ii=0;
-    $html .='</ol>';
-  }
+    if($ii==5) {
+        $ii=0;
+        $html .='</ol>';
+    }
 
-  //list map
-  $list_map_html .= "['".$res['establishment']."', ".$res['latitude'].",".$res['longitude'].", 1, '<h4>".$res['establishment']."</h4> <p>".$res['adresse']."</p>'], \r";
+    //list map
+    $list_map_html .= "['".$res['establishment']."', ".$res['latitude'].",".$res['longitude'].", 1, '<h4>".$res['establishment']."</h4> <p>".$res['adresse']."</p>'], \r";
 
 }
 
 $list_map_html = substr($list_map_html, 0, strlen($list_map_html)-1);
 
-if($ii>0){
-  $html .='</ol>';
+if($ii>0) {
+    $html .='</ol>';
 }
 
 
@@ -159,44 +161,44 @@ if($ii>0){
 
   function process_contact(reponse){
 
-  	$r_h_s1 = '<div class="alert alert-danger alert-dismissable" for="';
-  	$r_h_s2 = '" id="';
-  	$r_h_s3 = '"><i class="icon fa fa-warning"></i>';
-  	$reponse_html_end = '</div>';
+      $r_h_s1 = '<div class="alert alert-danger alert-dismissable" for="';
+      $r_h_s2 = '" id="';
+      $r_h_s3 = '"><i class="icon fa fa-warning"></i>';
+      $reponse_html_end = '</div>';
 
     console.log("process_contact.reponse = ".reponse);
-  	if(reponse.success == 'yes'){
-  		// animate("#modal-dialog-login", "fadeOutUp",0,false);
+      if(reponse.success == 'yes'){
+          // animate("#modal-dialog-login", "fadeOutUp",0,false);
       $("#contact_success").show();
       $("#contact_form").hide();
 
-  		// setTimeout(function(){location.href="./index.php"}, 1500);
+          // setTimeout(function(){location.href="./index.php"}, 1500);
       // alert ("Ca marche");
-  	}else{
+      }else{
       // alert ("Ca marche pas !!!");
-  		// animate("#modal-dialog-login", "wobble");
+          // animate("#modal-dialog-login", "wobble");
 
-  		if(reponse.name != '') {
-  			$('#div_name').prepend($r_h_s1+'name'+$r_h_s2+'div_name'+$r_h_s3+reponse.name+$reponse_html_end);
+          if(reponse.name != '') {
+              $('#div_name').prepend($r_h_s1+'name'+$r_h_s2+'div_name'+$r_h_s3+reponse.name+$reponse_html_end);
         console.log("Error name: "+reponse.name);
-  		}
-  		if(reponse.email != '') {
-  			$('#div_email').prepend($r_h_s1+'email'+$r_h_s2+'div_email'+$r_h_s3+reponse.email+$reponse_html_end);
+          }
+          if(reponse.email != '') {
+              $('#div_email').prepend($r_h_s1+'email'+$r_h_s2+'div_email'+$r_h_s3+reponse.email+$reponse_html_end);
         console.log("Error email"+reponse.email);
-  		}
-  		if(reponse.subject != '') {
-  			$('#div_subject').prepend($r_h_s1+'subject'+$r_h_s2+'div_subject'+$r_h_s3+reponse.subject+$reponse_html_end);
+          }
+          if(reponse.subject != '') {
+              $('#div_subject').prepend($r_h_s1+'subject'+$r_h_s2+'div_subject'+$r_h_s3+reponse.subject+$reponse_html_end);
         console.log("Error subject"+reponse.subject);
-  		}
-  		if(reponse.message != '') {
-  			$('#div_message').prepend($r_h_s1+'message'+$r_h_s2+'div_message'+$r_h_s3+reponse.message+$reponse_html_end);
+          }
+          if(reponse.message != '') {
+              $('#div_message').prepend($r_h_s1+'message'+$r_h_s2+'div_message'+$r_h_s3+reponse.message+$reponse_html_end);
         console.log("Error message"+reponse.message);
-  		}
-  	}
+          }
+      }
 
 
 
-	$('#div-forms').css("height","");
+    $('#div-forms').css("height","");
 }
 
     <?php
@@ -274,13 +276,13 @@ if($ii>0){
   }
 
   // var sites = [
-  // 	['Titre 1', 52.202977,0.138938, 1, '<h2>Titre 1--</h2> <p>The Frontroom. <br/>23-25 Gwydir Street, Cambridge, CB1 2LG <br/>01223 305 600</p>'],
-  // 	['<h2>Titre 1</h2> <p>The Frontroom. <br/>23-25 Gwydir Street, Cambridge, CB1 2LG <br/>01223 305 600</p>', 52.203825,0.134808, 1, ' '],
+  //     ['Titre 1', 52.202977,0.138938, 1, '<h2>Titre 1--</h2> <p>The Frontroom. <br/>23-25 Gwydir Street, Cambridge, CB1 2LG <br/>01223 305 600</p>'],
+  //     ['<h2>Titre 1</h2> <p>The Frontroom. <br/>23-25 Gwydir Street, Cambridge, CB1 2LG <br/>01223 305 600</p>', 52.203825,0.134808, 1, ' '],
   //   ['<h2>Titre 1</h2> <p>The Frontroom. <br/>23-25 Gwydir Street, Cambridge, CB1 2LG <br/>01223 305 600</p>',52.190756,0.136522, 1, ' ']
   // ];
 
   var sites = [
-  	<?php echo $list_map_html; ?>
+      <?php echo $list_map_html; ?>
   ];
 
 

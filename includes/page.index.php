@@ -232,5 +232,5 @@
 </section><!--/#get-in-touch-->
 
 <?php
-include("includes/section_contact.php");
+require "includes/section_contact.php";
 ?>

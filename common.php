@@ -1,34 +1,36 @@
 <?php
-#################################################################################
-# PROGRAM     : EDINAR APPLICATION                                             	#
-# VERSION     : 0.01                                                          	#
-# AUTHOR      : Arfa Abderrahim                                               	#
-# COMPANY     : HOSTDZ	                                             			#
-# COPYRIGHTS  : (C) HOSTDZ. ALL RIGHTS RESERVED                    				#
-#         COPYRIGHTS BY (C)2011 HOSTDZ. ALL RIGHTS RESERVDED  	  				#
-###############################################################################
-#               	     DEVELOPED BY HOSTDZ             `		        		#
-###############################################################################
-#    ALL SOURCE CODE, IMAGES, PROGRAMS, FILES INCLUDED IN THIS DISTRIBUTION   	#
-#         COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED  	      			#
-###############################################################################
-#       ANY REDISTRIBUTION WITHOUT PERMISSION OF HOSTDZ AND IS          		#
-#                            STRICTLY FORBIDDEN                                 #
-###############################################################################
-#         COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED  	      			#
-###############################################################################
+// 
+// PROGRAM     : EDINAR APPLICATION                                                 #
+// VERSION     : 0.01                                                              #
+// AUTHOR      : Arfa Abderrahim                                                   #
+// COMPANY     : HOSTDZ                                                             #
+// COPYRIGHTS  : (C) HOSTDZ. ALL RIGHTS RESERVED                                    #
+// COPYRIGHTS BY (C)2011 HOSTDZ. ALL RIGHTS RESERVDED                        #
+// 
+// DEVELOPED BY HOSTDZ             `                        #
+// 
+// ALL SOURCE CODE, IMAGES, PROGRAMS, FILES INCLUDED IN THIS DISTRIBUTION       #
+// COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
+// 
+// ANY REDISTRIBUTION WITHOUT PERMISSION OF HOSTDZ AND IS                  #
+// STRICTLY FORBIDDEN                                 #
+// 
+// COPYRIGHTS BY (C)2012 HOSTDZ. ALL RIGHTS RESERVDED                        #
+// 
 
 
-###############################################################################
+// 
 
 
-if(function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if(function_exists('set_magic_quotes_runtime')) { set_magic_quotes_runtime(0);
+}
 
-if(!ini_get('safe_mode')) set_time_limit(3600);
+if(!ini_get('safe_mode')) { set_time_limit(3600);
+}
 
 ignore_user_abort(true);
 
-###############################################################################
+// 
 
 $data['PostSent']=false;
 
@@ -38,7 +40,7 @@ $data['lang_ch'] =  $_COOKIE["ln"] ?? $data['DefaultLanguage'];
 
 setcookie("ln", $data['lang_ch']);
 
-###############################################################################
+// 
 
 $data['Path']=dirname(__FILE__);
 
@@ -53,7 +55,8 @@ $data['DonBtnsPath']="{$data['Path']}/images/buttons/donations";
 $data['SubBtnsPath']="{$data['Path']}/images/buttons/subscriptions";
 $data['ShopBtnsPath']="{$data['Path']}/images/buttons/shopcart";
 
-if($data['Folder'])$data['Folder']="/{$data['Folder']}";
+if($data['Folder']) { $data['Folder']="/{$data['Folder']}";
+}
 
 $data['Addr']="{$_SERVER['REMOTE_ADDR']}";
 $data['Host']="{$data['Prot']}://{$_SERVER['HTTP_HOST']}{$data['Folder']}";
@@ -68,25 +71,28 @@ $data['Members']="{$data['Host']}/secure";
 $data['Home']="Location:{$data['Host']}/acceuil-Edinars.html";
 $data['DbPrefix']="{$data['DbPrefix']}_";
 
-#################################### Audit ###########################################
+// Audit ###########################################
 
-function audit($subject, $body, $objtable , $objid,$user){
-	global $data;
-	    db_query(
-		"INSERT INTO `{$data['DbPrefix']}audit`".
-		"(`aud_subject`,`aud_body`,`aud_date`,`aud_obj_table`, `aud_obj_id` , `aud_user`)VALUES ".
-		"('".addslashes($subject)."','".addslashes($body)."' , NOW(),'{$objtable}',{$objid},'{$user}')");
+function audit($subject, $body, $objtable , $objid,$user)
+{
+    global $data;
+        db_query(
+            "INSERT INTO `{$data['DbPrefix']}audit`".
+            "(`aud_subject`,`aud_body`,`aud_date`,`aud_obj_table`, `aud_obj_id` , `aud_user`)VALUES ".
+            "('".addslashes($subject)."','".addslashes($body)."' , NOW(),'{$objtable}',{$objid},'{$user}')"
+        );
 
 }
 
 
-#################################### notifications ###########################################
+// notifications ###########################################
 
-function get_user_notifications($user_id, $view='', $type=''){
+function get_user_notifications($user_id, $view='', $type='')
+{
 
-	global $data;
+    global $data;
 
-  $sql = "SELECT `{$data['DbPrefix']}notifications`.*, `{$data['DbPrefix']}transactions`.type as transaction_type".
+    $sql = "SELECT `{$data['DbPrefix']}notifications`.*, `{$data['DbPrefix']}transactions`.type as transaction_type".
           ", `{$data['DbPrefix']}transactions`.comments as transaction_comments ".
           " FROM `{$data['DbPrefix']}notifications`".
           " LEFT JOIN {$data['DbPrefix']}transactions ON ({$data['DbPrefix']}transactions.id = {$data['DbPrefix']}notifications.transaction_id) ".
@@ -95,590 +101,622 @@ function get_user_notifications($user_id, $view='', $type=''){
           ($view? " AND `view`='{$view}'" : ' AND `hide_in_list` = \'no\' ').
           " Limit 30";
 
-  $notifications=db_rows($sql);
-  // prnuser
+    $notifications=db_rows($sql);
+    // prnuser
 
-  foreach ($notifications as $key => $value) {
-    $notifications[$key]["sender"] = prnuser($notifications[$key]["sender"]);
-    if($notifications[$key]["type"]=="transaction") $notifications[$key]["message"] = $notifications[$key]["transaction_comments"];
+    foreach ($notifications as $key => $value) {
+        $notifications[$key]["sender"] = prnuser($notifications[$key]["sender"]);
+        if($notifications[$key]["type"]=="transaction") { $notifications[$key]["message"] = $notifications[$key]["transaction_comments"];
+        }
 
-    $notifications[$key]["_message"] = strip_tags(str_replace("</p>","\r\n", $notifications[$key]["message"]));
-  }
-  //echo nl2br($sql);
+        $notifications[$key]["_message"] = strip_tags(str_replace("</p>", "\r\n", $notifications[$key]["message"]));
+    }
+    //echo nl2br($sql);
 
-  return $notifications;
+    return $notifications;
 
 }
 
-function set_notification_viewed($user_id,$notification_id, $transaction_id = null ){
-  global $data;
+function set_notification_viewed($user_id,$notification_id, $transaction_id = null )
+{
+    global $data;
 
-  $sql =  "UPDATE `{$data['DbPrefix']}notifications` "."\r\n".
+    $sql =  "UPDATE `{$data['DbPrefix']}notifications` "."\r\n".
           "SET `view` = 'yes' "."\r\n".
           "WHERE `{$data['DbPrefix']}notifications`.`member_id` = '".$user_id."' "."\r\n";
 
-  if(is_null($transaction_id)){
-    $sql .= "AND `{$data['DbPrefix']}notifications`.`id` = '".$notification_id."' "."\r\n";
-  }else{
-    $sql .= "AND `{$data['DbPrefix']}notifications`.`transaction_id` = '".$transaction_id."' "."\r\n";
-  }
-
-  $update = db_query($sql);
-  // echo nl2br($sql);
-  return $update;
-}
-
-
-
-#################################### Product ###########################################
-function select_products($uid, $type=0, $id=0, $single=false){
-
-	global $data;
-
-	$products=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}products`".
-
-		" WHERE `owner`={$uid} AND `type`={$type}".
-
-		($id?" AND `id`={$id}":'').($single?" LIMIT 1":'')
-
-	);
-
-	$result=array();
-
-	foreach($products as $key=>$value){
-
-		foreach($value as $name=>$v){
-        $result[$key][$name]=$v;
+    if(is_null($transaction_id)) {
+        $sql .= "AND `{$data['DbPrefix']}notifications`.`id` = '".$notification_id."' "."\r\n";
+    }else{
+        $sql .= "AND `{$data['DbPrefix']}notifications`.`transaction_id` = '".$transaction_id."' "."\r\n";
     }
-    $result[$key]['vendu'] = prnsumm($result[$key]['prix'] * $result[$key]['sold']);
-	}
 
-	return $result;
-
-}
-
-function delete_product($id){
-
-	global $data;
-
-	$rows=db_rows(
-
-		"SELECT `member`".
-
-		" FROM `{$data['DbPrefix']}subscriptions`".
-
-		" WHERE `product`={$id}"
-
-	);
-
-	$members=array();
-
-	foreach($rows as $key=>$value){
-
-		$row=get_member_info($value['member']);
-
-		$members[$key]['username']=$row['username'];
-
-		$members[$key]['fullname']="{$row['fname']} {$row['lname']}";
-
-	}
-
-	db_query(
-
-		"DELETE FROM `{$data['DbPrefix']}subscriptions`".
-
-		" WHERE `product`={$id}"
-
-	);
-
-	$rows=db_rows(
-
-		"SELECT `name` FROM `{$data['DbPrefix']}products`".
-
-		" WHERE `id`={$id}"
-
-	);
-
-	$product=$rows[0]['name'];
-
-	$delete = db_query(
-
-		"DELETE FROM `{$data['DbPrefix']}products` WHERE `id`={$id}"
-
-	);
-
-	foreach($members as $key=>$value){
-
-		$post['username']=$value['username'];
-
-		$post['fullname']=$value['fullname'];
-
-		$post['product']=$product;
-
-		send_email('OWNER-CANCELLED-SUBSCRIPTION', $post);
-
-	}
-
-  return $delete;
-}
-
-
-function insert_product($uid, $type, $post){
-
-	global $data;
-
-	$insert = db_query(
-		"INSERT INTO `{$data['DbPrefix']}products`(".
-		"`type`,`owner`,`prix`,`periode`,`installation`,`essai`,`tva`,`livraison`,".
-		"`button`,`nom`,`ureturn`,`unotify`,`ucancel`,`comments`".
-		")VALUES(".
-		"{$type},{$uid},{$post['prix']},".
-		($post['periode']?"{$post['periode']},":'0,').
-		($post['installation']?"{$post['installation']},":'0.00,').
-		($post['essai']?"{$post['essai']},":'0.00,').
-		($post['tva']?"{$post['tva']},":'0.00,').
-		($post['livraison']?"{$post['livraison']},":'0.00,').
-		"'{$post['button']}','{$post['nom']}','{$post['ureturn']}',".
-		"'{$post['unotify']}','{$post['ucancel']}','".
-		addslashes($post['comments'])."')"
-	);
-
-  return $insert;
-
-}
-
-function insert_notification($array_infos){
-
-	global $data;
-  $sql = "INSERT INTO `{$data['DbPrefix']}notifications` ";
-
-  $sql_keys  = "(";
-  $sql_value  = "VALUES(";
-
-  foreach ($array_infos as $key => $value) {
-    # code...
-    $sql_keys .= '`'.$key.'`, ';
-    $sql_value .= "'".$value."', ";
-  }
-
-  $sql_keys = substr($sql_keys, 0, strlen($sql_keys)-2);
-  $sql_value = substr($sql_value, 0, strlen($sql_value)-2);
-
-  $sql_value .= ")";
-  $sql_keys .= ")";
-
-  $insert = db_query($sql.$sql_keys.$sql_value);
-  // $insert = db_query(
-	// 	"INSERT INTO `{$data['DbPrefix']}products`(".
-	// 	"`type`,`owner`,`prix`,`periode`,`installation`,`essai`,`tva`,`livraison`,".
-	// 	"`button`,`nom`,`ureturn`,`unotify`,`ucancel`,`comments`".
-	// 	")VALUES(".
-	// 	"{$type},{$uid},{$post['prix']},".
-	// 	($post['periode']?"{$post['periode']},":'0,').
-	// 	($post['installation']?"{$post['installation']},":'0.00,').
-	// 	($post['essai']?"{$post['essai']},":'0.00,').
-	// 	($post['tva']?"{$post['tva']},":'0.00,').
-	// 	($post['livraison']?"{$post['livraison']},":'0.00,').
-	// 	"'{$post['button']}','{$post['nom']}','{$post['ureturn']}',".
-	// 	"'{$post['unotify']}','{$post['ucancel']}','".
-	// 	addslashes($post['comments'])."')"
-	// );
-
-  return $insert;
-
-}
-
-function update_product($id, $post){
-
-	global $data;
-
-	$update = db_query(
-
-		"UPDATE `{$data['DbPrefix']}products` SET ".
-
-		"`prix`={$post['prix']},".
-
-		"`periode`=".($post['periode']?"{$post['periode']},":'0,').
-
-		"`installation`=".($post['installation']?"{$post['installation']},":'0.00,').
-
-		"`essai`=".($post['essai']?"{$post['essai']},":'0.00,').
-
-		"`tva`=".($post['tva']?"{$post['tva']},":'0.00,').
-
-		"`livraison`=".($post['livraison']?"{$post['livraison']},":'0.00,').
-
-		"`button`='{$post['button']}',`nom`='{$post['nom']}',".
-
-		"`ureturn`='{$post['ureturn']}',`unotify`='{$post['unotify']}',".
-
-		"`ucancel`='{$post['ucancel']}',`comments`='".addslashes($post['comments'])."'".
-
-		" WHERE `id`={$id}"
-
-	);
-  return $update;
-
-}
-
-###############################################################################
-
-function get_post(){
-
-	global $_POST;
-
-	$result=array();
-
-	foreach($_POST as $key=>$value)$result[$key]=$value;
-
-	reset($_POST);
-
-	return $result;
-
-}
-
-###############################################################################
-
-function protect($buffer){
-
-	global $data, $_SERVER, $_SESSION;
-
-	if($data['ProtectHtml']&&$_SESSION['login'])return encrypt_pages($buffer);
-
-	else return $buffer;
-
+    $update = db_query($sql);
+    // echo nl2br($sql);
+    return $update;
 }
 
 
 
-function prepare($buffer){
+// Product ###########################################
+function select_products($uid, $type=0, $id=0, $single=false)
+{
 
-	return protect($buffer);
+    global $data;
+
+    $products=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}products`".
+
+        " WHERE `owner`={$uid} AND `type`={$type}".
+
+        ($id?" AND `id`={$id}":'').($single?" LIMIT 1":'')
+    );
+
+    $result=array();
+
+    foreach($products as $key=>$value){
+
+        foreach($value as $name=>$v){
+              $result[$key][$name]=$v;
+        }
+        $result[$key]['vendu'] = prnsumm($result[$key]['prix'] * $result[$key]['sold']);
+    }
+
+    return $result;
 
 }
 
+function delete_product($id)
+{
 
+    global $data;
 
-function show($template){
+    $rows=db_rows(
+        "SELECT `member`".
 
-	global $data, $post;
+        " FROM `{$data['DbPrefix']}subscriptions`".
 
-	//echo $template;
+        " WHERE `product`={$id}"
+    );
 
-	if(file_exists($template))include($template);
+    $members=array();
 
-	else echo("Template \"{$template}\" not found!");
+    foreach($rows as $key=>$value){
 
+        $row=get_member_info($value['member']);
+
+        $members[$key]['username']=$row['username'];
+
+        $members[$key]['fullname']="{$row['fname']} {$row['lname']}";
+
+    }
+
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}subscriptions`".
+
+        " WHERE `product`={$id}"
+    );
+
+    $rows=db_rows(
+        "SELECT `name` FROM `{$data['DbPrefix']}products`".
+
+        " WHERE `id`={$id}"
+    );
+
+    $product=$rows[0]['name'];
+
+    $delete = db_query(
+        "DELETE FROM `{$data['DbPrefix']}products` WHERE `id`={$id}"
+    );
+
+    foreach($members as $key=>$value){
+
+        $post['username']=$value['username'];
+
+        $post['fullname']=$value['fullname'];
+
+        $post['product']=$product;
+
+        send_email('OWNER-CANCELLED-SUBSCRIPTION', $post);
+
+    }
+
+    return $delete;
 }
 
 
+function insert_product($uid, $type, $post)
+{
 
-function display($path=''){
+    global $data;
 
-	global $data;
+    $insert = db_query(
+        "INSERT INTO `{$data['DbPrefix']}products`(".
+        "`type`,`owner`,`prix`,`periode`,`installation`,`essai`,`tva`,`livraison`,".
+        "`button`,`nom`,`ureturn`,`unotify`,`ucancel`,`comments`".
+        ")VALUES(".
+        "{$type},{$uid},{$post['prix']},".
+        ($post['periode']?"{$post['periode']},":'0,').
+        ($post['installation']?"{$post['installation']},":'0.00,').
+        ($post['essai']?"{$post['essai']},":'0.00,').
+        ($post['tva']?"{$post['tva']},":'0.00,').
+        ($post['livraison']?"{$post['livraison']},":'0.00,').
+        "'{$post['button']}','{$post['nom']}','{$post['ureturn']}',".
+        "'{$post['unotify']}','{$post['ucancel']}','".
+        addslashes($post['comments'])."')"
+    );
 
-	ob_start("prepare");
+    return $insert;
 
-	if($path){
-		$path="/{$path}";
-		}
+}
 
-	if (!$data['lang_ch']){
-		$data['lang_ch']=$data['DefaultLanguage'];
-   }
+function insert_notification($array_infos)
+{
 
-	if ($path == "" ){$path="/langs/{$data['lang_ch']}".$path;}
-	if ($path == "/secure" ){$path="/langs/{$data['lang_ch']}".$path;}
-	if ($data['PageFile'] == 'process')  {
-	    show("{$data['Templates']}{$path}/template.header.process.php");
-		show("{$data['Templates']}{$path}/template.{$data['PageFile']}.php");
-		//show("{$data['Templates']}{$path}/template.footer.process.php");
-	} else {
-		show("{$data['Templates']}{$path}/template.header.php");
-		show("{$data['Templates']}{$path}/template.{$data['PageFile']}.php");
-		show("{$data['Templates']}{$path}/template.footer.php");
-	}
-	ob_end_flush();
+    global $data;
+    $sql = "INSERT INTO `{$data['DbPrefix']}notifications` ";
+
+    $sql_keys  = "(";
+    $sql_value  = "VALUES(";
+
+    foreach ($array_infos as $key => $value) {
+        // code...
+        $sql_keys .= '`'.$key.'`, ';
+        $sql_value .= "'".$value."', ";
+    }
+
+    $sql_keys = substr($sql_keys, 0, strlen($sql_keys)-2);
+    $sql_value = substr($sql_value, 0, strlen($sql_value)-2);
+
+    $sql_value .= ")";
+    $sql_keys .= ")";
+
+    $insert = db_query($sql.$sql_keys.$sql_value);
+    // $insert = db_query(
+    //     "INSERT INTO `{$data['DbPrefix']}products`(".
+    //     "`type`,`owner`,`prix`,`periode`,`installation`,`essai`,`tva`,`livraison`,".
+    //     "`button`,`nom`,`ureturn`,`unotify`,`ucancel`,`comments`".
+    //     ")VALUES(".
+    //     "{$type},{$uid},{$post['prix']},".
+    //     ($post['periode']?"{$post['periode']},":'0,').
+    //     ($post['installation']?"{$post['installation']},":'0.00,').
+    //     ($post['essai']?"{$post['essai']},":'0.00,').
+    //     ($post['tva']?"{$post['tva']},":'0.00,').
+    //     ($post['livraison']?"{$post['livraison']},":'0.00,').
+    //     "'{$post['button']}','{$post['nom']}','{$post['ureturn']}',".
+    //     "'{$post['unotify']}','{$post['ucancel']}','".
+    //     addslashes($post['comments'])."')"
+    // );
+
+    return $insert;
+
+}
+
+function update_product($id, $post)
+{
+
+    global $data;
+
+    $update = db_query(
+        "UPDATE `{$data['DbPrefix']}products` SET ".
+
+        "`prix`={$post['prix']},".
+
+        "`periode`=".($post['periode']?"{$post['periode']},":'0,').
+
+        "`installation`=".($post['installation']?"{$post['installation']},":'0.00,').
+
+        "`essai`=".($post['essai']?"{$post['essai']},":'0.00,').
+
+        "`tva`=".($post['tva']?"{$post['tva']},":'0.00,').
+
+        "`livraison`=".($post['livraison']?"{$post['livraison']},":'0.00,').
+
+        "`button`='{$post['button']}',`nom`='{$post['nom']}',".
+
+        "`ureturn`='{$post['ureturn']}',`unotify`='{$post['unotify']}',".
+
+        "`ucancel`='{$post['ucancel']}',`comments`='".addslashes($post['comments'])."'".
+
+        " WHERE `id`={$id}"
+    );
+    return $update;
+
+}
+
+// 
+
+function get_post()
+{
+
+    global $_POST;
+
+    $result=array();
+
+    foreach($_POST as $key=>$value) { $result[$key]=$value;
+    }
+
+    reset($_POST);
+
+    return $result;
+
+}
+
+// 
+
+function protect($buffer)
+{
+
+    global $data, $_SERVER, $_SESSION;
+
+    if($data['ProtectHtml']&&$_SESSION['login']) { return encrypt_pages($buffer);
+
+    } else { return $buffer;
+    }
 
 }
 
 
 
-function showpage($template){
+function prepare($buffer)
+{
 
-	global $data;
-
-	ob_start("prepare");
-
-	show("{$data['Templates']}/{$template}");
-
-	ob_end_flush();
+    return protect($buffer);
 
 }
 
 
 
-function showmenu($mode, $path=''){
+function show($template)
+{
 
-	global $data;
+    global $data, $post;
 
-	$data['mode']=$mode;
+    //echo $template;
 
-	if($path)$path="/{$path}";
+    if(file_exists($template)) { include $template;
 
-	if (!$data['lang_ch']){
+    } else { echo("Template \"{$template}\" not found!");
+    }
 
-		$data['lang_ch']=$data['DefaultLanguage'];
+}
 
-	}
 
-	if ($path != "/admins"){$path="/langs/{$data['lang_ch']}".$path;}
 
-	show("{$data['Templates']}{$path}/template.menu.htm");
+function display($path='')
+{
+
+    global $data;
+
+    ob_start("prepare");
+
+    if($path) {
+        $path="/{$path}";
+    }
+
+    if (!$data['lang_ch']) {
+        $data['lang_ch']=$data['DefaultLanguage'];
+    }
+
+    if ($path == "" ) {$path="/langs/{$data['lang_ch']}".$path;
+    }
+    if ($path == "/secure" ) {$path="/langs/{$data['lang_ch']}".$path;
+    }
+    if ($data['PageFile'] == 'process') {
+        show("{$data['Templates']}{$path}/template.header.process.php");
+        show("{$data['Templates']}{$path}/template.{$data['PageFile']}.php");
+        //show("{$data['Templates']}{$path}/template.footer.process.php");
+    } else {
+        show("{$data['Templates']}{$path}/template.header.php");
+        show("{$data['Templates']}{$path}/template.{$data['PageFile']}.php");
+        show("{$data['Templates']}{$path}/template.footer.php");
+    }
+    ob_end_flush();
+
+}
+
+
+
+function showpage($template)
+{
+
+    global $data;
+
+    ob_start("prepare");
+
+    show("{$data['Templates']}/{$template}");
+
+    ob_end_flush();
+
+}
+
+
+
+function showmenu($mode, $path='')
+{
+
+    global $data;
+
+    $data['mode']=$mode;
+
+    if($path) { $path="/{$path}";
+    }
+
+    if (!$data['lang_ch']) {
+
+        $data['lang_ch']=$data['DefaultLanguage'];
+
+    }
+
+    if ($path != "/admins") {$path="/langs/{$data['lang_ch']}".$path;
+    }
+
+    show("{$data['Templates']}{$path}/template.menu.htm");
 
 
 
 }
 
-function showbanner(){
+function showbanner()
+{
 
-	global $data;
+    global $data;
 
-	show("{$data['Templates']}/template.banners.htm");
-
-}
-
-
-function showbar($mode, $path=''){
-
-	global $data;
-
-	$data['mode']=$mode;
-
-	if($path)$path="/{$path}";
-
-	if (!$data['lang_ch']){
-
-		$data['lang_ch']=$data['DefaultLanguage'];
-
-	}
-
-	if ($path != "/admins"){$path="/langs/{$data['lang_ch']}".$path;}
-
-	show("{$data['Templates']}{$path}/template.menu.htm");
-
-
+    show("{$data['Templates']}/template.banners.htm");
 
 }
-###############################################################################
+
+
+function showbar($mode, $path='')
+{
+
+    global $data;
+
+    $data['mode']=$mode;
+
+    if($path) { $path="/{$path}";
+    }
+
+    if (!$data['lang_ch']) {
+
+        $data['lang_ch']=$data['DefaultLanguage'];
+
+    }
+
+    if ($path != "/admins") {$path="/langs/{$data['lang_ch']}".$path;
+    }
+
+    show("{$data['Templates']}{$path}/template.menu.htm");
+
+
+
+}
+// 
 
 $data['cid']=null;
 
 
 
-function show_menu_langs(){
+function show_menu_langs()
+{
 
-	global $data;
-
-
-	$langs_dir_obj = dir($data['Templates']."/langs/");
-	while($entry = $langs_dir_obj->read()){
-
-     if ($entry != "." && $entry != ".." && $entry != "default") {
-
-       if($_COOKIE["ln"]==$entry || (!$_COOKIE["ln"] && $data['DefaultLanguage']==$entry)){$select="selected";}
-       else{$select="";}
-
-       echo "<option value='".$entry."' ".$select.">".$entry."</option>";
-
-     }
-
-	}
-
-}
-
-function show_default_select_lang(){
-
-	global $data;
+    global $data;
 
 
-	$langs_dir_obj = dir($data['Templates']."/langs/");
-	while($entry = $langs_dir_obj->read()){
+    $langs_dir_obj = dir($data['Templates']."/langs/");
+    while($entry = $langs_dir_obj->read()){
 
-     if ($entry != "." && $entry != ".." && $entry != "default") {
+        if ($entry != "." && $entry != ".." && $entry != "default") {
 
-       if($data['DefaultLanguage']==$entry){$select="selected";}else{$select="";}
+            if($_COOKIE["ln"]==$entry || (!$_COOKIE["ln"] && $data['DefaultLanguage']==$entry)) {$select="selected";
+            }
+            else{$select="";
+            }
 
-       echo "<option value='".$entry."' ".$select.">".$entry."</option>";
+            echo "<option value='".$entry."' ".$select.">".$entry."</option>";
 
-     }
+        }
 
-	}
+    }
 
 }
 
+function show_default_select_lang()
+{
+
+    global $data;
 
 
-function db_connect(){
+    $langs_dir_obj = dir($data['Templates']."/langs/");
+    while($entry = $langs_dir_obj->read()){
 
-	global $data;
+        if ($entry != "." && $entry != ".." && $entry != "default") {
 
-	$data['cid']=mysqli_connect(
+            if($data['DefaultLanguage']==$entry) {$select="selected";
+            }else{$select="";
+            }
 
-		$data['Hostname'], $data['Username'], $data['Password'], $data['Database']
+            echo "<option value='".$entry."' ".$select.">".$entry."</option>";
 
-	);
+        }
 
-	if(!$data['cid']){
-
-		echo(
-
-			'<font style="font:20px Verdana;color:#FF0000">'.mysqli_error().
-
-			"<br>DB error please contact to site administrator <a href=\"mailto:{$data['AdminEmail']}\">".
-
-			"{$data['AdminEmail']}</a>.</font>"
-
-		);
-
-		exit;
-	}
-
-  	mysqli_query($data['cid'], "SET NAMES 'utf8'");
-
-	return (bool)$data['cid'];
-}
-
-
-
-function db_disconnect(){
-
-	global $data;
-
-	return (bool)mysqli_close($data['cid']);
+    }
 
 }
 
 
 
-function db_query($statement,$print=false){
+function db_connect()
+{
 
-	global $data;
+    global $data;
 
-	if($print) echo("-->{$statement}<--<br>");
+    $data['cid']=mysqli_connect(
+        $data['Hostname'], $data['Username'], $data['Password'], $data['Database']
+    );
 
-	return mysqli_query($data['cid'], $statement);
+    if(!$data['cid']) {
+
+        echo(
+
+        '<font style="font:20px Verdana;color:#FF0000">'.mysqli_error().
+
+        "<br>DB error please contact to site administrator <a href=\"mailto:{$data['AdminEmail']}\">".
+
+        "{$data['AdminEmail']}</a>.</font>"
+
+        );
+
+        exit;
+    }
+
+    mysqli_query($data['cid'], "SET NAMES 'utf8'");
+
+    return (bool)$data['cid'];
 }
 
 
 
-function newid(){
+function db_disconnect()
+{
 
-	global $data;
+    global $data;
 
-	return mysqli_insert_id($data['cid']);
-
-}
-
-
-
-function db_count($result){
-
-	return (int) mysqli_num_rows($result);
-
-}
-
-
-
-function db_rows($statement,$print=false) {
-
-	$result=array();
-
-	if($print) echo("-->{$statement}<--<br>");
-
-	$query=db_query($statement);
-
-	$count=db_count($query);
-
-	for($i=0; $i<$count; $i++){
-
-		$record=mysqli_fetch_array($query, MYSQLI_ASSOC);
-
-		foreach($record as $key=>$value)$result[$i][$key]=$value;
-
-	}
-
-	return $result;
-
-}
-
-###############################################################################
-
-function verify_email($email){
-
-	return !(bool)ereg("^.+@.+\\..+$", $email);
+    return (bool)mysqli_close($data['cid']);
 
 }
 
 
 
-function verify_username($username){
+function db_query($statement,$print=false)
+{
 
-	return !(bool)ereg("^[a-zA-Z0-9]+$", $username);
+    global $data;
+
+    if($print) { echo("-->{$statement}<--<br>");
+    }
+
+    return mysqli_query($data['cid'], $statement);
+}
+
+
+
+function newid()
+{
+
+    global $data;
+
+    return mysqli_insert_id($data['cid']);
 
 }
 
 
 
-function gencode(){
+function db_count($result)
+{
 
-	global $data;
-
-	list($usec, $sec)=explode(' ', microtime());
-
-	$rand=(float)$sec+((float)$usec*100000);
-
-	srand($rand);
-
-	if($data['TuringNumbers']){
-
-		return (string)rand(pow(10, $data['TuringSize']-1), pow(10, $data['TuringSize'])-1);
-
-	}else{
-
-		return strtoupper(substr(md5(rand()), rand(1, 26), $data['TuringSize']));
-
-	}
+    return (int) mysqli_num_rows($result);
 
 }
 
 
 
-function around($amount){
+function db_rows($statement,$print=false)
+{
 
-	return sprintf("%6.2f", $amount);
+    $result=array();
+
+    if($print) { echo("-->{$statement}<--<br>");
+    }
+
+    $query=db_query($statement);
+
+    $count=db_count($query);
+
+    for($i=0; $i<$count; $i++){
+
+        $record=mysqli_fetch_array($query, MYSQLI_ASSOC);
+
+        foreach($record as $key=>$value) { $result[$i][$key]=$value;
+        }
+
+    }
+
+    return $result;
+
+}
+
+// 
+
+function verify_email($email)
+{
+
+    return !(bool)preg_match("/^.+@.+\\..+$/", $email);
 
 }
 
 
 
-function encode($number, $size){
+function verify_username($username)
+{
 
-	$result='';
+    return !(bool)preg_match("/^[a-zA-Z0-9]+$/", $username);
+}
 
-	$length=strlen($number);
 
-	for($i=0;$i<$length-$size;$i++)$result.='X';
 
-	return $result.substr($number, $length-$size, $length);
+function gencode()
+{
+
+    global $data;
+
+    list($usec, $sec)=explode(' ', microtime());
+
+    $rand=(float)$sec+((float)$usec*100000);
+
+    srand($rand);
+
+    if($data['TuringNumbers']) {
+
+        return (string)rand(pow(10, $data['TuringSize']-1), pow(10, $data['TuringSize'])-1);
+
+    }else{
+
+        return strtoupper(substr(md5(rand()), rand(1, 26), $data['TuringSize']));
+
+    }
 
 }
 
 
 
-function is_changed($number){
+function around($amount)
+{
+
+    return sprintf("%6.2f", $amount);
+
+}
+
+
+
+function encode($number, $size)
+{
+
+    $result='';
+
+    $length=strlen($number);
+
+    for($i=0;$i<$length-$size;$i++) { $result.='X';
+    }
+
+    return $result.substr($number, $length-$size, $length);
+
+}
+
+
+
+function is_changed($number)
+{
 
     return (bool)ereg("^[0-9]+$", $number);
 
@@ -686,131 +724,149 @@ function is_changed($number){
 
 
 
-function is_number($text){
-	if (!is_changed($text)) { return true ; }
- 	return (bool)is_changed($text);
+function is_number($text)
+{
+    if (!is_changed($text)) { return true ; 
+    }
+    return (bool)is_changed($text);
 
 }
 
 
 
-function showselect($values, $current=null){
+function showselect($values, $current=null)
+{
 
-	$result='';
-	$exclute = array ('template.faq.htm','template.banners.htm') ;
-	foreach($values as $key=>$value){
+    $result='';
+    $exclute = array ('template.faq.htm','template.banners.htm') ;
+    foreach($values as $key=>$value){
 
-		$result.=
+        $result.=
 
-			"<option value=\"{$key}\"".
+        "<option value=\"{$key}\"".
 
-			($current!=null?($current==$key?' selected':''):'').
+        ($current!=null?($current==$key?' selected':''):'').
 
-			">{$value}</option>"
+        ">{$value}</option>"
 
-		;
+        ;
 
-	}
+    }
 
-	return $result;
-
-}
-
-
-
-function read_csv( $filename, $break) {
-
-	if ( $file=fopen($filename,"r") ) {
-
-		while ($content[]=fgetcsv($file,1024,$break));
-
-		fclose($file);
-
-		array_pop($content);
-
-		return $content;
-
-	}
+    return $result;
 
 }
 
-###############################################################################
-
-function prndate($date){
-
-	global $data;
-
-	if($date=='0000-00-00 00:00:00')return '---';
-	else return  date($data['DateFormat'], strtotime($date));
 
 
-}
-function smalldate($date){
+function read_csv( $filename, $break)
+{
 
-	global $data;
+    if ($file=fopen($filename, "r") ) {
 
-	if($date=='0000-00-00 00:00:00')return '---';
-	else return  date($data['SmallDateFormat'], strtotime($date));
+        while ($content[]=fgetcsv($file, 1024, $break));
 
+        fclose($file);
 
-}
-function prnintg($number){
+        array_pop($content);
 
-	return number_format($number, 0, '', ',');
+        return $content;
 
-}
-function prnsum($sum){
-
-	return (float)str_replace(",", "", $sum);
-
-}
-function prnsumm($summ){
-
-	global $data;
-
-	$summ=str_replace(",", ".", $summ);
-
-	return number_format(($summ>0?$summ:-$summ), $data['CurrSize'], '.', ',');
+    }
 
 }
 
-function prnsumm_two($summ){
+// 
 
-	global $data;
+function prndate($date)
+{
 
-	$summ=str_replace(",", "", $summ);
+    global $data;
 
-	$summn = $summ>0?$summ:-$summ;
+    if($date=='0000-00-00 00:00:00') { return '---';
+    } else { return  date($data['DateFormat'], strtotime($date));
+    }
 
-	return $summn;
+
+}
+function smalldate($date)
+{
+
+    global $data;
+
+    if($date=='0000-00-00 00:00:00') { return '---';
+    } else { return  date($data['SmallDateFormat'], strtotime($date));
+    }
+
+
+}
+function prnintg($number)
+{
+
+    return number_format($number, 0, '', ',');
+
+}
+function prnsum($sum)
+{
+
+    return (float)str_replace(",", "", $sum);
+
+}
+function prnsumm($summ)
+{
+
+    global $data;
+
+    $summ=str_replace(",", ".", $summ);
+
+    return number_format(($summ>0?$summ:-$summ), $data['CurrSize'], '.', ',');
 
 }
 
-function prnpays($summ, $splus=true){
+function prnsumm_two($summ)
+{
 
-	global $data;
+    global $data;
 
-	if($summ<0)$color='red';else $color='green';
+    $summ=str_replace(",", "", $summ);
 
-		return
-		"<font color={$color}>".
-		($summ>=0?($splus?'+':''):'-').prnsumm($summ)." ".$data['Currency'].
-		'</font>';
+    $summn = $summ>0?$summ:-$summ;
+
+    return $summn;
 
 }
 
-function showBalance($summ, $splus=true){
-	global $data;
-		return
-		($summ>=0?($splus?'+':''):'-').prnsumm($summ)." ".$data['Currency'];
+function prnpays($summ, $splus=true)
+{
+
+    global $data;
+
+    if($summ<0) { $color='red';
+    } else { $color='green';
+    }
+
+    return
+    "<font color={$color}>".
+    ($summ>=0?($splus?'+':''):'-').prnsumm($summ)." ".$data['Currency'].
+    '</font>';
+
 }
 
-function prnfees($summ){
-	return $summ!=0?prnpays($summ):'<font color="maroon">---</font>';
+function showBalance($summ, $splus=true)
+{
+    global $data;
+    return
+    ($summ>=0?($splus?'+':''):'-').prnsumm($summ)." ".$data['Currency'];
+}
+
+function prnfees($summ)
+{
+    return $summ!=0?prnpays($summ):'<font color="maroon">---</font>';
 }
 
 
-function prntext($text){
+function prntext($text)
+{
 
     $search = array ('@<script[^>]*?>.*?</script>@si', // Strip out javascript
 
@@ -840,7 +896,7 @@ function prntext($text){
 
 
 
-$replace = array ('',
+    $replace = array ('',
 
                  '',
 
@@ -868,370 +924,390 @@ $replace = array ('',
 
 
 
-return preg_replace($search, $replace, $text);
+    return preg_replace($search, $replace, $text);
 
 }
 
-function balance($summ){
+function balance($summ)
+{
 
-	return prnpays($summ, false);
+    return prnpays($summ, false);
 
 }
 
 
 
-function prnuser($uid){
+function prnuser($uid)
+{
 
-	// if($uid>0)return get_member_username($uid);
-  //
-	// else return 'System';
+    // if($uid>0)return get_member_username($uid);
+    //
+    // else return 'System';
 
-  global $data;
+    global $data;
 
-  $name = "";
+    $name = "";
 
-  if($uid > 0){
-    // /echo "uid = ".$uid."\r\n";
+    if($uid > 0) {
+        // /echo "uid = ".$uid."\r\n";
 
-    $result=db_rows(
+        $result=db_rows(
+            "SELECT type, company, fname, lname FROM `{$data['DbPrefix']}members`".
 
-      "SELECT type, company, fname, lname FROM `{$data['DbPrefix']}members`".
+            " WHERE `id`={$uid} LIMIT 1"
+        );
 
-      " WHERE `id`={$uid} LIMIT 1"
+        if($result[0]['type']==0) {
+
+            $name = $result[0]['fname']." ".$result[0]['lname'];
+            // echo "fname lname = ".$uid.$name."\r\n";
+        }elseif($result[0]['company']!="") {
+            $name = $result[0]['company'];
+            // echo "company = ".$uid.$name."\r\n";
+        }else{
+            $name = "Entreprise sans nom";
+            // echo "company = ".$uid.$name."\r\n";
+        }
+    }else{
+        $name = 'System';
+        // echo "System = ".$uid.$name."\r\n";
+    }
+
+    return $name;
+}
+
+
+
+
+function get_files_list($path)
+{
+
+    $result=array();
+
+    if(@file_exists($path)) {
+
+        $handle=@opendir($path);
+
+        while(($file=@readdir($handle))!==false){
+
+            if($file!='.'&&$file!='..') {
+
+                $x=strtolower(substr($file, -4));
+
+                if($x&&$x=='.jpg'||$x=='.gif'||$x=='.png') { $result[]="{$file}";
+                }
+
+            }
+
+        }
+
+    }
+
+    return $result;
+
+}
+
+
+
+function get_html_templates()
+{
+
+    global $data;
+
+    $result=array('0'=>'--');
+
+    if(@file_exists($data['Templates']."/langs/default")) {
+
+        $handle=@opendir($data['Templates']."/langs/default");
+
+        while(($file=@readdir($handle))!==false){
+            if($file!='.'&&$file!='..') {
+
+                $x=strtolower(substr($file, -4));
+
+                if($x&&$x=='.htm') {$result[$file]="{$file}";
+                }else{
+                     $handle_mem=@opendir($data['Templates']."/langs/default/".$file);
+                    while(($file_mem=@readdir($handle_mem))!==false){
+                        if($file_mem!='.'&&$file_mem!='..') {
+                            $x_mem=strtolower(substr($file_mem, -4));
+                            if($x_mem&&$x_mem=='.htm') { $result[$file."/".$file_mem]="{$file}/{$file_mem}";
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    return $result;
+
+}
+
+// 
+
+function send_email($key, $post)
+{
+
+    global $data;
+
+    $template=db_rows(
+        "SELECT `id`, `name`,`value` FROM `{$data['DbPrefix']}emails`".
+
+        " WHERE `key`='{$key}'"
     );
 
-    if($result[0]['type']==0){
+    $text=$template[0]['value'];
 
-      $name = $result[0]['fname']." ".$result[0]['lname'];
-      // echo "fname lname = ".$uid.$name."\r\n";
-    }elseif($result[0]['company']!=""){
-      $name = $result[0]['company'];
-      // echo "company = ".$uid.$name."\r\n";
-    }else{
-      $name = "Entreprise sans nom";
-      // echo "company = ".$uid.$name."\r\n";
+    $subject=$template[0]['name'];
+
+    $post['email-id']=$template[0]['id'];
+
+    if(isset($post['username'])) {
+
+        $text=str_replace("[username]", $post['username'], $text);
+
+        $text=str_replace("[usersite]", "{$data['Host']}/?rid={$post['username']}", $text);
+
     }
-  }else{
-    $name = 'System';
-    // echo "System = ".$uid.$name."\r\n";
-  }
 
-  return $name;
-}
+    // if password reset
+    if(isset($post['lost_email'])) {
+        $post['email'] = $post['lost_email'];
+    }
 
+    if(isset($post['password'])) { $text=str_replace("[password]", $post['password'], $text);
+    }
 
+    if(isset($post['emailadr'])) { $text=str_replace("[emailadr]", $post['emailadr'], $text);
+    }
 
+    if(isset($post['buyer'])) { $text=str_replace("[buyeradr]", $post['buyer'], $text);
+    }
 
-function get_files_list($path){
+    if(isset($post['seller'])) { $text=str_replace("[selleradr]", $post['seller'], $text);
+    }
 
-	$result=array();
+    if(isset($post['sellerusername'])) { $text=str_replace("[sellerusername]", $post['sellerusername'], $text);
+    }
 
-	if(@file_exists($path)){
+    if(isset($post['product'])) { $text=str_replace("[product]", $post['product'], $text);
+    }
 
-		$handle=@opendir($path);
+    if(isset($post['ccode'])) { $text=str_replace("[confcode]", $post['ccode'], $text);
+    }
 
-		while(($file=@readdir($handle))!==false){
+    if(isset($post['chash'])) { $text=str_replace("[confhash]", $post['chash'], $text);
+    }
 
-			if($file!='.'&&$file!='..'){
+    if(isset($post['comments'])) { $text=str_replace("[comments]", $post['comments'], $text);
 
-				$x=strtolower(substr($file, -4));
+    } else { $text=str_replace("[comments]", '---', $text);
+    }
 
-				if($x&&$x=='.jpg'||$x=='.gif'||$x=='.png')$result[]="{$file}";
+    if(isset($post['uid'])) { $text=str_replace("[uid]", $post['uid'], $text);
+    }
 
-			}
+    if(isset($post['nom'])) { $text=str_replace("[contact_nom]", $post['nom'], $text);
+    }
 
-		}
+    if(isset($post['mail'])) { $text=str_replace("[contact_email]", $post['mail'], $text);
+    }
 
-	}
+    if(isset($post['phone'])) { $text=str_replace("[contact_phone]", $post['phone'], $text);
+    }
 
-	return $result;
+    if(isset($post['msg'])) { $text=str_replace("[contact_msg]", $post['msg'], $text);
+    }
 
-}
+    $text=str_replace("[fullname]", isset($post['uid']) ? get_member_name($post['uid']) : 'null', $text);
 
+    $text=str_replace("[date]", date("d/m/Y H:i:s"), $text);
 
+    $text=str_replace("[emailpage]", $data['Host'] . "/verifer-email-edinars.html", $text);
 
-function get_html_templates(){
+    $text=str_replace("[email]", $post['email'] ?? 'null', $text);
 
-	global $data;
+    $text=str_replace("[sitename]", $data['SiteName'], $text);
 
-	$result=array('0'=>'--');
+    $text=str_replace("[hostname]", $data['Host'], $text);
 
-	if(@file_exists($data['Templates']."/langs/default")){
+    $text=str_replace("[singpage]", $data['Host']. "/ouvrir-un-compte-Edinars.html", $text);
 
-		$handle=@opendir($data['Templates']."/langs/default");
+    $text=str_replace("[confpage]", $data['Host']. "/activation.html", $text);
 
-		while(($file=@readdir($handle))!==false){
-			if($file!='.'&&$file!='..'){
+    $text=str_replace("[forgotpage]", $data['Host']. "/", $text);
 
-				$x=strtolower(substr($file, -4));
+    $text=str_replace("[lognpage]", $data['Host'], $text);
 
-				if($x&&$x=='.htm'){$result[$file]="{$file}";}else{
-					$handle_mem=@opendir($data['Templates']."/langs/default/".$file);
-					while(($file_mem=@readdir($handle_mem))!==false){
-					  if($file_mem!='.'&&$file_mem!='..'){
-					  	$x_mem=strtolower(substr($file_mem, -4));
-					  	if($x_mem&&$x_mem=='.htm')$result[$file."/".$file_mem]="{$file}/{$file_mem}";
-					  }
-					}
-				}
+    $text=str_replace("[montant_payment]", ( isset($post['montant']) ? prnsumm($post['montant']) : 'null' ).' '.$data['Currency'], $text);
 
-			}
+    $text=str_replace("[montant]",  ( isset($post['montant']) && isset($post['fees'])   ?  prnsumm($post['montant']- $post['fees'])  : 'null' ).' '.$data['Currency'], $text);
 
-		}
+    $text=str_replace("[trxid]", $post['trxid'] ?? 'null', $text);
 
-	}
+    $text=str_replace("[depot_info]", $post['depot_info'] ?? 'null', $text);
 
-	return $result;
+    $text=str_replace("[total]",  ( isset($post['total']) ? prnsumm($post['total']) : 'null').' '.$data['Currency'], $text);
 
-}
+    $text=str_replace("[error]", $post['error'] ?? 'null', $text);
 
-###############################################################################
+    $text=str_replace("[email-id]", $post['email-id'] ?? 'null', $text);
 
-function send_email($key, $post){
 
-	global $data;
+    switch  ($key) {
 
-	$template=db_rows(
-
-		"SELECT `id`, `name`,`value` FROM `{$data['DbPrefix']}emails`".
-
-		" WHERE `key`='{$key}'"
-
-	);
-
-	$text=$template[0]['value'];
-
-	$subject=$template[0]['name'];
-
-	$post['email-id']=$template[0]['id'];
-
-	if(isset($post['username'])){
-
-		$text=str_replace("[username]", $post['username'], $text);
-
-		$text=str_replace("[usersite]", "{$data['Host']}/?rid={$post['username']}", $text);
-
-	}
-
-	if(isset($post['password'])) $text=str_replace("[password]", $post['password'], $text);
-
-	if(isset($post['emailadr'])) $text=str_replace("[emailadr]", $post['emailadr'], $text);
-
-	if(isset($post['buyer'])) $text=str_replace("[buyeradr]", $post['buyer'], $text);
-
-	if(isset($post['seller'])) $text=str_replace("[selleradr]", $post['seller'], $text);
-
-	if(isset($post['sellerusername'])) $text=str_replace("[sellerusername]", $post['sellerusername'], $text);
-
-	if(isset($post['product'])) $text=str_replace("[product]", $post['product'], $text);
-
-	if(isset($post['ccode'])) $text=str_replace("[confcode]", $post['ccode'], $text);
-
-	if(isset($post['chash'])) $text=str_replace("[confhash]", $post['chash'], $text);
-
-	if(isset($post['comments'])) $text=str_replace("[comments]", $post['comments'], $text);
-
-	else $text=str_replace("[comments]", '---', $text);
-
-	if(isset($post['uid'])) $text=str_replace("[uid]", $post['uid'], $text);
-
-	if(isset($post['nom'])) $text=str_replace("[contact_nom]", $post['nom'], $text);
-
-	if(isset($post['mail'])) $text=str_replace("[contact_email]", $post['mail'], $text);
-
-	if(isset($post['phone'])) $text=str_replace("[contact_phone]", $post['phone'], $text);
-
-	if(isset($post['msg'])) $text=str_replace("[contact_msg]", $post['msg'], $text);
-
-	$text=str_replace("[fullname]", isset($post['uid']) ? get_member_name($post['uid']) : 'null', $text);
-
-	$text=str_replace("[date]", date("d/m/Y H:i:s") , $text);
-
-	$text=str_replace("[emailpage]", $data['Host'] . "/verifer-email-edinars.html", $text);
-
-	$text=str_replace("[email]", $post['email'] ?? 'null', $text);
-
-	$text=str_replace("[sitename]", $data['SiteName'], $text);
-
-	$text=str_replace("[hostname]", $data['Host'], $text);
-
-	$text=str_replace("[singpage]", $data['Host']. "/ouvrir-un-compte-Edinars.html", $text);
-
-	$text=str_replace("[confpage]", $data['Host']. "/activation.html", $text);
-
-	$text=str_replace("[forgotpage]", $data['Host']. "/", $text);
-
-	$text=str_replace("[lognpage]", $data['Host'] , $text);
-
-	$text=str_replace("[montant_payment]", ( isset($post['montant']) ? prnsumm($post['montant']) : 'null' ).' '.$data['Currency'], $text);
-
-	$text=str_replace("[montant]",  ( isset($post['montant']) && isset($post['fees'])   ?  prnsumm($post['montant']- $post['fees'])  : 'null' ).' '.$data['Currency'], $text);
-
-	$text=str_replace("[trxid]", $post['trxid'] ?? 'null', $text);
-
-	$text=str_replace("[depot_info]", $post['depot_info'] ?? 'null', $text);
-
-	$text=str_replace("[total]",  ( isset($post['total']) ? prnsumm($post['total']) : 'null').' '.$data['Currency'] , $text);
-
-	$text=str_replace("[error]", $post['error'] ?? 'null' , $text);
-
-	$text=str_replace("[email-id]", $post['email-id'] ?? 'null', $text);
-
-
-	switch  ($key) {
-
-		case 'DEPOT-PAYMENT-CCP-ADMIN' :
-				$header ="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-				$header .= "MIME-version: 1.0\n";
-				$header .= "Content-type: text/html; charset=utf-8\n";
-				//insert_sent_email ($post['email-id'],$data['CCP_email'],stripslashes($subject),htmlspecialchars($text,ENT_QUOTES) );
-				return @mail($data['CCP_email'], stripslashes($subject), stripslashes($text), $header);
-				break ;
-		case 'WITHDRAW-PAYMENT-ADMIN' :
-				$header.="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-				$header .= "MIME-version: 1.0\n";
-				$header .= "Content-type: text/html; charset=utf-8\n";
-				//insert_sent_email ($post['email-id'],$data['withdraw_email'],stripslashes($subject), htmlspecialchars( $text, ENT_QUOTES) );
-				return @mail($data['withdraw_email'], stripslashes($subject), stripslashes($text), $header);
-		case 'ERROR-EMAIL-ADMIN' :
-				$header.="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-				$header .= "MIME-version: 1.0\n";
-				$header .= "Content-type: text/html; charset=utf-8\n";
-				//insert_sent_email ($post['email-id'],$data['error_email'],stripslashes($subject),htmlspecialchars($text, ENT_QUOTES) ) ;
-				return @mail($data['error_email'], stripslashes($subject), stripslashes($text), $header);
-		}
-
-		$header="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
-		$header .= "MIME-version: 1.0\n";
-		$header .= "Content-type: text/html; charset=utf-8\n";
-		insert_sent_email ($post['email-id'],$post['email'],stripslashes($subject) ,htmlspecialchars($text, ENT_QUOTES) ) ;
-		return @mail($post['email'], stripslashes($subject), stripslashes($text), $header);
+    case 'DEPOT-PAYMENT-CCP-ADMIN' :
+        $header ="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
+        $header .= "MIME-version: 1.0\n";
+        $header .= "Content-type: text/html; charset=utf-8\n";
+        //insert_sent_email ($post['email-id'],$data['CCP_email'],stripslashes($subject),htmlspecialchars($text,ENT_QUOTES) );
+        return @mail($data['CCP_email'], stripslashes($subject), stripslashes($text), $header);
+                break ;
+    case 'WITHDRAW-PAYMENT-ADMIN' :
+        $header.="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
+        $header .= "MIME-version: 1.0\n";
+        $header .= "Content-type: text/html; charset=utf-8\n";
+        //insert_sent_email ($post['email-id'],$data['withdraw_email'],stripslashes($subject), htmlspecialchars( $text, ENT_QUOTES) );
+        return @mail($data['withdraw_email'], stripslashes($subject), stripslashes($text), $header);
+    case 'ERROR-EMAIL-ADMIN' :
+        $header.="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
+        $header .= "MIME-version: 1.0\n";
+        $header .= "Content-type: text/html; charset=utf-8\n";
+        //insert_sent_email ($post['email-id'],$data['error_email'],stripslashes($subject),htmlspecialchars($text, ENT_QUOTES) ) ;
+        return @mail($data['error_email'], stripslashes($subject), stripslashes($text), $header);
+    }
+
+    $header="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
+    $header .= "MIME-version: 1.0\n";
+    $header .= "Content-type: text/html; charset=utf-8\n";
+    insert_sent_email($post['email-id'], $post['email'], stripslashes($subject), htmlspecialchars($text, ENT_QUOTES));
+    return @mail($post['email'], stripslashes($subject), stripslashes($text), $header);
 
 }
 
-function send_mass_email($subject, $message, $active=-1){
+function send_mass_email($subject, $message, $active=-1)
+{
 
-	global $data;
+    global $data;
 
-	$header="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
+    $header="From: {$data['AdminEmail']}\nReturn-Path: {$data['AdminEmail']}\n";
 
-	$members=db_rows(
+    $members=db_rows(
+        "SELECT `username`,`email`,`fname`,`lname`".
 
-		"SELECT `username`,`email`,`fname`,`lname`".
+        " FROM `{$data['DbPrefix']}members`".
 
-		" FROM `{$data['DbPrefix']}members`".
+        ($active<0?'':" WHERE `active`={$active}")
+    );
 
-		($active<0?'':" WHERE `active`={$active}")
-
-	);
-
-	foreach($members as $value){
-		mail($value['email'], $subject, $message, $header);
-	}
+    foreach($members as $value){
+        mail($value['email'], $subject, $message, $header);
+    }
 
 }
 
-function insert_sent_email( $pin_id , $mail, $subject, $message){
+function insert_sent_email( $pin_id , $mail, $subject, $message)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
-		"INSERT INTO `{$data['DbPrefix']}email_sent`(".
-		"`email_id`, `email_address`,`email_subject`,`email_content`,`email_created_date` )VALUES(".
-		"'{$pin_id}','{$mail}','{$subject}','{$message}','".date("Y-m-d H:i:s")."')"
-	);
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}email_sent`(".
+        "`email_id`, `email_address`,`email_subject`,`email_content`,`email_created_date` )VALUES(".
+        "'{$pin_id}','{$mail}','{$subject}','{$message}','".date("Y-m-d H:i:s")."')"
+    );
 }
-###############################################################################
+// 
 
-function use_curl($href, $post=null){
+function use_curl($href, $post=null)
+{
 
-	$handle=curl_init();
+    $handle=curl_init();
 
-	curl_setopt($handle, CURLOPT_URL, $href);
+    curl_setopt($handle, CURLOPT_URL, $href);
 
-	if($post){
+    if($post) {
 
-		if($post){
+        if($post) {
 
-			curl_setopt($handle, CURLOPT_POST, 1);
+            curl_setopt($handle, CURLOPT_POST, 1);
 
-			curl_setopt($handle, CURLOPT_POSTFIELDS, $post);
+            curl_setopt($handle, CURLOPT_POSTFIELDS, $post);
 
-		}
+        }
 
-		curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
 
-		curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
-		curl_setopt($handle, CURLOPT_TIMEOUT, 90);
+        curl_setopt($handle, CURLOPT_TIMEOUT, 90);
 
-	}
+    }
 
-	$result=curl_exec($handle);
+    $result=curl_exec($handle);
 
-	curl_close($handle);
+    curl_close($handle);
 
-	return $result;
+    return $result;
 
 }
 
 
 
 
-###############################################################################
+// 
 
 // function is_user_available($username){
 //
-// 	global $data;
+//     global $data;
 //
-// 	$confirms=db_rows(
+//     $confirms=db_rows(
 //
-// 		"SELECT `id` FROM `{$data['DbPrefix']}confirms`".
+//         "SELECT `id` FROM `{$data['DbPrefix']}confirms`".
 //
-// 		" WHERE(`newuser`='{$username}') LIMIT 1"
+//         " WHERE(`newuser`='{$username}') LIMIT 1"
 //
-// 	);
+//     );
 //
-// 	$members=db_rows(
+//     $members=db_rows(
 //
-// 		"SELECT `id` FROM `{$data['DbPrefix']}members`".
+//         "SELECT `id` FROM `{$data['DbPrefix']}members`".
 //
-// 		" WHERE(`username`='{$username}') LIMIT 1"
+//         " WHERE(`username`='{$username}') LIMIT 1"
 //
-// 	);
+//     );
 //
-// 	return (bool)(!$confirms&&!$members);
+//     return (bool)(!$confirms&&!$members);
 //
 // }
 
 
 
-function is_mail_available($email){
+function is_mail_available($email)
+{
 
         global $data;
 
         $confirms=db_rows(
-
-                "SELECT `id` FROM `{$data['DbPrefix']}confirms`".
+            "SELECT `id` FROM `{$data['DbPrefix']}confirms`".
 
                 " WHERE(`newmail`='{$email}') LIMIT 1"
-
         );
 
         $members=db_rows(
-
-                "SELECT `id` FROM `{$data['DbPrefix']}members`".
+            "SELECT `id` FROM `{$data['DbPrefix']}members`".
 
                 " WHERE(`email`='{$email}') LIMIT 1"
-
         );
 
         $emails=db_rows(
-
-                "SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
+            "SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
 
                 " WHERE(`email`='{$email}') LIMIT 1"
-
         );
 
         return (bool)(!$confirms&&!$members&&!$emails);
@@ -1239,754 +1315,763 @@ function is_mail_available($email){
 
 
 
-function create_confirmation($newpass, $newques, $newansw, $newmail, $newtype, $sponsor=0){
+function create_confirmation($newpass, $newques, $newansw, $newmail, $newtype, $sponsor=0)
+{
 
-	global $data;
+    global $data;
 
-	$result=gencode();
+    $result=gencode();
 
-	$sponsor=($sponsor?$sponsor:0);
+    $sponsor=($sponsor?$sponsor:0);
 
-  $add_query = db_query( "INSERT INTO `{$data['DbPrefix']}confirms` ".
-        		"(`newpass`,`newmail`,`newtype`,`sponsor`,`confirm` )VALUES(".
-        		"'".strtoupper(md5($newpass.'|'.$result))."','{$newmail}','{$newtype}',{$sponsor},'{$result}')");
+    $add_query = db_query(
+        "INSERT INTO `{$data['DbPrefix']}confirms` ".
+                "(`newpass`,`newmail`,`newtype`,`sponsor`,`confirm` )VALUES(".
+                "'".strtoupper(md5($newpass.'|'.$result))."','{$newmail}','{$newtype}',{$sponsor},'{$result}')"
+    );
 
-  if($add_query){
-    $post['ccode'] = $result;
+    if($add_query) {
+        $post['ccode'] = $result;
 
-    $post['email'] = $newmail;
+        $post['email'] = $newmail;
 
-    $post['chash']=strtoupper(md5($post['ccode'].'|'.$post['email']));
+        $post['chash']=strtoupper(md5($post['ccode'].'|'.$post['email']));
 
-    $send_email = send_email('CONFIRM-TO-MEMBER', $post);
-    if($send_email){
-      return true;
-    }else {
-      return false;
+        $send_email = send_email('CONFIRM-TO-MEMBER', $post);
+        if($send_email) {
+            return true;
+        }else {
+            return false;
+        }
+    }else{
+        return false;
     }
-  }else{
-    return false;
-  }
 }
 
-function select_confirmation($ccode, $email, $chash=''){
+function select_confirmation($ccode, $email, $chash='')
+{
 
-	global $data;
+    global $data;
 
-	if(isset($chash) && !empty($chash)){
+    if(isset($chash) && !empty($chash)) {
 
-		$query="WHERE `newpass`='{$chash}'";
+        $query="WHERE `newpass`='{$chash}'";
 
-	}else{
+    }else{
 
-		$query="WHERE(`confirm`='{$ccode}' AND `newmail`='{$email}')";
+        $query="WHERE(`confirm`='{$ccode}' AND `newmail`='{$email}')";
 
-	}
+    }
 
-	$confirm = db_rows(
+    $confirm = db_rows(
+        "SELECT `id` FROM `{$data['DbPrefix']}confirms` {$query} LIMIT 1"
+    );
 
-		"SELECT `id` FROM `{$data['DbPrefix']}confirms` {$query} LIMIT 1"
-
-	);
-
-	return isset($confirm[0]) ? $confirm[0]['id'] : null;
+    return isset($confirm[0]) ? $confirm[0]['id'] : null;
 
 }
 
-function select_email_confirmation($ccode, $email, $chash=''){
+function select_email_confirmation($ccode, $email, $chash='')
+{
 
-	global $data;
+    global $data;
 
-	if(isset($chash)&&!empty($chash)){
+    if(isset($chash)&&!empty($chash)) {
 
-		$query="WHERE MD5(CONCAT(`confirm`,'|',`email`))='{$chash}'";
+        $query="WHERE MD5(CONCAT(`confirm`,'|',`email`))='{$chash}'";
 
-	}else{
+    }else{
 
-		$query="WHERE(`confirm`='{$ccode}' AND `email`='{$email}')";
+        $query="WHERE(`confirm`='{$ccode}' AND `email`='{$email}')";
 
-	}
+    }
 
-	$confirm=db_rows(
+    $confirm=db_rows(
+        "SELECT `id` FROM `{$data['DbPrefix']}member_emails` {$query} LIMIT 1"
+    );
 
-		"SELECT `id` FROM `{$data['DbPrefix']}member_emails` {$query} LIMIT 1"
-
-	);
-
-	return $confirm[0]['id'];
+    return $confirm[0]['id'];
 
 }
 
 
 // Functions Created by: Yacine Ait chalal
-function update_security_question($uid, $question, $answer, $notify=true){
+function update_security_question($uid, $question, $answer, $notify=true)
+{
 
-	global $data;
+    global $data;
 
-	$edit_security_question = db_query(
+    $edit_security_question = db_query(
+        "UPDATE `{$data['DbPrefix']}members` SET ".
 
-		"UPDATE `{$data['DbPrefix']}members` SET ".
+        "`question`='{$question}',`answer`='{$answer}'".
 
-		"`question`='{$question}',`answer`='{$answer}'".
+        " WHERE `id`={$uid}"
+    );
 
-		" WHERE `id`={$uid}"
+    if($notify) {
 
-	);
+        $post['email'] = get_member_email($uid);
+        $post['uid'] = $uid;
+        send_email('UPDATE-MEMBER-PROFILE', $post);
 
-	if($notify){
-
-		$post['email'] = get_member_email($uid);
-		$post['uid'] = $uid;
-		send_email('UPDATE-MEMBER-PROFILE', $post);
-
-	}
-	// ajoutre un audit
-	$mcheckinfo = "Modification des detail sur S&egravecurit&egrave acc&egraces";
-	audit(
+    }
+    // ajoutre un audit
+    $mcheckinfo = "Modification des detail sur S&egravecurit&egrave acc&egraces";
+    audit(
         'MODIFICATION DES DETAIL SUR S&EgraveCURIT&Egrace ACC&EgraveS',
         $mcheckinfo,
         'members',
         $uid,
         prnuser($uid)
-        );
+    );
 
-  return $edit_security_question;
+    return $edit_security_question;
 }
 
-function update_my_profile_empty($uid){
-  $info_user = get_member_info($uid);
+function update_my_profile_empty($uid)
+{
+    $info_user = get_member_info($uid);
 
-  // var_dump($info_user);
+    // var_dump($info_user);
 
-  if($info_user['type'] == 0){ //Particulier
-    if($info_user['fname'] && $info_user['address']){
-      $post_empty['empty'] = 0;
+    if($info_user['type'] == 0) { //Particulier
+        if($info_user['fname'] && $info_user['address']) {
+            $post_empty['empty'] = 0;
+        }
+    }else{
+        if($info_user['fname'] && $info_user['address'] && $info_user['company']) {
+            $post_empty['empty'] = 0;
+        }
     }
-  }else{
-    if($info_user['fname'] && $info_user['address'] && $info_user['company']){
-      $post_empty['empty'] = 0;
-    }
-  }
 
-  $edit_profile = update_my_profile($post_empty, $uid, false);
+    $edit_profile = update_my_profile($post_empty, $uid, false);
 
-  return $edit_profile;
+    return $edit_profile;
 }
 
-function update_my_profile($post, $uid, $notify=true){
-  global $data;
+function update_my_profile($post, $uid, $notify=true)
+{
+    global $data;
 
-  $profile = get_member_info($uid);
+    $profile = get_member_info($uid);
 
-  $sql = " UPDATE `{$data['DbPrefix']}members` SET ";
-  $sql .= " id = id ";
-  //$sql .= " `empty`= 0 ";
-  if(isset($post['sponsor'])) $sql .= " ,`sponsor`=".addslashes($post['sponsor'])." ";
-  if(isset($post['fname'])) $sql .= " ,`fname`='".addslashes($post['fname'])."' ";
-  if(isset($post['lname'])) $sql .= " ,`lname`='".addslashes($post['lname'])."' ";
-  if(isset($post['type'])){
-    if($post['type']=="") $post['type'] = 0;
-    $sql .= " , `type`='".addslashes($post['type'])."' ";
-  }
-  if(isset($post['phone'])) $sql .= " ,`phone`='".addslashes($post['phone'])."' ";
-  if(isset($post['fax'])) $sql .= " ,`fax`='".addslashes($post['fax'])."' ";
-  if(isset($post['mobile'])){
-
-    $sql .= " , `mobile`='".addslashes($post['mobile'])."', `confirm_mobile` = '0', confirm_mobile_code = '".generate_pin_code(6)."' ";
-  }
-  if(isset($post['confirm_mobile'])) $sql .= " , `confirm_mobile`='".addslashes($post['confirm_mobile'])."' ";
-  if(isset($post['address'])) $sql .= " , `address`='".addslashes($post['address'])."' ";
-  if(isset($post['city'])) $sql .= " , `city`='".addslashes($post['city'])."' ";
-  if(isset($post['postcode'])) $sql .= " , `postcode`='".addslashes($post['postcode'])."' ";
-  if(isset($post['wilaya'])) $sql .= " , `wilaya`='".addslashes($post['wilaya'])."' ";
-  if(isset($post['company'])) $sql .= " , `company`='".addslashes($post['company'])."' ";
-  if(isset($post['nrc'])) $sql .= " , `nrc`='".addslashes($post['nrc'])."' ";
-  if(isset($post['nnif'])) $sql .= " , `nnif`='".addslashes($post['nnif'])."' ";
-  if(isset($post['nart'])) $sql .= " , `nart`='".addslashes($post['nart'])."' ";
-  if(isset($post['nfis'])) $sql .= " , `nfis`='".addslashes($post['nfis'])."' ";
-  if(isset($post['empty'])) $sql .= " , `empty`='".addslashes($post['empty'])."' ";
-  // var_dump($post);
-  $sql .= " WHERE `id`={$uid} ";
-
-  // echo nl2br($sql);
-
-  $edit_profile = db_query($sql);
-
-  if($edit_profile){
-
-	$mcheckinfo  = '';
-
-	if(isset($post['fname']))
-    	$mcheckinfo .=" NOM : ".addslashes($post['fname'])." \n ";
-	if(isset($post['lname']))
-    	$mcheckinfo .=" PRENOM  : ".addslashes($post['lname'])." \n ";
-	if(isset($post['phone']))
-    	$mcheckinfo .=" TELEPHONE : ".addslashes($post['phone'])." \n";
-	if(isset($post['mobile']))
-   		$mcheckinfo .=" MOBILE    : ".addslashes($post['mobile'])." \n " ;
-	if(isset($post['fax']))
-    	$mcheckinfo .=" FAX : ".addslashes($post['fax']);
-
-    // ajoutre un audit
-    // audit(
-    //   'AJOUTER DES DETAIL SUR PROFILE',
-    //   $mcheckinfo,
-    //   'members',
-    //   $profile['id'],
-    //   prnuser($uid)
-    // );
-
-
-    if($notify){
-      $post['email'] = get_member_email($uid);
-      send_email('UPDATE-MEMBER-PROFILE', $post);
+    $sql = " UPDATE `{$data['DbPrefix']}members` SET ";
+    $sql .= " id = id ";
+    //$sql .= " `empty`= 0 ";
+    if(isset($post['sponsor'])) { $sql .= " ,`sponsor`=".addslashes($post['sponsor'])." ";
     }
-  }
+    if(isset($post['fname'])) { $sql .= " ,`fname`='".addslashes($post['fname'])."' ";
+    }
+    if(isset($post['lname'])) { $sql .= " ,`lname`='".addslashes($post['lname'])."' ";
+    }
+    if(isset($post['type'])) {
+        if($post['type']=="") { $post['type'] = 0;
+        }
+        $sql .= " , `type`='".addslashes($post['type'])."' ";
+    }
+    if(isset($post['phone'])) { $sql .= " ,`phone`='".addslashes($post['phone'])."' ";
+    }
+    if(isset($post['fax'])) { $sql .= " ,`fax`='".addslashes($post['fax'])."' ";
+    }
+    if(isset($post['mobile'])) {
 
-  return $edit_profile;
+        $sql .= " , `mobile`='".addslashes($post['mobile'])."', `confirm_mobile` = '0', confirm_mobile_code = '".generate_pin_code(6)."' ";
+    }
+    if(isset($post['confirm_mobile'])) { $sql .= " , `confirm_mobile`='".addslashes($post['confirm_mobile'])."' ";
+    }
+    if(isset($post['address'])) { $sql .= " , `address`='".addslashes($post['address'])."' ";
+    }
+    if(isset($post['city'])) { $sql .= " , `city`='".addslashes($post['city'])."' ";
+    }
+    if(isset($post['postcode'])) { $sql .= " , `postcode`='".addslashes($post['postcode'])."' ";
+    }
+    if(isset($post['wilaya'])) { $sql .= " , `wilaya`='".addslashes($post['wilaya'])."' ";
+    }
+    if(isset($post['company'])) { $sql .= " , `company`='".addslashes($post['company'])."' ";
+    }
+    if(isset($post['nrc'])) { $sql .= " , `nrc`='".addslashes($post['nrc'])."' ";
+    }
+    if(isset($post['nnif'])) { $sql .= " , `nnif`='".addslashes($post['nnif'])."' ";
+    }
+    if(isset($post['nart'])) { $sql .= " , `nart`='".addslashes($post['nart'])."' ";
+    }
+    if(isset($post['nfis'])) { $sql .= " , `nfis`='".addslashes($post['nfis'])."' ";
+    }
+    if(isset($post['empty'])) { $sql .= " , `empty`='".addslashes($post['empty'])."' ";
+    }
+    // var_dump($post);
+    $sql .= " WHERE `id`={$uid} ";
+
+    // echo nl2br($sql);
+
+    $edit_profile = db_query($sql);
+
+    if($edit_profile) {
+
+        $mcheckinfo  = '';
+
+        if(isset($post['fname'])) {
+            $mcheckinfo .=" NOM : ".addslashes($post['fname'])." \n ";
+        }
+        if(isset($post['lname'])) {
+            $mcheckinfo .=" PRENOM  : ".addslashes($post['lname'])." \n ";
+        }
+        if(isset($post['phone'])) {
+            $mcheckinfo .=" TELEPHONE : ".addslashes($post['phone'])." \n";
+        }
+        if(isset($post['mobile'])) {
+            $mcheckinfo .=" MOBILE    : ".addslashes($post['mobile'])." \n " ;
+        }
+        if(isset($post['fax'])) {
+            $mcheckinfo .=" FAX : ".addslashes($post['fax']);
+        }
+
+        // ajoutre un audit
+        // audit(
+        //   'AJOUTER DES DETAIL SUR PROFILE',
+        //   $mcheckinfo,
+        //   'members',
+        //   $profile['id'],
+        //   prnuser($uid)
+        // );
+
+
+        if($notify) {
+            $post['email'] = get_member_email($uid);
+            send_email('UPDATE-MEMBER-PROFILE', $post);
+        }
+    }
+
+    return $edit_profile;
 }
 
-function update_confirmation($cid){
+function update_confirmation($cid)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}confirms`".
 
-		"DELETE FROM `{$data['DbPrefix']}confirms`".
+        " WHERE(TO_DAYS(NOW())-TO_DAYS(`cdate`)>=2)"
+    );
 
-		" WHERE(TO_DAYS(NOW())-TO_DAYS(`cdate`)>=2)"
+    $confirm=db_rows("SELECT". "`id`,`newpass`,`newquestion`,`newanswer`,`newmail`,`newtype`,". ($data['UseExtRegForm']? "`newfname`,`newlname`,`newcompany`,`newregnum`,`newdrvnum`,`newaddress`,". "`newcity`,`newcountry`,`newstate`,`newzip`,`newphone`,`newfax`,":"" ). "`sponsor`". " ,`confirm` FROM `{$data['DbPrefix']}confirms` WHERE(`id`='{$cid}')");
 
-	);
+    $confirm=$confirm[0];
 
-	$confirm=db_rows("SELECT". "`id`,`newpass`,`newquestion`,`newanswer`,`newmail`,`newtype`,". ($data['UseExtRegForm']? "`newfname`,`newlname`,`newcompany`,`newregnum`,`newdrvnum`,`newaddress`,". "`newcity`,`newcountry`,`newstate`,`newzip`,`newphone`,`newfax`,":"" ). "`sponsor`". " ,`confirm` FROM `{$data['DbPrefix']}confirms` WHERE(`id`='{$cid}')");
+    foreach($confirm as $key=>$value){
 
-	$confirm=$confirm[0];
+        $confirm[$key] = @addslashes($value);
 
-	foreach($confirm as $key=>$value){
+    }
 
-		$confirm[$key] = @addslashes($value);
-
-	}
-
-  $pin_code = generate_pin_code(4);
+    $pin_code = generate_pin_code(4);
 
 
-	db_query(
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}members`(".
 
-		"INSERT INTO `{$data['DbPrefix']}members`(".
+        "`sponsor`,`mem_id`,`password`,`email`,`question`,`answer`,`type`,".
 
-		"`sponsor`,`mem_id`,`password`,`email`,`question`,`answer`,`type`,".
+        ($data['UseExtRegForm']?
 
-		($data['UseExtRegForm']?
+        "`fname`,`lname`,`company`,`regnum`,`drvnum`,`address`,".
 
-		"`fname`,`lname`,`company`,`regnum`,`drvnum`,`address`,".
+        "`city`,`country`,`state`,`zip`,`phone`,`fax`, `pin_code`,":''
 
-		"`city`,`country`,`state`,`zip`,`phone`,`fax`, `pin_code`,":''
+        ).
 
-      ).
+        "`active`,`empty`,`cdate`".
 
-      "`active`,`empty`,`cdate`".
+        ")VALUES(".
 
-		")VALUES(".
+        "{$confirm['sponsor']},'{$confirm['confirm']}','{$confirm['newpass']}','{$confirm['newmail']}',".
 
-		"{$confirm['sponsor']},'{$confirm['confirm']}','{$confirm['newpass']}','{$confirm['newmail']}',".
+        "'{$confirm['newquestion']}','{$confirm['newanswer']}','{$confirm['newtype']}',".
 
-		"'{$confirm['newquestion']}','{$confirm['newanswer']}','{$confirm['newtype']}',".
+        ($data['UseExtRegForm']?
 
-		($data['UseExtRegForm']?
+        "'{$confirm['newfname']}','{$confirm['newlname']}','{$confirm['newcompany']}',".
 
-		"'{$confirm['newfname']}','{$confirm['newlname']}','{$confirm['newcompany']}',".
+        "'{$confirm['newregnum']}','{$confirm['newdrvnum']}','{$confirm['newaddress']}',".
 
-      "'{$confirm['newregnum']}','{$confirm['newdrvnum']}','{$confirm['newaddress']}',".
+        "'{$confirm['newcity']}','{$confirm['newcountry']}','{$confirm['newstate']}',".
 
-      "'{$confirm['newcity']}','{$confirm['newcountry']}','{$confirm['newstate']}',".
+        "'{$confirm['newzip']}','{$confirm['newphone']}','{$confirm['newfax']}', '{$pin_code}'":''
 
-      "'{$confirm['newzip']}','{$confirm['newphone']}','{$confirm['newfax']}', '{$pin_code}'":''
+        ).
 
-      ).
+        "1,".($data['UseExtRegForm']?'0':'1').",'".date('Y-m-d H:i:s')."')"
+    );
 
-      "1,".($data['UseExtRegForm']?'0':'1').",'".date('Y-m-d H:i:s')."')"
+    $code=gencode();
 
-	);
+    $receiver=newid();
 
-	$code=gencode();
-
-	$receiver=newid();
-
-	db_query("INSERT INTO `{$data['DbPrefix']}member_emails`
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}member_emails`
 
 	(`owner`,`email`,`active`,`primary`) VALUES
 
 	('{$receiver}','{$confirm['newmail']}',1,1)
 
-	");
+	"
+    );
 
 
 
-	db_query(
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}confirms`".
 
-		"DELETE FROM `{$data['DbPrefix']}confirms`".
-
-		" WHERE(`id`={$confirm['id']})"
-
-	);
+        " WHERE(`id`={$confirm['id']})"
+    );
 
 
 
-	if($data['SignupPays']){
+    if($data['SignupPays']) {
 
-		transaction(
-			get_trx_id(),
-			-1,
-			$receiver,
-			$data['SignupBonus'],
-			0,
-			4,
-			2,
-			'Bonus d\'inscription'
+        transaction(
+            get_trx_id(),
+            -1,
+            $receiver,
+            $data['SignupBonus'],
+            0,
+            4,
+            2,
+            'Bonus d\'inscription'
+        );
 
-		);
+    }
 
-	}
+    $post['username'] = $confirm['newuser'] ?? '';
 
-	$post['username'] = $confirm['newuser'] ?? '';
+    $post['password'] = $confirm['newpass'];
 
-	$post['password'] = $confirm['newpass'];
+    $post['email']      = $confirm['newmail'];
 
-	$post['email']	  = $confirm['newmail'];
+    send_email('SIGNUP-TO-MEMBER', $post);
 
-	send_email('SIGNUP-TO-MEMBER', $post);
+    if($data['ReferralPays']) {
 
-	if($data['ReferralPays']){
+        $post['email']=get_member_email($confirm['sponsor']);
 
-		$post['email']=get_member_email($confirm['sponsor']);
+        send_email('DOWNLINE-CHANGE', $post);
 
-		send_email('DOWNLINE-CHANGE', $post);
+    }
 
-	}
+    $tmpays = get_unreg_member_pay($receiver, 'RECEIVER');
 
-	$tmpays = get_unreg_member_pay($receiver,'RECEIVER');
-
-	if(isset($tmpays[0])) update_unreg_member_pays($receiver);
+    if(isset($tmpays[0])) { update_unreg_member_pays($receiver);
+    }
 }
 
 
 
-function update_email_confirmation($eid){
+function update_email_confirmation($eid)
+{
 
         global $data;
 
         db_query(
-
-                "UPDATE `{$data['DbPrefix']}member_emails`".
+            "UPDATE `{$data['DbPrefix']}member_emails`".
 
                 " SET `confirm`='', `status`=2".
 
                 " WHERE `id`={$eid}"
-
         );
 
 }
 
 
 
-function get_members_count($active=0 ,$All=1){
+function get_members_count($active=0 ,$All=1)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT COUNT(`id`) AS `count`".
 
-		"SELECT COUNT(`id`) AS `count`".
+        " FROM `{$data['DbPrefix']}members`".
 
-		" FROM `{$data['DbPrefix']}members`".
+        //" WHERE  `active`={$active}".
+        ($All?" WHERE  `active`={$active}":'').
+        " LIMIT 1"
+    );
 
-		//" WHERE  `active`={$active}".
-		($All?" WHERE  `active`={$active}":'').
-		" LIMIT 1"
-
-	);
-
-	return $result[0]['count'];
-
-}
-
-
-
-function get_members_list($active=0, $start=0, $count=0, $online=false){
-
-	global $data;
-
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
-
-		($count?" LIMIT {$count}":''));
-
-	$members=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}members`".
-
-		" WHERE `active`={$active}".($online?' AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(`adate`)<1800)':'').
-
-		" ORDER BY `username` ASC{$limit}"
-
-	);
-
-
-
-	$result=array();
-
-	foreach($members as $key=>$value){
-
-		$result[$key]=$value;
-
-		$trans=db_rows(
-
-			"SELECT COUNT(`id`) AS `count`".
-
-			" FROM `{$data['DbPrefix']}transactions`".
-
-			" WHERE `sender`={$result[$key]['id']}".
-
-			" OR `receiver`={$result[$key]['id']} LIMIT 1"
-
-		);
-
-		$result[$key]['transactions']=$trans[0]['count'];
-
-		$result[$key]['candelete']=$trans[0]['count']<2;
-
-		$result[$key]['email']=get_member_email($result[$key]['id'],true,true);
-
-		if($result[$key]['sponsor']){
-
-			$result[$key]['sname']=
-
-				get_member_username($result[$key]['sponsor']).'<br>('.
-
-				get_member_email($result[$key]['sponsor'],true,true).')'
-
-			;
-
-		}else $result[$key]['sname']='N/A';
-
-	}
-
-	return $result;
+    return $result[0]['count'];
 
 }
 
 
 
-function get_members_count_where_pred($where_pred){
+function get_members_list($active=0, $start=0, $count=0, $online=false)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-		"SELECT COUNT(`id`) AS `count`".
+    ($count?" LIMIT {$count}":''));
 
-		" FROM `{$data['DbPrefix']}members`".
+    $members=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}members`".
 
-		" WHERE $where_pred ".
+        " WHERE `active`={$active}".($online?' AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(`adate`)<1800)':'').
 
-		" LIMIT 1"
+        " ORDER BY `username` ASC{$limit}"
+    );
 
-	);
 
-	return $result[0]['count'];
+
+    $result=array();
+
+    foreach($members as $key=>$value){
+
+        $result[$key]=$value;
+
+        $trans=db_rows(
+            "SELECT COUNT(`id`) AS `count`".
+
+            " FROM `{$data['DbPrefix']}transactions`".
+
+            " WHERE `sender`={$result[$key]['id']}".
+
+            " OR `receiver`={$result[$key]['id']} LIMIT 1"
+        );
+
+        $result[$key]['transactions']=$trans[0]['count'];
+
+        $result[$key]['candelete']=$trans[0]['count']<2;
+
+        $result[$key]['email']=get_member_email($result[$key]['id'], true, true);
+
+        if($result[$key]['sponsor']) {
+
+            $result[$key]['sname']=
+
+             get_member_username($result[$key]['sponsor']).'<br>('.
+
+             get_member_email($result[$key]['sponsor'], true, true).')'
+
+            ;
+
+        }else { $result[$key]['sname']='N/A';
+        }
+
+    }
+
+    return $result;
+
+}
+
+
+
+function get_members_count_where_pred($where_pred)
+{
+
+    global $data;
+
+    $result=db_rows(
+        "SELECT COUNT(`id`) AS `count`".
+
+        " FROM `{$data['DbPrefix']}members`".
+
+        " WHERE $where_pred ".
+
+        " LIMIT 1"
+    );
+
+    return $result[0]['count'];
 
 }
 
 
 
-function get_members_list_where_pred($start=0, $count=0, $where_pred){
+function get_members_list_where_pred($start=0, $count=0, $where_pred)
+{
 
-	global $data;
+    global $data;
 
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-		($count?" LIMIT {$count}":''));
+    ($count?" LIMIT {$count}":''));
 
-	$members=db_rows(
+    $members=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}members`".
 
-		"SELECT * FROM `{$data['DbPrefix']}members`".
+        " WHERE $where_pred ".
 
-		" WHERE $where_pred ".
+        " ORDER BY `id` ASC {$limit}"
+    );
 
-		" ORDER BY `id` ASC {$limit}"
+    $result=array();
 
-	);
+    foreach($members as $key=>$value){
 
-	$result=array();
+        $result[$key]=$value;
 
-	foreach($members as $key=>$value){
+        $trans=db_rows(
+            "SELECT COUNT(`id`) AS `count`".
 
-		$result[$key]=$value;
+            " FROM `{$data['DbPrefix']}transactions` ".
 
-		$trans=db_rows(
+            " WHERE `sender`={$result[$key]['id']}".
 
-			"SELECT COUNT(`id`) AS `count`".
+            " OR `receiver`={$result[$key]['id']} LIMIT 1"
+        );
 
-			" FROM `{$data['DbPrefix']}transactions` ".
+        $result[$key]['transactions']=$trans[0]['count'];
 
-			" WHERE `sender`={$result[$key]['id']}".
+        $result[$key]['candelete']=$trans[0]['count']==0;
 
-			" OR `receiver`={$result[$key]['id']} LIMIT 1"
+        if($result[$key]['sponsor']) {
 
-		);
+            $result[$key]['sname']=
 
-		$result[$key]['transactions']=$trans[0]['count'];
+             get_member_username($result[$key]['sponsor']).'<br>('.
 
-		$result[$key]['candelete']=$trans[0]['count']==0;
+             get_member_email($result[$key]['sponsor']).')'
 
-		if($result[$key]['sponsor']){
+            ;
 
-			$result[$key]['sname']=
+        }else { $result[$key]['sname']='N/A';
+        }
 
-				get_member_username($result[$key]['sponsor']).'<br>('.
+    }
 
-				get_member_email($result[$key]['sponsor']).')'
-
-			;
-
-		}else $result[$key]['sname']='N/A';
-
-	}
-
-	return $result;
+    return $result;
 
 }
 
 
-function get_member_id($username, $password='', $where=''){
+function get_member_id($username, $password='', $where='')
+{
 
-	global $data;
+    global $data;
 
-	$Crypt 			= db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `email`='{$username}' LIMIT 1");
-	$CrypPassword   = '';
+    $Crypt             = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `email`='{$username}' LIMIT 1");
+    $CrypPassword   = '';
 
-	if(!$Crypt){
-		$result=db_rows("SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails` WHERE `email`='{$username}' LIMIT 1");
+    if(!$Crypt) {
+        $result=db_rows("SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails` WHERE `email`='{$username}' LIMIT 1");
 
-		if($result){
+        if($result) {
 
-			$result = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `id`={$result[0]['id']} LIMIT 1" );
-			$CrypPassword =  strtoupper(md5($password.'|'.$result[0]['mem_id'])) ;
-		}
+            $result = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `id`={$result[0]['id']} LIMIT 1");
+            $CrypPassword =  strtoupper(md5($password.'|'.$result[0]['mem_id']));
+        }
 
-	}else{
+    }else{
 
-		$CrypPassword   = strtoupper(md5($password.'|'.$Crypt[0]['mem_id']) );
-	}
+        $CrypPassword   = strtoupper(md5($password.'|'.$Crypt[0]['mem_id']));
+    }
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `id` FROM `{$data['DbPrefix']}members`".
 
-		"SELECT `id` FROM `{$data['DbPrefix']}members`".
+        " WHERE  `email`='{$username}'".
 
-		" WHERE  `email`='{$username}'".
+        ($password?" AND `password`='{$CrypPassword}'":'').
 
-		($password?" AND `password`='{$CrypPassword}'":'').
+        ($where?" AND $where":'')." LIMIT 1"
+    );
 
-		($where?" AND $where":'')." LIMIT 1");
+    if(!$result) {
 
-        if(!$result){
+        $result=db_rows(
+            "SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails`".
 
-           $result=db_rows(
+            " WHERE `email`='{$username}' LIMIT 1"
+        );
 
-                "SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails`".
+        if($result&&($password||$where)) {
 
-                " WHERE `email`='{$username}' LIMIT 1"
+            $result=db_rows(
+                "SELECT `id` FROM `{$data['DbPrefix']}members`".
 
-           );
+                " WHERE `id`={$result[0]['id']}".
 
-           if($result&&($password||$where)){
+                ($password?" AND `password`='{$CrypPassword}'":'').
 
-              $result=db_rows(
-
-                 "SELECT `id` FROM `{$data['DbPrefix']}members`".
-
-                 " WHERE `id`={$result[0]['id']}".
-
-                 ($password?" AND `password`='{$CrypPassword}'":'').
-
-                 ($where?" AND $where":'')." LIMIT 1"
-
-              );
-
-           }
+                ($where?" AND $where":'')." LIMIT 1"
+            );
 
         }
+
+    }
 
         return isset($result[0])  ? $result[0]['id'] : null;
 }
 //*****************************************************//
 function insert_member_id_session($member_id)
 {
-	global $data;
-  $result=db_query( "INSERT INTO `{$data['DbPrefix']}members_sessions`
+    global $data;
+    $result=db_query(
+        "INSERT INTO `{$data['DbPrefix']}members_sessions`
                   (`member_session_id`, `member_id`, `login_date`,`last_activity`)
-                  VALUES (NULL, '{$member_id}', NOW(),NOW() )");
+                  VALUES (NULL, '{$member_id}', NOW(),NOW() )"
+    );
 
-  $newid = newid();
-  $result_md5=db_rows("SELECT MD5 (CONCAT(member_id,member_session_id)) as access_token
+    $newid = newid();
+    $result_md5=db_rows(
+        "SELECT MD5 (CONCAT(member_id,member_session_id)) as access_token
                         FROM `{$data['DbPrefix']}members_sessions`
                         WHERE member_session_id = '".$newid."'
                         ORDER BY `{$data['DbPrefix']}members_sessions`.member_session_id DESC
-                        LIMIT 1");
+                        LIMIT 1"
+    );
 
-  return $result_md5[0]['access_token'];
+    return $result_md5[0]['access_token'];
 }
 //****************************************************//
 
-function update_member_forgot_password($email, $password){
+function update_member_forgot_password($email, $password)
+{
 
-	global $data;
+    global $data;
 
-	$forgotEmail = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `email`='{$email}' LIMIT 1");
+    $forgotEmail = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `email`='{$email}' LIMIT 1");
 
-	if(!$forgotEmail){
-		$result=db_rows("SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails` WHERE `email`='{$email}' LIMIT 1");
-		if($result){
-              $result = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `id`={$result[0]['id']} LIMIT 1" );
-              $CryptPassword =  strtoupper(md5($password.'|'.$result[0]['mem_id'])) ;
-			}
-	}
-	else {
-		$CryptPassword =  strtoupper(md5($password.'|'.$forgotEmail[0]['mem_id']) ) ;
-	}
- 	 if($CryptPassword){
-			db_query(
-				"UPDATE `{$data['DbPrefix']}members` SET `password`='{$CryptPassword}' WHERE `mem_id`={$forgotEmail[0]['mem_id']}"
-			);
-	}
+    if(!$forgotEmail) {
+        $result=db_rows("SELECT `owner` as `id` FROM `{$data['DbPrefix']}member_emails` WHERE `email`='{$email}' LIMIT 1");
+        if($result) {
+              $result = db_rows("SELECT `mem_id` FROM `{$data['DbPrefix']}members` WHERE `id`={$result[0]['id']} LIMIT 1");
+              $CryptPassword =  strtoupper(md5($password.'|'.$result[0]['mem_id']));
+        }
+    }
+    else {
+        $CryptPassword =  strtoupper(md5($password.'|'.$forgotEmail[0]['mem_id']));
+    }
+    if($CryptPassword) {
+        db_query(
+            "UPDATE `{$data['DbPrefix']}members` SET `password`='{$CryptPassword}' WHERE `mem_id`={$forgotEmail[0]['mem_id']}"
+        );
+    }
 }
 
-function get_member_logo($username){
+function get_member_logo($username)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `logo` FROM `{$data['DbPrefix']}members`".
 
-		"SELECT `logo` FROM `{$data['DbPrefix']}members`".
-
-		" WHERE (`username`='{$username}') LIMIT 1");
+        " WHERE (`username`='{$username}') LIMIT 1"
+    );
 
         return $result[0]['logo'];
 
 }
 
-function get_member_email($uid, $primary=false, $confirmed=true){
+function get_member_email($uid, $primary=false, $confirmed=true)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
 
-		"SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
+        " WHERE `owner`={$uid}".
 
-		" WHERE `owner`={$uid}".
+        ($primary?" AND `primary`='{$primary}'":'').
 
-		($primary?" AND `primary`='{$primary}'":'').
+        ($confirmed?" AND `active`='{$confirmed}'":'').
 
-		($confirmed?" AND `active`='{$confirmed}'":'').
+        " ORDER BY `primary` DESC"
+    );
 
-		" ORDER BY `primary` DESC"
-
-
-
-	);
-
-	return $result[0]['email'];
+    return $result[0]['email'];
 
 }
-function get_member_email_by_username($username){
+function get_member_email_by_username($username)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `email` FROM `{$data['DbPrefix']}members`".
 
-		"SELECT `email` FROM `{$data['DbPrefix']}members`".
+        " WHERE `username`= '".$username."' "
+    );
 
-		" WHERE `username`= '".$username."' "
-	);
-
-	return $result[0]['email'];
+    return $result[0]['email'];
 
 }
 
 
 
-function count_member_emails($uid, $primary=false, $confirmed=true) {
+function count_member_emails($uid, $primary=false, $confirmed=true)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT COUNT(`email`) AS `count`".
 
-		"SELECT COUNT(`email`) AS `count`".
+        " FROM `{$data['DbPrefix']}member_emails`".
 
-		" FROM `{$data['DbPrefix']}member_emails`".
+        " WHERE `owner`={$uid}".
 
-		" WHERE `owner`={$uid}".
+        ($primary?" AND `primary`='{$primary}'":'').
 
-		($primary?" AND `primary`='{$primary}'":'').
+        ($confirmed?" AND `active`='{$confirmed}'":'').
 
-		($confirmed?" AND `active`='{$confirmed}'":'').
+        " LIMIT 1"
+    );
 
-		" LIMIT 1"
-
-	);
-
-	return $result[0]['count'];
-
-}
-
-
-
-function get_email_details($uid, $primary=false, $confirmed=true){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}member_emails`".
-
-		" WHERE `owner`={$uid}".
-
-		($primary?" AND `primary`='{$primary}'":'').
-
-		($confirmed?" AND `active`='{$confirmed}'":'')
-
-	);
-
-	return $result;
+    return $result[0]['count'];
 
 }
 
 
 
-function prnmemberemails($uid) {
+function get_email_details($uid, $primary=false, $confirmed=true)
+{
 
-	global $data;
+    global $data;
 
-	$str_add="";
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}member_emails`".
 
-	$result=db_rows(
+        " WHERE `owner`={$uid}".
 
-		"SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
+        ($primary?" AND `primary`='{$primary}'":'').
 
-		" WHERE `owner`={$uid} AND `active`='1'".
+        ($confirmed?" AND `active`='{$confirmed}'":'')
+    );
 
-		" ORDER BY `primary` DESC"
+    return $result;
+
+}
 
 
 
-	);
+function prnmemberemails($uid)
+{
 
-	foreach($result as $key=>$value) {
+    global $data;
 
-		$str_add .=  $result[$key]['email']."<br>";
+    $str_add="";
 
-	}
+    $result=db_rows(
+        "SELECT `email` FROM `{$data['DbPrefix']}member_emails`".
 
-	return $str_add;
+        " WHERE `owner`={$uid} AND `active`='1'".
+
+        " ORDER BY `primary` DESC"
+    );
+
+    foreach($result as $key=>$value) {
+
+        $str_add .=  $result[$key]['email']."<br>";
+
+    }
+
+    return $str_add;
 
 }
 
@@ -1996,209 +2081,221 @@ function prnmemberemails($uid) {
 
 
 
-function add_email($uid,$email){
+function add_email($uid,$email)
+{
 
-	global $data;
+    global $data;
 
-	$max_email=$data['maxemails'];
+    $max_email=$data['maxemails'];
 
-	$nb_emails=count_member_emails($uid,false,false);
+    $nb_emails=count_member_emails($uid, false, false);
 
-	if($nb_emails >= $max_email) return TOO_MANY_EMAILS;
+    if($nb_emails >= $max_email) { return TOO_MANY_EMAILS;
 
-	elseif(verify_email($email)) return INVALID_EMAIL_ADDRESS;
+    } elseif(verify_email($email)) { return INVALID_EMAIL_ADDRESS;
 
-	elseif(email_exists($email)) return EMAIL_EXISTS;
+    } elseif(email_exists($email)) { return EMAIL_EXISTS;
 
-	else {
+    } else {
 
-		$verifcode=gencode($email);
-
-
-
-		$result=db_query(
-
-			"INSERT INTO `{$data['DbPrefix']}member_emails`".
-
-			"(`owner`,`email`,`active`,`primary`,`verifcode`) VALUES ".
-
-			"($uid,'{$email}',0,0,'{$verifcode}')"
-
-		);
-
-		if (!$result) return DB_ERROR;
-
-		$info=get_member_info($uid);
-
-		$post['email']=$email;
-
-		$post['fullname']=get_member_name($uid);
-
-		$post['ccode']=$verifcode;
-
-		$post['uid']=$uid;
-
-		$post['emailpage'];
-
-		send_email('CONFIRM-NEW-EMAIL',$post);
-
-		return SUCCESS;
-
-	}
-
-}
+        $verifcode=gencode($email);
 
 
 
-function activate_email($uid, $verifcode){
+        $result=db_query(
+            "INSERT INTO `{$data['DbPrefix']}member_emails`".
 
-	global $data;
+            "(`owner`,`email`,`active`,`primary`,`verifcode`) VALUES ".
 
-	$confirm=db_rows(
+            "($uid,'{$email}',0,0,'{$verifcode}')"
+        );
 
-		"SELECT * FROM `{$data['DbPrefix']}member_emails` WHERE `owner`='$uid' AND `verifcode`='$verifcode' AND `active`=0");
+        if (!$result) { return DB_ERROR;
+        }
 
-	if (!isset($confirm[0])) return CONFIRMATION_NOT_FOUND;
+        $info=get_member_info($uid);
 
-	db_query("UPDATE `{$data['DbPrefix']}member_emails` SET `active`=1 WHERE `owner`={$uid} AND `verifcode`='{$verifcode}'");
+        $post['email']=$email;
 
+        $post['fullname']=get_member_name($uid);
 
+        $post['ccode']=$verifcode;
 
-	$info=get_member_info($uid);
+        $post['uid']=$uid;
 
-	$post['email']=$confirm[0]['email'];
+        $post['emailpage'];
 
-	$post['fullname']=get_member_name($uid);
+        send_email('CONFIRM-NEW-EMAIL', $post);
 
-	send_email('NEW-EMAIL-ACTIVATED',$post);
+        return SUCCESS;
 
-	return SUCCESS;
+    }
 
 }
 
 
 
-function make_email_prim($uid, $email){
+function activate_email($uid, $verifcode)
+{
 
-	global $data;
+    global $data;
 
-	if (verify_email($email)) return INVALID_EMAIL_ADDRESS;
+    $confirm=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}member_emails` WHERE `owner`='$uid' AND `verifcode`='$verifcode' AND `active`=0"
+    );
 
-	$emails=get_email_details($uid,false,false);
+    if (!isset($confirm[0])) { return CONFIRMATION_NOT_FOUND;
+    }
 
-	$oldprim=get_member_email($uid,true);
+    db_query("UPDATE `{$data['DbPrefix']}member_emails` SET `active`=1 WHERE `owner`={$uid} AND `verifcode`='{$verifcode}'");
 
-	foreach ($emails as $addr)
 
-		if($addr['email']==$email && $addr['primary']) return ALREADY_PRIMARY;
 
-		elseif($addr['email']==$email && !$addr['active']) return EMAIL_NOT_ACTIVE;
+    $info=get_member_info($uid);
 
-		elseif($addr['email']==$email){
+    $post['email']=$confirm[0]['email'];
 
-			/* un-prim old, make prim new*/
+    $post['fullname']=get_member_name($uid);
 
-			db_query("UPDATE {$data['DbPrefix']}member_emails SET `primary`=1 WHERE `owner`='{$uid}' AND `email`='{$email}'");
+    send_email('NEW-EMAIL-ACTIVATED', $post);
 
-			db_query("UPDATE {$data['DbPrefix']}member_emails SET `primary`=0 WHERE `owner`='{$uid}' AND `email`='{$oldprim}'");
-
-			db_query("UPDATE {$data['DbPrefix']}members SET `email`='{$email}' WHERE `id`='{$uid}'");
-
-			return SUCCESS;
-
-		}
-
-	return EMAIL_NOT_FOUND;
+    return SUCCESS;
 
 }
 
 
 
-function get_email_detail($email, $type=ALL){
+function make_email_prim($uid, $email)
+{
 
-	global $data;
+    global $data;
 
-	if ($type==CONFIRMED) $result=db_rows(
+    if (verify_email($email)) { return INVALID_EMAIL_ADDRESS;
+    }
 
-		"SELECT * FROM {$data['DbPrefix']}member_emails WHERE `email`='$email' AND `active`=1");
+    $emails=get_email_details($uid, false, false);
 
-	else $result=db_rows(
+    $oldprim=get_member_email($uid, true);
 
-		"SELECT * FROM {$data['DbPrefix']}member_emails WHERE `email`='$email'");
+    foreach ($emails as $addr) {
 
-	return $result[0];
+        if($addr['email']==$email && $addr['primary']) { return ALREADY_PRIMARY;
 
-}
+        } elseif($addr['email']==$email && !$addr['active']) { return EMAIL_NOT_ACTIVE;
 
+        } elseif($addr['email']==$email) {
 
+            /* un-prim old, make prim new*/
 
-function delete_member_email($uid, $email){
+            db_query("UPDATE {$data['DbPrefix']}member_emails SET `primary`=1 WHERE `owner`='{$uid}' AND `email`='{$email}'");
 
-	global $data;
+            db_query("UPDATE {$data['DbPrefix']}member_emails SET `primary`=0 WHERE `owner`='{$uid}' AND `email`='{$oldprim}'");
 
-	if(verify_email($email)) return INVALID_EMAIL_ADDRESS;
+            db_query("UPDATE {$data['DbPrefix']}members SET `email`='{$email}' WHERE `id`='{$uid}'");
 
-	$todel=get_email_detail($email);
+            return SUCCESS;
 
-	if(!$todel) return EMAIL_NOT_FOUND;
+        }
+    }
 
-	elseif($todel['primary']) return CANNOT_DELETE_PRIMARY;
-
-
-
-	db_query("DELETE FROM {$data['DbPrefix']}member_emails WHERE owner='{$uid}' AND `email`='{$email}'");
-
-	return SUCCESS;
-
-}
-
-
-
-function email_exists ($email){
-
-	global $data;
-
-	$result=db_rows("SELECT owner FROM {$data['DbPrefix']}members_emails WHERE email='{$email}'");
-
-	return (bool)$result['0'];
+    return EMAIL_NOT_FOUND;
 
 }
 
 
 
-function get_user_id($unoremail){
+function get_email_detail($email, $type=ALL)
+{
 
-	global $data;
+    global $data;
 
-	if(verify_email($unoremail)){
+    if ($type==CONFIRMED) { $result=db_rows(
+        "SELECT * FROM {$data['DbPrefix']}member_emails WHERE `email`='$email' AND `active`=1"
+        );
 
-	// here we know its the username
+    } else { $result=db_rows(
+        "SELECT * FROM {$data['DbPrefix']}member_emails WHERE `email`='$email'"
+    );
+    }
 
-		$result=db_rows(
+    return $result[0];
 
-			"SELECT `id` FROM `{$data['DbPrefix']}members`".
+}
 
-			" WHERE (`username`='{$unoremail}') AND `active`=1 LIMIT 1");
 
-		return $result[0]['id'];
 
-	} else {
+function delete_member_email($uid, $email)
+{
 
-	//... here the email address
+    global $data;
 
-		$result=db_rows(
+    if(verify_email($email)) { return INVALID_EMAIL_ADDRESS;
+    }
 
-			"SELECT `owner` FROM `{$data['DbPrefix']}member_emails` e, ".
+    $todel=get_email_detail($email);
 
-			"`{$data['DbPrefix']}members` m".
+    if(!$todel) { return EMAIL_NOT_FOUND;
 
-			" WHERE (e.`email`='{$unoremail}' AND m.`active`=1)".
+    } elseif($todel['primary']) { return CANNOT_DELETE_PRIMARY;
+    }
 
-			" LIMIT 1");
 
-		return $result[0]['owner'];
 
-	}
+    db_query("DELETE FROM {$data['DbPrefix']}member_emails WHERE owner='{$uid}' AND `email`='{$email}'");
+
+    return SUCCESS;
+
+}
+
+
+
+function email_exists($email)
+{
+
+    global $data;
+
+    $result=db_rows("SELECT owner FROM {$data['DbPrefix']}members_emails WHERE email='{$email}'");
+
+    return (bool)$result['0'];
+
+}
+
+
+
+function get_user_id($unoremail)
+{
+
+    global $data;
+
+    if(verify_email($unoremail)) {
+
+        // here we know its the username
+
+        $result=db_rows(
+            "SELECT `id` FROM `{$data['DbPrefix']}members`".
+
+            " WHERE (`username`='{$unoremail}') AND `active`=1 LIMIT 1"
+        );
+
+        return $result[0]['id'];
+
+    } else {
+
+        //... here the email address
+
+        $result=db_rows(
+            "SELECT `owner` FROM `{$data['DbPrefix']}member_emails` e, ".
+
+            "`{$data['DbPrefix']}members` m".
+
+            " WHERE (e.`email`='{$unoremail}' AND m.`active`=1)".
+
+            " LIMIT 1"
+        );
+
+        return $result[0]['owner'];
+
+    }
 
 }
 
@@ -2210,484 +2307,498 @@ function get_user_id($unoremail){
 
 
 
-function get_sponsor_id($uid){
+function get_sponsor_id($uid)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `sponsor` FROM `{$data['DbPrefix']}members`".
 
-		"SELECT `sponsor` FROM `{$data['DbPrefix']}members`".
+        " WHERE `id`={$uid} LIMIT 1"
+    );
 
-		" WHERE `id`={$uid} LIMIT 1"
-
-	);
-
-	return $result[0]['sponsor'];
-
-}
-
-
-
-function get_sponsors($uid){
-
-	global $data;
-
-	$members=db_rows(
-
-		"SELECT `id`,`email`".
-
-		" FROM `{$data['DbPrefix']}members`".
-
-		($uid?" WHERE `id`<>{$uid} AND `sponsor`<>{$uid}":'')
-
-	);
-
-	$result=array('--');
-
-	foreach($members as $value)$result[$value['id']]="{$value['username']} ({$value['email']})";
-
-	return $result;
+    return $result[0]['sponsor'];
 
 }
 
-function get_member_username_hashkey($uid){
 
-	global $data;
 
-	if($uid<0)return 'System';
+function get_sponsors($uid)
+{
 
-	$result=db_rows(
+    global $data;
 
-		"SELECT `username` ,`mem_id` FROM `{$data['DbPrefix']}members`".
+    $members=db_rows(
+        "SELECT `id`,`email`".
 
-		" WHERE `id`={$uid} LIMIT 1");
+        " FROM `{$data['DbPrefix']}members`".
 
-		$PerHashKey = encryptPerHashKey($result[0]['mem_id'] ,$result[0]['username']) ;
+        ($uid?" WHERE `id`<>{$uid} AND `sponsor`<>{$uid}":'')
+    );
 
-	return  $PerHashKey ;
+    $result=array('--');
 
-}
+    foreach($members as $value) { $result[$value['id']]="{$value['username']} ({$value['email']})";
+    }
 
-function get_member_username($uid){
-
-	global $data;
-
-	if($uid<0)return 'System';
-
-	$result=db_rows(
-
-		"SELECT `username` FROM `{$data['DbPrefix']}members`".
-
-		" WHERE `id`={$uid} LIMIT 1");
-
-	return $result[0]['username'];
+    return $result;
 
 }
 
-function get_member_username_pincode($uid){
+function get_member_username_hashkey($uid)
+{
 
-	global $data;
+    global $data;
 
-	if($uid<0) return 'System';
+    if($uid<0) { return 'System';
+    }
 
-  $sql = "SELECT `mem_id` FROM `{$data['DbPrefix']}members`".
+    $result=db_rows(
+        "SELECT `username` ,`mem_id` FROM `{$data['DbPrefix']}members`".
+
+        " WHERE `id`={$uid} LIMIT 1"
+    );
+
+    $PerHashKey = encryptPerHashKey($result[0]['mem_id'], $result[0]['username']);
+
+    return  $PerHashKey ;
+
+}
+
+function get_member_username($uid)
+{
+
+    global $data;
+
+    if($uid<0) { return 'System';
+    }
+
+    $result=db_rows(
+        "SELECT `username` FROM `{$data['DbPrefix']}members`".
+
+        " WHERE `id`={$uid} LIMIT 1"
+    );
+
+    return $result[0]['username'];
+
+}
+
+function get_member_username_pincode($uid)
+{
+
+    global $data;
+
+    if($uid<0) { return 'System';
+    }
+
+    $sql = "SELECT `mem_id` FROM `{$data['DbPrefix']}members`".
           " WHERE `id`={$uid} LIMIT 1";
-  //echo $sql;
-  $result = db_rows($sql);
+    //echo $sql;
+    $result = db_rows($sql);
 
-	return $result[0]['mem_id'];
+    return $result[0]['mem_id'];
 
 }
 
 
-function get_member_name($uid) {
+function get_member_name($uid)
+{
 
-	global $data;
+    global $data;
 
-	if($uid < 0 ) return 'system';
+    if($uid < 0 ) { return 'system';
+    }
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `fname`,`lname` FROM `{$data['DbPrefix']}members`".
 
-		"SELECT `fname`,`lname` FROM `{$data['DbPrefix']}members`".
+        " WHERE `id`={$uid} LIMIT 1"
+    );
 
-		" WHERE `id`={$uid} LIMIT 1");
-
-	return ucfirst($result[0]['fname'])." ".ucfirst($result[0]['lname']);
+    return ucfirst($result[0]['fname'])." ".ucfirst($result[0]['lname']);
 }
 
 
 
-function get_member_info($uid){
+function get_member_info($uid)
+{
 
         global $data;
 
         $result=db_rows(
+            "SELECT * FROM `{$data['DbPrefix']}members`".
 
-                "SELECT * FROM `{$data['DbPrefix']}members`".
-
-                " WHERE `id`={$uid} LIMIT 1");
+            " WHERE `id`={$uid} LIMIT 1"
+        );
 
         $result[0]['emails']=db_rows(
+            "SELECT * FROM `{$data['DbPrefix']}member_emails`".
 
-                "SELECT * FROM `{$data['DbPrefix']}member_emails`".
-
-                " WHERE `owner`={$uid} AND `email`<>'{$result[0]['email']}'");
+            " WHERE `owner`={$uid} AND `email`<>'{$result[0]['email']}'"
+        );
 
         return $result[0];
 
 }
-function get_member_info_by_mem_id($mem_id){
+function get_member_info_by_mem_id($mem_id)
+{
 
       global $data;
 
-      $result=db_rows(
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}members`".
 
-              "SELECT * FROM `{$data['DbPrefix']}members`".
+        " WHERE `mem_id`={$mem_id} LIMIT 1"
+    );
 
-              " WHERE `mem_id`={$mem_id} LIMIT 1");
+    $result[0]['emails']=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}member_emails`".
 
-      $result[0]['emails']=db_rows(
-
-              "SELECT * FROM `{$data['DbPrefix']}member_emails`".
-
-              " WHERE `owner`='".$result[0]['id']."' AND `email`<>'{$result[0]['email']}'");
+        " WHERE `owner`='".$result[0]['id']."' AND `email`<>'{$result[0]['email']}'"
+    );
 
       return $result[0];
 }
 
-function get_member_info_by_mobile_code($mobile, $code){
+function get_member_info_by_mobile_code($mobile, $code)
+{
 
       global $data;
 
-      $result=db_rows(
-
-              "SELECT * FROM `{$data['DbPrefix']}members`".
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}members`".
 
               " WHERE REPLACE(mobile, ' ', '') = '{$mobile}'".
               " AND confirm_mobile_code = '{$code}' ".
-              " LIMIT 1");
+        " LIMIT 1"
+    );
 
-      $result[0]['emails']=db_rows(
+    $result[0]['emails']=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}member_emails`".
 
-              "SELECT * FROM `{$data['DbPrefix']}member_emails`".
-
-              " WHERE `owner`='".$result[0]['id']."' AND `email`<>'{$result[0]['email']}'");
+        " WHERE `owner`='".$result[0]['id']."' AND `email`<>'{$result[0]['email']}'"
+    );
 
       return $result[0];
 }
 
 
 
-function get_member_info_reciever($uid){
-  global $data;
+function get_member_info_reciever($uid)
+{
+    global $data;
 
-  if(!is_numeric($uid)){
-    $result=db_rows(
+    if(!is_numeric($uid)) {
+        $result=db_rows(
             "SELECT * FROM `{$data['DbPrefix']}members`".
-            " WHERE `email`='{$uid}' LIMIT 1");
-  }else{
-    $result=db_rows(
+            " WHERE `email`='{$uid}' LIMIT 1"
+        );
+    }else{
+        $result=db_rows(
             "SELECT * FROM `{$data['DbPrefix']}members`".
-            " WHERE `mem_id`={$uid} LIMIT 1");
-  }
-
-  $result[0]['emails']=db_rows(
-          "SELECT * FROM `{$data['DbPrefix']}member_emails`".
-  " INNER JOIN `{$data['DbPrefix']}members` ON `owner`= `id` ".
-          " WHERE `membmem_ider_id`={$uid} AND `email`<>'{$result[0]['email']}'");
-
-  return $result[0];
-
-}
-
-
-
-function get_member_status($uid){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT `status` FROM `{$data['DbPrefix']}members`".
-
-		" WHERE `id`={$uid} LIMIT 1"
-
-	);
-
-	return $result[0]['status'];
-
-}
-
-
-
-function get_ip_history($uid, $order=''){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT `date`,`address` FROM `{$data['DbPrefix']}visits`".
-
-		" WHERE `member`={$uid} ".($order?"ORDER BY `{$order}`":'ORDER BY `date` DESC')
-
-	);
-
-	return $result;
-
-}
-
-
-
-function is_member_found($username, $password){
-
-	return (bool)get_member_id($username, $password);
-
-}
-
-
-
-function is_member_active($username){
-
-	return (bool)get_member_id($username, '', '`active`=1');
-
-}
-
-
-
-function set_member_status($uid, $active){
-
-	global $data;
-
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}members`".
-
-		" SET `active`=".(int)$active.
-
-		" WHERE `id`={$uid}"
-
-	);
-
-
-}
-
-
-
-function set_member_status_ex($uid, $status){
-
-	global $data;
-
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}members`".
-
-		" SET `status`={$status}".
-
-		" WHERE `id`={$uid}"
-
-	);
-
-}
-
-
-
-function get_member_status_ex($uid){
-
-	global $data;
-
-	$record=db_rows(
-
-		"SELECT `status` FROM `{$data['DbPrefix']}members`".
-
-		" WHERE `id`={$uid} LIMIT 1"
-
-	);
-
-	return $record[0]['status'];
-
-}
-
-
-
-function set_member_inactive($username){
-
-	global $data;
-
-	set_member_status(get_member_id($username), false);
-
-}
-
-
-
-function delete_member($uid){
-
-	global $data;
-
-	db_query(
-
-		"DELETE FROM `{$data['DbPrefix']}members` WHERE `id`={$uid}"
-
-	);
-
-}
-
-
-
-function select_balance($uid){
-
-	global $data;
-
-	if($uid<0){
-		$isql=
-			"SELECT SUM(`fees`) AS `summ`".
-			" FROM `{$data['DbPrefix']}transactions`".
-			" WHERE (`status`=2 OR `status`=4) LIMIT 1"; // 1-> 2  6-> 4
-	}else{
-		$isql=
-			"SELECT SUM(`amount`-`fees`) AS `summ`".
-			" FROM `{$data['DbPrefix']}transactions`".
-			" WHERE `receiver`={$uid} AND (`status` = 2 OR `status` = 4) LIMIT 1";
-	}
-
-	$outgoing=db_rows(
-		"SELECT SUM(`amount`) AS `summ`".
-		" FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `sender`={$uid} AND (`status`=2 OR `status`=4) AND type != 3  LIMIT 1"
-	);
-
-	$outgoingmobile=db_rows(
-		"SELECT SUM(`amount`+`fees`) AS `summ`".
-		" FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `sender`={$uid} AND (`status`=2 OR `status`=4)  AND type = 3 LIMIT 1"
-		);
-
-	$pending_out_unreg=db_rows(
-		"SELECT SUM(`amount`) AS `summ`".
-		" FROM `{$data['DbPrefix']}temp_pays`".
-		" WHERE `sender`={$uid} AND (`status`=1) LIMIT 1"
+            " WHERE `mem_id`={$uid} LIMIT 1"
+        );
+    }
+
+    $result[0]['emails']=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}member_emails`".
+        " INNER JOIN `{$data['DbPrefix']}members` ON `owner`= `id` ".
+        " WHERE `membmem_ider_id`={$uid} AND `email`<>'{$result[0]['email']}'"
     );
 
-	$incoming=db_rows($isql);
-	$outgoing=(double)$outgoing[0]['summ'];
-	$pending_out_unreg=(double)$pending_out_unreg[0]['summ'];
-	$outgoing=$outgoing+$pending_out_unreg;
-	$incoming=(double)$incoming[0]['summ'];
-	$outgoingmobile=(double)$outgoingmobile[0]['summ'];
+    return $result[0];
+
+}
 
 
-	return $incoming-$outgoing-$outgoingmobile;
+
+function get_member_status($uid)
+{
+
+    global $data;
+
+    $result=db_rows(
+        "SELECT `status` FROM `{$data['DbPrefix']}members`".
+
+        " WHERE `id`={$uid} LIMIT 1"
+    );
+
+    return $result[0]['status'];
+
+}
+
+
+
+function get_ip_history($uid, $order='')
+{
+
+    global $data;
+
+    $result=db_rows(
+        "SELECT `date`,`address` FROM `{$data['DbPrefix']}visits`".
+
+        " WHERE `member`={$uid} ".($order?"ORDER BY `{$order}`":'ORDER BY `date` DESC')
+    );
+
+    return $result;
+
+}
+
+
+
+function is_member_found($username, $password)
+{
+
+    return (bool)get_member_id($username, $password);
+
+}
+
+
+
+function is_member_active($username)
+{
+
+    return (bool)get_member_id($username, '', '`active`=1');
+
+}
+
+
+
+function set_member_status($uid, $active)
+{
+
+    global $data;
+
+    db_query(
+        "UPDATE `{$data['DbPrefix']}members`".
+
+        " SET `active`=".(int)$active.
+
+        " WHERE `id`={$uid}"
+    );
+
+
+}
+
+
+
+function set_member_status_ex($uid, $status)
+{
+
+    global $data;
+
+    db_query(
+        "UPDATE `{$data['DbPrefix']}members`".
+
+        " SET `status`={$status}".
+
+        " WHERE `id`={$uid}"
+    );
+
+}
+
+
+
+function get_member_status_ex($uid)
+{
+
+    global $data;
+
+    $record=db_rows(
+        "SELECT `status` FROM `{$data['DbPrefix']}members`".
+
+        " WHERE `id`={$uid} LIMIT 1"
+    );
+
+    return $record[0]['status'];
+
+}
+
+
+
+function set_member_inactive($username)
+{
+
+    global $data;
+
+    set_member_status(get_member_id($username), false);
+
+}
+
+
+
+function delete_member($uid)
+{
+
+    global $data;
+
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}members` WHERE `id`={$uid}"
+    );
+
+}
+
+
+
+function select_balance($uid)
+{
+
+    global $data;
+
+    if($uid<0) {
+        $isql=
+        "SELECT SUM(`fees`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE (`status`=2 OR `status`=4) LIMIT 1"; // 1-> 2  6-> 4
+    }else{
+        $isql=
+        "SELECT SUM(`amount`-`fees`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `receiver`={$uid} AND (`status` = 2 OR `status` = 4) LIMIT 1";
+    }
+
+    $outgoing=db_rows(
+        "SELECT SUM(`amount`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `sender`={$uid} AND (`status`=2 OR `status`=4) AND type != 3  LIMIT 1"
+    );
+
+    $outgoingmobile=db_rows(
+        "SELECT SUM(`amount`+`fees`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `sender`={$uid} AND (`status`=2 OR `status`=4)  AND type = 3 LIMIT 1"
+    );
+
+    $pending_out_unreg=db_rows(
+        "SELECT SUM(`amount`) AS `summ`".
+        " FROM `{$data['DbPrefix']}temp_pays`".
+        " WHERE `sender`={$uid} AND (`status`=1) LIMIT 1"
+    );
+
+    $incoming=db_rows($isql);
+    $outgoing=(double)$outgoing[0]['summ'];
+    $pending_out_unreg=(double)$pending_out_unreg[0]['summ'];
+    $outgoing=$outgoing+$pending_out_unreg;
+    $incoming=(double)$incoming[0]['summ'];
+    $outgoingmobile=(double)$outgoingmobile[0]['summ'];
+
+
+    return $incoming-$outgoing-$outgoingmobile;
 
 }
 
 
 
 
-function select_balance_disponible($uid){
+function select_balance_disponible($uid)
+{
 
-	global $data;
+    global $data;
 
-	$incoming=db_rows(
-		"SELECT SUM(`amount`-`fees`) AS `summ`".
-		" FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `receiver`={$uid} AND (tdate < DATE_SUB( NOW(), INTERVAL 5 DAY)  OR `sender` = -1) AND (`status`=2 OR `status`=4) AND `type` not in (1, 3) LIMIT 1"		);
+    $incoming=db_rows(
+        "SELECT SUM(`amount`-`fees`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `receiver`={$uid} AND (tdate < DATE_SUB( NOW(), INTERVAL 5 DAY)  OR `sender` = -1) AND (`status`=2 OR `status`=4) AND `type` not in (1, 3) LIMIT 1"        
+    );
 
-	$incoming_topup=db_rows(
-		"SELECT SUM(`amount`-`fees`) AS `summ`".
-		" FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `receiver`={$uid} AND `status`=2 AND `type` in (1, 3) LIMIT 1"
-		);
+    $incoming_topup=db_rows(
+        "SELECT SUM(`amount`-`fees`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `receiver`={$uid} AND `status`=2 AND `type` in (1, 3) LIMIT 1"
+    );
 
 
-	$outgoing=db_rows(
-		"SELECT SUM(`amount`) AS `summ`".
-		" FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `sender`={$uid} AND (`status`=2 OR `status`=4)  AND type != 3  LIMIT 1"
-	);
+    $outgoing=db_rows(
+        "SELECT SUM(`amount`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `sender`={$uid} AND (`status`=2 OR `status`=4)  AND type != 3  LIMIT 1"
+    );
 
-	$outgoingmobile=db_rows(
-		"SELECT SUM(`amount`+`fees`) AS `summ`".
-		" FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `sender`={$uid} AND (`status`=2 OR `status`=4)  AND type = 3  LIMIT 1"
-	);
+    $outgoingmobile=db_rows(
+        "SELECT SUM(`amount`+`fees`) AS `summ`".
+        " FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `sender`={$uid} AND (`status`=2 OR `status`=4)  AND type = 3  LIMIT 1"
+    );
 
-	$pending_out_unreg=db_rows(
-		"SELECT SUM(`amount`) AS `summ`".
-		" FROM `{$data['DbPrefix']}temp_pays`".
-		" WHERE `sender`={$uid} AND tdate < DATE_SUB( NOW(), INTERVAL 5 DAY) AND (`status`=1) LIMIT 1"
-	);
+    $pending_out_unreg=db_rows(
+        "SELECT SUM(`amount`) AS `summ`".
+        " FROM `{$data['DbPrefix']}temp_pays`".
+        " WHERE `sender`={$uid} AND tdate < DATE_SUB( NOW(), INTERVAL 5 DAY) AND (`status`=1) LIMIT 1"
+    );
 
-	$outgoing=(double)$outgoing[0]['summ'];
+    $outgoing=(double)$outgoing[0]['summ'];
 
-	$pending_out_unreg=(double)$pending_out_unreg[0]['summ'];
+    $pending_out_unreg=(double)$pending_out_unreg[0]['summ'];
 
-	$outgoing=$outgoing+$pending_out_unreg;
+    $outgoing=$outgoing+$pending_out_unreg;
 
-	$incoming=(double)$incoming[0]['summ'];
-	$incoming_topup=(double)$incoming_topup[0]['summ'];
+    $incoming=(double)$incoming[0]['summ'];
+    $incoming_topup=(double)$incoming_topup[0]['summ'];
 
-	$outgoingmobile=(double)$outgoingmobile[0]['summ'];
+    $outgoingmobile=(double)$outgoingmobile[0]['summ'];
 
-	return ($incoming + $incoming_topup) - $outgoing-$outgoingmobile;
-
-}
-
-function set_last_access($username){
-
-	global $data;
-
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}members`".
-
-		" SET `ldate`='".date("Y-m-d H:i:s")."',".
-
-		"`last_ip`='{$_SERVER['REMOTE_ADDR']}'".
-
-		" WHERE `id`=".get_member_id($username)
-
-	);
+    return ($incoming + $incoming_topup) - $outgoing-$outgoingmobile;
 
 }
 
+function set_last_access($username)
+{
 
+    global $data;
 
-function set_last_access_date($uid, $reset=false){
+    db_query(
+        "UPDATE `{$data['DbPrefix']}members`".
 
-	global $data;
+        " SET `ldate`='".date("Y-m-d H:i:s")."',".
 
-	if(!$reset)$curr=date("Y-m-d H:i:s");else $curr=0;
+        "`last_ip`='{$_SERVER['REMOTE_ADDR']}'".
 
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}members`".
-
-		" SET `adate`='{$curr}'".
-
-		" WHERE `id`={$uid}"
-
-	);
+        " WHERE `id`=".get_member_id($username)
+    );
 
 }
 
 
 
-function save_remote_ip($uid, $address){
+function set_last_access_date($uid, $reset=false)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    if(!$reset) { $curr=date("Y-m-d H:i:s");
+    } else { $curr=0;
+    }
 
-		"INSERT `{$data['DbPrefix']}visits`(`member`,`date`,`address`".
+    db_query(
+        "UPDATE `{$data['DbPrefix']}members`".
 
-		")VALUES({$uid},'".date('Y-m-d H:i:s')."','{$address}')"
+        " SET `adate`='{$curr}'".
 
-	);
+        " WHERE `id`={$uid}"
+    );
 
 }
 
 
 
-function is_valid_mail($email){
+function save_remote_ip($uid, $address)
+{
+
+    global $data;
+
+    db_query(
+        "INSERT `{$data['DbPrefix']}visits`(`member`,`date`,`address`".
+
+        ")VALUES({$uid},'".date('Y-m-d H:i:s')."','{$address}')"
+    );
+
+}
+
+
+
+function is_valid_mail($email)
+{
 
         global $data;
 
@@ -2698,238 +2809,236 @@ function is_valid_mail($email){
         return (bool)($result&&$emails);
 }
 
-function get_member_by_email($email){
+function get_member_by_email($email)
+{
 
         global $data;
 
         $result=db_rows(
-
-                " SELECT CASE  WHEN  LENGTH(lname) > 1 THEN lname + ' ' + fname".
-				" WHEN LENGTH(lname) = 0  THEN username END  as fullname ,`mem_id`,`password`,`question`,`answer` FROM `{$data['DbPrefix']}members`".
-				" WHERE `email`='{$email}'"
-
+            " SELECT CASE  WHEN  LENGTH(lname) > 1 THEN lname + ' ' + fname".
+                " WHEN LENGTH(lname) = 0  THEN username END  as fullname ,`mem_id`,`password`,`question`,`answer` FROM `{$data['DbPrefix']}members`".
+                " WHERE `email`='{$email}'"
         );
 
-        if(!$result){
+    if(!$result) {
 
-           $emails=db_rows(
+        $emails=db_rows(
+            "SELECT `owner` FROM `{$data['DbPrefix']}member_emails`".
 
-                "SELECT `owner` FROM `{$data['DbPrefix']}member_emails`".
+            " WHERE `email`='{$email}' LIMIT 1"
+        );
 
-                " WHERE `email`='{$email}' LIMIT 1"
+        if($emails) {
 
-           );
-
-           if($emails){
-
-              $result=db_rows(
-
-                 " SELECT CASE  WHEN  LENGTH(lname) > 1 THEN lname + ' ' + fname ".
-				 " WHEN LENGTH(lname) = 0  THEN username END  as fullname , `mem_id`,`password`,`question`,`answer` FROM `{$data['DbPrefix']}members`".
-                 " WHERE `id`={$emails[0]['owner']}"
-
-              );
-
-           }
+            $result=db_rows(
+                " SELECT CASE  WHEN  LENGTH(lname) > 1 THEN lname + ' ' + fname ".
+                " WHEN LENGTH(lname) = 0  THEN username END  as fullname , `mem_id`,`password`,`question`,`answer` FROM `{$data['DbPrefix']}members`".
+                " WHERE `id`={$emails[0]['owner']}"
+            );
 
         }
+
+    }
 
         return $result[0];
 
 }
 
-function is_info_empty($uid){
+function is_info_empty($uid)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `empty`".
 
-		"SELECT `empty`".
+        " FROM `{$data['DbPrefix']}members`".
 
-		" FROM `{$data['DbPrefix']}members`".
+        " WHERE `id`={$uid} LIMIT 1"
+    );
 
-		" WHERE `id`={$uid} LIMIT 1"
-
-	);
-
-	return (bool)$result[0]['empty'];
-
-}
-
-
-
-function select_info($uid, $post){
-
-	global $data;
-
-	$result = $post;
-
-	$member=get_member_info($uid);
-
-	if(!$member){
-
-		$_SESSION['uid']=0;
-
-		$_SESSION['login']=false;
-
-		header("Location:{$data['Host']}/acceuil-Edinars.html");
-
-		echo('ACCESS DENIED.');
-
-		exit;
-
-	}
-
-	foreach($member as $key=>$value)
-		if(!isset($post[$key]))
-			$result[$key]=$value;
-
-	if(!$result['active']){
-
-		$_SESSION['uid']=0;
-
-		$_SESSION['login']=false;
-
-		header("Location:{$data['Host']}/cceuil-Edinars");
-
-		echo('ACCESS DENIED.');
-
-		exit;
-
-	}
-
-	return $result;
+    return (bool)$result[0]['empty'];
 
 }
 
 
 
-function insert_profile_info($post){
+function select_info($uid, $post)
+{
 
-	global $data;
+    global $data;
 
-	if(!$post['sponsor'])$post['sponsor']=0;
+    $result = $post;
 
-	db_query(
+    $member=get_member_info($uid);
 
-		"INSERT INTO `{$data['DbPrefix']}members`(".
+    if(!$member) {
 
-		"`sponsor`,`username`,`password`,`email`,`active`,`empty`,".
+        $_SESSION['uid']=0;
 
-		"`fname`,`lname`,`company`,`regnum`,`drvnum`,".
+        $_SESSION['login']=false;
 
-		"`address`,`city`,`country`,`state`,`zip`,`phone`,`fax`".
+        header("Location:{$data['Host']}/acceuil-Edinars.html");
 
-		")VALUES(".
+        echo('ACCESS DENIED.');
 
-		"{$post['sponsor']},'{$post['username']}','{$post['password']}',".
+        exit;
 
-		"'{$post['email']}',0,0,'{$post['fname']}','{$post['lname']}',".
+    }
 
-		"'{$post['company']}','{$post['regnum']}','{$post['drvnum']}',".
+    foreach($member as $key=>$value) {
+        if(!isset($post[$key])) {
+            $result[$key]=$value;
+        }
+    }
 
-		"'{$post['address']}','{$post['city']}','{$post['country']}',".
+    if(!$result['active']) {
 
-		"'{$post['state']}','{$post['zip']}','{$post['phone']}',".
+        $_SESSION['uid']=0;
 
-		"'{$post['fax']}'".
+        $_SESSION['login']=false;
 
-		")"
+        header("Location:{$data['Host']}/cceuil-Edinars");
 
-	);
+        echo('ACCESS DENIED.');
 
-	$newid=newid();
+        exit;
 
-	db_query("INSERT INTO `{$data['DbPrefix']}member_emails`
+    }
+
+    return $result;
+
+}
+
+
+
+function insert_profile_info($post)
+{
+
+    global $data;
+
+    if(!$post['sponsor']) { $post['sponsor']=0;
+    }
+
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}members`(".
+
+        "`sponsor`,`username`,`password`,`email`,`active`,`empty`,".
+
+        "`fname`,`lname`,`company`,`regnum`,`drvnum`,".
+
+        "`address`,`city`,`country`,`state`,`zip`,`phone`,`fax`".
+
+        ")VALUES(".
+
+        "{$post['sponsor']},'{$post['username']}','{$post['password']}',".
+
+        "'{$post['email']}',0,0,'{$post['fname']}','{$post['lname']}',".
+
+        "'{$post['company']}','{$post['regnum']}','{$post['drvnum']}',".
+
+        "'{$post['address']}','{$post['city']}','{$post['country']}',".
+
+        "'{$post['state']}','{$post['zip']}','{$post['phone']}',".
+
+        "'{$post['fax']}'".
+
+        ")"
+    );
+
+    $newid=newid();
+
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}member_emails`
 
 	(`owner`,`email`,`active`,`primary`) VALUES
 
 	('{$newid}','{$post['email']}',1,1)
 
-	");
+	"
+    );
 
-	return $newid;
-
-}
-
-
-
-function update_profile_info($post, $uid, $notify=true){
-
-	global $data;
-
-	if(!$post['sponsor'])$post['sponsor']=0;
-
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}members` SET ".
-
-		"`sponsor`={$post['sponsor']},`type`='{$post['type']}',".
-
-		"`empty`=0,`fname`='{$post['fname']}',`lname`='{$post['lname']}',".
-
-		"`company`='{$post['company']}',`address`='{$post['address']}',".
-
-		"`city`='{$post['city']}',`wilaya`='{$post['wilaya']}',".
-
-		"`state`='{$post['state']}',`postcode`='{$post['postcode']}',".
-
-		"`phone`='{$post['phone']}',`fax`='{$post['fax']}',".
-
-		"`mobile`='{$post['mobile']}',`description`='{$post['description']}'".
-
-		" WHERE `id`={$uid}"
-
-	);
-
-	if($notify){
-
-		$post['email']=get_member_email($uid);
-
-		send_email('UPDATE-MEMBER-PROFILE', $post);
-
-	}
+    return $newid;
 
 }
 
 
 
-function update_private_info($post, $uid){
+function update_profile_info($post, $uid, $notify=true)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    if(!$post['sponsor']) { $post['sponsor']=0;
+    }
 
-		"UPDATE `{$data['DbPrefix']}members` SET ".
+    db_query(
+        "UPDATE `{$data['DbPrefix']}members` SET ".
 
-		"`username`='{$post['username']}',`password`='{$post['password']}',".
+        "`sponsor`={$post['sponsor']},`type`='{$post['type']}',".
 
-		"`email`='{$post['email']}' WHERE `id`={$uid}"
+        "`empty`=0,`fname`='{$post['fname']}',`lname`='{$post['lname']}',".
 
-	);
+        "`company`='{$post['company']}',`address`='{$post['address']}',".
+
+        "`city`='{$post['city']}',`wilaya`='{$post['wilaya']}',".
+
+        "`state`='{$post['state']}',`postcode`='{$post['postcode']}',".
+
+        "`phone`='{$post['phone']}',`fax`='{$post['fax']}',".
+
+        "`mobile`='{$post['mobile']}',`description`='{$post['description']}'".
+
+        " WHERE `id`={$uid}"
+    );
+
+    if($notify) {
+
+        $post['email']=get_member_email($uid);
+
+        send_email('UPDATE-MEMBER-PROFILE', $post);
+
+    }
+
+}
+
+
+
+function update_private_info($post, $uid)
+{
+
+    global $data;
+
+    db_query(
+        "UPDATE `{$data['DbPrefix']}members` SET ".
+
+        "`username`='{$post['username']}',`password`='{$post['password']}',".
+
+        "`email`='{$post['email']}' WHERE `id`={$uid}"
+    );
 
 }
 
 
 
 
-function insert_email_info($email, $uid, $notify=true){
+function insert_email_info($email, $uid, $notify=true)
+{
 
         global $data;
 
         db_query(
-
-                "INSERT INTO `{$data['DbPrefix']}member_emails`(".
+            "INSERT INTO `{$data['DbPrefix']}member_emails`(".
 
                 "`owner`,`email`,`status`".
 
                 ")VALUES(".
 
                 "{$uid},'{$email}',0)"
-
         );
 
-        if($notify)send_email_request(newid());
+    if($notify) { send_email_request(newid());
+    }
 
         return newid();
 
@@ -2937,115 +3046,104 @@ function insert_email_info($email, $uid, $notify=true){
 
 
 
-function delete_email_info($gid){
+function delete_email_info($gid)
+{
 
         global $data;
 
         db_query(
-
-                "DELETE FROM `{$data['DbPrefix']}member_emails`".
+            "DELETE FROM `{$data['DbPrefix']}member_emails`".
 
                 " WHERE `id`={$gid}"
-
         );
 
 }
 
 
 
-function send_email_request($gid){
+function send_email_request($gid)
+{
 
         global $data;
 
         $emails=db_rows(
-
-                "SELECT * FROM `{$data['DbPrefix']}member_emails`".
+            "SELECT * FROM `{$data['DbPrefix']}member_emails`".
 
                 " WHERE `id`={$gid} LIMIT 1"
-
         );
 
-        if($emails[0]){
+    if($emails[0]) {
 
-                $post['ccode']=gencode();
+            $post['ccode']=gencode();
 
-                db_query(
+            db_query(
+                "UPDATE `{$data['DbPrefix']}member_emails`".
 
-                         "UPDATE `{$data['DbPrefix']}member_emails`".
+                     " SET `confirm`='{$post['ccode']}', `status`=1".
 
-                         " SET `confirm`='{$post['ccode']}', `status`=1".
+                     " WHERE `id`={$gid}"
+            );
 
-                         " WHERE `id`={$gid}"
+            $post['email']=$emails[0]['email'];
 
-                );
+            send_email('CONFIRM-EMAIL', $post);
 
-                $post['email']=$emails[0]['email'];
-
-                send_email('CONFIRM-EMAIL', $post);
-
-        }
+    }
 
 }
 
 
 
-function set_default_email($gid){
+function set_default_email($gid)
+{
 
         global $data;
 
         $emails=db_rows(
-
-                "SELECT * FROM `{$data['DbPrefix']}member_emails`".
+            "SELECT * FROM `{$data['DbPrefix']}member_emails`".
 
                 " WHERE `id`={$gid} LIMIT 1"
-
         );
 
-        if($emails[0]){
+    if($emails[0]) {
 
-                db_query(
+            db_query(
+                "INSERT INTO `{$data['DbPrefix']}member_emails`(".
 
-                         "INSERT INTO `{$data['DbPrefix']}member_emails`(".
+                     "`owner`,`email`,`status`".
 
-                         "`owner`,`email`,`status`".
+                     ")VALUES(".
 
-                         ")VALUES(".
+                     "{$emails[0]['owner']},'".get_member_email($emails[0]['owner'])."',2)"
+            );
 
-                         "{$emails[0]['owner']},'".get_member_email($emails[0]['owner'])."',2)"
+            db_query(
+                "UPDATE `{$data['DbPrefix']}members`".
 
-                );
+                     " SET `email`='{$emails[0]['email']}'".
 
-                db_query(
+                     " WHERE `id`={$emails[0]['owner']}"
+            );
 
-                         "UPDATE `{$data['DbPrefix']}members`".
+            db_query(
+                "DELETE FROM `{$data['DbPrefix']}member_emails`".
 
-                         " SET `email`='{$emails[0]['email']}'".
+                     " WHERE `id`={$emails[0]['id']}"
+            );
 
-                         " WHERE `id`={$emails[0]['owner']}"
-
-                );
-
-                db_query(
-
-                         "DELETE FROM `{$data['DbPrefix']}member_emails`".
-
-                         " WHERE `id`={$emails[0]['id']}"
-
-                );
-
-        }
+    }
 
 }
 
 
 
-function insert_card_info($post, $uid, $notify=true){
+function insert_card_info($post, $uid, $notify=true)
+{
 
         global $data;
 
         db_query(
-
-                "INSERT INTO `{$data['DbPrefix']}cards`(".
+            "INSERT INTO `{$data['DbPrefix']}cards`(".
 
                 "`owner`,`ctype`,`cname`,`cnumber`,`ccvv`,`cmonth`,`cyear`,".
 
@@ -3060,16 +3158,15 @@ function insert_card_info($post, $uid, $notify=true){
                 "{$post['cmonth']},{$post['cyear']},".
 
                 "0,0)"
-
         );
 
-        if($notify){
+    if($notify) {
 
-                $post['email']=get_member_email($uid);
+            $post['email']=get_member_email($uid);
 
-                send_email('UPDATE-CARD-INFORMATION', $post);
+            send_email('UPDATE-CARD-INFORMATION', $post);
 
-        }
+    }
 
         return newid();
 
@@ -3077,7 +3174,8 @@ function insert_card_info($post, $uid, $notify=true){
 
 
 
-function update_card_info($post, $gid, $uid, $notify=true){
+function update_card_info($post, $gid, $uid, $notify=true)
+{
 
         global $data;
 
@@ -3086,8 +3184,7 @@ function update_card_info($post, $gid, $uid, $notify=true){
         $ccvv=(is_changed($post['ccvv']))?"`ccvv`='{$post['ccvv']}',":'';
 
         db_query(
-
-                "UPDATE `{$data['DbPrefix']}cards` SET ".
+            "UPDATE `{$data['DbPrefix']}cards` SET ".
 
                 "`ctype`='{$post['ctype']}',`cname`='{$post['cname']}',".
 
@@ -3096,70 +3193,68 @@ function update_card_info($post, $gid, $uid, $notify=true){
                 "`cmonth`={$post['cmonth']},`cyear`={$post['cyear']}".
 
                 " WHERE `id`={$gid}"
-
         );
 
-        if($notify){
+    if($notify) {
 
-                $post['email']=get_member_email($uid);
+            $post['email']=get_member_email($uid);
 
-                send_email('UPDATE-CARD-INFORMATION', $post);
+            send_email('UPDATE-CARD-INFORMATION', $post);
 
-        }
+    }
 
 }
 
 
 
-function delete_card($gid){
+function delete_card($gid)
+{
 
         global $data;
 
         db_query(
-
-                "DELETE FROM `{$data['DbPrefix']}cards`".
+            "DELETE FROM `{$data['DbPrefix']}cards`".
 
                 " WHERE `id`={$gid}"
-
         );
 
 }
 
 
 
-function select_cards($uid, $hiden=true, $id=0, $single=false){
+function select_cards($uid, $hiden=true, $id=0, $single=false)
+{
 
         global $data;
 
         $cards=db_rows(
-
-                "SELECT * FROM `{$data['DbPrefix']}cards`".
+            "SELECT * FROM `{$data['DbPrefix']}cards`".
 
                 " WHERE `owner`={$uid}".
 
                 ($id?" AND `id`={$id}":'').($single?" LIMIT 1":'')
-
         );
 
         $result=array();
 
-        foreach($cards as $key=>$value){
+    foreach($cards as $key=>$value){
 
-                foreach($value as $name=>$v){
+        foreach($value as $name=>$v){
 
-                   $result[$key][$name]=$v;
+            $result[$key][$name]=$v;
 
-                   if($hiden){
+            if($hiden) {
 
-                     if($name=='cnumber') $result[$key][$name]=encode($v, 4);
+                if($name=='cnumber') { $result[$key][$name]=encode($v, 4);
 
-                     elseif($name=='ccvv') $result[$key][$name]=encode($v, 1);
-
-                   }
-
+                } elseif($name=='ccvv') { $result[$key][$name]=encode($v, 1);
                 }
 
+            }
+
         }
+
+    }
 
         return $result;
 
@@ -3167,13 +3262,13 @@ function select_cards($uid, $hiden=true, $id=0, $single=false){
 
 
 
-function insert_bank_info($post, $uid, $notify=true){
+function insert_bank_info($post, $uid, $notify=true)
+{
 
         global $data;
 
         db_query(
-
-                "INSERT INTO `{$data['DbPrefix']}banks`(".
+            "INSERT INTO `{$data['DbPrefix']}banks`(".
 
                 "`owner`,`bname`,`baddress`,`bcity`,`bzip`,`bcountry`,`bstate`,".
 
@@ -3192,16 +3287,15 @@ function insert_bank_info($post, $uid, $notify=true){
                 "'{$post['btype']}','{$post['brtgnum']}','{$post['bswift']}',".
 
                 "0,0)"
-
         );
 
-        if($notify){
+    if($notify) {
 
-                $post['email']=get_member_email($uid);
+            $post['email']=get_member_email($uid);
 
-                send_email('UPDATE-BANK-INFORMATION', $post);
+            send_email('UPDATE-BANK-INFORMATION', $post);
 
-        }
+    }
 
         return newid();
 
@@ -3209,13 +3303,13 @@ function insert_bank_info($post, $uid, $notify=true){
 
 
 
-function update_bank_info($post, $gid, $uid, $notify=true){
+function update_bank_info($post, $gid, $uid, $notify=true)
+{
 
         global $data;
 
         db_query(
-
-                "UPDATE `{$data['DbPrefix']}banks` SET ".
+            "UPDATE `{$data['DbPrefix']}banks` SET ".
 
                 "`bname`='{$post['bname']}',`baddress`='{$post['baddress']}',".
 
@@ -3230,58 +3324,56 @@ function update_bank_info($post, $gid, $uid, $notify=true){
                 "`brtgnum`='{$post['brtgnum']}',`bswift`='{$post['bswift']}'".
 
                 " WHERE `id`={$gid}"
-
         );
 
-        if($notify){
+    if($notify) {
 
-                $post['email']=get_member_email($uid);
+            $post['email']=get_member_email($uid);
 
-                send_email('UPDATE-BANK-INFORMATION', $post);
+            send_email('UPDATE-BANK-INFORMATION', $post);
 
-        }
+    }
 
 }
 
 
 
-function delete_bank($gid){
+function delete_bank($gid)
+{
 
         global $data;
 
         db_query(
-
-                "DELETE FROM `{$data['DbPrefix']}banks`".
+            "DELETE FROM `{$data['DbPrefix']}banks`".
 
                 " WHERE `id`={$gid}"
-
         );
 
 }
 
 
 
-function select_banks($uid, $id=0, $single=false){
+function select_banks($uid, $id=0, $single=false)
+{
 
         global $data;
 
         $banks=db_rows(
-
-                "SELECT * FROM `{$data['DbPrefix']}banks`".
+            "SELECT * FROM `{$data['DbPrefix']}banks`".
 
                 " WHERE `owner`={$uid}".
 
                 ($id?" AND `id`={$id}":'').($single?" LIMIT 1":'')
-
         );
 
         $result=array();
 
-        foreach($banks as $key=>$value){
+    foreach($banks as $key=>$value){
 
-                foreach($value as $name=>$v)$result[$key][$name]=$v;
-
+        foreach($value as $name=>$v) { $result[$key][$name]=$v;
         }
+
+    }
 
         return $result;
 
@@ -3289,135 +3381,132 @@ function select_banks($uid, $id=0, $single=false){
 
 
 
-function set_trtype($uid, $dir){
+function set_trtype($uid, $dir)
+{
 
-	switch($dir){
+    switch($dir){
 
-		case 'both':
+    case 'both':
 
-			return "(`sender`={$uid} OR `receiver`={$uid})";
+        return "(`sender`={$uid} OR `receiver`={$uid})";
 
-		case 'incoming':
+    case 'incoming':
 
-			return "`receiver`={$uid}";
+        return "`receiver`={$uid}";
 
-		case 'outgoing':
+    case 'outgoing':
 
-			return "`sender`={$uid}";
+        return "`sender`={$uid}";
 
-	}
+    }
 
-	return '';
-
-}
-
-
-
-function get_trans_count($where=''){
-	global $data;
-	$result=db_rows("SELECT COUNT(`id`) AS `count` FROM `{$data['DbPrefix']}transactions`{$where} LIMIT 1");
-	return $result[0]['count'];
-}
-
-function get_transactions_count($uid, $dir='both', $extra='1'){
-
-	$result=get_trans_count(
-
-		' WHERE '.($uid>0?set_trtype($uid, $dir).
-
-		($extra?" AND {$extra}":''):($extra?" {$extra}":''))
-
-	);
-
-	return $result;
+    return '';
 
 }
 
 
 
-function get_transactions_summ($where){
+function get_trans_count($where='')
+{
+    global $data;
+    $result=db_rows("SELECT COUNT(`id`) AS `count` FROM `{$data['DbPrefix']}transactions`{$where} LIMIT 1");
+    return $result[0]['count'];
+}
 
-	global $data;
+function get_transactions_count($uid, $dir='both', $extra='1')
+{
 
-	$rows=db_rows(
+    $result=get_trans_count(
+        ' WHERE '.($uid>0?set_trtype($uid, $dir).
 
-		'SELECT SUM(`amount`) AS `summ`, SUM(`fees`) AS `fees`'.
+        ($extra?" AND {$extra}":''):($extra?" {$extra}":''))
+    );
 
-		" FROM `{$data['DbPrefix']}transactions`".
-
-		($where?" WHERE {$where}":'').' ORDER BY `tdate` LIMIT 1'
-
-	);
-
-	$result['summ']=$rows[0]['summ'];
-
-	$result['fees']=$rows[0]['fees'];
-
-	return $result;
+    return $result;
 
 }
 
 
 
-function get_transactions_summary($dateA, $dateB){
+function get_transactions_summ($where)
+{
 
-	global $data;
+    global $data;
 
-	foreach($data['TransactionType'] as $key=>$value){
+    $rows=db_rows(
+        'SELECT SUM(`amount`) AS `summ`, SUM(`fees`) AS `fees`'.
 
-		$rows=get_transactions_summ(
+        " FROM `{$data['DbPrefix']}transactions`".
 
-			"`type`={$key} AND".
+        ($where?" WHERE {$where}":'').' ORDER BY `tdate` LIMIT 1'
+    );
 
-			" UNIX_TIMESTAMP(`tdate`)>={$dateA} AND".
+    $result['summ']=$rows[0]['summ'];
 
-			" UNIX_TIMESTAMP(`tdate`)<{$dateB}"
+    $result['fees']=$rows[0]['fees'];
 
-		);
-
-		$result[$value]['Summ']=$rows['summ']?$rows['summ']:0;
-		$result[$value]['Fees']=$rows['fees']?$rows['fees']:0;
-
-	}
-
-	return $result;
+    return $result;
 
 }
 
 
 
-function get_transactions_year(){
+function get_transactions_summary($dateA, $dateB)
+{
 
-	global $data;
+    global $data;
 
-	$years=db_rows(
+    foreach($data['TransactionType'] as $key=>$value){
 
-		"SELECT MIN(YEAR(`tdate`)) AS `min`, MAX(YEAR(`tdate`)) AS `max`".
+        $rows=get_transactions_summ(
+            "`type`={$key} AND".
 
-		" FROM `{$data['DbPrefix']}transactions` LIMIT 1"
+            " UNIX_TIMESTAMP(`tdate`)>={$dateA} AND".
 
-	);
+            " UNIX_TIMESTAMP(`tdate`)<{$dateB}"
+        );
 
-	$result['min']=$years[0]['min'];
+        $result[$value]['Summ']=$rows['summ']?$rows['summ']:0;
+        $result[$value]['Fees']=$rows['fees']?$rows['fees']:0;
 
-	$result['max']=$years[0]['max'];
+    }
 
-	return $result;
+    return $result;
 
 }
 
 
 
-function get_transactions_period(){
+function get_transactions_year()
+{
+
+    global $data;
+
+    $years=db_rows(
+        "SELECT MIN(YEAR(`tdate`)) AS `min`, MAX(YEAR(`tdate`)) AS `max`".
+
+        " FROM `{$data['DbPrefix']}transactions` LIMIT 1"
+    );
+
+    $result['min']=$years[0]['min'];
+
+    $result['max']=$years[0]['max'];
+
+    return $result;
+
+}
+
+
+
+function get_transactions_period()
+{
 
         global $data;
 
         $period=db_rows(
-
-                "SELECT MIN(`tdate`) AS `min`, MAX(`tdate`) AS `max`".
+            "SELECT MIN(`tdate`) AS `min`, MAX(`tdate`) AS `max`".
 
                 " FROM `{$data['DbPrefix']}transactions` LIMIT 1"
-
         );
 
         $result['min']=getdate(strtotime($period[0]['min']));
@@ -3430,2032 +3519,2041 @@ function get_transactions_period(){
 
 
 
-function can_refund($id, $uid){
+function can_refund($id, $uid)
+{
 
-	global $data;
+    global $data;
 
-	$balance=select_balance($uid);
+    $balance=select_balance($uid);
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT `id` FROM `{$data['DbPrefix']}transactions`".
 
-		"SELECT `id` FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `id`={$id} AND `receiver`={$uid}".
 
-		" WHERE `id`={$id} AND `receiver`={$uid}".
+        " AND `type` in (0,1) AND (`status`=1 OR `status`=2)". //pending or refunded
 
-		" AND `type` in (0,1) AND (`status`=1 OR `status`=2)". //pending or refunded
+        " AND `amount`<{$balance}".
 
-		" AND `amount`<{$balance}".
+        " AND TO_DAYS(NOW())-TO_DAYS(`tdate`)<{$data['RefundPeriod']}"
+    );
 
-		" AND TO_DAYS(NOW())-TO_DAYS(`tdate`)<{$data['RefundPeriod']}"
-
-	);
-
-	return $result[0];
-
-}
-
-
-
-function get_status_color($status){
-
-	$result='000000';
-
-	switch($status){
-
-	case 0:
-		$result='blue';
-		break;
-	case 1:
-		$result='green';
-		break;
-	case 2:
-		$result='red';
-		break;
-	case 3:
-		$result='maroon';
-		break;
-	case 4:
-		$result='orange';
-		break;
-	case 99:
-		$result='red';
-		break;
-	}
-	return $result;
-}
-
-function get_notification_by_id($user_id, $notification_id ){
-  global $data;
-
-  $sql = "SELECT *".
-  " FROM `{$data['DbPrefix']}notifications` ".
-  " WHERE `{$data['DbPrefix']}notifications`.id = '".$notification_id."' ".
-  " AND `{$data['DbPrefix']}notifications`.member_id = '".$user_id."' ";
-
-  // echo nl2br($sql);
-  $notification = db_rows($sql);
-  return $notification[0];
-}
-
-function get_transaction_by_id($user_id, $transaction_id ){
-  $transaction = get_transactions($user_id, 'both', -1, -1, 0, 0, '', '', '', $transaction_id);
-  // var_dump($transaction);
-  return $transaction[0];
-}
-
-function get_transactions($uid, $dir='both', $type=-1, $status=-1, $start=0,$count=0, $order='', $suser='', $sdate='', $transaction_id=''){
-
-	global $data;
-
-	if(!is_null($suser) || !is_null($sdata)){
-		$start=0;
-		$count=0;
-	}
-
-	$order=($order?$order:'ORDER BY `tdate` DESC');
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
-		($count?" LIMIT {$count}":''));
-
-  $sql = "SELECT *,(TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`".
-  " FROM `{$data['DbPrefix']}transactions` ".
-  " WHERE `{$data['DbPrefix']}transactions`.id !=0 ".
-  ($uid?" AND ".set_trtype($uid, $dir):'').
-  ($type<0? '' : " AND `type`={$type}").
-  ($status<0? '' : " AND `status`={$status}").
-  ($transaction_id == '' ? '' : " AND `id` = {$transaction_id}").
-  " {$order}{$limit}";
-
-  // echo nl2br($sql);
-
-  $trans=db_rows($sql);
-
-	$result=array();
-
-	foreach($trans as $key=>$value){
-		if($suser){
-			if(
-				strpos(get_member_username($value['sender']), $suser)===false
-				&&
-				strpos(get_member_username($value['receiver']), $suser)===false
-			)continue;
-		}elseif($sdate){
-			if(strpos($value['tdate'], $sdate)===false)continue;
-		}
-		$dir=(bool)($value['sender']!=$uid);
-		$result[$key]['id']=$value['id'];
-		$result[$key]['direction']=$dir?'1':'0';
-		$result[$key]['sender']=$value['sender'];
-		// $result[$key]['senduser']=prnuser($value['sender']);
-		$result[$key]['senduser']=prnuser($value['sender']);
-		$result[$key]['receiver']=$value['receiver'];
-		// $result[$key]['recvuser']=prnuser($value['receiver']);
-		$result[$key]['recvuser']=prnuser($value['receiver']);
-		$result[$key]['userid']=$dir?$value['sender']:$value['receiver'];
-		// $result[$key]['username']=prnuser($result[$key]['userid']);
-		$result[$key]['username']=prnuser($result[$key]['userid']);
-		$result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
-		$result[$key]['amount']=prnpays($result[$key]['oamount']);
-		$result[$key]['tdate']=prndate($value['tdate']);
-		$result[$key]['period']=$value['period'];
-		$result[$key]['ostatus']=$value['status'];
-		$result[$key]['type']=$data['TransactionType'][$value['type']];
-		$result[$key]['status']="<font color=".get_status_color($value['status']).">".$data['TransactionStatus'][$value['status']].'</font>';
-    $result[$key]['status_color'] = get_status_color($value['status']);
-		if($value['fees']>0 && ($value['type']==1||$value['type']==2||($dir&&$value['type']==0)) ){
-			$result[$key]['ofees']=-$value['fees'];
-		}elseif ($value['type']==3 ){
-				$result[$key]['ofees']=-$value['fees'];
-		}else {
-			$result[$key]['ofees']=0;
-		}
-		$result[$key]['fees']=prnfees($result[$key]['ofees']);
-		if ($value['type']==3) {
-			$result[$key]['onets'] = $value['amount']+$value['fees'];
-		} else {
-			$result[$key]['onets']=$value['sender']>0&&$value['sender']==$uid&&$value['receiver']>0?$value['amount']:$value['amount']-$value['fees'];
-		}
-		$result[$key]['nets']=prnpays($result[$key]['onets'], false);
-		$result[$key]['comments']=prntext($value['comments']);
-		$result[$key]['ecomments']=prntext($value['ecomments']);
-		$result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
-		$result[$key]['canrefund']=can_refund($value['id'], $uid);
-		$result[$key]['trxid']=$value['trxid'];
-	}
-	return $result;
-}
-
-
-function get_transactions_ussd ($uid, $start=0,$count=0 ){
-
-	global $data;
-
-	$order=($order?$order:'ORDER BY `tdate` DESC');
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
-		($count?" LIMIT {$count}":''));
-	$trans=db_rows(
-		"SELECT *,(TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`".
-		" FROM `{$data['DbPrefix']}transactions` INNER JOIN `{$data['DbPrefix']}ussd` ON id = ussd_trx_id  ".
-		" WHERE `sender` =".$uid." AND `type`=3 ".
-		" {$order}{$limit}");
-	$result=array();
-
-	foreach($trans as $key=>$value){
-
-		$dir=(bool)($value['sender']!=$uid);
-		$result[$key]['id']=$value['id'];
-		$result[$key]['direction']=$dir?'1':'0';
-		$result[$key]['sender']=$value['sender'];
-		$result[$key]['senduser']=prnuser($value['sender']);
-		$result[$key]['receiver']=$value['receiver'];
-		$result[$key]['recvuser']=prnuser($value['receiver']);
-		$result[$key]['userid']=$dir?$value['sender']:$value['receiver'];
-		$result[$key]['username']=prnuser($result[$key]['userid']);
-		$result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
-		$result[$key]['amount']=prnpays($result[$key]['oamount']);
-		//$result[$key]['tdate']=smalldate($value['tdate']);
-		$result[$key]['tdate']=prndate($value['tdate']);
-		$result[$key]['period']=$value['period'];
-		$result[$key]['ostatus']=$value['status'];
-		$result[$key]['type']=$data['TransactionType'][$value['type']];
-		$result[$key]['status']="<font color=".get_status_color($value['status']).">".$data['TransactionStatus'][$value['status']].'</font>';
-
-		if($value['fees']>0 && ($value['type']==1||$value['type']==2||($dir&&$value['type']==0)) ){
-			$result[$key]['ofees']=-$value['fees'];
-		}elseif ($value['type']==3 ){
-				$result[$key]['ofees']=-$value['fees'];
-		}else {
-			$result[$key]['ofees']=0;
-		}
-		$result[$key]['fees']=prnfees($result[$key]['ofees']);
-		//if ($value['type']==3) {
-		//	$result[$key]['onets'] = $value['amount']+$value['fees'];
-		//} else {
-			$result[$key]['onets']=$value['sender']>0&&$value['sender']==$uid&&$value['receiver']>0?$value['amount']:$value['amount']+$value['fees'];
-		//}
-		$result[$key]['nets']=prnpays($result[$key]['onets'], false);
-		$result[$key]['comments']=prntext($value['comments']);
-		$result[$key]['ecomments']=prntext($value['ecomments']);
-		$result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
-		$result[$key]['canrefund']=can_refund($value['id'], $uid);
-		$result[$key]['ussd_operator']=$value['ussd_operator'];
-		$result[$key]['ussd_number']=$value['ussd_number'];
-		$result[$key]['ussd_retries']=$value['ussd_retries'];
-
-
-	}
-	return $result;
-}
-
-
-
-
-function get_transaction_detail($id, $uid){
-
-	global $data;
-	$trans=db_rows("SELECT * FROM `{$data['DbPrefix']}transactions` WHERE `id`={$id} LIMIT 1");
-	$trans=$trans[0];
-	if($trans){
-
-		$dir=(bool)($trans['sender']!=$uid);
-		$result['id']=$trans['id'];
-		$result['direction']=$dir?'FROM':'TO';
-		$result['sender']=$trans['sender'];
-		$result['receiver']=$trans['receiver'];
-		$result['userid']=$dir?$trans['sender']:$trans['receiver'];
-		$result['username']=prnuser($result['userid']);
-		$result['oamount']=$dir?$trans['amount']:-$trans['amount'];
-		$result['amount']=prnpays($dir?$trans['amount']:-$trans['amount']);
-		$result['ofees']=$dir?$trans['fees']:+$trans['fees'];
-		$result['tdate']=prndate($trans['tdate']);
-		$result['otype']=$trans['type'];
-		$result['type']=ucfirst($data['TransactionType'][$trans['type']]);
-		$result['ostatus']=$trans['status'];
-		$result['status']=
-			"<font color=".get_status_color($trans['status']).">".
-			ucfirst($data['TransactionStatus'][$trans['status']]).
-			"</font>";
-		if($trans['fees']>0&&($trans['type']==1||$trans['type']==2|| $trans['type']==3 || ($dir&&$trans['type']==0))){
-			$result['fees']=-$trans['fees'];
-		}else{
-			$result['fees']=0;
-		}
-		if ($trans['type']==3) {
-			$result['nets'] = prnpays($trans['amount'] + $trans['fees'],false);
-		} else {
-			$result['nets']=$trans['sender']>0&&$trans['sender']==$uid&&$trans['receiver']>0?prnpays($trans['amount'], false):prnpays($trans['amount']-$trans['fees'], false);
-		}
-		$result['comments']=prntext($trans['comments']);
-		$result['ecomments']=prntext($trans['ecomments']);
-		$result['canrefund']=can_refund($trans['id'], $uid);
-		$result['trxid']=$trans['trxid'];
-	}
-	return $result;
-}
-function get_receiver($id){
-	global $data;
-	$result=db_rows("SELECT `receiver`,`fees` FROM `{$data['DbPrefix']}transactions` WHERE `id`={$id} LIMIT 1");
-	return $result[0];
-}
-
-function insert_transaction($trx_id ,$sender, $receiver, $related, $amount, $fees, $type, $status, $comments='', $ecomments='' ){
-
-	global $data;
-  $sql = "INSERT INTO `{$data['DbPrefix']}transactions`".
-  "(`tdate`,`sender`,`receiver`,`related`,`amount`,`fees`,`type`,`status`,".
-  "`comments`,`ecomments` ,`trxid` )VALUES".
-  "('".date("Y-m-d H:i:s")."',{$sender},{$receiver},{$related},{$amount},{$fees},{$type},{$status},".
-  "'".addslashes($comments)."','".addslashes($ecomments)."','".addslashes($trx_id)."')";
-
-  $insert = db_query($sql);
-
-  // echo nl2br($sql);
-
-  return $insert;
+    return $result[0];
 
 }
 
 
 
-function insert_commissions($uid, $amount){
+function get_status_color($status)
+{
 
-	global $data;
+    $result='000000';
 
-	$i=0;
+    switch($status){
 
-	$fees=($amount*$data['ReferralPercent']/100);
+    case 0:
+        $result='blue';
+        break;
+    case 1:
+        $result='green';
+        break;
+    case 2:
+        $result='red';
+        break;
+    case 3:
+        $result='maroon';
+        break;
+    case 4:
+        $result='orange';
+        break;
+    case 99:
+        $result='red';
+        break;
+    }
+    return $result;
+}
 
-	$sponsor=get_sponsor_id($uid);
+function get_notification_by_id($user_id, $notification_id )
+{
+    global $data;
 
-	$recvname=get_member_username($uid);
+    $sql = "SELECT *".
+    " FROM `{$data['DbPrefix']}notifications` ".
+    " WHERE `{$data['DbPrefix']}notifications`.id = '".$notification_id."' ".
+    " AND `{$data['DbPrefix']}notifications`.member_id = '".$user_id."' ";
 
-	$trxid = get_trx_id();
+    // echo nl2br($sql);
+    $notification = db_rows($sql);
+    return $notification[0];
+}
 
-	while($sponsor && $i < $data['ReferralLevels']-1){
+function get_transaction_by_id($user_id, $transaction_id )
+{
+    $transaction = get_transactions($user_id, 'both', -1, -1, 0, 0, '', '', '', $transaction_id);
+    // var_dump($transaction);
+    return $transaction[0];
+}
 
-		insert_transaction(
-			$trxid,
-			-1,
-			$sponsor,
-			$uid,
-			$fees,
-			0,
-			5, //type
-			1, //
-			"Commission from member {$recvname}"
-		);
+function get_transactions($uid, $dir='both', $type=-1, $status=-1, $start=0,$count=0, $order='', $suser='', $sdate='', $transaction_id='')
+{
 
-		$sponsor=get_sponsor_id($sponsor);
+    global $data;
 
-		$i++;
+    if(!is_null($suser) || !is_null($sdata)) {
+        $start=0;
+        $count=0;
+    }
 
-	}
+    $order=($order?$order:'ORDER BY `tdate` DESC');
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+    ($count?" LIMIT {$count}":''));
+
+    $sql = "SELECT *,(TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`".
+    " FROM `{$data['DbPrefix']}transactions` ".
+    " WHERE `{$data['DbPrefix']}transactions`.id !=0 ".
+    ($uid?" AND ".set_trtype($uid, $dir):'').
+    ($type<0? '' : " AND `type`={$type}").
+    ($status<0? '' : " AND `status`={$status}").
+    ($transaction_id == '' ? '' : " AND `id` = {$transaction_id}").
+    " {$order}{$limit}";
+
+    // echo nl2br($sql);
+
+    $trans=db_rows($sql);
+
+    $result=array();
+
+    foreach($trans as $key=>$value){
+        if($suser) {
+            if(strpos(get_member_username($value['sender']), $suser)===false
+                && strpos(get_member_username($value['receiver']), $suser)===false
+            ) { continue;
+            }
+        }elseif($sdate) {
+            if(strpos($value['tdate'], $sdate)===false) { continue;
+            }
+        }
+        $dir=(bool)($value['sender']!=$uid);
+        $result[$key]['id']=$value['id'];
+        $result[$key]['direction']=$dir?'1':'0';
+        $result[$key]['sender']=$value['sender'];
+        // $result[$key]['senduser']=prnuser($value['sender']);
+        $result[$key]['senduser']=prnuser($value['sender']);
+        $result[$key]['receiver']=$value['receiver'];
+        // $result[$key]['recvuser']=prnuser($value['receiver']);
+        $result[$key]['recvuser']=prnuser($value['receiver']);
+        $result[$key]['userid']=$dir?$value['sender']:$value['receiver'];
+        // $result[$key]['username']=prnuser($result[$key]['userid']);
+        $result[$key]['username']=prnuser($result[$key]['userid']);
+        $result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
+        $result[$key]['amount']=prnpays($result[$key]['oamount']);
+        $result[$key]['tdate']=prndate($value['tdate']);
+        $result[$key]['period']=$value['period'];
+        $result[$key]['ostatus']=$value['status'];
+        $result[$key]['type']=$data['TransactionType'][$value['type']];
+        $result[$key]['status']="<font color=".get_status_color($value['status']).">".$data['TransactionStatus'][$value['status']].'</font>';
+        $result[$key]['status_color'] = get_status_color($value['status']);
+        if($value['fees']>0 && ($value['type']==1||$value['type']==2||($dir&&$value['type']==0)) ) {
+            $result[$key]['ofees']=-$value['fees'];
+        }elseif ($value['type']==3 ) {
+            $result[$key]['ofees']=-$value['fees'];
+        }else {
+            $result[$key]['ofees']=0;
+        }
+        $result[$key]['fees']=prnfees($result[$key]['ofees']);
+        if ($value['type']==3) {
+            $result[$key]['onets'] = $value['amount']+$value['fees'];
+        } else {
+            $result[$key]['onets']=$value['sender']>0&&$value['sender']==$uid&&$value['receiver']>0?$value['amount']:$value['amount']-$value['fees'];
+        }
+        $result[$key]['nets']=prnpays($result[$key]['onets'], false);
+        $result[$key]['comments']=prntext($value['comments']);
+        $result[$key]['ecomments']=prntext($value['ecomments']);
+        $result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
+        $result[$key]['canrefund']=can_refund($value['id'], $uid);
+        $result[$key]['trxid']=$value['trxid'];
+    }
+    return $result;
+}
+
+
+function get_transactions_ussd($uid, $start=0,$count=0 )
+{
+
+    global $data;
+
+    $order=($order?$order:'ORDER BY `tdate` DESC');
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+    ($count?" LIMIT {$count}":''));
+    $trans=db_rows(
+        "SELECT *,(TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`".
+        " FROM `{$data['DbPrefix']}transactions` INNER JOIN `{$data['DbPrefix']}ussd` ON id = ussd_trx_id  ".
+        " WHERE `sender` =".$uid." AND `type`=3 ".
+        " {$order}{$limit}"
+    );
+    $result=array();
+
+    foreach($trans as $key=>$value){
+
+        $dir=(bool)($value['sender']!=$uid);
+        $result[$key]['id']=$value['id'];
+        $result[$key]['direction']=$dir?'1':'0';
+        $result[$key]['sender']=$value['sender'];
+        $result[$key]['senduser']=prnuser($value['sender']);
+        $result[$key]['receiver']=$value['receiver'];
+        $result[$key]['recvuser']=prnuser($value['receiver']);
+        $result[$key]['userid']=$dir?$value['sender']:$value['receiver'];
+        $result[$key]['username']=prnuser($result[$key]['userid']);
+        $result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
+        $result[$key]['amount']=prnpays($result[$key]['oamount']);
+        //$result[$key]['tdate']=smalldate($value['tdate']);
+        $result[$key]['tdate']=prndate($value['tdate']);
+        $result[$key]['period']=$value['period'];
+        $result[$key]['ostatus']=$value['status'];
+        $result[$key]['type']=$data['TransactionType'][$value['type']];
+        $result[$key]['status']="<font color=".get_status_color($value['status']).">".$data['TransactionStatus'][$value['status']].'</font>';
+
+        if($value['fees']>0 && ($value['type']==1||$value['type']==2||($dir&&$value['type']==0)) ) {
+            $result[$key]['ofees']=-$value['fees'];
+        }elseif ($value['type']==3 ) {
+            $result[$key]['ofees']=-$value['fees'];
+        }else {
+            $result[$key]['ofees']=0;
+        }
+        $result[$key]['fees']=prnfees($result[$key]['ofees']);
+        //if ($value['type']==3) {
+        //    $result[$key]['onets'] = $value['amount']+$value['fees'];
+        //} else {
+        $result[$key]['onets']=$value['sender']>0&&$value['sender']==$uid&&$value['receiver']>0?$value['amount']:$value['amount']+$value['fees'];
+        //}
+        $result[$key]['nets']=prnpays($result[$key]['onets'], false);
+        $result[$key]['comments']=prntext($value['comments']);
+        $result[$key]['ecomments']=prntext($value['ecomments']);
+        $result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
+        $result[$key]['canrefund']=can_refund($value['id'], $uid);
+        $result[$key]['ussd_operator']=$value['ussd_operator'];
+        $result[$key]['ussd_number']=$value['ussd_number'];
+        $result[$key]['ussd_retries']=$value['ussd_retries'];
+
+
+    }
+    return $result;
+}
+
+
+
+
+function get_transaction_detail($id, $uid)
+{
+
+    global $data;
+    $trans=db_rows("SELECT * FROM `{$data['DbPrefix']}transactions` WHERE `id`={$id} LIMIT 1");
+    $trans=$trans[0];
+    if($trans) {
+
+        $dir=(bool)($trans['sender']!=$uid);
+        $result['id']=$trans['id'];
+        $result['direction']=$dir?'FROM':'TO';
+        $result['sender']=$trans['sender'];
+        $result['receiver']=$trans['receiver'];
+        $result['userid']=$dir?$trans['sender']:$trans['receiver'];
+        $result['username']=prnuser($result['userid']);
+        $result['oamount']=$dir?$trans['amount']:-$trans['amount'];
+        $result['amount']=prnpays($dir?$trans['amount']:-$trans['amount']);
+        $result['ofees']=$dir?$trans['fees']:+$trans['fees'];
+        $result['tdate']=prndate($trans['tdate']);
+        $result['otype']=$trans['type'];
+        $result['type']=ucfirst($data['TransactionType'][$trans['type']]);
+        $result['ostatus']=$trans['status'];
+        $result['status']=
+        "<font color=".get_status_color($trans['status']).">".
+        ucfirst($data['TransactionStatus'][$trans['status']]).
+        "</font>";
+        if($trans['fees']>0&&($trans['type']==1||$trans['type']==2|| $trans['type']==3 || ($dir&&$trans['type']==0))) {
+            $result['fees']=-$trans['fees'];
+        }else{
+            $result['fees']=0;
+        }
+        if ($trans['type']==3) {
+            $result['nets'] = prnpays($trans['amount'] + $trans['fees'], false);
+        } else {
+            $result['nets']=$trans['sender']>0&&$trans['sender']==$uid&&$trans['receiver']>0?prnpays($trans['amount'], false):prnpays($trans['amount']-$trans['fees'], false);
+        }
+        $result['comments']=prntext($trans['comments']);
+        $result['ecomments']=prntext($trans['ecomments']);
+        $result['canrefund']=can_refund($trans['id'], $uid);
+        $result['trxid']=$trans['trxid'];
+    }
+    return $result;
+}
+function get_receiver($id)
+{
+    global $data;
+    $result=db_rows("SELECT `receiver`,`fees` FROM `{$data['DbPrefix']}transactions` WHERE `id`={$id} LIMIT 1");
+    return $result[0];
+}
+
+function insert_transaction($trx_id ,$sender, $receiver, $related, $amount, $fees, $type, $status, $comments='', $ecomments='' )
+{
+
+    global $data;
+    $sql = "INSERT INTO `{$data['DbPrefix']}transactions`".
+    "(`tdate`,`sender`,`receiver`,`related`,`amount`,`fees`,`type`,`status`,".
+    "`comments`,`ecomments` ,`trxid` )VALUES".
+    "('".date("Y-m-d H:i:s")."',{$sender},{$receiver},{$related},{$amount},{$fees},{$type},{$status},".
+    "'".addslashes($comments)."','".addslashes($ecomments)."','".addslashes($trx_id)."')";
+
+    $insert = db_query($sql);
+
+    // echo nl2br($sql);
+
+    return $insert;
 
 }
 
 
 
-function unreg_member_pay($sender, $receiver, $amount, $comments) {
+function insert_commissions($uid, $amount)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    $i=0;
 
-		"INSERT INTO `{$data['DbPrefix']}temp_pays`".
+    $fees=($amount*$data['ReferralPercent']/100);
 
-		" (`tdate`,`sender`,`receiver`,`amount`,`status`,".
+    $sponsor=get_sponsor_id($uid);
 
-		"`comments`)VALUES".
+    $recvname=get_member_username($uid);
 
-		"(NOW(),{$sender},'{$receiver}',{$amount},0,".
+    $trxid = get_trx_id();
 
-		"'".addslashes($comments)."')"
+    while($sponsor && $i < $data['ReferralLevels']-1){
 
-	);
-
-	$post['email']=$receiver;
-
-	$post['username']=get_member_username($sender);
-
-	$post['emailadr']=get_member_email($sender);
-
-	$post['amount']=$amount;
-
-	$post['comments']=$comments;
-
-	send_email('PAYMENT-TO-UNREGMEMBER', $post);
-}
-
-
-
-function get_unreg_member_pay($uid, $which='SENDER', $status=0) {
-
-	global $data;
-
-	if($which=='RECEIVER') $receiver=get_member_email($uid);
-
-	$trans=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}temp_pays`".
-
-		($which=='RECEIVER'?" WHERE `receiver`='{$receiver}' AND `status`={$status} ":
-
-		" WHERE `sender`={$uid} AND `status`={$status} ")
-
-
-
-	);
-
-	$result=array();
-
-	foreach($trans as $key=>$value){
-
-		$result[$key]['id']=$value['id'];
-
-		$result[$key]['receiver']=$value['receiver'];
-
-		$result[$key]['sender']=$value['sender'];
-
-		$result[$key]['recvuser']=prnuser($value['receiver']);
-
-		$result[$key]['amount']=prnpays($value['amount']);
-
-		$result[$key]['tdate']=prndate($value['tdate']);
-
-		$result[$key]['comments']=prntext($value['comments']);
-
-
-
-	}
-
-	return $result;
-
-}
-
-
-
-function delete_unreg_member_pay($id) {
-
-	global $data;
-
-	db_query(
-
-                "DELETE FROM `{$data['DbPrefix']}unreg_member_pays`".
-
-                " WHERE `id`={$id}"
-
+        insert_transaction(
+            $trxid,
+            -1,
+            $sponsor,
+            $uid,
+            $fees,
+            0,
+            5, //type
+            1, //
+            "Commission from member {$recvname}"
         );
 
+        $sponsor=get_sponsor_id($sponsor);
+
+        $i++;
+
+    }
+
 }
 
 
 
-function update_unreg_member_pays($receiver) {
+function unreg_member_pay($sender, $receiver, $amount, $comments)
+{
 
-	global $data;
+    global $data;
 
-	// purge older than 10 days
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}temp_pays`".
 
-	db_query(
+        " (`tdate`,`sender`,`receiver`,`amount`,`status`,".
 
-		"DELETE FROM `{$data['DbPrefix']}temp_pays`".
+        "`comments`)VALUES".
 
-		" WHERE(TO_DAYS(NOW())-TO_DAYS(`tdate`)>=10 AND `status`=0)"
+        "(NOW(),{$sender},'{$receiver}',{$amount},0,".
 
-	);
+        "'".addslashes($comments)."')"
+    );
 
-	$receiver_email=get_member_email($receiver);
+    $post['email']=$receiver;
 
-	$pending=db_rows("SELECT *".
+    $post['username']=get_member_username($sender);
 
-" FROM `{$data['DbPrefix']}temp_pays` WHERE(`receiver`='{$receiver_email}' AND `status`=0)"
+    $post['emailadr']=get_member_email($sender);
 
-	);
+    $post['amount']=$amount;
 
-	$pending=$pending[0];
+    $post['comments']=$comments;
 
-	foreach($pending as $key=>$value){
+    send_email('PAYMENT-TO-UNREGMEMBER', $post);
+}
 
-		$pending[$key] = @addslashes($value);
 
-	}
 
-	$fees=($pending['amount']*$data['PaymentPercent']/100)+$data['PaymentFees'];
+function get_unreg_member_pay($uid, $which='SENDER', $status=0)
+{
 
-	transaction(get_trx_id() ,$pending['sender'], $receiver, $pending['amount'], $fees,0,2, $pending['comments'] );
+    global $data;
 
-	db_query(
+    if($which=='RECEIVER') { $receiver=get_member_email($uid);
+    }
 
-                "UPDATE `{$data['DbPrefix']}temp_pays`".
+    $trans=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}temp_pays`".
+
+        ($which=='RECEIVER'?" WHERE `receiver`='{$receiver}' AND `status`={$status} ":
+
+        " WHERE `sender`={$uid} AND `status`={$status} ")
+    );
+
+    $result=array();
+
+    foreach($trans as $key=>$value){
+
+        $result[$key]['id']=$value['id'];
+
+        $result[$key]['receiver']=$value['receiver'];
+
+        $result[$key]['sender']=$value['sender'];
+
+        $result[$key]['recvuser']=prnuser($value['receiver']);
+
+        $result[$key]['amount']=prnpays($value['amount']);
+
+        $result[$key]['tdate']=prndate($value['tdate']);
+
+        $result[$key]['comments']=prntext($value['comments']);
+
+
+
+    }
+
+    return $result;
+
+}
+
+
+
+function delete_unreg_member_pay($id)
+{
+
+    global $data;
+
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}unreg_member_pays`".
+
+                " WHERE `id`={$id}"
+    );
+
+}
+
+
+
+function update_unreg_member_pays($receiver)
+{
+
+    global $data;
+
+    // purge older than 10 days
+
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}temp_pays`".
+
+        " WHERE(TO_DAYS(NOW())-TO_DAYS(`tdate`)>=10 AND `status`=0)"
+    );
+
+    $receiver_email=get_member_email($receiver);
+
+    $pending=db_rows(
+        "SELECT *".
+
+        " FROM `{$data['DbPrefix']}temp_pays` WHERE(`receiver`='{$receiver_email}' AND `status`=0)"
+    );
+
+    $pending=$pending[0];
+
+    foreach($pending as $key=>$value){
+
+        $pending[$key] = @addslashes($value);
+
+    }
+
+    $fees=($pending['amount']*$data['PaymentPercent']/100)+$data['PaymentFees'];
+
+    transaction(get_trx_id(), $pending['sender'], $receiver, $pending['amount'], $fees, 0, 2, $pending['comments']);
+
+    db_query(
+        "UPDATE `{$data['DbPrefix']}temp_pays`".
 
                 " SET `status`=1".
 
                 " WHERE `receiver`='{$receiver_email}'"
-        );
-	//TO DO: email confirmation to sender
+    );
+    //TO DO: email confirmation to sender
 
-	$post['fees']=$fees;
-	$post['email']=get_member_email($pending['receiver']);
-	$post['amount']=$pending['amount'];
-	$post['sender']=$pending['sender'];
-	send_email('PAY-FROM-UNREGMEM-ACCEPTED', $post);
-	// delete old completed transactions in table temp_pays?? or not?
+    $post['fees']=$fees;
+    $post['email']=get_member_email($pending['receiver']);
+    $post['amount']=$pending['amount'];
+    $post['sender']=$pending['sender'];
+    send_email('PAY-FROM-UNREGMEM-ACCEPTED', $post);
+    // delete old completed transactions in table temp_pays?? or not?
 }
 
-function transaction($trxid ,$sender, $receiver, $amount, $fees, $type, $status, $comments='', $ecomments='' ){
+function transaction($trxid ,$sender, $receiver, $amount, $fees, $type, $status, $comments='', $ecomments='' )
+{
 
-	global $data;
+    global $data;
 
-	$insert = insert_transaction($trxid ,$sender, $receiver, 0, $amount, $fees, $type, $status, $comments, $ecomments);
+    $insert = insert_transaction($trxid, $sender, $receiver, 0, $amount, $fees, $type, $status, $comments, $ecomments);
 
-	if($sender>0 && $type==0){
+    if($sender>0 && $type==0) {
 
-		if($data['ReferralPays']) insert_commissions($receiver, $fees);
+        if($data['ReferralPays']) { insert_commissions($receiver, $fees);
+        }
 
-	}
+    }
 
-  return $insert;
+    return $insert;
 
 }
 
 
 
-function update_transaction_status($uid, $id, $status){
+function update_transaction_status($uid, $id, $status)
+{
 
-	global $data;
-	if($uid>0){
-		$user=get_member_info($uid);
-		$name="{$user['fname']} {$user['lname']} ({$user['username']})";
-	}else{
-		$name='System Administrator (system)';
-	}
-	$tran=get_transaction_detail($id, $uid);
-	$post['email']=get_member_email($tran['receiver']);
-	$where='';
-	$comments='';
-	switch($status){
-		case 1:
-			if($uid>0)$where=" AND `sender`={$uid}";
-			$comments="La transaction a &eacute;t&eacute; confirm&eacute;e par {$name}";
+    global $data;
+    if($uid>0) {
+        $user=get_member_info($uid);
+        $name="{$user['fname']} {$user['lname']} ({$user['username']})";
+    }else{
+        $name='System Administrator (system)';
+    }
+    $tran=get_transaction_detail($id, $uid);
+    $post['email']=get_member_email($tran['receiver']);
+    $where='';
+    $comments='';
+    switch($status){
+    case 1:
+        if($uid>0) { $where=" AND `sender`={$uid}";
+        }
+        $comments="La transaction a &eacute;t&eacute; confirm&eacute;e par {$name}";
 
-			if($tran['otype']==1||$tran['otype']==3){
-				if($data['ReferralPays'])insert_commissions($tran['receiver'], $tran['ofees']);
-			}
-			if($tran['otype']==3)send_email('CONFIRM-ESCROW', $post);
-			break;
-		case 2:
-			if(($uid>0)&&($uid==$tran['sender'])){
-				unset($status);
-				break;
-			}
-			$comments="La transaction a &eacute;t&eacute; annul&eacute;e par {$name}";
-			if($tran['otype']==3)send_email('CANCEL-ESCROW', $post);
-			break;
-		case 3:
-			$comments="La transaction a &eacute;t&eacute; rembours&eacute;e par {$name}";
-			if($tran['otype']==3)send_email('REFUND-ESCROW', $post);
-			break;
-	}
-	$update = db_query(
-		"UPDATE `{$data['DbPrefix']}transactions`".
-		" SET `tdate`=NOW(),`status`={$status},`comments`='{$comments}'".
-		" WHERE `id`={$id}{$where}"
-	);
-
-  return $update;
-}
-
-function update_transaction_status_topup( $id, $status,$comments){
-
-	global $data;
-
-	db_query(
-		"UPDATE `{$data['DbPrefix']}transactions`".
-		" SET `tdate`=NOW(),`status`={$status},`comments`='{$comments}'".
-		" WHERE `id`={$id}"
-	);
-}
-#################################################################################################
-# ussd function
-#################################################################################################
- function get_ussd_by_trx_id($trx_id=''){
-   global $data;
-
-   $result=db_rows(
-
-     "SELECT  `{$data['DbPrefix']}transactions`.status, {$data['DbPrefix']}ussd.* FROM `{$data['DbPrefix']}ussd` ".
-     "INNER JOIN  `{$data['DbPrefix']}transactions` ".
-          "ON (`{$data['DbPrefix']}transactions`.id = `{$data['DbPrefix']}ussd`.ussd_trx_id) ".
-     "WHERE `ussd_retries`={$trx_id} LIMIT 1"
+        if($tran['otype']==1||$tran['otype']==3) {
+            if($data['ReferralPays']) { insert_commissions($tran['receiver'], $tran['ofees']);
+            }
+        }
+        if($tran['otype']==3) { send_email('CONFIRM-ESCROW', $post);
+        }
+        break;
+    case 2:
+        if(($uid>0)&&($uid==$tran['sender'])) {
+            unset($status);
+            break;
+        }
+        $comments="La transaction a &eacute;t&eacute; annul&eacute;e par {$name}";
+        if($tran['otype']==3) { send_email('CANCEL-ESCROW', $post);
+        }
+        break;
+    case 3:
+        $comments="La transaction a &eacute;t&eacute; rembours&eacute;e par {$name}";
+        if($tran['otype']==3) { send_email('REFUND-ESCROW', $post);
+        }
+        break;
+    }
+    $update = db_query(
+        "UPDATE `{$data['DbPrefix']}transactions`".
+        " SET `tdate`=NOW(),`status`={$status},`comments`='{$comments}'".
+        " WHERE `id`={$id}{$where}"
     );
 
-   return $result[0];
+    return $update;
 }
 
-function ussd($user_id,$trx_id ,$operator, $mobile, $montant,$status,$api_trx_id ){
+function update_transaction_status_topup( $id, $status,$comments)
+{
 
-	global $data;
+    global $data;
 
-	if($operator == 'Djezzy') {
-		$server_span = '1';
-	} else if($operator == 'Mobilis') {
-		$server_span = '3';
-	} else if($operator == 'Ooredoo') {
-		$server_span = '2';
-	}
+    db_query(
+        "UPDATE `{$data['DbPrefix']}transactions`".
+        " SET `tdate`=NOW(),`status`={$status},`comments`='{$comments}'".
+        " WHERE `id`={$id}"
+    );
+}
+// 
+// ussd function
+// 
+function get_ussd_by_trx_id($trx_id='')
+{
+    global $data;
 
-	db_query(
-		"INSERT INTO `{$data['DbPrefix']}ussd`".
-		"(`ussd_trx_id`,`ussd_user_id`, `ussd_operator`,`ussd_number`,`ussd_amount`,`ussd_status`,`ussd_created_date`, `ussd_type`,`ussd_source`, `ussd_server_ip`, `ussd_server_span`,`ussd_retries`) VALUES".
-"('{$trx_id}','{$user_id}','{$operator}','{$mobile}',{$montant},'{$status}','".date("Y-m-d H:i:s")."','Credit', 'Edinars', '192.168.30.220', '{$server_span}' , {$api_trx_id})");
+    $result=db_rows(
+        "SELECT  `{$data['DbPrefix']}transactions`.status, {$data['DbPrefix']}ussd.* FROM `{$data['DbPrefix']}ussd` ".
+        "INNER JOIN  `{$data['DbPrefix']}transactions` ".
+         "ON (`{$data['DbPrefix']}transactions`.id = `{$data['DbPrefix']}ussd`.ussd_trx_id) ".
+        "WHERE `ussd_retries`={$trx_id} LIMIT 1"
+    );
 
+    return $result[0];
 }
 
-#################################################################################################
-# Produit function
-#################################################################################################
+function ussd($user_id,$trx_id ,$operator, $mobile, $montant,$status,$api_trx_id )
+{
 
+    global $data;
 
+    if($operator == 'Djezzy') {
+        $server_span = '1';
+    } else if($operator == 'Mobilis') {
+        $server_span = '3';
+    } else if($operator == 'Ooredoo') {
+        $server_span = '2';
+    }
 
-function select_product_details($id, $uid){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}products`".
-
-		" WHERE `id`={$id} AND `owner`={$uid} LIMIT 1"
-
-	 );
-
-	return $result[0];
-
-}
-
-
-function update_sold($id, $quantity){
-
-	global $data;
-
-	db_query(
-		"UPDATE `{$data['DbPrefix']}products` SET `sold`= `sold` + {$quantity}".
-		" WHERE `id`={$id}" );
-}
-
-
-###############################################################################
-
-function select_button($id){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT `button` FROM `{$data['DbPrefix']}products` WHERE `id`={$id} LIMIT 1"
-
-	);
-
-	return $result[0]['button'];
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}ussd`".
+        "(`ussd_trx_id`,`ussd_user_id`, `ussd_operator`,`ussd_number`,`ussd_amount`,`ussd_status`,`ussd_created_date`, `ussd_type`,`ussd_source`, `ussd_server_ip`, `ussd_server_span`,`ussd_retries`) VALUES".
+        "('{$trx_id}','{$user_id}','{$operator}','{$mobile}',{$montant},'{$status}','".date("Y-m-d H:i:s")."','Credit', 'Edinars', '192.168.30.220', '{$server_span}' , {$api_trx_id})"
+    );
 
 }
 
+// 
+// Produit function
+// 
 
 
-function select_type($id){
 
-	global $data;
+function select_product_details($id, $uid)
+{
 
-	$result=db_rows(
+    global $data;
 
-		"SELECT `type` FROM `{$data['DbPrefix']}products` WHERE `id`={$id} LIMIT 1"
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}products`".
 
-	);
+        " WHERE `id`={$id} AND `owner`={$uid} LIMIT 1"
+    );
 
-	return $result[0]['type'];
+    return $result[0];
 
 }
 
 
+function update_sold($id, $quantity)
+{
 
-function insert_subscription($owner, $member, $product){
+    global $data;
 
-	global $data;
+    db_query(
+        "UPDATE `{$data['DbPrefix']}products` SET `sold`= `sold` + {$quantity}".
+        " WHERE `id`={$id}" 
+    );
+}
 
-	db_query(
 
-		"INSERT INTO `{$data['DbPrefix']}subscriptions`(".
+// 
 
-		"`owner`,`member`,`product`,`sdate`,`pdate`".
+function select_button($id)
+{
 
-		")VALUES(".
+    global $data;
 
-		"{$owner},{$member},{$product},NOW(),NOW()".
+    $result=db_rows(
+        "SELECT `button` FROM `{$data['DbPrefix']}products` WHERE `id`={$id} LIMIT 1"
+    );
 
-		")"
-
-	);
-
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}products` SET".
-
-		" `sold`=`sold`+1".
-
-		" WHERE `id`={$product}"
-
-	);
+    return $result[0]['button'];
 
 }
 
 
 
-function select_subscriptions($uid){
+function select_type($id)
+{
 
-	global $data;
+    global $data;
 
-	$subscr=db_rows(
+    $result=db_rows(
+        "SELECT `type` FROM `{$data['DbPrefix']}products` WHERE `id`={$id} LIMIT 1"
+    );
 
-		"SELECT s.id,s.owner,s.pdate,p.nom,p.prix,p.periode".
-
-		" FROM `{$data['DbPrefix']}subscriptions` AS s,`{$data['DbPrefix']}products` AS p".
-
-		" WHERE s.owner={$uid} AND p.id=s.product"
-
-	);
-	$result=array();
-
-	foreach($subscr as $key=>$value){
-
-		$result[$key]['id']=$value['id'];
-
-		$result[$key]['owner']=get_member_username($value['owner']);
-
-		$result[$key]['prix']=$value['prix'];
-
-		$result[$key]['periode']=$value['periode'];
-
-		$result[$key]['nom']=$value['nom'];
-
-		$result[$key]['pdate']=$value['pdate'];
-
-	}
-
-	return $result;
+    return $result[0]['type'];
 
 }
 
 
 
-function cancel_subscription($id){
+function insert_subscription($owner, $member, $product)
+{
 
-	global $data;
+    global $data;
 
-	$rows=db_rows(
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}subscriptions`(".
 
-		"SELECT `owner`,`member`,`product`".
+        "`owner`,`member`,`product`,`sdate`,`pdate`".
 
-		" FROM `{$data['DbPrefix']}subscriptions`".
+        ")VALUES(".
 
-		" WHERE `id`={$id}"
+        "{$owner},{$member},{$product},NOW(),NOW()".
 
-	);
+        ")"
+    );
 
-	$owner=$rows[0]['owner'];
+    db_query(
+        "UPDATE `{$data['DbPrefix']}products` SET".
 
-	$member=$rows[0]['member'];
+        " `sold`=`sold`+1".
 
-	$product=$rows[0]['product'];
-
-	$rows=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}products`".
-
-		" WHERE `id`={$product}"
-
-	);
-
-	$product_infos=$rows[0];
-
-  // echo nl2br("UPDATE `{$data['DbPrefix']}products` SET".
-  // " `sold`=`sold`-1".
-  //
-  // " WHERE `id`={$product}");
-  // exit();
-
-	db_query(
-
-		"UPDATE `{$data['DbPrefix']}products` SET".
-
-		" `sold`=`sold`-1".
-
-		" WHERE `id`={$product}"
-
-	);
-
-	$cancel = db_query(
-
-		"DELETE FROM `{$data['DbPrefix']}subscriptions` WHERE `id`={$id}"
-
-	);
-
-	$owner=get_member_info($owner);
-
-	$post['product']=$product;
-
-	$post['username']=$owner['username'];
-
-	$post['fullname']="{$owner['fname']} {$owner['lname']}";
-
-	$post['email']=$owner['email'];
-
-	$member=get_member_info($member);
-
-	$post['comments']=
-
-		"Member username: {$member['username']}\n".
-
-		"Member e-mail address: {$member['email']}\n"
-
-	;
-
-	send_email('MEMBER-CANCELLED-SUBSCRIPTION', $post);
-
-  return $cancel;
-}
-
-
-
-function get_referrals_count($uid){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT COUNT(`id`) as total FROM `{$data['DbPrefix']}members`".
-
-		" WHERE `sponsor`={$uid}"
-
-	);
-
-	return $result[0]['total'];
+        " WHERE `id`={$product}"
+    );
 
 }
 
 
 
-function optimize($uid){
+function select_subscriptions($uid)
+{
 
-	global $data;
+    global $data;
 
-	$fp=@fopen("{$data['Path']}/{$uid}.htm", 'w+');
+    $subscr=db_rows(
+        "SELECT s.id,s.owner,s.pdate,p.nom,p.prix,p.periode".
 
-	@fwrite($fp, '');
+        " FROM `{$data['DbPrefix']}subscriptions` AS s,`{$data['DbPrefix']}products` AS p".
 
-	@fclose($fp);
+        " WHERE s.owner={$uid} AND p.id=s.product"
+    );
+    $result=array();
 
-}
+    foreach($subscr as $key=>$value){
 
+        $result[$key]['id']=$value['id'];
 
+        $result[$key]['owner']=get_member_username($value['owner']);
 
-function calculate_downline($uid, $clevel, $result=null){
+        $result[$key]['prix']=$value['prix'];
 
-	global $data;
+        $result[$key]['periode']=$value['periode'];
 
-	$members=mysqli_query($data['cid'], "SELECT * FROM `{$data['DbPrefix']}members` WHERE `sponsor`={$uid}");
+        $result[$key]['nom']=$value['nom'];
 
-	if($members){
+        $result[$key]['pdate']=$value['pdate'];
 
-		while($row=mysqli_fetch_array($members, MYSQLI_ASSOC)){
+    }
 
-			$nlevel=$clevel+1;
-
-			if($nlevel>$data['ReferralLevels'])return $result;
-
-			$query=mysqli_query($data['cid'],
-
-				"SELECT SUM(`amount`) AS `earned`".
-
-				" FROM `{$data['DbPrefix']}transactions`".
-
-				" WHERE `receiver`={$uid} AND `sender`=-1 AND `related`={$row['id']}"
-
-			);
-
-			if($query){
-
-				$arow=mysqli_fetch_array($query, MYSQLI_ASSOC);
-
-				$result+=$arow['earned'];
-
-			}
-
-			$result=calculate_downline($row['id'], $nlevel, $result);
-
-		}
-
-	}
-
-	return $result;
+    return $result;
 
 }
 
 
 
-function get_referrals($uid, $start=0, $count=0){
+function cancel_subscription($id)
+{
 
-	global $data;
+    global $data;
 
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+    $rows=db_rows(
+        "SELECT `owner`,`member`,`product`".
 
-		($count?" LIMIT {$count}":''));
+        " FROM `{$data['DbPrefix']}subscriptions`".
 
-	$members=db_rows(
+        " WHERE `id`={$id}"
+    );
 
-		"SELECT * FROM `{$data['DbPrefix']}members`".
+    $owner=$rows[0]['owner'];
 
-		" WHERE `sponsor`={$uid} ORDER BY `cdate` DESC{$limit}"
+    $member=$rows[0]['member'];
 
-	);
+    $product=$rows[0]['product'];
 
-	$result=array();
+    $rows=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}products`".
 
-	foreach($members as $key=>$value){
+        " WHERE `id`={$product}"
+    );
 
-		$result[$key]['id']=$value['id'];
+    $product_infos=$rows[0];
 
-		$result[$key]['cdate']=prndate($value['cdate']);
+    // echo nl2br("UPDATE `{$data['DbPrefix']}products` SET".
+    // " `sold`=`sold`-1".
+    //
+    // " WHERE `id`={$product}");
+    // exit();
 
-		$result[$key]['username']=prnuser($value['id']);
+    db_query(
+        "UPDATE `{$data['DbPrefix']}products` SET".
 
-		$result[$key]['fullname']="{$value['fname']} {$value['lname']}";
+        " `sold`=`sold`-1".
 
-		$result[$key]['email']=prntext($value['email']);
+        " WHERE `id`={$product}"
+    );
 
-		$result[$key]['fname']=prntext($value['fname']);
+    $cancel = db_query(
+        "DELETE FROM `{$data['DbPrefix']}subscriptions` WHERE `id`={$id}"
+    );
 
-		$result[$key]['lname']=prntext($value['lname']);
+    $owner=get_member_info($owner);
 
-		$result[$key]['referrals']=get_referrals_count($value['id']);
+    $post['product']=$product;
 
-		$result[$key]['payments']=get_transactions_count(
+    $post['username']=$owner['username'];
 
-			$value['id'], 'both', ' `type`=0 AND `status`=2 '
+    $post['fullname']="{$owner['fname']} {$owner['lname']}";
 
-		);
+    $post['email']=$owner['email'];
 
-		$result[$key]['earned']=prnpays(calculate_downline($uid, 1));
+    $member=get_member_info($member);
 
-	}
+    $post['comments']=
 
-	return $result;
+    "Member username: {$member['username']}\n".
 
+    "Member e-mail address: {$member['email']}\n"
+
+    ;
+
+    send_email('MEMBER-CANCELLED-SUBSCRIPTION', $post);
+
+    return $cancel;
 }
 
-###############################################################################
-
-function get_news($where){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}news`".
-
-		" WHERE {$where} ORDER BY `date` DESC"
-
-	);
-
-	return $result;
-
-}
 
 
+function get_referrals_count($uid)
+{
 
-function get_latest_news(){
+    global $data;
 
-	global $data;
+    $result=db_rows(
+        "SELECT COUNT(`id`) as total FROM `{$data['DbPrefix']}members`".
 
-	$result=get_news('`active`>0');
+        " WHERE `sponsor`={$uid}"
+    );
 
-	return $result;
-
-}
-
-###############################################################################
-
-function select_banners($owner){
-
-	global $data;
-
-	$result=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}banners` WHERE `owner`={$owner}"
-
-	);
-
-	return $result;
+    return $result[0]['total'];
 
 }
 
 
 
-function fetch_banner($id){
+function optimize($uid)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $fp=@fopen("{$data['Path']}/{$uid}.htm", 'w+');
 
-		"SELECT * FROM `{$data['DbPrefix']}banners` WHERE `id`={$id}"
+    @fwrite($fp, '');
 
-	);
-
-	return $result[0];
-
-}
-
-
-
-function insert_banner($owner, $burl, $lurl, $pkg, $per){
-
-	global $data;
-
-	db_query(
-
-		"INSERT INTO `{$data['DbPrefix']}banners` (".
-
-		"`owner`,`burl`,`lurl`,`package`,`views`,`clicks`,".
-
-		"`cdate`,`fdate`,`ldate`,`active`".
-
-		")VALUES(".
-
-		"{$owner},'{$burl}','{$lurl}',{$pkg},0,0,NOW(),NOW()+interval $per day,NOW(),0".
-
-		")"
-
-	);
+    @fclose($fp);
 
 }
 
 
 
-function delete_banners($id){
+function calculate_downline($uid, $clevel, $result=null)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    $members=mysqli_query($data['cid'], "SELECT * FROM `{$data['DbPrefix']}members` WHERE `sponsor`={$uid}");
 
-		"DELETE FROM `{$data['DbPrefix']}banners` WHERE `id`={$id}"
+    if($members) {
 
-	);
+        while($row=mysqli_fetch_array($members, MYSQLI_ASSOC)){
 
-}
+            $nlevel=$clevel+1;
 
+            if($nlevel>$data['ReferralLevels']) { return $result;
+            }
 
+            $query=mysqli_query(
+                $data['cid'],
+                "SELECT SUM(`amount`) AS `earned`".
 
-function get_banner_id(){
+                " FROM `{$data['DbPrefix']}transactions`".
 
-	global $data;
+                " WHERE `receiver`={$uid} AND `sender`=-1 AND `related`={$row['id']}"
+            );
 
-	$result=db_rows(
+            if($query) {
 
-		"SELECT b.`id`,p.`credits`,now()-b.`ldate`,(now()-b.`ldate`)*p.`credits`".
+                   $arow=mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-		" FROM `dp_banners` b, `dp_banners_packages` p ".
+                   $result+=$arow['earned'];
 
-		" WHERE b.`package`=p.`id` AND b.`active`=1 ".
+            }
 
-		" ORDER BY (now()-b.`ldate`)*p.`credits` desc"
+            $result=calculate_downline($row['id'], $nlevel, $result);
 
-	);
+        }
 
-	return ($result)? $result[0]['id']:0;
+    }
 
-}
-
-
-
-function inc_banner_views($id){
-
-	global $data;
-
-	db_query(
-
-		"UPDATE `dp_banners` SET `ldate`=now(), `views`=`views`+1 WHERE `id`={$id}"
-
-	);
+    return $result;
 
 }
 
 
 
-function inc_banner_clicks($id){
+function get_referrals($uid, $start=0, $count=0)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-		"UPDATE `dp_banners` SET `clicks`=`clicks`+1 WHERE `id`={$id}"
+    ($count?" LIMIT {$count}":''));
 
-	);
+    $members=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}members`".
+
+        " WHERE `sponsor`={$uid} ORDER BY `cdate` DESC{$limit}"
+    );
+
+    $result=array();
+
+    foreach($members as $key=>$value){
+
+        $result[$key]['id']=$value['id'];
+
+        $result[$key]['cdate']=prndate($value['cdate']);
+
+        $result[$key]['username']=prnuser($value['id']);
+
+        $result[$key]['fullname']="{$value['fname']} {$value['lname']}";
+
+        $result[$key]['email']=prntext($value['email']);
+
+        $result[$key]['fname']=prntext($value['fname']);
+
+        $result[$key]['lname']=prntext($value['lname']);
+
+        $result[$key]['referrals']=get_referrals_count($value['id']);
+
+        $result[$key]['payments']=get_transactions_count(
+            $value['id'], 'both', ' `type`=0 AND `status`=2 '
+        );
+
+        $result[$key]['earned']=prnpays(calculate_downline($uid, 1));
+
+    }
+
+    return $result;
+
+}
+
+// 
+
+function get_news($where)
+{
+
+    global $data;
+
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}news`".
+
+        " WHERE {$where} ORDER BY `date` DESC"
+    );
+
+    return $result;
 
 }
 
 
 
-function select_banners_packages(){
+function get_latest_news()
+{
 
-	global $data;
+    global $data;
 
-	$rows=db_rows(
+    $result=get_news('`active`>0');
 
-		"SELECT * FROM `{$data['DbPrefix']}banners_packages` WHERE `active`=1"
+    return $result;
 
-	);
+}
 
-	$result=array();
+// 
 
-	if($rows)foreach($rows as $val) $result[$val['id']]=$val['name'];
+function select_banners($owner)
+{
 
-	return $result;
+    global $data;
+
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}banners` WHERE `owner`={$owner}"
+    );
+
+    return $result;
 
 }
 
 
 
-function fetch_banners_packages($id){
+function fetch_banner($id)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}banners` WHERE `id`={$id}"
+    );
 
-		"SELECT * FROM `{$data['DbPrefix']}banners_packages` WHERE `id`={$id}"
-
-	);
-
-	return $result[0];
-
-}
-
-###############################################################################
-
-function get_mail_templates(){
-
-	global $data;
-
-	return db_rows("SELECT * FROM `{$data['DbPrefix']}emails`");
+    return $result[0];
 
 }
 
 
 
-function select_mail_template($key){
+function insert_banner($owner, $burl, $lurl, $pkg, $per)
+{
 
-	global $data;
+    global $data;
 
-	$result=db_rows(
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}banners` (".
 
-		"SELECT * FROM `{$data['DbPrefix']}emails`".
+        "`owner`,`burl`,`lurl`,`package`,`views`,`clicks`,".
 
-		" WHERE `key`='{$key}' LIMIT 1"
+        "`cdate`,`fdate`,`ldate`,`active`".
 
-	);
+        ")VALUES(".
 
-	return $result[0];
+        "{$owner},'{$burl}','{$lurl}',{$pkg},0,0,NOW(),NOW()+interval $per day,NOW(),0".
+
+        ")"
+    );
+
+}
+
+
+
+function delete_banners($id)
+{
+
+    global $data;
+
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}banners` WHERE `id`={$id}"
+    );
 
 }
 
 
 
-function update_mail_template($key, $name, $value){
+function get_banner_id()
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    $result=db_rows(
+        "SELECT b.`id`,p.`credits`,now()-b.`ldate`,(now()-b.`ldate`)*p.`credits`".
 
-		"UPDATE `{$data['DbPrefix']}emails`".
+        " FROM `dp_banners` b, `dp_banners_packages` p ".
 
-		" SET `name`='".addslashes($name)."',`value`='".addslashes($value)."'".
+        " WHERE b.`package`=p.`id` AND b.`active`=1 ".
 
-		" WHERE `key`='{$key}'"
+        " ORDER BY (now()-b.`ldate`)*p.`credits` desc"
+    );
 
-	);
+    return ($result)? $result[0]['id']:0;
 
 }
 
-###############################################################################
 
-function get_categories_tree($categoryid) {
 
-  global $data;
+function inc_banner_views($id)
+{
 
-  if ($categoryid == 0) return "TOP CATEGORIES";
+    global $data;
 
-  $parent = db_rows(
+    db_query(
+        "UPDATE `dp_banners` SET `ldate`=now(), `views`=`views`+1 WHERE `id`={$id}"
+    );
 
-		"SELECT `id`, `parentid`, `name` FROM `{$data['DbPrefix']}shop_categories` ".
+}
 
-    "WHERE id={$categoryid}"
 
-  );
 
-  $result = "<a href='{$GLOBALS['PHP_SELF']}?action=view&cid={$parent[0]['id']}'>{$parent[0]['name']}</a>";
+function inc_banner_clicks($id)
+{
 
-  while ($parent[0]['parentid'] != 0 && $parent) {
+    global $data;
+
+    db_query(
+        "UPDATE `dp_banners` SET `clicks`=`clicks`+1 WHERE `id`={$id}"
+    );
+
+}
+
+
+
+function select_banners_packages()
+{
+
+    global $data;
+
+    $rows=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}banners_packages` WHERE `active`=1"
+    );
+
+    $result=array();
+
+    if($rows) { foreach($rows as $val) { $result[$val['id']]=$val['name'];
+    }
+    }
+
+    return $result;
+
+}
+
+
+
+function fetch_banners_packages($id)
+{
+
+    global $data;
+
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}banners_packages` WHERE `id`={$id}"
+    );
+
+    return $result[0];
+
+}
+
+// 
+
+function get_mail_templates()
+{
+
+    global $data;
+
+    return db_rows("SELECT * FROM `{$data['DbPrefix']}emails`");
+
+}
+
+
+
+function select_mail_template($key)
+{
+
+    global $data;
+
+    $result=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}emails`".
+
+        " WHERE `key`='{$key}' LIMIT 1"
+    );
+
+    return $result[0];
+
+}
+
+
+
+function update_mail_template($key, $name, $value)
+{
+
+    global $data;
+
+    db_query(
+        "UPDATE `{$data['DbPrefix']}emails`".
+
+        " SET `name`='".addslashes($name)."',`value`='".addslashes($value)."'".
+
+        " WHERE `key`='{$key}'"
+    );
+
+}
+
+// 
+
+function get_categories_tree($categoryid)
+{
+
+    global $data;
+
+    if ($categoryid == 0) { return "TOP CATEGORIES";
+    }
 
     $parent = db_rows(
+        "SELECT `id`, `parentid`, `name` FROM `{$data['DbPrefix']}shop_categories` ".
 
-      "SELECT `id`, `parentid`, `name` FROM `{$data['DbPrefix']}shop_categories` ".
-
-      "WHERE `id`={$parent[0]['parentid']}"
-
+        "WHERE id={$categoryid}"
     );
 
-    $result = "<a href='{$GLOBALS['PHP_SELF']}?action=view&cid={$parent[0]['id']}'>{$parent[0]['name']}</a>&nbsp;&nbsp;&gt;&gt;&nbsp;" . $result;
+    $result = "<a href='{$GLOBALS['PHP_SELF']}?action=view&cid={$parent[0]['id']}'>{$parent[0]['name']}</a>";
 
-  }
+    while ($parent[0]['parentid'] != 0 && $parent) {
 
-  return "<a href='{$GLOBALS['PHP_SELF']}?action=view'>TOP CATEGORIES</a>&nbsp;&nbsp;&gt;&gt;&nbsp;$result";
+        $parent = db_rows(
+            "SELECT `id`, `parentid`, `name` FROM `{$data['DbPrefix']}shop_categories` ".
+
+            "WHERE `id`={$parent[0]['parentid']}"
+        );
+
+        $result = "<a href='{$GLOBALS['PHP_SELF']}?action=view&cid={$parent[0]['id']}'>{$parent[0]['name']}</a>&nbsp;&nbsp;&gt;&gt;&nbsp;" . $result;
+
+    }
+
+    return "<a href='{$GLOBALS['PHP_SELF']}?action=view'>TOP CATEGORIES</a>&nbsp;&nbsp;&gt;&gt;&nbsp;$result";
 
 }
 
 
 
 function get_first_root_category_id()
-
 {
 
-  global $data;
+    global $data;
 
-	$categories=db_rows(
+    $categories=db_rows(
+        "SELECT id FROM `{$data['DbPrefix']}shop_categories` ".
 
-		"SELECT id FROM `{$data['DbPrefix']}shop_categories` ".
+        "WHERE parentid=0 ".
 
-    "WHERE parentid=0 ".
+        "ORDER BY `id` ASC ".
 
-    "ORDER BY `id` ASC ".
+        "LIMIT 1"
+    );
 
-    "LIMIT 1"
-
-	);
-
-  return $categories[0]['id'];
+    return $categories[0]['id'];
 
 }
 
 
 
-function get_category_parent($categoryid) {
+function get_category_parent($categoryid)
+{
 
-  global $data;
+    global $data;
 
-	$categories=db_rows(
+    $categories=db_rows(
+        "SELECT parentid FROM `{$data['DbPrefix']}shop_categories` ".
 
-		"SELECT parentid FROM `{$data['DbPrefix']}shop_categories` ".
+        "WHERE `id`={$categoryid}"
+    );
 
-    "WHERE `id`={$categoryid}"
-
-	);
-
-  return $categories[0]['parentid'];
-
-}
-
-
-
-function get_shop_categories_count($categoryid) {
-
-  global $data;
-
-  $result=db_rows(
-
-		"SELECT COUNT(`id`) AS `count` ".
-
-    " FROM `{$data['DbPrefix']}shop_categories`".
-
-		" WHERE `parentid`='{$categoryid}' ".
-
-		" LIMIT 1"
-
-  );
-
-  return $result[0]['count'];
+    return $categories[0]['parentid'];
 
 }
 
 
 
-function get_shop_categories_list($categoryid, $start=0, $count=0) {
+function get_shop_categories_count($categoryid)
+{
 
-	global $data;
+    global $data;
 
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+    $result=db_rows(
+        "SELECT COUNT(`id`) AS `count` ".
 
-		($count?" LIMIT {$count}":''));
+        " FROM `{$data['DbPrefix']}shop_categories`".
 
-	$categories=db_rows(
+        " WHERE `parentid`='{$categoryid}' ".
 
-		"SELECT * FROM `{$data['DbPrefix']}shop_categories`".
+        " LIMIT 1"
+    );
 
-		" WHERE `parentid`='{$categoryid}' ".
-
-		" ORDER BY `id` ASC{$limit}"
-
-	);
-
-	$result=array();
-
-	foreach($categories as $key=>$value){
-
-		$result[$key]=$value;
-
-		$subcat=db_rows(
-
-			"SELECT COUNT(`id`) AS `count`".
-
-			" FROM `{$data['DbPrefix']}shop_categories`".
-
-			" WHERE `parentid`={$result[$key]['id']}".
-
-			" LIMIT 1"
-
-		);
-
-    $result[$key]['subcategories']=$subcat[0]['count'];
-
-		$items=db_rows(
-
-			"SELECT COUNT(`id`) AS `count`".
-
-			" FROM `{$data['DbPrefix']}shop_items`".
-
-			" WHERE `categoryid`={$result[$key]['id']}".
-
-			" LIMIT 1"
-
-		);
-
-		$result[$key]['items']=$items[0]['count'];
-
-		$result[$key]['candelete']=($items[0]['count']==0 && $subcat[0]['count']==0);
-
-	}
-
-	return $result;
+    return $result[0]['count'];
 
 }
 
 
 
-function get_shop_categories_count_where_pred($where_pred) {
+function get_shop_categories_list($categoryid, $start=0, $count=0)
+{
 
-  global $data;
+    global $data;
 
-  $result=db_rows(
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-		"SELECT COUNT(`id`) AS `count` ".
+    ($count?" LIMIT {$count}":''));
 
-    " FROM `{$data['DbPrefix']}shop_categories`".
+    $categories=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}shop_categories`".
 
-		" WHERE {$where_pred} ".
+        " WHERE `parentid`='{$categoryid}' ".
 
-		" LIMIT 1"
+        " ORDER BY `id` ASC{$limit}"
+    );
 
-  );
+    $result=array();
 
-  return $result[0]['count'];
+    foreach($categories as $key=>$value){
 
-}
+        $result[$key]=$value;
 
+        $subcat=db_rows(
+            "SELECT COUNT(`id`) AS `count`".
 
+            " FROM `{$data['DbPrefix']}shop_categories`".
 
-function get_shop_categories_list_where_pred($where_pred) {
+            " WHERE `parentid`={$result[$key]['id']}".
 
-	global $data;
+            " LIMIT 1"
+        );
 
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+        $result[$key]['subcategories']=$subcat[0]['count'];
 
-		($count?" LIMIT {$count}":''));
+        $items=db_rows(
+            "SELECT COUNT(`id`) AS `count`".
 
-	$categories=db_rows(
+            " FROM `{$data['DbPrefix']}shop_items`".
 
-		"SELECT * FROM `{$data['DbPrefix']}shop_categories`".
+            " WHERE `categoryid`={$result[$key]['id']}".
 
-		" WHERE {$where_pred} ".
+            " LIMIT 1"
+        );
 
-		" ORDER BY `id` ASC{$limit}"
+        $result[$key]['items']=$items[0]['count'];
 
-	);
+        $result[$key]['candelete']=($items[0]['count']==0 && $subcat[0]['count']==0);
 
-	$result=array();
+    }
 
-	foreach($categories as $key=>$value){
-
-		$result[$key]=$value;
-
-		$subcat=db_rows(
-
-			"SELECT COUNT(`id`) AS `count`".
-
-			" FROM `{$data['DbPrefix']}shop_categories`".
-
-			" WHERE `parentid`={$result[$key]['id']}".
-
-			" LIMIT 1"
-
-		);
-
-    $result[$key]['subcategories']=$subcat[0]['count'];
-
-		$items=db_rows(
-
-			"SELECT COUNT(`id`) AS `count`".
-
-			" FROM `{$data['DbPrefix']}shop_items`".
-
-			" WHERE `categoryid`={$result[$key]['id']}".
-
-			" LIMIT 1"
-
-		);
-
-		$result[$key]['items']=$items[0]['count'];
-
-		$result[$key]['candelete']=($items[0]['count']==0 && $subcat[0]['count']==0);
-
-	}
-
-	return $result;
+    return $result;
 
 }
 
 
 
-function insert_category($parentid, $post){
+function get_shop_categories_count_where_pred($where_pred)
+{
 
-	global $data;
+    global $data;
 
-  $description = $post['categorydescription'];
+    $result=db_rows(
+        "SELECT COUNT(`id`) AS `count` ".
 
-  if (empty($description)) $description = "Top ".addslashes($post['categoryname']);
+        " FROM `{$data['DbPrefix']}shop_categories`".
 
-	db_query(
+        " WHERE {$where_pred} ".
 
-		"INSERT INTO `{$data['DbPrefix']}shop_categories`(".
+        " LIMIT 1"
+    );
 
-		"`parentid`,`name`,`description`".
-
-		")VALUES(".
-
-		"{$parentid},".
-
-		"'".addslashes($post['categoryname'])."','".addslashes($description)."')"
-
-	);
+    return $result[0]['count'];
 
 }
 
 
 
-function update_category($categoryid, $parentid, $post){
+function get_shop_categories_list_where_pred($where_pred)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-		"UPDATE `{$data['DbPrefix']}shop_categories` ".
+    ($count?" LIMIT {$count}":''));
 
-		"SET `parentid` = {$parentid}, ".
+    $categories=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}shop_categories`".
 
-    "`name`='".addslashes($post['categoryname'])."', ".
+        " WHERE {$where_pred} ".
 
-    "`description`='".addslashes($post['categorydescription'])."' ".
+        " ORDER BY `id` ASC{$limit}"
+    );
 
-    "WHERE `id`={$categoryid}"
+    $result=array();
 
-	);
+    foreach($categories as $key=>$value){
 
-}
+        $result[$key]=$value;
 
+        $subcat=db_rows(
+            "SELECT COUNT(`id`) AS `count`".
 
+            " FROM `{$data['DbPrefix']}shop_categories`".
 
-function delete_category($categoryid){
+            " WHERE `parentid`={$result[$key]['id']}".
 
-	global $data;
+            " LIMIT 1"
+        );
 
-	db_query(
+        $result[$key]['subcategories']=$subcat[0]['count'];
 
-		"DELETE FROM `{$data['DbPrefix']}shop_categories` ".
+        $items=db_rows(
+            "SELECT COUNT(`id`) AS `count`".
 
-    "WHERE `id`={$categoryid}"
+            " FROM `{$data['DbPrefix']}shop_items`".
 
-	);
+            " WHERE `categoryid`={$result[$key]['id']}".
 
-}
+            " LIMIT 1"
+        );
 
+        $result[$key]['items']=$items[0]['count'];
 
+        $result[$key]['candelete']=($items[0]['count']==0 && $subcat[0]['count']==0);
 
-function get_category($categoryid) {
+    }
 
-	global $data;
-
-	$categories=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}shop_categories` ".
-
-    "WHERE `id`={$categoryid}".
-
-		" LIMIT 1"
-
-	);
-
-  return $categories[0];
-
-}
-
-###############################################################################
-
-function get_shop_items_count($categoryid) {
-
-  global $data;
-
-  $result=db_rows(
-
-		"SELECT COUNT(`id`) AS `count` ".
-
-    " FROM `{$data['DbPrefix']}shop_items`".
-
-		" WHERE `categoryid`='{$categoryid}' ".
-
-		" LIMIT 1"
-
-  );
-
-  return $result[0]['count'];
+    return $result;
 
 }
 
 
 
-function get_shop_items_list($categoryid, $start=0, $count=0) {
+function insert_category($parentid, $post)
+{
 
-	global $data;
+    global $data;
 
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
+    $description = $post['categorydescription'];
 
-		($count?" LIMIT {$count}":''));
+    if (empty($description)) { $description = "Top ".addslashes($post['categoryname']);
+    }
 
-	$categories=db_rows(
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}shop_categories`(".
 
-		"SELECT * FROM `{$data['DbPrefix']}shop_items`".
+        "`parentid`,`name`,`description`".
 
-		" WHERE `categoryid`='{$categoryid}' ".
+        ")VALUES(".
 
-		" ORDER BY `id` ASC{$limit}"
+        "{$parentid},".
 
-	);
-
-	$result=array();
-
-	foreach($categories as $key=>$value){
-
-		$result[$key]=$value;
-
-		$result[$key]['candelete']=true;
-
-	}
-
-	return $result;
+        "'".addslashes($post['categoryname'])."','".addslashes($description)."')"
+    );
 
 }
 
 
 
-function get_shop_items_count_where_pred($where_pred) {
+function update_category($categoryid, $parentid, $post)
+{
 
-  global $data;
+    global $data;
 
-  $result=db_rows(
+    db_query(
+        "UPDATE `{$data['DbPrefix']}shop_categories` ".
 
-		"SELECT COUNT(`id`) AS `count` ".
+        "SET `parentid` = {$parentid}, ".
 
-    " FROM `{$data['DbPrefix']}shop_items`".
+        "`name`='".addslashes($post['categoryname'])."', ".
 
-		" WHERE {$where_pred} ".
+        "`description`='".addslashes($post['categorydescription'])."' ".
 
-		" LIMIT 1"
-
-  );
-
-  return $result[0]['count'];
-
-}
-
-
-
-function get_shop_items_list_where_pred($where_pred) {
-
-	global $data;
-
-	$limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
-
-		($count?" LIMIT {$count}":''));
-
-	$categories=db_rows(
-
-		"SELECT * FROM `{$data['DbPrefix']}shop_items`".
-
-		" WHERE {$where_pred} ".
-
-		" ORDER BY `id` ASC{$limit}"
-
-	);
-
-	$result=array();
-
-	foreach($categories as $key=>$value){
-
-		$result[$key]=$value;
-
-		$result[$key]['candelete']=true;
-
-	}
-
-	return $result;
+        "WHERE `id`={$categoryid}"
+    );
 
 }
 
 
 
-function get_shop_item($itemid) {
+function delete_category($categoryid)
+{
 
-	global $data;
+    global $data;
 
-	$items=db_rows(
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}shop_categories` ".
 
-		"SELECT * FROM `{$data['DbPrefix']}shop_items` ".
-
-    "WHERE `id`={$itemid}".
-
-		" LIMIT 1"
-
-	);
-
-  return $items[0];
+        "WHERE `id`={$categoryid}"
+    );
 
 }
 
 
 
-function insert_shop_item($categoryid, $name, $url, $description) {
+function get_category($categoryid)
+{
 
-	global $data;
+    global $data;
 
-  if (empty($description)) $description = "Top ".addslashes($name);
+    $categories=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}shop_categories` ".
 
-	db_query(
+        "WHERE `id`={$categoryid}".
 
-		"INSERT INTO `{$data['DbPrefix']}shop_items`(".
+        " LIMIT 1"
+    );
 
-		"`categoryid`,`name`, `url`, `description`".
+    return $categories[0];
 
-		")VALUES(".
+}
 
-		"{$categoryid},".
+// 
 
-		"'".addslashes($name)."','".addslashes($url)."','".addslashes($description)."')"
+function get_shop_items_count($categoryid)
+{
 
-	);
+    global $data;
+
+    $result=db_rows(
+        "SELECT COUNT(`id`) AS `count` ".
+
+        " FROM `{$data['DbPrefix']}shop_items`".
+
+        " WHERE `categoryid`='{$categoryid}' ".
+
+        " LIMIT 1"
+    );
+
+    return $result[0]['count'];
 
 }
 
 
 
-function update_shop_item($itemid, $name, $url, $description) {
+function get_shop_items_list($categoryid, $start=0, $count=0)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-		"UPDATE `{$data['DbPrefix']}shop_items` ".
+    ($count?" LIMIT {$count}":''));
 
-		"SET `name`='{$name}', ".
+    $categories=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}shop_items`".
 
-    "`url`='{$url}', ".
+        " WHERE `categoryid`='{$categoryid}' ".
 
-    "`description`='{$description}' ".
+        " ORDER BY `id` ASC{$limit}"
+    );
 
-		"WHERE `id`={$itemid}"
+    $result=array();
 
-	);
+    foreach($categories as $key=>$value){
+
+        $result[$key]=$value;
+
+        $result[$key]['candelete']=true;
+
+    }
+
+    return $result;
 
 }
 
 
 
-function delete_shop_item($itemid){
+function get_shop_items_count_where_pred($where_pred)
+{
 
-	global $data;
+    global $data;
 
-	db_query(
-		"DELETE FROM `{$data['DbPrefix']}shop_items` WHERE `id`={$itemid}"
-	);
+    $result=db_rows(
+        "SELECT COUNT(`id`) AS `count` ".
+
+        " FROM `{$data['DbPrefix']}shop_items`".
+
+        " WHERE {$where_pred} ".
+
+        " LIMIT 1"
+    );
+
+    return $result[0]['count'];
+
 }
 
-###############################################################################
 
-function insert_shopcart_item($productid, $quantity){
 
-  if ($quantity <= 0) return false;
+function get_shop_items_list_where_pred($where_pred)
+{
 
-  $newid = count($_SESSION['ptobuy']);
+    global $data;
 
-  $_SESSION['ptobuy'][$newid] = array();
+    $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
 
-  $_SESSION['ptobuy'][$newid]['product'] = $productid;
+    ($count?" LIMIT {$count}":''));
 
-  $_SESSION['ptobuy'][$newid]['quantity'] = $quantity;
+    $categories=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}shop_items`".
+
+        " WHERE {$where_pred} ".
+
+        " ORDER BY `id` ASC{$limit}"
+    );
+
+    $result=array();
+
+    foreach($categories as $key=>$value){
+
+        $result[$key]=$value;
+
+        $result[$key]['candelete']=true;
+
+    }
+
+    return $result;
+
+}
+
+
+
+function get_shop_item($itemid)
+{
+
+    global $data;
+
+    $items=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}shop_items` ".
+
+        "WHERE `id`={$itemid}".
+
+        " LIMIT 1"
+    );
+
+    return $items[0];
+
+}
+
+
+
+function insert_shop_item($categoryid, $name, $url, $description)
+{
+
+    global $data;
+
+    if (empty($description)) { $description = "Top ".addslashes($name);
+    }
+
+    db_query(
+        "INSERT INTO `{$data['DbPrefix']}shop_items`(".
+
+        "`categoryid`,`name`, `url`, `description`".
+
+        ")VALUES(".
+
+        "{$categoryid},".
+
+        "'".addslashes($name)."','".addslashes($url)."','".addslashes($description)."')"
+    );
+
+}
+
+
+
+function update_shop_item($itemid, $name, $url, $description)
+{
+
+    global $data;
+
+    db_query(
+        "UPDATE `{$data['DbPrefix']}shop_items` ".
+
+        "SET `name`='{$name}', ".
+
+        "`url`='{$url}', ".
+
+        "`description`='{$description}' ".
+
+        "WHERE `id`={$itemid}"
+    );
+
+}
+
+
+
+function delete_shop_item($itemid)
+{
+
+    global $data;
+
+    db_query(
+        "DELETE FROM `{$data['DbPrefix']}shop_items` WHERE `id`={$itemid}"
+    );
+}
+
+// 
+
+function insert_shopcart_item($productid, $quantity)
+{
+
+    if ($quantity <= 0) { return false;
+    }
+
+    $newid = count($_SESSION['ptobuy']);
+
+    $_SESSION['ptobuy'][$newid] = array();
+
+    $_SESSION['ptobuy'][$newid]['product'] = $productid;
+
+    $_SESSION['ptobuy'][$newid]['quantity'] = $quantity;
 
 }
 
 
 
 function get_shopcart_items_list($id=-1)
-
 {
 
-  global $data;
+    global $data;
 
-  $result = array();
+    $result = array();
 
-  for ($i = 0; $i<count($_SESSION['ptobuy']); $i++)
+    for ($i = 0; $i<count($_SESSION['ptobuy']); $i++) {
 
-  if ($_SESSION['ptobuy'][$i]['product'] != -1) {
+        if ($_SESSION['ptobuy'][$i]['product'] != -1) {
 
-    $result[$i] = array();
+            $result[$i] = array();
 
-    $shopitems=db_rows(
+            $shopitems=db_rows(
+                "SELECT id, name, tax, shipping, price FROM `{$data['DbPrefix']}products` ".
 
-      "SELECT id, name, tax, shipping, price FROM `{$data['DbPrefix']}products` ".
+                "WHERE `id` = (" . $_SESSION['ptobuy'][$i]['product'] .") "
+            );
 
-      "WHERE `id` = (" . $_SESSION['ptobuy'][$i]['product'] .") "
+            $result[$i]['shopitemid'] = $i;
 
-    );
+            $result[$i]['id'] = $shopitems[0]['id'];
 
-    $result[$i]['shopitemid'] = $i;
+            $result[$i]['name'] = $shopitems[0]['name'];
 
-    $result[$i]['id'] = $shopitems[0]['id'];
+            $result[$i]['tax'] = $shopitems[0]['tax'];
 
-    $result[$i]['name'] = $shopitems[0]['name'];
+            $result[$i]['shipping'] = $shopitems[0]['shipping'];
 
-    $result[$i]['tax'] = $shopitems[0]['tax'];
+            $result[$i]['price'] = $shopitems[0]['price'];
 
-    $result[$i]['shipping'] = $shopitems[0]['shipping'];
+            $result[$i]['quantity'] = $_SESSION['ptobuy'][$i]['quantity'];
 
-    $result[$i]['price'] = $shopitems[0]['price'];
+        }
+    }
 
-    $result[$i]['quantity'] = $_SESSION['ptobuy'][$i]['quantity'];
-
-  }
-
-  if ($id==-1) return $result; else return $result[$id];
-
-}
-
-
-
-function delete_shopcart_item($itemstodel){
-
-  $_SESSION['ptobuy'][$itemstodel]['product'] = -1;
+    if ($id==-1) { return $result; 
+    } else { return $result[$id];
+    }
 
 }
 
 
 
-function get_shopcart_items_price(){
+function delete_shopcart_item($itemstodel)
+{
 
-  global $data;
-
-  $price=0;
-
-  $r = get_shopcart_items_list();
-
-  foreach ($r as $key=>$value) $price += $value['quantity'] * ($value['price'] + $value['tax']) + $value['shipping'];
-
-  return prnsumm($price);
+    $_SESSION['ptobuy'][$itemstodel]['product'] = -1;
 
 }
 
 
 
-function get_one_item_price($id){
+function get_shopcart_items_price()
+{
 
-  $r = get_shopcart_items_list($id);
+    global $data;
 
-  $price = $value['quantity'] * ($value['price'] + $value['tax']) + $value['shipping'];
+    $price=0;
 
-  return $price;
+    $r = get_shopcart_items_list();
 
-}
+    foreach ($r as $key=>$value) { $price += $value['quantity'] * ($value['price'] + $value['tax']) + $value['shipping'];
+    }
 
-
-
-function update_shopcart_item_quantity($id, $quantity){
-
-  if ($quantity <= 0) return;
-
-  $_SESSION['ptobuy'][$id]['quantity'] = ceil($quantity);
+    return prnsumm($price);
 
 }
 
 
 
-function set_shopitems_paid(){
+function get_one_item_price($id)
+{
 
-  $_SESSION['ptobuy'] = array();
+    $r = get_shopcart_items_list($id);
 
-}
+    $price = $value['quantity'] * ($value['price'] + $value['tax']) + $value['shipping'];
 
-###############################################################################
-
-function unhtmlentities($text){
-
-	$table=get_html_translation_table(HTML_ENTITIES);
-
-	$table=array_flip($table);
-
-	return strtr($text, $table);
+    return $price;
 
 }
 
-############################### SECURITY ################################################
 
-function encrypt_pages($content){
-	$r="<NOSOURCE>";
-	for($i=0;$i<255;$i++)$r.="\n";
-	return $r.encrypt($content);
+
+function update_shopcart_item_quantity($id, $quantity)
+{
+
+    if ($quantity <= 0) { return;
+    }
+
+    $_SESSION['ptobuy'][$id]['quantity'] = ceil($quantity);
+
+}
+
+
+
+function set_shopitems_paid()
+{
+
+    $_SESSION['ptobuy'] = array();
+
+}
+
+// 
+
+function unhtmlentities($text)
+{
+
+    $table=get_html_translation_table(HTML_ENTITIES);
+
+    $table=array_flip($table);
+
+    return strtr($text, $table);
+
+}
+
+// SECURITY ################################################
+
+function encrypt_pages($content)
+{
+    $r="<NOSOURCE>";
+    for($i=0;$i<255;$i++) { $r.="\n";
+    }
+    return $r.encrypt($content);
 }
 
 function encryptPerHashKey($keypwd ,$hachkey)
 {
-  // echo $keypwd." <- keypwd";
-	$Cryptkey  = trim(base64_encode(@mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $keypwd, $hachkey, MCRYPT_MODE_ECB)));
-	return str_replace(array('+','/','='), array('-','_',''), $Cryptkey );
+    // echo $keypwd." <- keypwd";
+    $Cryptkey  = trim(base64_encode(@mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $keypwd, $hachkey, MCRYPT_MODE_ECB)));
+    return str_replace(array('+','/','='), array('-','_',''), $Cryptkey);
 }
 
 function decryptPerHashKey($keypwd ,$hachkey)
 {
-	$hachkey = str_replace(array('-','_'),array('+','/'),$hachkey);
-	return trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256,$keypwd, base64_decode($hachkey), MCRYPT_MODE_ECB));
+    $hachkey = str_replace(array('-','_'), array('+','/'), $hachkey);
+    return trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $keypwd, base64_decode($hachkey), MCRYPT_MODE_ECB));
 }
 
 
 
-function generate_pin_code($size=7){
+function generate_pin_code($size=7)
+{
 
-	$code  	= str_split(strrev(md5(microtime())));
-	$index 	= 0;
-	$key  	= '';
-	foreach($code as $value){
-		if((int)$value>0){
-			$key.=$value;
-			$index++;
-		}
-	}
-	$key=substr($key, 0, $size);
-	if(strlen($key)<$size)$key.=strrev(substr($key, 0, $size-strlen($key)));
-	return $key;
+    $code      = str_split(strrev(md5(microtime())));
+    $index     = 0;
+    $key      = '';
+    foreach($code as $value){
+        if((int)$value>0) {
+            $key.=$value;
+            $index++;
+        }
+    }
+    $key=substr($key, 0, $size);
+    if(strlen($key)<$size) { $key.=strrev(substr($key, 0, $size-strlen($key)));
+    }
+    return $key;
 }
 
-function generate_char_code(){
+function generate_char_code()
+{
 
-	$code=str_split(strrev(md5(microtime())));
-	$index=0;
-	$key  	= '';
-	foreach($code as $value){
-		if((int)$value>0){
-			$key.=$value;
-			if($index==3){
-				$key.='-';
-				$index=0;
-			}
-			$index++;
-		}
-	}
-	$key=substr($key, 0, 14);
-	if(strlen($key)<14)$key.=strrev(substr($key, 0, 14-strlen($key)));
-	return $key;
+    $code=str_split(strrev(md5(microtime())));
+    $index=0;
+    $key      = '';
+    foreach($code as $value){
+        if((int)$value>0) {
+            $key.=$value;
+            if($index==3) {
+                $key.='-';
+                $index=0;
+            }
+            $index++;
+        }
+    }
+    $key=substr($key, 0, 14);
+    if(strlen($key)<14) { $key.=strrev(substr($key, 0, 14-strlen($key)));
+    }
+    return $key;
 
 }
 
-function generate_topup_code(){
+function generate_topup_code()
+{
 
-	$code=str_split(strrev(md5(microtime())));
-	$index=0;
-	$key  	= '';
-	foreach($code as $value){
-		if((int)$value>0){
-			$key.=$value;
-			$index++;
-		}
-	}
-	$key=substr($key, 0, 16);
-	if(strlen($key)<16)$key.=strrev(substr($key, 0, 16-strlen($key)));
-	return $key;
+    $code=str_split(strrev(md5(microtime())));
+    $index=0;
+    $key      = '';
+    foreach($code as $value){
+        if((int)$value>0) {
+            $key.=$value;
+            $index++;
+        }
+    }
+    $key=substr($key, 0, 16);
+    if(strlen($key)<16) { $key.=strrev(substr($key, 0, 16-strlen($key)));
+    }
+    return $key;
 }
 
-function get_trx_id (){
+function get_trx_id()
+{
 
-	$code=str_split(strrev(md5(microtime())));
-	$index=0;
-	$key  	= '';
-	foreach($code as $value){
-		if((int)$value>0){
-			$key.=$value;
-			$index++;
-		 }
+    $code=str_split(strrev(md5(microtime())));
+    $index=0;
+    $key      = '';
+    foreach($code as $value){
+        if((int)$value>0) {
+            $key.=$value;
+            $index++;
+        }
 
-	}
-	$key=substr($key, 0, 12);
-	if(strlen($key)<12)$key.=strrev(substr($key, 0, 12-strlen($key)));
-	return 'TRX'.$key;
+    }
+    $key=substr($key, 0, 12);
+    if(strlen($key)<12) { $key.=strrev(substr($key, 0, 12-strlen($key)));
+    }
+    return 'TRX'.$key;
 }
 
-function get_transaction_trx_id($trxid){
+function get_transaction_trx_id($trxid)
+{
 
-global $data;
-	if(isset($suser) || isset($sdata)){
-		$start=0;
-		$count=0;
-	}
-	$trans=db_rows(
+    global $data;
+    if(isset($suser) || isset($sdata)) {
+        $start=0;
+        $count=0;
+    }
+    $trans=db_rows(
+        "SELECT * FROM `{$data['DbPrefix']}transactions`".
+        " WHERE `trxid`='{$trxid}' LIMIT 1"
+    );
 
-		"SELECT * FROM `{$data['DbPrefix']}transactions`".
-		" WHERE `trxid`='{$trxid}' LIMIT 1");
+    $result=array();
 
-		$result=array();
+    foreach($trans as $key=>$value){
+        if($suser) {
+            if(strpos(get_member_username($value['sender']), $suser)===false
+                && strpos(get_member_username($value['receiver']), $suser)===false
+            ) { continue;
+            }
+        }elseif($sdate) {
+            if(strpos($value['tdate'], $sdate)===false) { continue;
+            }
+        }
 
-	foreach($trans as $key=>$value){
-		if($suser){
-			if(
-				strpos(get_member_username($value['sender']), $suser)===false
-				&&
-				strpos(get_member_username($value['receiver']), $suser)===false
-			)continue;
-		}elseif($sdate){
-			if(strpos($value['tdate'], $sdate)===false)continue;
-		}
+        $dir=(bool)($value['sender']!=$uid);
+        $result[$key]['id']=$value['id'];
+        $result[$key]['direction']=$dir?'1':'0';
+        //$result[$key]['sender']=$value['sender'];
+        $result[$key]['senduser']=prnuser($value['sender']);
+        //$result[$key]['receiver']=$value['receiver'];
+        $result[$key]['recvuser']=prnuser($value['receiver']);
+        //$result[$key]['userid']=$dir?$value['sender']:$value['receiver'];
+        //$result[$key]['username']=prnuser($result[$key]['userid']);
+        $result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
+        //$result[$key]['amount']=prnpays($result[$key]['oamount']);
+        $result[$key]['tdate']=prndate($value['tdate']);
+        $result[$key]['period']=$value['period'];
 
-		$dir=(bool)($value['sender']!=$uid);
-		$result[$key]['id']=$value['id'];
-		$result[$key]['direction']=$dir?'1':'0';
-		//$result[$key]['sender']=$value['sender'];
-		$result[$key]['senduser']=prnuser($value['sender']);
-		//$result[$key]['receiver']=$value['receiver'];
-		$result[$key]['recvuser']=prnuser($value['receiver']);
-		//$result[$key]['userid']=$dir?$value['sender']:$value['receiver'];
-		//$result[$key]['username']=prnuser($result[$key]['userid']);
-		$result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
-		//$result[$key]['amount']=prnpays($result[$key]['oamount']);
-		$result[$key]['tdate']=prndate($value['tdate']);
-		$result[$key]['period']=$value['period'];
+        //$result[$key]['ostatus']=$value['status'];
+        $result[$key]['type']=$data['TransactionType'][$value['type']];
+        $result[$key]['status']=$data['TransactionStatus'][$value['status']];
 
-		//$result[$key]['ostatus']=$value['status'];
-		$result[$key]['type']=$data['TransactionType'][$value['type']];
-		$result[$key]['status']=$data['TransactionStatus'][$value['status']];
+        if($value['fees']>0 && ($value['type']==1||$value['type']==2||($dir&&$value['type']==0)) ) {
+            $result[$key]['ofees']=-$value['fees'];
+        }elseif ($value['type']==3 ) {
+            $result[$key]['ofees']=-$value['fees'];
+        }else {
+            $result[$key]['ofees']=0;
+        }
+        //$result[$key]['fees']=prnfees($result[$key]['ofees']);
+        if ($value['type']==3) {
+            $result[$key]['onets'] = $value['amount']+$value['fees'];
+        } else {
+            $result[$key]['onets']=$value['sender']>0&&$value['sender']==$uid&&$value['receiver']>0?$value['amount']:$value['amount']-$value['fees'];
+        }
+        //$result[$key]['nets']=prnpays($result[$key]['onets'], false);
+        $result[$key]['comments']=prntext($value['comments']);
+        $result[$key]['ecomments']=prntext($value['ecomments']);
+        $result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
+        $result[$key]['canrefund']=can_refund($value['id'], $uid);
+        $result[$key]['trxid']=$value['trxid'];
+    }
 
-		if($value['fees']>0 && ($value['type']==1||$value['type']==2||($dir&&$value['type']==0)) ){
-			$result[$key]['ofees']=-$value['fees'];
-		}elseif ($value['type']==3 ){
-				$result[$key]['ofees']=-$value['fees'];
-		}else {
-			$result[$key]['ofees']=0;
-		}
-		//$result[$key]['fees']=prnfees($result[$key]['ofees']);
-		if ($value['type']==3) {
-			$result[$key]['onets'] = $value['amount']+$value['fees'];
-		} else {
-			$result[$key]['onets']=$value['sender']>0&&$value['sender']==$uid&&$value['receiver']>0?$value['amount']:$value['amount']-$value['fees'];
-		}
-		//$result[$key]['nets']=prnpays($result[$key]['onets'], false);
-		$result[$key]['comments']=prntext($value['comments']);
-		$result[$key]['ecomments']=prntext($value['ecomments']);
-		$result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
-		$result[$key]['canrefund']=can_refund($value['id'], $uid);
-		$result[$key]['trxid']=$value['trxid'];
-	}
-
-		return $result;
+    return $result;
 }
 
-function get_pin_id (){
+function get_pin_id()
+{
 
-	$code=str_split(strrev(md5(microtime())));
-	$index=0;
-	$key  	= '';
-	foreach($code as $value){
-		if((int)$value>0){
-			$key.=$value;
-			$index++;
-		 }
+    $code=str_split(strrev(md5(microtime())));
+    $index=0;
+    $key      = '';
+    foreach($code as $value){
+        if((int)$value>0) {
+            $key.=$value;
+            $index++;
+        }
 
-	}
-	$key=substr($key, 0, 6);
-	if(strlen($key)<5)$key.=strrev(substr($key, 0, 6-strlen($key)));
-	return 'ED-'.$key;
+    }
+    $key=substr($key, 0, 6);
+    if(strlen($key)<5) { $key.=strrev(substr($key, 0, 6-strlen($key)));
+    }
+    return 'ED-'.$key;
 }
 
-###############################################################################
+// 
 
-if(isset($_GET['sid']))$post['sid']=$_GET['sid'];
+if(isset($_GET['sid'])) { $post['sid']=$_GET['sid'];
+}
 
-if(isset($_GET['bid']))$post['bid']=$_GET['bid'];
+if(isset($_GET['bid'])) { $post['bid']=$_GET['bid'];
+}
 
-if(isset($_GET['id']))$post['gid']=$_GET['id'];
+if(isset($_GET['id'])) { $post['gid']=$_GET['id'];
+}
 
-if(isset($_GET['bp']))$post['bp']=$_GET['bp'];
+if(isset($_GET['bp'])) { $post['bp']=$_GET['bp'];
+}
 
-if(isset($_GET['cid']))$post['cid']=$_GET['cid'];
+if(isset($_GET['cid'])) { $post['cid']=$_GET['cid'];
+}
 
-if(isset($_GET['updateid']))$post['updateid']=$_GET['updateid'];
+if(isset($_GET['updateid'])) { $post['updateid']=$_GET['updateid'];
+}
 
-if(isset($_GET['itemid']))$post['itemid']=$_GET['itemid'];
+if(isset($_GET['itemid'])) { $post['itemid']=$_GET['itemid'];
+}
 
-if(isset($_GET['type']))$post['type']=$_GET['type'];
+if(isset($_GET['type'])) { $post['type']=$_GET['type'];
+}
 
-if(isset($_GET['email']))$post['email']=$_GET['email'];
+if(isset($_GET['email'])) { $post['email']=$_GET['email'];
+}
 
-if(isset($_GET['status']))$post['status']=$_GET['status'];
+if(isset($_GET['status'])) { $post['status']=$_GET['status'];
+}
 
-if(isset($_GET['page']))$post['StartPage']=$_GET['page'];
+if(isset($_GET['page'])) { $post['StartPage']=$_GET['page'];
+}
 
-if(isset($_GET['order']))$post['order']=$_GET['order'];
+if(isset($_GET['order'])) { $post['order']=$_GET['order'];
+}
 
-if(isset($_GET['action']))$post['action']=$_GET['action'];
+if(isset($_GET['action'])) { $post['action']=$_GET['action'];
+}
 
-if(isset($_GET['member']))$post['member']=$_GET['member'];
+if(isset($_GET['member'])) { $post['member']=$_GET['member'];
+}
 
-if(isset($_GET['product']))$post['product']=$_GET['product'];
+if(isset($_GET['product'])) { $post['product']=$_GET['product'];
+}
 
-if(isset($_GET['keyword']))$post['keyword']=$_GET['keyword'];
+if(isset($_GET['keyword'])) { $post['keyword']=$_GET['keyword'];
+}
 
-if(isset($_GET['pincode']))$post['pincode']=$_GET['pincode'];
+if(isset($_GET['pincode'])) { $post['pincode']=$_GET['pincode'];
+}
 
-if(isset($_GET['prehashkey']))$post['prehashkey']=$_GET['prehashkey'];
+if(isset($_GET['prehashkey'])) { $post['prehashkey']=$_GET['prehashkey'];
+}
 
-if(isset($_GET['crypt']))$post['crypt']=$_GET['crypt'];
-###############################################################################
+if(isset($_GET['crypt'])) { $post['crypt']=$_GET['crypt'];
+}
+// 
 
-if(isset($_GET['rid']))$post['sponsor']=$_GET['rid'];
+if(isset($_GET['rid'])) { $post['sponsor']=$_GET['rid'];
 
-elseif(isset($_COOKIE['rid']))$post['sponsor']=$_COOKIE['rid'];
+} elseif(isset($_COOKIE['rid'])) { $post['sponsor']=$_COOKIE['rid'];
+}
 
 reset($_GET);
 
-################################### SESSION ############################################
+// SESSION ############################################
 
 if(!session_id()) { 
-	session_start();
+    session_start();
 }
 
 $data['sid']=session_id();
@@ -5464,8 +5562,9 @@ $_SESSION['csrf_token'] = generate_csrf_token();
 
 header("Cache-control: private");
 
-#################################### CSRF ###########################################
-function generate_csrf_token(){
+// CSRF ###########################################
+function generate_csrf_token()
+{
     if (function_exists('mcrypt_create_iv')) {
         $csrf_token = bin2hex(@mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
     } else {
@@ -5475,158 +5574,173 @@ function generate_csrf_token(){
     return $csrf_token;
 }
 
-function update_csrf_token($user_id, $csrf_token){
-  global $data;
+function update_csrf_token($user_id, $csrf_token)
+{
+    global $data;
 
-  $update = db_query("UPDATE `{$data['DbPrefix']}members`
+    $update = db_query(
+        "UPDATE `{$data['DbPrefix']}members`
                         SET `csrf_token` = '{$csrf_token}'
                         WHERE `{$data['DbPrefix']}members`.`id` = '{$user_id}';"
-  );
+    );
 
-  return $update;
+    return $update;
 }
 
-function get_user_csrf_token($user_id){
-  global $data;
+function get_user_csrf_token($user_id)
+{
+    global $data;
 
-  $row = db_rows("SELECT csrf_token FROM `{$data['DbPrefix']}members` WHERE `id` = '{$user_id}' ");
+    $row = db_rows("SELECT csrf_token FROM `{$data['DbPrefix']}members` WHERE `id` = '{$user_id}' ");
 
-  // var_dump("SELECT csrf_token FROM `{$data['DbPrefix']}members` WHERE `id` = '{$user_id}' ");
-  // var_dump($row);
-  return $row[0]['csrf_token'];
+    // var_dump("SELECT csrf_token FROM `{$data['DbPrefix']}members` WHERE `id` = '{$user_id}' ");
+    // var_dump($row);
+    return $row[0]['csrf_token'];
 }
 //generate_csrf_token();
 
-###############################################################################
+// 
 
-if($_POST) $post = get_post();
+if($_POST) { $post = get_post();
+}
 
-if(isset($post['StartPage'])) $post['StartPage'] = 0;
+if(isset($post['StartPage'])) { $post['StartPage'] = 0;
+}
 
-###############################################################################
+// 
 
 db_connect();
 
-###############################################################################
+// 
 
 $uid = 0;
 
-if($uid){
+if($uid) {
 
-	$balance=select_balance($uid);
+    $balance=select_balance($uid);
 
-	$post['Balance']=$balance;
+    $post['Balance']=$balance;
 
-	$post['Address']=$data['Addr'];
+    $post['Address']=$data['Addr'];
 
-	$post['MailAddr']=get_member_email($uid);
+    $post['MailAddr']=get_member_email($uid);
 
-	$post['Username']=get_member_username($uid);
+    $post['Username']=get_member_username($uid);
 
-	set_last_access_date($uid);
+    set_last_access_date($uid);
 
 }else{
-	$uid = isset($_SESSION['uid']) ? $_SESSION['uid'] : 0;
+    $uid = isset($_SESSION['uid']) ? $_SESSION['uid'] : 0;
 }
 
-###############################################################################
+// 
 
-if($data['ReferralPays']){
+if($data['ReferralPays']) {
 
-	if(get_member_id($post['sponsor'], '', "`active`=1")){
+    if(get_member_id($post['sponsor'], '', "`active`=1")) {
 
-		$_SESSION['sponsor']=$post['sponsor'];
+        $_SESSION['sponsor']=$post['sponsor'];
 
-		setcookie('rid', $post['sponsor']);
+        setcookie('rid', $post['sponsor']);
 
-	}elseif(!$_POST['sponsor'])unset($post['sponsor']);
+    }elseif(!$_POST['sponsor']) { unset($post['sponsor']);
+    }
 
 }unset($_POST['sponsor']);
 
 
-############################ Vouchers ############################
-function get_voucher_types(){
-  global $data;
+// Vouchers ############################
+function get_voucher_types()
+{
+    global $data;
 
-  $sql = "SELECT `voucher_types`.*".
+    $sql = "SELECT `voucher_types`.*".
           " FROM `voucher_types`".
           " ORDER BY `voucher_types`.`id` ASC ";
-  // echo $sql;
-  $types = db_rows($sql);
+    // echo $sql;
+    $types = db_rows($sql);
 
-  return $types;
+    return $types;
 }
 
-function get_voucher_offers(){
-  global $data;
+function get_voucher_offers()
+{
+    global $data;
 
-  $sql = "SELECT voucher_offers.*, COUNT(vouchers.id) as count_vouchers FROM `voucher_offers` ".
+    $sql = "SELECT voucher_offers.*, COUNT(vouchers.id) as count_vouchers FROM `voucher_offers` ".
           " LEFT JOIN vouchers ON (vouchers.voucher_offer_id = voucher_offers.id) ".
           " GROUP BY voucher_offers.id ";
 
-  $offers=db_rows($sql);
-  return $offers;
+    $offers=db_rows($sql);
+    return $offers;
 }
 
 
-function get_voucher_offer_details($offer_id){
-  global $data;
+function get_voucher_offer_details($offer_id)
+{
+    global $data;
 
-  $sql = "SELECT voucher_offers.*, COUNT(vouchers.id) as count_vouchers FROM `voucher_offers` ".
+    $sql = "SELECT voucher_offers.*, COUNT(vouchers.id) as count_vouchers FROM `voucher_offers` ".
           " LEFT JOIN vouchers ON (vouchers.voucher_offer_id = voucher_offers.id) ".
           " WHERE voucher_offers.id ='".$offer_id."' ".
           " GROUP BY voucher_offers.id ";
 
-  $offers=db_rows($sql);
-  return $offers[0];
+    $offers=db_rows($sql);
+    return $offers[0];
 }
 
-function purchase_voucher($user_id, $offer_id){
-  global $data;
+function purchase_voucher($user_id, $offer_id)
+{
+    global $data;
 
-  // Find voucher
-  $sql = "SELECT vouchers.* FROM vouchers".
+    // Find voucher
+    $sql = "SELECT vouchers.* FROM vouchers".
           " WHERE vouchers.voucher_offer_id ='".$offer_id."' ".
           " LIMIT 1 ";
 
-  $voucher=db_rows($sql)[0];
-  if(!$voucher['id']) return false;
-  // echo 'voucher[id] = '.$voucher['code'];
+    $voucher=db_rows($sql)[0];
+    if(!$voucher['id']) { return false;
+    }
+    // echo 'voucher[id] = '.$voucher['code'];
 
-  // Archive
-  $sql = "INSERT INTO `vouchers_archive`".
+    // Archive
+    $sql = "INSERT INTO `vouchers_archive`".
           "(`id`, `voucher_offer_id`, `member_id`, `code`, `bought_at`) VALUES".
           "(NULL, '".$offer_id."', '".$user_id."', '".$voucher["code"]."', Now() );";
 
-  // echo $sql." <--SQL \r\n";
-  $archive = db_query($sql);
+    // echo $sql." <--SQL \r\n";
+    $archive = db_query($sql);
 
-  if(!$archive) return false;
+    if(!$archive) { return false;
+    }
 
-  // Delete from vouchers
-  $sql = "DELETE FROM `vouchers` WHERE `vouchers`.`id` = '".$voucher['id']."' LIMIT 1 " ;
+    // Delete from vouchers
+    $sql = "DELETE FROM `vouchers` WHERE `vouchers`.`id` = '".$voucher['id']."' LIMIT 1 " ;
 
-  // echo $sql." <--SQL \r\n";
-  $delete = db_query($sql);
+    // echo $sql." <--SQL \r\n";
+    $delete = db_query($sql);
 
-  if(!$delete) return false;
+    if(!$delete) { return false;
+    }
 
-  //Success
-  return $voucher;
+    //Success
+    return $voucher;
 }
 
-############################ Vouchers ############################
-function get_mobile_recharge_offers($inital=""){
-  global $data;
+// Vouchers ############################
+function get_mobile_recharge_offers($inital="")
+{
+    global $data;
 
-  $sql = "SELECT mobile_recharge_offers.* FROM mobile_recharge_offers";
+    $sql = "SELECT mobile_recharge_offers.* FROM mobile_recharge_offers";
 
-  if($inital!="") $sql .= " WHERE mobile_recharge_offers.initial ='".$inital."' ";
+    if($inital!="") { $sql .= " WHERE mobile_recharge_offers.initial ='".$inital."' ";
+    }
 
-  //$sql .= " LIMIT 100 ";
+    //$sql .= " LIMIT 100 ";
 
 
-  $offers = db_rows($sql);
+    $offers = db_rows($sql);
 
-  return $offers;
+    return $offers;
 }

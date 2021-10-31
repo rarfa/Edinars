@@ -1,7 +1,7 @@
-(function($){
-    $.fn.validationEngineLanguage = function(){};
+(function ($) {
+    $.fn.validationEngineLanguage = function (){};
     $.validationEngineLanguage = {
-        newLang: function(){
+        newLang: function () {
             $.validationEngineLanguage.allRules = {
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
@@ -10,7 +10,7 @@
                     "alertTextCheckboxe": "* E' richiesta la selezione della casella"
                 },
                 "requiredInFunction": { 
-                    "func": function(field, rules, i, options){
+                    "func": function (field, rules, i, options) {
                         return (field.val() == "test") ? true : false;
                     },
                     "alertText": "* Field must equal test"
@@ -25,7 +25,7 @@
                     "regex": "none",
                     "alertText": "* Numero di caselle da selezionare in eccesso"
                 },
-				"groupRequired": {
+                "groupRequired": {
                     "regex": "none",
                     "alertText": "* You must fill one of the following fields"
                 },
@@ -67,7 +67,7 @@
                 },
                 
                 "ipv4": {
-                	"regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
+                    "regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
                     "alertText": "* IP non corretto"
                 },
                 "url": {
@@ -78,11 +78,11 @@
                     "regex": /^[0-9\ ]+$/,
                     "alertText": "* Solo numeri"
                 },
-				"onlyLetter": {
+                "onlyLetter": {
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Solo lettere"
                 },
-				"onlyLetterAccentSp":{
+                "onlyLetterAccentSp":{
                     "regex": /^[a-z\u00C0-\u017F\ ]+$/i,
                     "alertText": "* Solo lettere"
                 },

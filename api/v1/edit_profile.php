@@ -1,15 +1,15 @@
 <?php
 // Created by: Yacine Ait Chalal -> 12/07/2017
-#############################################################
+// 
 header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-include(DIR_ROOT.'includes/All_files.php');
+require DIR_ROOT.'includes/All_files.php';
 
 // security
-include('verif_user.php');
-include('verif_csrf_token.php');
+require 'verif_user.php';
+require 'verif_csrf_token.php';
 
 
 
@@ -42,57 +42,55 @@ $info_user = select_info($user_id, $post);
 // var_dump($info_user);
 // echo "empty = ".$info_user["empty"]."<br>";
 
-if($info_user["empty"]!="0"){
-  if(!$lastname){
-    $array_reponse['errors']['lastname'] = "Veuillez saisir votre nom";
-    $array_reponse['success'] = "no";
-  }
+if($info_user["empty"]!="0") {
+    if(!$lastname) {
+        $array_reponse['errors']['lastname'] = "Veuillez saisir votre nom";
+        $array_reponse['success'] = "no";
+    }
 
-  if($firstname == '') {
-    $array_reponse['errors']['firstname'] = "Veuillez saisir votre prénom";
+    if($firstname == '') {
+        $array_reponse['errors']['firstname'] = "Veuillez saisir votre prénom";
+        $array_reponse['success']="no";
+    }
+
+    if(is_null($type_account)) {
+        $array_reponse['errors']['type_account'] = "Veuillez sélectionner le type de compte";
+        $array_reponse['success']="no";
+    }
+}
+
+if($mobile == '') {
+    $array_reponse['errors']['mobile'] = "Veuillez saisir votre numéro mobile";
     $array_reponse['success']="no";
-  }
-
-  if(is_null($type_account)) {
-    $array_reponse['errors']['type_account'] = "Veuillez sélectionner le type de compte";
-    $array_reponse['success']="no";
-  }
-}
-
-if($mobile == ''){
-  $array_reponse['errors']['mobile'] = "Veuillez saisir votre numéro mobile";
-  $array_reponse['success']="no";
 }
 
 
-if($array_reponse['success']=="yes"){//if no errors
+if($array_reponse['success']=="yes") {//if no errors
 
-  if($info_user["empty"]!="0"){
-    $post['fname'] = $firstname;
-    $post['lname'] = $lastname;
-    $post['type'] = $type_account;
-  }
+    if($info_user["empty"]!="0") {
+        $post['fname'] = $firstname;
+        $post['lname'] = $lastname;
+        $post['type'] = $type_account;
+    }
 
-  $post['phone'] = $phone;
+    $post['phone'] = $phone;
 
-  if($mobile != $info_user['mobile']){
-    $post['mobile'] = $mobile;
-  }
+    if($mobile != $info_user['mobile']) {
+        $post['mobile'] = $mobile;
+    }
 
-  $post['fax'] = $fax;
+    $post['fax'] = $fax;
 
-  $edit_profile = update_my_profile($post, $user_id);
+    $edit_profile = update_my_profile($post, $user_id);
 
-  $update_my_profile_empty = update_my_profile_empty($user_id);
+    $update_my_profile_empty = update_my_profile_empty($user_id);
 
 
-  if(!$edit_profile || !$update_my_profile_empty){
-    $array['errors']['edit_profile'] = "Erreur interne !!";
-    $array['success']="no";
-  }
+    if(!$edit_profile || !$update_my_profile_empty) {
+        $array['errors']['edit_profile'] = "Erreur interne !!";
+        $array['success']="no";
+    }
 
 }
 
-echo json_encode ($array_reponse);
-
-?>
+echo json_encode($array_reponse);

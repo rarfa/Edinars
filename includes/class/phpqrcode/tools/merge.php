@@ -54,13 +54,13 @@
     foreach($fileList as $fileName) {
         $outputCode .= "\n\n".'//---- '.basename($fileName).' -----------------------------'."\n\n";
         $anotherCode = file_get_contents($fileName);
-        $anotherCode = preg_replace ('/^<\?php/', '', $anotherCode);
-        $anotherCode = preg_replace ('/\?>\*$/', '', $anotherCode);
+        $anotherCode = preg_replace('/^<\?php/', '', $anotherCode);
+        $anotherCode = preg_replace('/\?>\*$/', '', $anotherCode);
         $outputCode .= "\n\n".$anotherCode."\n\n";
     }
     
-	$versionDataEx = explode("\n", file_get_contents($versionFile));
-	
+    $versionDataEx = explode("\n", file_get_contents($versionFile));
+    
     $outputContents = file_get_contents($headerFile);
     $outputContents .= "\n\n/*\n * Version: ".trim($versionDataEx[0])."\n * Build: ".trim($versionDataEx[1])."\n */\n\n";
     $outputContents .= $outputCode;
