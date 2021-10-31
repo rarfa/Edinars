@@ -5454,9 +5454,13 @@ reset($_GET);
 
 ################################### SESSION ############################################
 
-if(!session_id())session_start();
+if(!session_id()) { 
+	session_start();
+}
 
 $data['sid']=session_id();
+
+$_SESSION['csrf_token'] = generate_csrf_token();
 
 header("Cache-control: private");
 
