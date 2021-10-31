@@ -70,7 +70,7 @@ include('config.php');
                                 <div class="carousel-content">
 <p class="cpaitationslider">Le E-paiment en Algerie </p>
 <p class="cpaitationslider">Maintenant c'est possible avec E-dinar  </p>
-							      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
+							      <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ include('config.php');
                                 <div class="carousel-content">
 								    <p class="cpaitationslider">Le E-paiment en Algerie </p>
                                     <p class="cpaitationslider">Maintenant c'est possible avec E-dinar  </p>
-									<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
+									<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Ouvrir un Compte</button>
                                 </div>
                             </div>
                         </div>

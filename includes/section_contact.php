@@ -14,7 +14,7 @@
 }
 
 .list_points_ventes h2 {
-  color:#73be28 ;
+  color:#e30613 ;
   font-size: 14px;
   font-weight: 600;
 
@@ -128,7 +128,7 @@ if($ii>0){
             <div class="form-group" id="div_message">
               <textarea name="message" name="id" class="form-control" rows="8" placeholder="Message"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Envoyer Message</button>
+            <button type="submit" class="btn btn-danger">Envoyer Message</button>
             <div class="loader" id="loading_contact"  name="loading_contact" style="display:none;float:right"></div>
           </form>
       </div>
