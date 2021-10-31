@@ -318,7 +318,8 @@ $esc_url = $base_url . 'espace_client/';
 
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script> var esc_url = '<?=$esc_url?>'; </script>
+        <script> var base_url = '<?=$base_url?>'; </script>
+        <script> var esc_url  = '<?=$esc_url?>'; </script>
         <script type="text/javascript" src="<?=$esc_url?>js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="<?=$esc_url?>js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="<?=$esc_url?>js/plugins/bootstrap/bootstrap.min.js"></script>

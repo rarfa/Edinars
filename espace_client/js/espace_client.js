@@ -1,7 +1,4 @@
-// Decalarations
-root_path="/";
-api_url = "/api/v1/";
-espace_client_dir ="/espace_client";
+api_url = base_url + "api/v1/";
 
 // ############################ csrf_token & access_token ############################
 function get_csrf_token(){
@@ -37,7 +34,7 @@ function load_include_page(page, check_loged=true){
 	$('#included_loading').show();
 
 	$.ajax({
-	  url: "aj.php?page="+page,
+	  url: esc_url + "aj.php?page="+page,
 	  cache: false,
 	  data: str,
 	  success: function(html){
@@ -61,7 +58,7 @@ function load_form(form_name, callback){
 	$('#loading_'+form_name+'_form').show();
 
 	$.ajax({
-	  url: "aj.php?form="+form_name,
+	  url: esc_url + "aj.php?form="+form_name,
 	  cache: false,
 	  data: str,
 	  success: function(html){
@@ -375,7 +372,7 @@ function process_refresh_user_datas(reponse, callback=null){
 		if(reponse.empty=="1"){
 			// redirected_to_profile = true;
 			// load_include_page("my_profile");
-			location.href = espace_client_dir + "#my_profile/";
+			location.href = esc_url + "#my_profile/";
 			// alert("my_profile_note");
 			show_my_profile_note = 1;
 		}

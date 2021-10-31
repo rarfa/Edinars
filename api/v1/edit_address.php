@@ -12,10 +12,10 @@ include('verif_user.php');
 include('verif_csrf_token.php');
 
 
-$address = !empty($_GET['address'])? clean_var($_GET['address']):clean_var($_POST['address']);
-$city = !empty($_GET['city'])? clean_var($_GET['city']):clean_var($_POST['city']);
-$postcode = !empty($_GET['postcode'])? clean_var($_GET['postcode']):clean_var($_POST['postcode']);
-$wilaya = !empty($_GET['wilaya'])? clean_var($_GET['wilaya']):clean_var($_POST['wilaya']);
+$address    = $_REQUEST['address'] ?? '';
+$city       = $_REQUEST['city'] ?? '';
+$postcode   = $_REQUEST['postcode'] ?? '';
+$wilaya     = $_REQUEST['wilaya'] ?? '';
 
 
 $array_reponse = array( 'errors'=> array(
@@ -74,5 +74,3 @@ if($array_reponse['success']=="yes"){
 }
 
 echo json_encode ($array_reponse);
-
-?>

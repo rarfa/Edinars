@@ -1381,30 +1381,30 @@ function update_my_profile($post, $uid, $notify=true){
   $sql = " UPDATE `{$data['DbPrefix']}members` SET ";
   $sql .= " id = id ";
   //$sql .= " `empty`= 0 ";
-  if(!is_null($post['sponsor'])) $sql .= " ,`sponsor`=".addslashes($post['sponsor'])." ";
-  if(!is_null($post['fname'])) $sql .= " ,`fname`='".addslashes($post['fname'])."' ";
-  if(!is_null($post['lname'])) $sql .= " ,`lname`='".addslashes($post['lname'])."' ";
-  if(!is_null($post['type'])){
+  if(isset($post['sponsor'])) $sql .= " ,`sponsor`=".addslashes($post['sponsor'])." ";
+  if(isset($post['fname'])) $sql .= " ,`fname`='".addslashes($post['fname'])."' ";
+  if(isset($post['lname'])) $sql .= " ,`lname`='".addslashes($post['lname'])."' ";
+  if(isset($post['type'])){
     if($post['type']=="") $post['type'] = 0;
     $sql .= " , `type`='".addslashes($post['type'])."' ";
   }
-  if(!is_null($post['phone'])) $sql .= " ,`phone`='".addslashes($post['phone'])."' ";
-  if(!is_null($post['fax'])) $sql .= " ,`fax`='".addslashes($post['fax'])."' ";
-  if(!is_null($post['mobile'])){
+  if(isset($post['phone'])) $sql .= " ,`phone`='".addslashes($post['phone'])."' ";
+  if(isset($post['fax'])) $sql .= " ,`fax`='".addslashes($post['fax'])."' ";
+  if(isset($post['mobile'])){
 
     $sql .= " , `mobile`='".addslashes($post['mobile'])."', `confirm_mobile` = '0', confirm_mobile_code = '".generate_pin_code(6)."' ";
   }
-  if(!is_null($post['confirm_mobile'])) $sql .= " , `confirm_mobile`='".addslashes($post['confirm_mobile'])."' ";
-  if(!is_null($post['address'])) $sql .= " , `address`='".addslashes($post['address'])."' ";
-  if(!is_null($post['city'])) $sql .= " , `city`='".addslashes($post['city'])."' ";
-  if(!is_null($post['postcode'])) $sql .= " , `postcode`='".addslashes($post['postcode'])."' ";
-  if(!is_null($post['wilaya'])) $sql .= " , `wilaya`='".addslashes($post['wilaya'])."' ";
-  if(!is_null($post['company'])) $sql .= " , `company`='".addslashes($post['company'])."' ";
-  if(!is_null($post['nrc'])) $sql .= " , `nrc`='".addslashes($post['nrc'])."' ";
-  if(!is_null($post['nnif'])) $sql .= " , `nnif`='".addslashes($post['nnif'])."' ";
-  if(!is_null($post['nart'])) $sql .= " , `nart`='".addslashes($post['nart'])."' ";
-  if(!is_null($post['nfis'])) $sql .= " , `nfis`='".addslashes($post['nfis'])."' ";
-  if(!is_null($post['empty'])) $sql .= " , `empty`='".addslashes($post['empty'])."' ";
+  if(isset($post['confirm_mobile'])) $sql .= " , `confirm_mobile`='".addslashes($post['confirm_mobile'])."' ";
+  if(isset($post['address'])) $sql .= " , `address`='".addslashes($post['address'])."' ";
+  if(isset($post['city'])) $sql .= " , `city`='".addslashes($post['city'])."' ";
+  if(isset($post['postcode'])) $sql .= " , `postcode`='".addslashes($post['postcode'])."' ";
+  if(isset($post['wilaya'])) $sql .= " , `wilaya`='".addslashes($post['wilaya'])."' ";
+  if(isset($post['company'])) $sql .= " , `company`='".addslashes($post['company'])."' ";
+  if(isset($post['nrc'])) $sql .= " , `nrc`='".addslashes($post['nrc'])."' ";
+  if(isset($post['nnif'])) $sql .= " , `nnif`='".addslashes($post['nnif'])."' ";
+  if(isset($post['nart'])) $sql .= " , `nart`='".addslashes($post['nart'])."' ";
+  if(isset($post['nfis'])) $sql .= " , `nfis`='".addslashes($post['nfis'])."' ";
+  if(isset($post['empty'])) $sql .= " , `empty`='".addslashes($post['empty'])."' ";
   // var_dump($post);
   $sql .= " WHERE `id`={$uid} ";
 
@@ -1413,11 +1413,19 @@ function update_my_profile($post, $uid, $notify=true){
   $edit_profile = db_query($sql);
 
   if($edit_profile){
-    $mcheckinfo  =" NOM : ".addslashes($post['fname'])." \n ";
-    $mcheckinfo .=" PRENOM  : ".addslashes($post['lname'])." \n ";
-    $mcheckinfo .=" TELEPHONE : ".addslashes($post['phone'])." \n" ;
-    $mcheckinfo .=" MOBILE    : ".addslashes($post['mobile'])." \n " ;
-    $mcheckinfo .=" FAX : ".addslashes($post['fax']);
+
+	$mcheckinfo  = '';
+
+	if(isset($post['fname']))
+    	$mcheckinfo .=" NOM : ".addslashes($post['fname'])." \n ";
+	if(isset($post['lname']))
+    	$mcheckinfo .=" PRENOM  : ".addslashes($post['lname'])." \n ";
+	if(isset($post['phone']))
+    	$mcheckinfo .=" TELEPHONE : ".addslashes($post['phone'])." \n";
+	if(isset($post['mobile']))
+   		$mcheckinfo .=" MOBILE    : ".addslashes($post['mobile'])." \n " ;
+	if(isset($post['fax']))
+    	$mcheckinfo .=" FAX : ".addslashes($post['fax']);
 
     // ajoutre un audit
     // audit(

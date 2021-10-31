@@ -109,7 +109,7 @@ function login(){
 	$("#login_loading").show();
 	$.ajax({
 			// url: "creer_un_compte.php",
-			url: "api/v1/identification.php",
+			url: base_url + "api/v1/identification.php",
 			cache: false,
 			data: str,
 			type:"post",
@@ -183,7 +183,7 @@ function register(){
 	$("#register_loading").show();
 	$.ajax({
 			// url: "creer_un_compte.php",
-			url: "api/v1/register.php",
+			url: base_url + "api/v1/register.php",
 			cache: false,
 			data: str,
 			type:"post",
@@ -238,7 +238,7 @@ function lost_password(){
 	$("#lost_loading").show();
 	$.ajax({
 			// url: "creer_un_compte.php",
-			url: "api/v1/lost_password.php",
+			url: base_url + "api/v1/lost_password.php",
 			cache: false,
 			data: str,
 			type:"post",
@@ -308,7 +308,7 @@ function reset_password(){
 	$("#loading_reset_password").show();
 	$.ajax({
 			// url: "creer_un_compte.php",
-			url: "api/v1/reset_password.php",
+			url: base_url + "api/v1/reset_password.php",
 			cache: false,
 			data: str,
 			type:"post",
