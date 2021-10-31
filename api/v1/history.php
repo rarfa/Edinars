@@ -9,8 +9,7 @@ require DIR_ROOT.'includes/All_files.php';
 require 'verif_user.php';
 
 $count = 8;
-$page = !empty($_GET['page'])? clean_var($_GET['page']):clean_var($_POST['page']);
-
+$page = (int) $_REQUEST['page'] ?? 0;
 $page = $page * $count;
 
 $_array = get_transactions($user_id, 'both', -1, -1, $page, $count);
