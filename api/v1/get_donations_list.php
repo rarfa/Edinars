@@ -1,17 +1,17 @@
 <?php
 // Created by: Yacine Ait Chalal -> 12/07/2017
-// 
+//
 header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-require DIR_ROOT.'includes/All_files.php';
+require DIR_ROOT . 'includes/All_files.php';
 
 // security
 require 'verif_user.php';
 
-$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
-$donation_id = !empty($_GET['donation_id'])? clean_var($_GET['donation_id']):clean_var($_POST['donation_id']);
+$mode        = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
+$donation_id = isset($_REQUEST['donation_id']) ? $_REQUEST['donation_id'] : '';
 
 $array_reponse = array('success'=>'yes' );
 
