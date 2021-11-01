@@ -924,7 +924,7 @@ function prntext($text)
 
 
 
-    return preg_replace($search, $replace, $text);
+    return @preg_replace($search, $replace, $text);
 
 }
 
@@ -2479,14 +2479,7 @@ function get_member_info_reciever($uid)
         );
     }
 
-    $result[0]['emails']=db_rows(
-        "SELECT * FROM `{$data['DbPrefix']}member_emails`".
-        " INNER JOIN `{$data['DbPrefix']}members` ON `owner`= `id` ".
-        " WHERE `membmem_ider_id`={$uid} AND `email`<>'{$result[0]['email']}'"
-    );
-
     return $result[0];
-
 }
 
 
@@ -3516,8 +3509,7 @@ function can_refund($id, $uid)
         " AND TO_DAYS(NOW())-TO_DAYS(`tdate`)<{$data['RefundPeriod']}"
     );
 
-    return $result[0];
-
+    return $result[0] ?? null;
 }
 
 
@@ -5377,8 +5369,8 @@ function get_trx_id()
 function get_transaction_trx_id($trxid)
 {
 
-    global $data;
-    if(isset($suser) || isset($sdata)) {
+    global $data, $suser, $sdate, $uid;
+    if(isset($suser) || isset($sdate)) {
         $start=0;
         $count=0;
     }
@@ -5412,7 +5404,7 @@ function get_transaction_trx_id($trxid)
         $result[$key]['oamount']=$dir?$value['amount']:-$value['amount'];
         //$result[$key]['amount']=prnpays($result[$key]['oamount']);
         $result[$key]['tdate']=prndate($value['tdate']);
-        $result[$key]['period']=$value['period'];
+        $result[$key]['period']= $value['period'] ?? '';
 
         //$result[$key]['ostatus']=$value['status'];
         $result[$key]['type']=$data['TransactionType'][$value['type']];
