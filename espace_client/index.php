@@ -20,8 +20,8 @@ $esc_url = $base_url . 'espace_client/';
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="<?php echo $esc_url?>css/theme-default.css?update=<?php echo time()?>"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo $esc_url?>css/fontawesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-default.css?update=<?=time()?>"/>
+        <link rel="stylesheet" type="text/css" href="<?=$esc_url?>css/fontawesome/css/font-awesome.min.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
     <body>
@@ -38,11 +38,11 @@ $esc_url = $base_url . 'espace_client/';
                   </li>
                   <li class="xn-profile">
                       <a href="#" class="profile-mini">
-                          <img src="<?php echo $base_url?>images/logo_initial.png" alt="logo edinars" height="35"/>
+                          <img src="<?=$base_url?>images/logo_initial.png" alt="logo edinars" height="35"/>
                       </a>
                       <div class="profile">
                           <div class="profile-image">
-                              <img src="<?php echo $base_url?>images/logo.png" alt="logo edinars" height="45">
+                              <img src="<?=$base_url?>images/logo.png" alt="logo edinars" height="45">
                           </div>
                           <div class="profile-data">
                             <div class="profile-data-name"><span class="user_data_firstname">{firstname}</span> <span class="user_data_lastname">{lastname}</span> </div>
@@ -95,7 +95,7 @@ $esc_url = $base_url . 'espace_client/';
                             </a>
                         </div>
                         <div class="panel-footer text-center">
-                            <a href="<?php echo $esc_url?>#notifications">Afficher toutes</a>
+                            <a href="<?=$esc_url?>#notifications/">Afficher toutes</a>
                         </div>
                     </div>
                 </li>
@@ -279,22 +279,22 @@ $esc_url = $base_url . 'espace_client/';
                     <div class="mb-content">
                       <div class="row">
                         <div class="col-md-3">
-                          <a  href="<?php echo $esc_url?>#products/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-gift"></span>
+                          <a  href="<?=$esc_url?>#products/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-gift"></span>
                             <br> Produits
                           </a>
                         </div>
                         <div class="col-md-3">
-                          <a  href="<?php echo $esc_url?>#traders_simple_payment/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-credit-card"></span>
+                          <a  href="<?=$esc_url?>#traders_simple_payment/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-credit-card"></span>
                             <br> Paiements
                           </a>
                         </div>
                         <div class="col-md-3">
-                          <a  href="<?php echo $esc_url?>#subscriptions/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-rss"></span>
+                          <a  href="<?=$esc_url?>#subscriptions/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-rss"></span>
                             <br>Abonnements
                           </a>
                         </div>
                         <div class="col-md-3">
-                          <a  href="<?php echo $esc_url?>#donations/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-heart-o"></span>
+                          <a  href="<?=$esc_url?>#donations/" onclick="$('#mb-traders').removeClass('open');" class="tile tile-success tile-valign"><span class="fa fa-heart-o"></span>
                             <br> Donation
                           </a>
                         </div>
@@ -313,62 +313,62 @@ $esc_url = $base_url . 'espace_client/';
         <!-- END traders BOX-->
 
         <!-- START PRELOADS -->
-        <audio id="audio-alert" src="<?php echo $esc_url?>audio/alert.mp3" preload="auto"></audio>
-        <audio id="audio-fail" src="<?php echo $esc_url?>audio/fail.mp3" preload="auto"></audio>
+        <audio id="audio-alert" src="<?=$esc_url?>audio/alert.mp3" preload="auto"></audio>
+        <audio id="audio-fail" src="<?=$esc_url?>audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->
 
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script> var base_url = '<?php echo $base_url?>'; </script>
-        <script> var esc_url  = '<?php echo $esc_url?>'; </script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/bootstrap/bootstrap.min.js"></script>
+        <script> var base_url = '<?=$base_url?>'; </script>
+        <script> var esc_url  = '<?=$esc_url?>'; </script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/bootstrap/bootstrap.min.js"></script>
         <!-- END PLUGINS -->
 
         <!-- START THIS PAGE PLUGINS-->
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/scrolltotop/scrolltopcontrol.js"></script>
 
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/morris/raphael-min.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/morris/morris.min.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/rickshaw/d3.v3.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/rickshaw/rickshaw.min.js"></script>
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/bootstrap/bootstrap-datepicker.js'></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/owl/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/morris/raphael-min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/morris/morris.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/rickshaw/d3.v3.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/rickshaw/rickshaw.min.js"></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/owl/owl.carousel.min.js"></script>
 
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/moment.min.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins/daterangepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/moment.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/daterangepicker/daterangepicker.js"></script>
         <!-- END THIS PAGE PLUGINS-->
 
         <!-- START TEMPLATE -->
         <!-- <script type="text/javascript" src="js/settings.js"></script> -->
 
-        <script type="text/javascript" src="<?php echo $esc_url?>js/plugins.js"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/actions.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/actions.js"></script>
 
         <!-- <script type="text/javascript" src="js/demo_dashboard.js"></script> -->
 
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/noty/jquery.noty.js'></script>
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/noty/layouts/center.js'></script>
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/noty/themes/default.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/noty/jquery.noty.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/noty/layouts/center.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/noty/themes/default.js'></script>
 
-        <script type='text/javascript' src='<?php echo $esc_url?>js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
 
-        <script src="<?php echo $esc_url?>js/plugins/sweet_alert/sweetalert2.min.js"></script>
-        <link rel="stylesheet" href="<?php echo $esc_url?>js/plugins/sweet_alert/sweetalert2.min.css">
+        <script src="<?=$esc_url?>js/plugins/sweet_alert/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="<?=$esc_url?>js/plugins/sweet_alert/sweetalert2.min.css">
 
-        <script type="text/javascript" src="<?php echo $esc_url?>js/faq.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/faq.js"></script>
 
-        <script type="text/javascript" src="<?php echo $esc_url?>js/sammy-latest.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/sammy-latest.min.js"></script>
         <!-- <script type="text/javascript" src="js/angular.min.js"></script> -->
 
-        <script type="text/javascript" src="<?php echo $base_url?>js/common.js?update=<?php echo time()?>"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/espace_client.js?update=<?php echo time()?>"></script>
-        <script type="text/javascript" src="<?php echo $esc_url?>js/espace_client_voucher.js?update=<?php echo time()?>"></script>
+        <script type="text/javascript" src="<?=$base_url?>js/common.js?update=<?=time()?>"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/espace_client.js?update=<?=time()?>"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/espace_client_voucher.js?update=<?=time()?>"></script>
 
         <script type="text/javascript">
           //check_login

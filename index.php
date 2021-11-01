@@ -1,8 +1,8 @@
 <?php
-// include("config.php");
 
+// include("config.php");
 define("DIR_ROOT", "./");
-require DIR_ROOT.'includes/All_files.php';
+require DIR_ROOT . 'includes/All_files.php';
 
 ?>
 <!DOCTYPE html>
@@ -18,30 +18,26 @@ require DIR_ROOT.'includes/All_files.php';
     <meta name="theme-color" content="#e30613" />
 
     <!-- core CSS -->
-    <link href="<?php echo $base_url?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="https://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" id="theme" href="<?php echo $base_url?>css/fontawesome/css/font-awesome.min.css"/>
-    <link href="<?php echo $base_url?>css/animate.min.css" rel="stylesheet">
-    <link href="<?php echo $base_url?>css/owl.carousel.css" rel="stylesheet">
-    <link href="<?php echo $base_url?>css/owl.transitions.css" rel="stylesheet">
-    <link href="<?php echo $base_url?>css/prettyPhoto.css" rel="stylesheet">
-    <link href="<?php echo $base_url?>css/main.css" rel="stylesheet">
-    <link href="<?php echo $base_url?>css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" id="theme" href="<?=$base_url?>css/fontawesome/css/font-awesome.min.css"/>
+    <link href="<?=$base_url?>css/animate.min.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/owl.carousel.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/owl.transitions.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/prettyPhoto.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/main.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
     <link rel="shortcut icon" href="images/ico/favicon_last.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $base_url?>images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $base_url?>images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $base_url?>images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="<?php echo $base_url?>images/ico/apple-touch-icon-57-precomposed.png">
-    <?php
-    require "includes/google_analytics.php";
-
-    ?>
-
-    <script> var base_url = '<?php echo $base_url?>'; </script>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?=$base_url?>images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?=$base_url?>images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?=$base_url?>images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<?=$base_url?>images/ico/apple-touch-icon-57-precomposed.png">
+    <?php require "includes/google_analytics.php"; ?>
+    <script> var base_url = '<?=$base_url?>'; </script>
     <script src="js/jquery.js"></script>
 </head><!--/head-->
 <!--Start of Tawk.to Script-->
@@ -69,18 +65,18 @@ s0.parentNode.insertBefore(s1,s0);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="<?php echo $base_url?>images/logo.svg" alt="logo" height="80"></a>
+                    <a class="navbar-brand" href="#"><img src="<?=$base_url?>images/logo.svg" alt="logo" height="80"></a>
                 </div>
 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <!--<li class="scroll active"><a href="#accueil">Accueil</a></li>-->
-                        <li class="scroll"><a href="<?php echo $base_url?>#features">Particuliers</a></li>
-                        <li class="scroll"><a href="<?php echo $base_url?>#work-process">Professionnels</a></li>
-                        <li class="scroll"><a href="<?php echo $base_url?>#services">Services</a></li>
+                        <li class="scroll"><a href="<?=$base_url?>#features">Particuliers</a></li>
+                        <li class="scroll"><a href="<?=$base_url?>#work-process">Professionnels</a></li>
+                        <li class="scroll"><a href="<?=$base_url?>#services">Services</a></li>
                         <li class="scroll"><a href="#" data-toggle="modal" data-target="#login-modal" role="button" class="login_btn">Mon Compte</a></li>
                         <!-- <li class="scroll"><a href="./#animated-number">Mon Compte</a></li> -->
-                        <li class="scroll"><a href="<?php echo $base_url?>#contact">Contact</a></li>
+                        <li class="scroll"><a href="<?=$base_url?>#contact">Contact</a></li>
                     </ul>
                 </div>
             </div><!--/.container-->
@@ -112,16 +108,16 @@ s0.parentNode.insertBefore(s1,s0);
     </footer><!--/#footer-->
 
 
-    <script src="<?php echo $base_url?>js/bootstrap.min.js"></script>
-    <script src="<?php echo $base_url?>js/owl.carousel.min.js"></script>
-    <script src="<?php echo $base_url?>js/mousescroll.js"></script>
-    <script src="<?php echo $base_url?>js/jquery.prettyPhoto.js"></script>
-    <script src="<?php echo $base_url?>js/jquery.isotope.min.js"></script>
-    <script src="<?php echo $base_url?>js/jquery.inview.min.js"></script>
-    <script src="<?php echo $base_url?>js/wow.min.js"></script>
-    <script src="<?php echo $base_url?>js/main.js?update=<?php echo time()?>"></script>
-    <script src="<?php echo $base_url?>js/validation-login.js"></script>
-    <script src="<?php echo $base_url?>js/common.js?update=<?php echo time()?>"></script>
+    <script src="<?=$base_url?>js/bootstrap.min.js"></script>
+    <script src="<?=$base_url?>js/owl.carousel.min.js"></script>
+    <script src="<?=$base_url?>js/mousescroll.js"></script>
+    <script src="<?=$base_url?>js/jquery.prettyPhoto.js"></script>
+    <script src="<?=$base_url?>js/jquery.isotope.min.js"></script>
+    <script src="<?=$base_url?>js/jquery.inview.min.js"></script>
+    <script src="<?=$base_url?>js/wow.min.js"></script>
+    <script src="<?=$base_url?>js/main.js?update=<?=time()?>"></script>
+    <script src="<?=$base_url?>js/validation-login.js"></script>
+    <script src="<?=$base_url?>js/common.js?update=<?=time()?>"></script>
 
 
 </body>
