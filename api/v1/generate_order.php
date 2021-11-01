@@ -2,12 +2,12 @@
 // Created by: Acher Adlane
 // Revised by: Yacine Ait Chalal -> 29/05/2017
 // Link for http://www.edinars.net/api/v1/generate_order.php?member_id=000&amount=500&from=application
-// 
+//
 //header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
 
-require DIR_ROOT.'includes/All_files.php';
+require DIR_ROOT . 'includes/All_files.php';
 
 // security
 require 'verif_user.php';
@@ -20,21 +20,24 @@ $array_reponse = array( 'errors' => array(
                           'generate_order'=>''),
                         'success'=>'yes' );
 
-$member_id = !empty($_GET['member_id'])? clean_var($_GET['member_id']):clean_var($_POST['member_id']);
-$amount = $post['montant'] = !empty($_GET['amount'])? clean_var($_GET['amount']):clean_var($_POST['amount']);
-$code_pin = $post['dtype'] = !empty($_GET['code_pin'])? clean_var($_GET['code_pin']):clean_var($_POST['code_pin']);
-$description  = !empty($_GET['description'])? clean_var($_GET['description']):clean_var($_POST['description']);
-// $dtype  = !empty($_GET['from'])? clean_var($_GET['from']):clean_var($_GET['from']);
+$member_id      =  isset($_REQUEST['member_id']) ? clean_var($_REQUEST['member_id']) : null;
+$amount         = $post['montant'] = isset($_REQUEST['amount']) ? clean_var($_REQUEST['amount']) : null;
+$code_pin       = $post['dtype'] = isset($_REQUEST['code_pin']) ? clean_var($_REQUEST['code_pin']) : null;
+$description    = isset($_REQUEST['description']) ? clean_var($_REQUEST['description']) : null;
 
-$array_info_sender = select_info($user_id, $post);
-$array_info_reciever = get_member_info_reciever($member_id);
+// if no post dtype default to edifuse
+// TODO :: sould be checked with rahim it was deleted here so it wasn't working this is just example fix
+$dtype          = isset($_REQUEST['dtype']) ? clean_var($_REQUEST['dtype']) : 'Ediffuse';
 
-$data['Balance-disponible']=select_balance_disponible($user_id);
+$array_info_sender      = select_info($user_id, $post);
+$array_info_reciever    = get_member_info_reciever($member_id);
 
-$fees = $data['DepositMethod'][$post['dtype']]['fees'];
-$prcn = $data['DepositMethod'][$post['dtype']]['prcn'];
+$data['Balance-disponible'] = select_balance_disponible($user_id);
 
-$amount_fees = $post['fees']=round(($amount * $prcn/100)+$fees, 2);
+$fees = $data['DepositMethod'][$dtype]['fees'];
+$prcn = $data['DepositMethod'][$dtype]['prcn'];
+
+$amount_fees = $post['fees'] = round(($amount * $prcn/100)+$fees, 2);
 
 
 if(!$member_id) {
@@ -82,11 +85,11 @@ if($array_reponse['success']=="yes") {
     // echo $array_info_reciever['id']." <- id \r\n";
     // echo prnuser($array_info_reciever['id'])." <- prnuser\r\n";
 
-    $transaction_description .="Montant : <b>".$amount." DA</b><br>" ;
-    $transaction_description .="Envoyé à : ".prnuser($array_info_reciever['id'])."<br>" ;
+    $transaction_description  = "Montant : <b>".$amount." DA</b><br>" ;
+    $transaction_description .= "Envoyé à : ".prnuser($array_info_reciever['id'])."<br>" ;
 
     //
-    $post['email']=get_member_email($array_info_reciever['id']);
+    $post['email'] = get_member_email($array_info_reciever['id']);
     send_email('REQUEST-MONEY', $post);
 
     $array_reponse['trx_id'] = $get_trx_id;
