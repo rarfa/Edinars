@@ -1109,4 +1109,8 @@ ul.nostyle i {
   background-color: #e30613;
   border-color: #e30613;
 }
+
+.alert-p {
+  padding-left: 20px;
+}
 /*******************Yacine ***************************/

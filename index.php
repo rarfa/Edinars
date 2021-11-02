@@ -13,7 +13,7 @@ require DIR_ROOT . 'includes/All_files.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Edinars Enterprise - Services de paiements online">
     <meta name="author" content="Sarl Edinars Enterprise">
-    <title>Edinars - Services de Paiements en Algerie</title>
+    <title>E-Recovery - Services de Paiements en Algerie</title>
 
     <meta name="theme-color" content="#e30613" />
 
@@ -93,7 +93,7 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                     Copyright © 2017 <b>Edinars</b>. Tous droits réservés
+                     Copyright © 2021 <b>E-Recovery</b>. Tous droits réservés
                 </div>
                 <div class="col-sm-6">
                     <ul class="social-icons">
