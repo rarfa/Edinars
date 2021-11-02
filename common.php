@@ -100,19 +100,20 @@ function get_user_notifications($user_id, $view='', $type='')
           " Limit 30";
 
     $notifications=db_rows($sql);
-    // prnuser
 
-    foreach ($notifications as $key => $value) {
-        $notifications[$key]["sender"] = prnuser($notifications[$key]["sender"]);
-        if($notifications[$key]["type"]=="transaction") { $notifications[$key]["message"] = $notifications[$key]["transaction_comments"];
+    foreach ($notifications as &$notification) {
+
+        $notification["sender"] = prnuser($notification["sender_id"]);
+
+        if($notification["type"] == "transaction") { 
+
+            $notification["message"] = $notification["transaction_comments"];
         }
 
-        $notifications[$key]["_message"] = strip_tags(str_replace("</p>", "\r\n", $notifications[$key]["message"]));
+        $notification["_message"] = strip_tags(str_replace("</p>", "\r\n", $notification["message"]));
     }
-    //echo nl2br($sql);
 
     return $notifications;
-
 }
 
 function set_notification_viewed($user_id,$notification_id, $transaction_id = null )
@@ -260,7 +261,7 @@ function insert_notification($array_infos)
     $sql = "INSERT INTO `{$data['DbPrefix']}notifications` ";
 
     $sql_keys  = "(";
-    $sql_value  = "VALUES(";
+    $sql_value  = "VALUES (";
 
     foreach ($array_infos as $key => $value) {
         // code...
@@ -268,31 +269,15 @@ function insert_notification($array_infos)
         $sql_value .= "'".$value."', ";
     }
 
-    $sql_keys = substr($sql_keys, 0, strlen($sql_keys)-2);
+    $sql_keys  = substr($sql_keys, 0, strlen($sql_keys)-2);
     $sql_value = substr($sql_value, 0, strlen($sql_value)-2);
 
     $sql_value .= ")";
-    $sql_keys .= ")";
+    $sql_keys .= ") ";
 
     $insert = db_query($sql.$sql_keys.$sql_value);
-    // $insert = db_query(
-    //     "INSERT INTO `{$data['DbPrefix']}products`(".
-    //     "`type`,`owner`,`prix`,`periode`,`installation`,`essai`,`tva`,`livraison`,".
-    //     "`button`,`nom`,`ureturn`,`unotify`,`ucancel`,`comments`".
-    //     ")VALUES(".
-    //     "{$type},{$uid},{$post['prix']},".
-    //     ($post['periode']?"{$post['periode']},":'0,').
-    //     ($post['installation']?"{$post['installation']},":'0.00,').
-    //     ($post['essai']?"{$post['essai']},":'0.00,').
-    //     ($post['tva']?"{$post['tva']},":'0.00,').
-    //     ($post['livraison']?"{$post['livraison']},":'0.00,').
-    //     "'{$post['button']}','{$post['nom']}','{$post['ureturn']}',".
-    //     "'{$post['unotify']}','{$post['ucancel']}','".
-    //     addslashes($post['comments'])."')"
-    // );
 
     return $insert;
-
 }
 
 function update_product($id, $post)
@@ -3573,7 +3558,7 @@ function get_transactions($uid, $dir='both', $type=-1, $status=-1, $start=0,$cou
 
     global $data;
 
-    if(!is_null($suser) || !is_null($sdata)) {
+    if(isset($suser) || isset($sdata)) {
         $start=0;
         $count=0;
     }
