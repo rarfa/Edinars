@@ -11,19 +11,25 @@ require DIR_ROOT.'includes/All_files.php';
 require 'verif_user.php';
 require 'verif_csrf_token.php';
 
-$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
+$mode = isset($_REQUEST['mode']) ? clean_var($_REQUEST['mode']) : '';
 
 
 //***** Mode: Add new donation *****//
 if($mode=="add") {
-    $donation_id = !empty($_GET['donation_id'])? clean_var($_GET['donation_id']):clean_var($_POST['donation_id']);
-    $nom = !empty($_GET['nom'])? clean_var($_GET['nom']):clean_var($_POST['nom']);
-    $prix = !empty($_GET['prix'])? clean_var($_GET['prix']):clean_var($_POST['prix']);
-    $ureturn = !empty($_GET['ureturn'])? clean_var($_GET['ureturn']):clean_var($_POST['ureturn']);
-    $unotify = !empty($_GET['unotify'])? clean_var($_GET['unotify']):clean_var($_POST['unotify']);
-    $ucancel = !empty($_GET['ucancel'])? clean_var($_GET['ucancel']):clean_var($_POST['ucancel']);
-    $comments = !empty($_GET['comments'])? clean_var($_GET['comments']):clean_var($_POST['comments']);
-    $button = !empty($_GET['button'])? clean_var($_GET['button']):clean_var($_POST['button']);
+    $donation_id    = isset($_REQUEST['donation_id']) ? clean_var($_REQUEST['donation_id']) : '';
+    $nom            = isset($_REQUEST['nom']) ? clean_var($_REQUEST['nom']) : '';
+    $prix           = isset($_REQUEST['prix']) ? clean_var($_REQUEST['prix']) : '';
+    $ureturn        = isset($_REQUEST['ureturn']) ? clean_var($_REQUEST['ureturn']) : '';
+    $unotify        = isset($_REQUEST['unotify']) ? clean_var($_REQUEST['unotify']) : '';
+    $ucancel        = isset($_REQUEST['ucancel']) ? clean_var($_REQUEST['ucancel']) : '';
+    $comments       = isset($_REQUEST['comments']) ? clean_var($_REQUEST['comments']) : '';
+    $button         = isset($_REQUEST['button']) ? clean_var($_REQUEST['button']) : '';
+
+    $periode        = isset($_REQUEST['periode']) ? clean_var($_REQUEST['periode']) : '';
+    $installation   = isset($_REQUEST['installation']) ? clean_var($_REQUEST['installation']) : '';
+    $essai          = isset($_REQUEST['essai']) ? clean_var($_REQUEST['essai']) : '';
+    $tva            = isset($_REQUEST['tva']) ? clean_var($_REQUEST['tva']) : '';
+    $livraison     = isset($_REQUEST['livraison']) ? clean_var($_REQUEST['livraison']) : '';
 
     $array_reponse = array( 'errors' => array(
                             'edit_donation' => ''),
@@ -45,7 +51,7 @@ if($mode=="add") {
     if(!$prix) {
         $array_reponse['errors']['prix'] = "Veuillez saisir le prix de donation";
         $array_reponse['success'] = "no";
-    }elseif(get_member_status($uid)<2 && $post['price']>$data['PaymentMaxSum']) {
+    }elseif(get_member_status($uid) < 2 && $post['prix']>$data['PaymentMaxSum']) {
         $array_reponse['errors']['prix'] ="Prix pour de donation doit être inférieur à".
         " {$data['PaymentMaxSum']} {$data['Currency']}  ".
         " parce que votre compte ne pas encore vérifié";
@@ -72,7 +78,7 @@ if($mode=="add") {
         $array_reponse['success'] = "no";
     }
 
-    $post = compact('nom', 'prix', 'ureturn', 'unotify', 'ucancel', 'button');
+    $post = compact('nom', 'prix', 'ureturn', 'unotify', 'ucancel', 'button', 'periode', 'installation', 'essai', 'tva', 'livraison', 'comments');
 
     if($array_reponse['success']=="yes" && $donation_id=="") { //add
         $insert = insert_product($user_id, 2, $post);
@@ -95,8 +101,9 @@ if($mode=="add") {
 }
 
 //***** Mode: delete donation *****//
-if($mode=="delete") {
-    $donation_id = !empty($_GET['donation_id'])? clean_var($_GET['donation_id']):clean_var($_POST['donation_id']);
+if($mode == "delete") {
+    
+    $donation_id    = isset($_REQUEST['donation_id']) ? clean_var($_REQUEST['donation_id']) : 0;
 
     $array_reponse = array( 'errors' => array(
                             'edit_donation' => ''),

@@ -10,10 +10,7 @@ require DIR_ROOT.'includes/All_files.php';
 // security
 require 'verif_user.php';
 
-$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
-// $subscriber_id = !empty($_GET['subscriber_id'])? clean_var($_GET['subscriber_id']):clean_var($_POST['subscriber_id']);
-
-
+$mode = isset($_REQUEST['mode']) ? clean_var($_REQUEST['mode']) : '';
 
 $array_reponse = array('success'=>'yes' );
 

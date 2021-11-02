@@ -9,10 +9,10 @@ require DIR_ROOT.'includes/All_files.php';
 require 'verif_user.php';
 
 $count = 8;
-$page = (int) $_REQUEST['page'] ?? 0;
-$page = $page * $count;
+$page  = (int) $_REQUEST['page'] ?? 0;
+$page  = $page * $count;
 
-$_array = get_transactions($user_id, 'both', -1, -1, $page, $count);
+$_array           = get_transactions($user_id, 'both', -1, -1, $page, $count);
 $all_transactions = get_transactions($user_id, 'both', -1, -1);
 
 foreach ($_array as $key => $value) {

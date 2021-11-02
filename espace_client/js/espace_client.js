@@ -644,10 +644,11 @@ function show_notification(notification_id)
     );
 }
 
-function fill_history_table(continer, json_datas, clear_container=true)
+function fill_history_table(container, json_datas, clear_container=true)
 {
 
-    if(clear_container==true) { $(continer).html("");
+    if(clear_container==true) { 
+        $(container).html("");
     }
     var action_pending_payments="";
     var raw_html="";
@@ -668,7 +669,7 @@ function fill_history_table(continer, json_datas, clear_container=true)
         raw_html += '<button class="btn btn-default btn-rounded btn-sm" onclick="show_transaction(\''+json_datas[key].id+'\');"><span class="fa fa-info-circle"></span></button> ';
         raw_html += action_pending_payments+'</td>';
         raw_html += '</tr>';
-        $(continer).append(raw_html);
+        $(container).append(raw_html);
     }
 }
 

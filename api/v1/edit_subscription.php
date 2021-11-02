@@ -12,29 +12,29 @@ require 'verif_user.php';
 require 'verif_csrf_token.php';
 
 
-$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
+$mode = isset($_REQUEST['mode']) ? clean_var($_REQUEST['mode']) : '' ;
 
 //***** Mode: Add new subscription *****//
 if($mode=="add") {
-    $subscription_id = !empty($_GET['subscription_id'])? clean_var($_GET['subscription_id']):clean_var($_POST['subscription_id']);
-    $nom = !empty($_GET['nom'])? clean_var($_GET['nom']):clean_var($_POST['nom']);
-    $prix = !empty($_GET['prix'])? clean_var($_GET['prix']):clean_var($_POST['prix']);
-    $periode = !empty($_GET['periode'])? clean_var($_GET['periode']):clean_var($_POST['periode']);
-    $essai = !empty($_GET['essai'])? clean_var($_GET['essai']):clean_var($_POST['essai']);
-    $installation = !empty($_GET['installation'])? clean_var($_GET['installation']):clean_var($_POST['installation']);
-    $tva = !empty($_GET['tva'])? clean_var($_GET['tva']):clean_var($_POST['tva']);
-    $livraison = !empty($_GET['livraison'])? clean_var($_GET['livraison']):clean_var($_POST['livraison']);
-    $ureturn = !empty($_GET['ureturn'])? clean_var($_GET['ureturn']):clean_var($_POST['ureturn']);
-    $unotify = !empty($_GET['unotify'])? clean_var($_GET['unotify']):clean_var($_POST['unotify']);
-    $ucancel = !empty($_GET['ucancel'])? clean_var($_GET['ucancel']):clean_var($_POST['ucancel']);
-    $comments = !empty($_GET['comments'])? clean_var($_GET['comments']):clean_var($_POST['comments']);
-    $button = !empty($_GET['button'])? clean_var($_GET['button']):clean_var($_POST['button']);
+    $subscription_id    = isset($_REQUEST['subscription_id']) ? clean_var($_REQUEST['subscription_id']) : '' ;
+    $nom                = isset($_REQUEST['nom']) ? clean_var($_REQUEST['nom']) : '' ;
+    $prix               = isset($_REQUEST['prix']) ? clean_var($_REQUEST['prix']) : '' ;
+    $periode            = isset($_REQUEST['periode']) ? clean_var($_REQUEST['periode']) : '' ;
+    $essai              = isset($_REQUEST['essai']) ? clean_var($_REQUEST['essai']) : '' ;
+    $installation       = isset($_REQUEST['installation']) ? clean_var($_REQUEST['installation']) : '' ;
+    $tva                = isset($_REQUEST['tva']) ? clean_var($_REQUEST['tva']) : '' ;
+    $livraison          = isset($_REQUEST['livraison']) ? clean_var($_REQUEST['livraison']) : '' ;
+    $ureturn            = isset($_REQUEST['ureturn']) ? clean_var($_REQUEST['ureturn']) : '' ;
+    $unotify            = isset($_REQUEST['unotify']) ? clean_var($_REQUEST['unotify']) : '' ;
+    $ucancel            = isset($_REQUEST['ucancel']) ? clean_var($_REQUEST['ucancel']) : '' ;
+    $comments           = isset($_REQUEST['comments']) ? clean_var($_REQUEST['comments']) : '' ;
+    $button             = isset($_REQUEST['button']) ? clean_var($_REQUEST['button']) : '' ;
 
     $array_reponse = array( 'errors' => array(
                             'edit_subscription' => ''),
                           'success'=>'yes' );
 
-    if($subscription_id!="") {
+    if($subscription_id != "") {
         $subscription = select_products($user_id, 1, $subscription_id, true);
         if($subscription[0]['id']=="") {
             $array_reponse['errors']['edit_subscription'] = "Abonnement n'existe pas!";
@@ -54,7 +54,7 @@ if($mode=="add") {
         $array_reponse['errors']['prix'] = "Prix pour un abonnement ou un service doit être inférieur à".
         " {$data['PaymentMinSum']} {$data['Currency']}";
         $array_reponse['success'] = "no";
-    }elseif(get_member_status($uid)<2 && $post['price']>$data['PaymentMaxSum']) {
+    }elseif(get_member_status($uid) < 2 && $post['prix']>$data['PaymentMaxSum']) {
         $array_reponse['errors']['prix'] ="Prix pour d'abonnement doit être inférieur à".
         " {$data['PaymentMaxSum']} {$data['Currency']}  ".
         " parce que votre compte ne pas encore vérifié";
@@ -115,7 +115,7 @@ if($mode=="add") {
 
 //***** Mode: delete subscription *****//
 if($mode=="delete") {
-    $subscription_id = !empty($_GET['subscription_id'])? clean_var($_GET['subscription_id']):clean_var($_POST['subscription_id']);
+    $subscription_id    = isset($_REQUEST['subscription_id']) ? clean_var($_REQUEST['subscription_id']) : 0;
 
     $array_reponse = array( 'errors' => array(
                             'edit_subscription' => ''),
@@ -133,7 +133,7 @@ if($mode=="delete") {
 
 //***** Mode: cancel subscription *****//
 if($mode=="cancel") {
-    $subscription_id = !empty($_GET['subscription_id'])? clean_var($_GET['subscription_id']):clean_var($_POST['subscription_id']);
+    $subscription_id    = isset($_REQUEST['subscription_id']) ? clean_var($_REQUEST['subscription_id']) : 0 ;
 
     $array_reponse = array( 'errors' => array(
                             'edit_subscription' => ''),
