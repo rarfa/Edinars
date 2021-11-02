@@ -15,10 +15,10 @@ require 'verif_csrf_token.php';
 
 //http://www.edinars.net/api/v1/load_account.php?member_id=000&amount=100&code_pin=0000
 
-$member_id = !empty($_GET['member_id'])? clean_var($_GET['member_id']):clean_var($_POST['member_id']);
-$amount = !empty($_GET['amount'])? clean_var($_GET['amount']):clean_var($_POST['amount']);
-$dtype  = !empty($_GET['dtype'])? clean_var($_GET['dtype']):clean_var($_POST['dtype']);
-$code_pin  = !empty($_GET['code_pin'])? clean_var($_GET['code_pin']):clean_var($_POST['code_pin']);
+$member_id  = isset($_REQUEST['member_id']) ? clean_var($_REQUEST['member_id']) : '' ;
+$amount     = isset($_REQUEST['amount']) ? clean_var($_REQUEST['amount']) : '' ;
+$dtype      = isset($_REQUEST['dtype']) ? clean_var($_REQUEST['dtype']) : 'topup' ; // TODO:: need to figure out dtype it wasn't sending by default
+$code_pin   = isset($_REQUEST['code_pin']) ? clean_var($_REQUEST['code_pin']) : '' ;
 
 $array_reponse = array( 'errors' => array(
                           'member_id' => '',
@@ -29,7 +29,7 @@ $array_reponse = array( 'errors' => array(
 
 
 
-$array_info_sender = select_info($user_id, $post);
+$array_info_sender   = select_info($user_id, $post);
 $array_info_reciever = get_member_info_reciever($member_id);
 
 
@@ -75,7 +75,7 @@ if($array_reponse['success']=="yes") {
 
     $get_trx_id = get_trx_id();
 
-    $mcheckinfo .=" Montant : ".$amount." \n" ;
+    $mcheckinfo  =" Montant : ".$amount." \n" ;
     $mcheckinfo .=" Identifinat : ".prnuser($array_info_reciever['id'])." \n " ;
     $mcheckinfo .=" Réference : ".$get_trx_id;
 
@@ -102,13 +102,13 @@ if($array_reponse['success']=="yes") {
 
     insert_notification($array_infos);
 
-    $mcheckinfo ="";
+    $mcheckinfo  ="";
     $mcheckinfo .=" Montant : <b>".$amount_fees." DA</b> <br />" ;
     $mcheckinfo .=" Identifinat    : <b>".prnuser($uid)."</b> <br /> " ;
     $mcheckinfo .=" Adresse E-Mail : <b>".get_member_email($uid)."</b> <br /> " ;
     $mcheckinfo .=" Réference : <b>".$get_trx_id."</b>";
 
-    $post['email']=get_member_email($tran['receiver']);
+    $post['email'] = get_member_email($array_info_reciever['id']);
     send_email('SEND-MONEY', $post);
     // 
     // transaction(get_trx_id(),
