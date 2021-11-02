@@ -11,7 +11,7 @@ require 'verif_user.php';
 
 $array_reponse = array( 'success'=>'yes', 'success_viewed' => 'yes' );
 
-$transaction_id = !empty($_GET['transaction_id'])? prntext($_GET['transaction_id']):prntext($_POST['transaction_id']);
+$transaction_id = isset($_REQUEST['transaction_id']) ? clean_var($_REQUEST['transaction_id']) : '';
 
 $transaction = get_transaction_by_id($user_id, $transaction_id);
 

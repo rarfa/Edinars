@@ -19,15 +19,13 @@ $array_reponse = array( 'errors' => array(
                           'confirm_payment'=>''),
                         'success'=>'yes' );
 
-$trx_id = !empty($_GET['trx_id'])? clean_var($_GET['trx_id']):clean_var($_POST['trx_id']);
-$code_pin  = !empty($_GET['code_pin'])? clean_var($_GET['code_pin']):clean_var($_POST['code_pin']);
+$trx_id     = isset($_REQUEST['trx_id']) ? clean_var($_REQUEST['trx_id']) : '' ;
+$code_pin   = isset($_REQUEST['code_pin']) ? clean_var($_REQUEST['code_pin']) : '' ;
 
 
-$transaction = get_transaction_trx_id($trx_id);
-
+$transaction         = get_transaction_trx_id($trx_id);
 $transaction_details = get_transaction_detail($transaction[0]['id'], $user_id);
-
-$balance_disponible = select_balance_disponible($transaction_details['sender']);
+$balance_disponible  = select_balance_disponible($transaction_details['sender']);
 
 
 
@@ -44,28 +42,29 @@ if(!$trx_id || !$transaction[0]['id']) {
 // exit();
 
 if(!$code_pin) {
-    // $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
-    // $array_reponse['success']="no";
+    $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
+    $array_reponse['success']="no";
 }
 
 
 // --> Output
-if($array_reponse['success']=="yes") {
+if($array_reponse['success'] == "yes") {
     $update = update_transaction_status($user_id, $transaction[0]["id"], 1);
 
     if($update) {
         $transaction = get_transaction_trx_id($trx_id);
 
         //insert notification
-        $array_infos['member_id'] = $transaction_details['receiver'];
-        $array_infos['transaction_id'] = $transaction[0]['id'];
-        $array_infos['type'] = "transaction";
+        $array_infos['member_id']       = $transaction_details['receiver'];
+        $array_infos['transaction_id']  = $transaction[0]['id'];
+        $array_infos['type']            = "transaction";
+        $array_infos['message']         = "transaction performed successfully";
 
         insert_notification($array_infos);
 
         // Email
-        $post['email'] = get_member_email(get_member_id($transaction[0]["recvuser"]));
-        // send_email('PAYMENT-MONEY', $post);
+        $post['email'] = get_member_email($transaction_details['receiver']);
+        send_email('PAYMENT-MONEY', $post);
 
         $array_reponse['transaction'] = $transaction[0];
     }else{

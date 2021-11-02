@@ -214,10 +214,10 @@ $data['WithdrawMethod']=array(
 //
 $data['MemberType']=array(
     ''=>'Choisir type de compte',
-    0=>'Particuliers',
-    1=>'Professionnels',
-    2=>'Détaillant',
-    2=>'Grossiste'
+    0 =>'Particuliers',
+    1 =>'Professionnels',
+    2 =>'Détaillant',
+    3 =>'Grossiste'
 );
 $data['MemberStatus']=array(
     0=>array(
@@ -263,6 +263,7 @@ $data['TransactionTypeUser']=array(
 //################################ TransactionStatus ######################################
 $data['TransactionStatus']=array(
     -1=> 'TOUTE LES TRANSACTIONS',
+    0=> 'unknown status',
     1=>'EN ATTENTE',
     2=>'TERMINE',
     3=>'ANNULER',
@@ -270,18 +271,16 @@ $data['TransactionStatus']=array(
     5=>'EN PROCESSE',
     6=>'ERREUR',
 );
-// $data['TransactionStatus']=array(
-//     -1=> 'TOUTE LES TRANSACTIONS',
-//     0=>'EN ATTENTE', -> 1
-//     1=>'TERMINE', -> 2
-//     2=>'ANNULER',
-//     3=>'REMBOURSE',
-//     4=>'EN PROCESSE',
-//     99=>'ERREUR',
-//
-// );
 
-
+/*$data['TransactionStatus']=array( // old status they used 0  but in new status above they removed 0 and in some cases wheen you process from ui some transactions gets status 0 (need to figure out how this works and why its sets 0 sometimes)
+     -1 => 'TOUTE LES TRANSACTIONS',
+     0  =>'EN ATTENTE',
+     1  =>'TERMINE',
+     2  =>'ANNULER',
+     3  =>'REMBOURSE',
+     4  =>'EN PROCESSE',
+     99 =>'ERREUR',
+);*/
 
 $data['TransactionStatusImages']=array(
     0=>'../images/exclamation.png',
