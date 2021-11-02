@@ -14,9 +14,9 @@ $array_reponse = array( 'code_post'=> '',
                         'code_get'=> '',
                         'success'=>'yes' );
 
-$donation_id = !empty($_GET['donation_id'])? clean_var($_GET['donation_id']):clean_var($_POST['donation_id']);
+$donation_id = isset($_REQUEST['donation_id']) ? clean_var($_REQUEST['donation_id']) : '' ;
 
-$donation = select_products($user_id, 2, $donation_id, true);
+$donation    = select_products($user_id, 2, $donation_id, true);
 
 if($donation_id=="") {
     $array_reponse['errors']['get_donation_code'] = "Veuillez entrer le donation ID";
@@ -64,7 +64,7 @@ if($array_reponse['success']=="yes") {
     "\n<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->"
     ;
     $post['OrgGetHtml']=$post['GetHtmlCode'];
-    if($post['status']=='crypt') {
+    if(isset($psot['status']) && $post['status']=='crypt') {
         $post['GetHtmlCode']=
         "<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->\n".
         encrypt($post['GetHtmlCode']).
