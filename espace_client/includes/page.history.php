@@ -92,11 +92,11 @@
   }
 
   function process_get_history(reponse){
-  	console.log("process_get_history() "+reponse.success);
-
-  	if(reponse.end_of_list == "yes"){
+  	if(reponse.end_of_list != 'undefined' && reponse.end_of_list  == "yes"){
   		$('#btn_show_more_history').hide();
   	}else{
+      // fix issue with appending to table (this needs a php pagination fix)
+      $('#tbody_history').html('');
   		fill_history_table("#tbody_history", reponse, false);
   	}
   }
