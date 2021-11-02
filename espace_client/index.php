@@ -20,7 +20,7 @@ $esc_url = $base_url . 'espace_client/';
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-black2.css?update=<?=time()?>"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-default.css?update=<?=time()?>"/>
         <link rel="stylesheet" type="text/css" href="<?=$esc_url?>css/fontawesome/css/font-awesome.min.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
