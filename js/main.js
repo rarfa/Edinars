@@ -199,6 +199,10 @@ jQuery(
 
         $(document).ready(
             function () {
+                $("#login-modal").on('hidden.bs.modal', function(){
+                    $("#register_success").hide();
+                    $("#register_form").show();
+                });
                 $('#btn_register').prop('disabled',true);
                 $('#terms').on('change',function(){
                     if( $('#terms').prop('checked')){
