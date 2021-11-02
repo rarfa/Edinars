@@ -20,7 +20,7 @@ $esc_url = $base_url . 'espace_client/';
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-default.css?update=<?=time()?>"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-default2.css?update=<?=time()?>"/>
         <link rel="stylesheet" type="text/css" href="<?=$esc_url?>css/fontawesome/css/font-awesome.min.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
@@ -42,11 +42,11 @@ $esc_url = $base_url . 'espace_client/';
                       </a>
                       <div class="profile">
                           <div class="profile-image">
-                              <img src="<?=$base_url?>images/logo_text_blanc .svg" alt="logo edinars" height="45">
+                              <img src="<?=$base_url?>images/logo_text_blanc .svg" alt="logo edinars" height="50">
                           </div>
                           <div class="profile-data">
                             <div class="profile-data-name"><span class="user_data_firstname">{firstname}</span> <span class="user_data_lastname">{lastname}</span> </div>
-                            <div class="profile-data-title ">Sode: <b class="user_data_solde">0 DA</b></div>
+                            <div class="profile-data-title ">Solde: <b class="user_data_solde">0 DA</b></div>
                             <div class="profile-data-title ">Disponible: <b class="user_data_solde_disponible">0 DA</b></div>
                             <div class="profile-data-title "><span class="badge user_data_status ">{status}</span></div>
                           </div>
