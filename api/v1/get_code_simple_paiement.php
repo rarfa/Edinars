@@ -20,7 +20,8 @@ $info_user = select_info($user_id, $post);
 
 
 //code
-$strToCrypt = "action={$tname}|" ;
+// todo need to figure out why 
+$strToCrypt = ''; //"action={@$tname}|" ;
 
 $pincode = get_member_username_pincode($user_id);
 $prehashkey = get_member_username_hashkey($user_id);
