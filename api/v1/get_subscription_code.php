@@ -14,7 +14,7 @@ $array_reponse = array( 'code_post'=> '',
                         'code_get'=> '',
                         'success'=>'yes' );
 
-$subscription_id = !empty($_GET['subscription_id'])? clean_var($_GET['subscription_id']):clean_var($_POST['subscription_id']);
+ $subscription_id    = isset($_REQUEST['subscription_id']) ? clean_var($_REQUEST['subscription_id']) : '' ;
 
 $subscription = select_products($user_id, 1, $subscription_id, true);
 
@@ -64,7 +64,7 @@ if($array_reponse['success']=="yes") {
     "\n<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->"
     ;
     $post['OrgGetHtml']=$post['GetHtmlCode'];
-    if($post['status']=='crypt') {
+    if(isset($post['status']) && $post['status']=='crypt') {
         $post['GetHtmlCode']=
         "<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->\n".
         encrypt($post['GetHtmlCode']).
