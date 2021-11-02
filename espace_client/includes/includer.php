@@ -2,7 +2,7 @@
 $page_par_defaut = "includes/page.index.php";
 
 //include
-$page     = isset($_GET['page'])    ? clean_var($_GET['page'])    : 'index'; // accessible par tous le monde
+$page     = isset($_GET['page'])    ? clean_var($_GET['page'])    : ''; // accessible par tous le monde
 $process  = isset($_GET['process']) ? clean_var($_GET['process']) : ''; // Pour les traitement ajax
 $form     = isset($_GET['form'])    ? clean_var($_GET['form'])    : ''; //inclure un form
 

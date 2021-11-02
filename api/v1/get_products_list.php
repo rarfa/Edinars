@@ -11,18 +11,14 @@ require DIR_ROOT.'includes/All_files.php';
 require 'verif_user.php';
 
 
-$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
-$product_id = !empty($_GET['product_id'])? clean_var($_GET['product_id']):clean_var($_POST['product_id']);
-
+$mode       = isset($_REQUEST['mode'])          ? clean_var($_REQUEST['mode']) : '';
+$product_id = isset($_REQUEST['product_id'])    ? clean_var($_REQUEST['product_id']) : '';
 
 
 $array_reponse = array('success'=>'yes' );
 
 
-
-// $info_user = select_info($user_id, $post);
-
-if($mode=="single" && $product_id!="") {
+if($mode == "single" && $product_id != "") {
     $products = select_products($user_id, 0, $product_id, true);
 }else{
     $products = select_products($user_id, 0);
@@ -30,7 +26,5 @@ if($mode=="single" && $product_id!="") {
 
 
 $array_reponse["products"] = $products;
-
-// var_dump($products);
 
 echo json_encode($array_reponse);
