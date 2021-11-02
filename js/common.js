@@ -74,9 +74,9 @@ function prepend_success(where, message)
 
 function replace_success(where, message)
 {
-    $r_h_s1 = '<div class="alert alert-success " id="';
+    $r_h_s1 = '<div class="alert alert-success alert-p" id="';
 
-    $r_h_s3 = '"><i class="icon fa fa-warning"></i>';
+    $r_h_s3 = '"><i class="icon fa fa-warning"></i> ';
     $reponse_html_end = '</div>';
 
     $("#"+where).html($r_h_s1+where+$r_h_s3+message+$reponse_html_end);
