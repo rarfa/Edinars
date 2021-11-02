@@ -214,10 +214,10 @@ $data['WithdrawMethod']=array(
 //
 $data['MemberType']=array(
     ''=>'Choisir type de compte',
-    0=>'Particuliers',
-    1=>'Professionnels',
-    2=>'Détaillant',
-    2=>'Grossiste'
+    0 =>'Particuliers',
+    1 =>'Professionnels',
+    2 =>'Détaillant',
+    3 =>'Grossiste'
 );
 $data['MemberStatus']=array(
     0=>array(
