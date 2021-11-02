@@ -199,6 +199,15 @@ jQuery(
 
         $(document).ready(
             function () {
+                $('#btn_register').prop('disabled',true);
+                $('#terms').on('change',function(){
+                    if( $('#terms').prop('checked')){
+                        $('#btn_register').prop('disabled',false);
+                    }else{
+                        $('#btn_register').prop('disabled',true);
+                    }
+                });
+
                 //Animated Progress
                 $('.progress-bar').bind(
                     'inview', function (event, visible, visiblePartX, visiblePartY) {
