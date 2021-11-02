@@ -14,7 +14,7 @@ $array_reponse = array( 'code_post'=> '',
                         'code_get'=> '',
                         'success'=>'yes' );
 
-$product_id = !empty($_GET['product_id'])? clean_var($_GET['product_id']):clean_var($_POST['product_id']);
+$product_id = isset($_REQUEST['product_id']) ? clean_var($_REQUEST['product_id']) : '';
 
 $product = select_products($user_id, 0, $product_id, true);
 
@@ -36,7 +36,7 @@ if($array_reponse['success']=="yes") {
 
     $button=select_button($product_id);
 
-    $strToCrypt = "action={$tname}|" ;
+    $strToCrypt  = "action={$tname}|" ;
     $strToCrypt .= "identifiant=".get_member_username($user_id)."|" ;
     $strToCrypt .= "produit=".$product_id ;
 
@@ -64,7 +64,7 @@ if($array_reponse['success']=="yes") {
     "\n<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->"
     ;
     $post['OrgGetHtml']=$post['GetHtmlCode'];
-    if($post['status']=='crypt') {
+    if(isset($post['status']) && $post['status']=='crypt') {
         $post['GetHtmlCode']=
         "<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->\n".
         encrypt($post['GetHtmlCode']).

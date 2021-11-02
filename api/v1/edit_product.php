@@ -12,20 +12,24 @@ require 'verif_user.php';
 require 'verif_csrf_token.php';
 
 
-$mode = !empty($_GET['mode'])? clean_var($_GET['mode']):clean_var($_POST['mode']);
+$mode = isset($_REQUEST['mode']) ? clean_var($_REQUEST['mode']) : '';
 
 //***** Mode: Add new product *****//
 if($mode=="add") {
-    $product_id = !empty($_GET['product_id'])? clean_var($_GET['product_id']):clean_var($_POST['product_id']);
-    $nom = !empty($_GET['nom'])? clean_var($_GET['nom']):clean_var($_POST['nom']);
-    $prix = !empty($_GET['prix'])? clean_var($_GET['prix']):clean_var($_POST['prix']);
-    $tva = !empty($_GET['tva'])? clean_var($_GET['tva']):clean_var($_POST['tva']);
-    $livraison = !empty($_GET['livraison'])? clean_var($_GET['livraison']):clean_var($_POST['livraison']);
-    $ureturn = !empty($_GET['ureturn'])? clean_var($_GET['ureturn']):clean_var($_POST['ureturn']);
-    $unotify = !empty($_GET['unotify'])? clean_var($_GET['unotify']):clean_var($_POST['unotify']);
-    $ucancel = !empty($_GET['ucancel'])? clean_var($_GET['ucancel']):clean_var($_POST['ucancel']);
-    $comments = !empty($_GET['comments'])? clean_var($_GET['comments']):clean_var($_POST['comments']);
-    $button = !empty($_GET['button'])? clean_var($_GET['button']):clean_var($_POST['button']);
+
+    $product_id     = isset($_REQUEST['product_id']) ? clean_var($_REQUEST['product_id']) : '';
+    $nom            = isset($_REQUEST['nom']) ? clean_var($_REQUEST['nom']) : '';
+    $prix           = isset($_REQUEST['prix']) ? clean_var($_REQUEST['prix']) : '';
+    $tva            = isset($_REQUEST['tva']) ? clean_var($_REQUEST['tva']) : '';
+    $livraison      = isset($_REQUEST['livraison']) ? clean_var($_REQUEST['livraison']) : '';
+    $periode        = isset($_REQUEST['periode']) ? clean_var($_REQUEST['periode']) : '';
+    $installation    = isset($_REQUEST['installation']) ? clean_var($_REQUEST['installation']) : '';
+    $essai          = isset($_REQUEST['essai']) ? clean_var($_REQUEST['essai']) : '';
+    $ureturn        = isset($_REQUEST['ureturn']) ? clean_var($_REQUEST['ureturn']) : '';
+    $unotify        = isset($_REQUEST['unotify']) ? clean_var($_REQUEST['unotify']) : '';
+    $ucancel        = isset($_REQUEST['ucancel']) ? clean_var($_REQUEST['ucancel']) : '';
+    $comments       = isset($_REQUEST['comments']) ? clean_var($_REQUEST['comments']) : '';
+    $button         = isset($_REQUEST['button']) ? clean_var($_REQUEST['button']) : '';
 
     $array_reponse = array( 'errors' => array(
                             'edit_product' => ''),
@@ -51,7 +55,7 @@ if($mode=="add") {
         $array_reponse['errors']['prix'] = "Prix pour un produit ou un service doit être inférieur à".
         " {$data['PaymentMinSum']} {$data['Currency']}";
         $array_reponse['success'] = "no";
-    }elseif(get_member_status($uid)<2 && $post['price']>$data['PaymentMaxSum']) {
+    }elseif(get_member_status($uid)<2 && $post['prix']>$data['PaymentMaxSum']) {
         $array_reponse['errors']['prix'] ="Prix pour de produit doit être inférieur à".
         " {$data['PaymentMaxSum']} {$data['Currency']}  ".
         " parce que votre compte ne pas encore vérifié";
@@ -83,7 +87,7 @@ if($mode=="add") {
         $array_reponse['success'] = "no";
     }
 
-    $post = compact('nom', 'prix', 'tva', 'livraison', 'ureturn', 'unotify', 'ucancel', 'comments', 'button');
+    $post = compact('nom', 'prix', 'tva', 'livraison', 'ureturn', 'unotify', 'ucancel', 'comments', 'button', 'periode', 'installation', 'essai');
 
     if($array_reponse['success']=="yes" && $product_id=="") { //add
         $insert = insert_product($user_id, 0, $post);
@@ -107,7 +111,8 @@ if($mode=="add") {
 
 //***** Mode: delete product *****//
 if($mode=="delete") {
-    $product_id = !empty($_GET['product_id'])? clean_var($_GET['product_id']):clean_var($_POST['product_id']);
+    
+    $product_id = isset($_REQUEST['product_id']) ? (int) clean_var($_REQUEST['product_id']) : 0;
 
     $array_reponse = array( 'errors' => array(
                             'edit_product' => ''),

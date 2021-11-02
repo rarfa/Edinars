@@ -196,12 +196,12 @@ function delete_product($id)
     );
 
     $rows=db_rows(
-        "SELECT `name` FROM `{$data['DbPrefix']}products`".
+        "SELECT `nom` FROM `{$data['DbPrefix']}products`".
 
         " WHERE `id`={$id}"
     );
 
-    $product=$rows[0]['name'];
+    $product = $rows[0]['nom'];
 
     $delete = db_query(
         "DELETE FROM `{$data['DbPrefix']}products` WHERE `id`={$id}"
@@ -234,13 +234,18 @@ function insert_product($uid, $type, $post)
         "`button`,`nom`,`ureturn`,`unotify`,`ucancel`,`comments`".
         ")VALUES(".
         "{$type},{$uid},{$post['prix']},".
+
         ($post['periode']?"{$post['periode']},":'0,').
+
         ($post['installation']?"{$post['installation']},":'0.00,').
         ($post['essai']?"{$post['essai']},":'0.00,').
         ($post['tva']?"{$post['tva']},":'0.00,').
         ($post['livraison']?"{$post['livraison']},":'0.00,').
+
         "'{$post['button']}','{$post['nom']}','{$post['ureturn']}',".
+
         "'{$post['unotify']}','{$post['ucancel']}','".
+
         addslashes($post['comments'])."')"
     );
 
@@ -2495,8 +2500,7 @@ function get_member_status($uid)
         " WHERE `id`={$uid} LIMIT 1"
     );
 
-    return $result[0]['status'];
-
+    return isset($result[0]) ? $result[0]['status'] : null;
 }
 
 
