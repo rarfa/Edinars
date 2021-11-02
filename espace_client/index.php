@@ -20,7 +20,7 @@ $esc_url = $base_url . 'espace_client/';
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-default.css?update=<?=time()?>"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-black2.css?update=<?=time()?>"/>
         <link rel="stylesheet" type="text/css" href="<?=$esc_url?>css/fontawesome/css/font-awesome.min.css"/>
         <!-- EOF CSS INCLUDE -->
     </head>
@@ -38,11 +38,11 @@ $esc_url = $base_url . 'espace_client/';
                   </li>
                   <li class="xn-profile">
                       <a href="#" class="profile-mini">
-                          <img src="<?=$base_url?>images/logo_initial.png" alt="logo edinars" height="35"/>
+                          <img src="<?=$base_url?>images/logo_icone.svg" alt="logo edinars" height="35"/>
                       </a>
                       <div class="profile">
                           <div class="profile-image">
-                              <img src="<?=$base_url?>images/logo.png" alt="logo edinars" height="45">
+                              <img src="<?=$base_url?>images/logo_text_blanc .svg" alt="logo edinars" height="45">
                           </div>
                           <div class="profile-data">
                             <div class="profile-data-name"><span class="user_data_firstname">{firstname}</span> <span class="user_data_lastname">{lastname}</span> </div>
@@ -167,7 +167,7 @@ $esc_url = $base_url . 'espace_client/';
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x" ></a>
+                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x rednew" ></a>
                         </div>
                     </div>
                 </div>
@@ -193,7 +193,7 @@ $esc_url = $base_url . 'espace_client/';
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x" ></a>
+                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x rednew" ></a>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@ $esc_url = $base_url . 'espace_client/';
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x" ></a>
+                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x rednew" ></a>
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@ $esc_url = $base_url . 'espace_client/';
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x" ></a>
+                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x rednew" ></a>
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@ $esc_url = $base_url . 'espace_client/';
                     <div class="mb-footer">
                         <div class="pull-right">
                             <!-- <button class="btn btn-default btn-lg mb-control-close">Fermer</button> -->
-                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x" ></a>
+                            <a href="javascript:;" class=" mb-control-close fa fa-times-circle-o fa-4x rednew" ></a>
                         </div>
                     </div>
                 </div>
