@@ -276,10 +276,6 @@ body {
 }
 .page-container.page-container-wide .page-content {
   margin-left: 50px;
-  -webkit-transition: all 200ms ease;
-  -moz-transition: all 200ms ease;
-  -ms-transition: all 200ms ease;
-  -o-transition: all 200ms ease;
   transition: all 200ms ease;
 }
 .page-container.page-navigation-toggled .page-content {
@@ -424,7 +420,6 @@ body.page-container-boxed .page-container {
   border-bottom-color: #bdbdbd;
 }
 .x-navigation li > ul li > a:hover {
-  background: #.x-navigation li > ul li > a;
   color: #ffffff;
 }
 .x-navigation li > ul li.active > a {
@@ -7330,7 +7325,6 @@ li.ext_zip {
   .x-navigation {
     max-height: 50px;
     overflow: hidden;
-    background: #fff;
   }
   .x-navigation.x-navigation-panel {
     height: 50px;
@@ -7414,4 +7408,12 @@ li.ext_zip {
 }
 .x-navigation-minimized .xn-logo{
 display:none;
+}
+
+.mb-content h3 {
+  color: white;
+}
+
+.x-navigation.x-navigation-minimized li.xn-profile .profile-mini:hover {
+  background: white;
 }

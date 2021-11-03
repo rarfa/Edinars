@@ -69,7 +69,7 @@
               <div class="modal-footer">
             <div>
                 <button type="submit" class="btn btn-success btn-lg btn-block" id="btn_lost">Envoyer</button>
-                                <div class="loader" id="lost_loading" name="lost_loading" style="display:none"></div>
+                                <div class="loader" id="lost_loading" style="display:none"></div>
             </div>
             <div>
                 <button id="lost_login_btn" type="button" class="btn btn-link">Connexion</button>

@@ -331,7 +331,7 @@ function process_lost_password(reponse)
             reponse.errors, function (key, val) {
                 if(val != "") {
                     // append_error_form(key, val);
-                    prepend_error('div_lost_'+key, val);
+                    prepend_error('div_'+key, val);
                     if(key=="csrf_token") {
                         alert(val);
                     }
