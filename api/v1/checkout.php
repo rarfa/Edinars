@@ -206,20 +206,20 @@ if($array_reponse['success'] == "yes") {
                 if ($array_reponse['action'] != 'abonnement') {
                     $post['uid']    =  $array_reponse['buyer'];
                     $post['email']  = get_member_email($array_reponse['buyer']);
-                    //send_email('PAYMENT-MONEY', $post);
+                    send_email('PAYMENT-MONEY', $post);
 
                     $post['uid']    =  $array_reponse['product']['owner'] ;
                     $post['email']  = get_member_email($array_reponse['product']['owner']);
-                    //send_email('PAYMENT-MONEY-TO-OWNER', $post);
+                    send_email('PAYMENT-MONEY-TO-OWNER', $post);
 
                 } else {
                     $post['uid']    = $array_reponse['buyer']  ;
                     $post['email']  = get_member_email($array_reponse['buyer']);
-                    //send_email('SUBSCRIPTION-MONEY', $post);
+                    send_email('SUBSCRIPTION-MONEY', $post);
 
                     $post['uid']    = $array_reponse['product']['owner'] ;
                     $post['email']  = get_member_email($array_reponse['product']['owner']);
-                    //send_email('SUBSCRIPTION-MONEY-TO-OWNER', $post);
+                    send_email('SUBSCRIPTION-MONEY-TO-OWNER', $post);
                 }
 
 
