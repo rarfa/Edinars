@@ -12,10 +12,10 @@ require 'verif_user.php';
 require 'verif_csrf_token.php';
 
 
-$address    = $_REQUEST['address'] ?? '';
-$city       = $_REQUEST['city'] ?? '';
-$postcode   = $_REQUEST['postcode'] ?? '';
-$wilaya     = $_REQUEST['wilaya'] ?? '';
+$address    = isset($_REQUEST['address'])   ? clean_var($_REQUEST['address'])   : '';
+$city       = isset($_REQUEST['city'])      ? clean_var($_REQUEST['city'])      : '';
+$postcode   = isset($_REQUEST['postcode'])  ? clean_var($_REQUEST['postcode'])  : '';
+$wilaya     = isset($_REQUEST['wilaya'])    ? clean_var($_REQUEST['wilaya'])    : '';
 
 
 $array_reponse = array( 'errors'=> array(
@@ -26,13 +26,6 @@ $array_reponse = array( 'errors'=> array(
                           'edit_address' => ''),
                         'success'=>'yes' );
 
-$info_user = select_info($user_id, $post);
-
-
-
-
-
-// var_dump($return_identification);
 
 if(!$address) {
     $array_reponse['errors']['address'] = "Veuillez saisir votre adresse";
@@ -56,19 +49,21 @@ if($wilaya == '') {
 
 if($array_reponse['success']=="yes") {
 
-    $post['address'] = $address;
-    $post['city'] = $city;
-    $post['postcode'] = $postcode;
-    $post['wilaya'] = $wilaya;
+    $info_user = select_info($user_id, $post);
 
+    $post['address']    = $address;
+    $post['city']       = $city;
+    $post['postcode']   = $postcode;
+    $post['wilaya']     = $wilaya;
+    $post['fullname']   = $info_user['lname'] . " " . $info_user['fname'];
 
-    $edit_address = update_my_profile($post, $user_id);
-
+    // perform update
+    $edit_address            = update_my_profile($post, $user_id);
     $update_my_profile_empty = update_my_profile_empty($user_id);
 
     if(!$edit_address || !$update_my_profile_empty) {
         $array['errors']['edit_address'] = "Erreur interne !!";
-        $array['success']="no";
+        $array['success'] = "no";
     }
 
 }
