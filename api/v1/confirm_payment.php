@@ -41,7 +41,7 @@ if(!$trx_id || !$transaction[0]['id']) {
 // echo '<br>--------------<br>'.$balance_disponible;
 // exit();
 
-if(!$code_pin) {
+if(!$code_pin || !verify_user_pincode($code_pin)) {
     $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
     $array_reponse['success']="no";
 }
@@ -79,3 +79,11 @@ if($array_reponse['success'] == "yes") {
 //                                                  'transaction'=>$transaction[0]);
 
 echo json_encode($array_reponse);
+
+
+function verify_user_pincode($code)
+{
+    global $user_id;
+    $validCode = get_member_pin_code($user_id);
+    return $code == $validCode;
+}

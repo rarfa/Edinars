@@ -1041,6 +1041,7 @@ function get_html_templates()
 
 function send_email($key, $post)
 {
+
     global $data;
 
     $template=db_rows(
@@ -1068,66 +1069,66 @@ function send_email($key, $post)
         $post['email'] = $post['lost_email'];
     }
 
-    if(isset($post['password'])) { 
+    if(isset($post['password'])) {
         $text=str_replace("[password]", $post['password'], $text);
     }
 
-    if(isset($post['emailadr'])) { 
+    if(isset($post['emailadr'])) {
         $text=str_replace("[emailadr]", $post['emailadr'], $text);
     }
 
-    if(isset($post['buyer'])) { 
+    if(isset($post['buyer'])) {
         $text=str_replace("[buyeradr]", $post['buyer'], $text);
     }
 
-    if(isset($post['seller'])) { 
+    if(isset($post['seller'])) {
         $text=str_replace("[selleradr]", $post['seller'], $text);
     }
 
-    if(isset($post['sellerusername'])) { 
+    if(isset($post['sellerusername'])) {
         $text=str_replace("[sellerusername]", $post['sellerusername'], $text);
     }
 
-    if(isset($post['product'])) { 
+    if(isset($post['product'])) {
         $text=str_replace("[product]", $post['product'], $text);
     }
 
-    if(isset($post['ccode'])) { 
+    if(isset($post['ccode'])) {
         $text=str_replace("[confcode]", $post['ccode'], $text);
     }
 
-    if(isset($post['chash'])) { 
+    if(isset($post['chash'])) {
         $text=str_replace("[confhash]", $post['chash'], $text);
     }
 
-    if(isset($post['comments'])) { 
+    if(isset($post['comments'])) {
         $text=str_replace("[comments]", $post['comments'], $text);
 
-    } else { 
+    } else {
         $text=str_replace("[comments]", '---', $text);
     }
 
-    if(isset($post['uid'])) { 
+    if(isset($post['uid'])) {
         $text=str_replace("[uid]", $post['uid'], $text);
     }
 
-    if(isset($post['nom'])) { 
+    if(isset($post['nom'])) {
         $text=str_replace("[contact_nom]", $post['nom'], $text);
     }
 
-    if(isset($post['mail'])) { 
+    if(isset($post['mail'])) {
         $text=str_replace("[contact_email]", $post['mail'], $text);
     }
 
-    if(isset($post['phone'])) { 
+    if(isset($post['phone'])) {
         $text=str_replace("[contact_phone]", $post['phone'], $text);
     }
 
-    if(isset($post['msg'])) { 
+    if(isset($post['msg'])) {
         $text=str_replace("[contact_msg]", $post['msg'], $text);
     }
 
-    if(isset($post['fullname'])) { 
+    if(isset($post['fullname'])) {
         $text=str_replace("[fullname]", $post['fullname'], $text);
     }
 
@@ -2355,7 +2356,7 @@ function get_member_username($uid)
 
     global $data;
 
-    if($uid < 0) { 
+    if($uid < 0) {
         return 'System';
     }
 
@@ -2374,7 +2375,7 @@ function get_member_username_pincode($uid)
 
     global $data;
 
-    if($uid < 0) { 
+    if($uid < 0) {
         return 'System';
     }
 
@@ -2385,6 +2386,23 @@ function get_member_username_pincode($uid)
     return $result[0]['mem_id'];
 }
 
+
+function get_member_pin_code($uid)
+{
+
+    global $data;
+
+    if($uid<0) { return 'System';
+    }
+
+    $result=db_rows(
+        "SELECT `pin_code` FROM `{$data['DbPrefix']}members`".
+
+        " WHERE `id`={$uid} LIMIT 1"
+    );
+
+    return $result[0]['pin_code'];
+}
 
 function get_member_name($uid)
 {
@@ -4007,17 +4025,17 @@ function update_transaction_status($uid, $id, $status)
 
     switch($status){
     case 1:
-        if($uid > 0) { 
+        if($uid > 0) {
             $where=" AND `sender`={$uid}";
         }
         $comments="La transaction a &eacute;t&eacute; confirm&eacute;e par {$name}";
 
         if($tran['otype']==1||$tran['otype']==3) {
-            if($data['ReferralPays']) { 
+            if($data['ReferralPays']) {
                 insert_commissions($tran['receiver'], $tran['ofees']);
             }
         }
-        if($tran['otype']==3) { 
+        if($tran['otype']==3) {
             send_email('CONFIRM-ESCROW', $post);
         }
         break;
@@ -4027,13 +4045,13 @@ function update_transaction_status($uid, $id, $status)
             break;
         }
         $comments="La transaction a &eacute;t&eacute; annul&eacute;e par {$name}";
-        if($tran['otype']==3) { 
+        if($tran['otype']==3) {
             send_email('CANCEL-ESCROW', $post);
         }
         break;
     case 3:
         $comments="La transaction a &eacute;t&eacute; rembours&eacute;e par {$name}";
-        if($tran['otype']==3) { 
+        if($tran['otype']==3) {
             send_email('REFUND-ESCROW', $post);
         }
         break;
@@ -5308,7 +5326,7 @@ function encryptPerHashKey(string $strToEncrypt ,string $hash): string
  * @return string
  */
 function decryptPerHashKey(string $strToDecrypt ,string $hash): string
-{   
+{
     global $openssl_hash_method, $open_ssl_iv;
     return openssl_decrypt($strToDecrypt, $openssl_hash_method, $hash, 0, $open_ssl_iv);
 }
