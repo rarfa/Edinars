@@ -2503,7 +2503,7 @@ function get_member_info_reciever($uid)
         );
     }
 
-    return $result[0];
+    return $result ? $result[0] : null ;
 }
 
 

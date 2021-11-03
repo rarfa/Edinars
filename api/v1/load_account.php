@@ -37,7 +37,7 @@ $array_info_reciever = get_member_info_reciever($member_id);
 if(!$member_id) {
     $array_reponse['errors']['member_id'] = "Veillez entrer le N° de compte";
     $array_reponse['success'] = "no";
-}elseif(!$array_info_reciever["id"]) {
+}elseif(!$array_info_reciever) {
     $array_reponse['errors']['member_id'] = "Ce compte n'existe pas ";
     $array_reponse['success'] = "no";
 }
@@ -65,10 +65,10 @@ if(!$amount) {
     $array_reponse['success'] = "no";
 }
 
-
-if(!$code_pin) {
-    // $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
-    // $array_reponse['success']="no";
+//verify valid pin_code
+if(!$code_pin || !(get_member_pin_code($user_id)==$code_pin)) {
+     $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
+     $array_reponse['success']="no";
 }
 
 if($array_reponse['success']=="yes") {
