@@ -7330,7 +7330,6 @@ li.ext_zip {
   .x-navigation {
     max-height: 50px;
     overflow: hidden;
-    background: #fff;
   }
   .x-navigation.x-navigation-panel {
     height: 50px;
@@ -7414,4 +7413,12 @@ li.ext_zip {
 }
 .x-navigation-minimized .xn-logo{
 display:none;
+}
+
+.mb-content h3 {
+  color: white;
+}
+
+.x-navigation.x-navigation-minimized li.xn-profile .profile-mini:hover {
+  background: white;
 }
