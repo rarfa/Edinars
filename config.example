@@ -140,7 +140,15 @@ $smtp_encryption='ssl';
 $smtp_from_address='setup@cpower.software';
 $smtp_from_name=$site_name;
 
-$contact_us_email = 'contact@erecovery.tech';
+// contact us email
+$contact_us_email = 'a.lakehal@createam-dz.com';
+
+// open ssl iv & hash method should be global 
+// inorder to be used both in encrypt & decrypt
+$openssl_hash_method = 'AES-256-CBC';
+$open_ssl_iv = openssl_random_pseudo_bytes(
+    openssl_cipher_iv_length($openssl_hash_method)
+);
 
 // 
 require 'consts.php';

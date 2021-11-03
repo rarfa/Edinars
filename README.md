@@ -1,7 +1,7 @@
 
 # Requirements
   - php 7.4 or newer versions
-  - Mcrypt extensions for [php7.4](https://pecl.php.net/package/mcrypt/1.0.3/windows) or other versions
+  - openssl extension
   - Gd2 extension is required
 
 

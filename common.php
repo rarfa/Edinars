@@ -1041,7 +1041,6 @@ function get_html_templates()
 
 function send_email($key, $post)
 {
-
     global $data;
 
     $template=db_rows(
@@ -1069,51 +1068,68 @@ function send_email($key, $post)
         $post['email'] = $post['lost_email'];
     }
 
-    if(isset($post['password'])) { $text=str_replace("[password]", $post['password'], $text);
+    if(isset($post['password'])) { 
+        $text=str_replace("[password]", $post['password'], $text);
     }
 
-    if(isset($post['emailadr'])) { $text=str_replace("[emailadr]", $post['emailadr'], $text);
+    if(isset($post['emailadr'])) { 
+        $text=str_replace("[emailadr]", $post['emailadr'], $text);
     }
 
-    if(isset($post['buyer'])) { $text=str_replace("[buyeradr]", $post['buyer'], $text);
+    if(isset($post['buyer'])) { 
+        $text=str_replace("[buyeradr]", $post['buyer'], $text);
     }
 
-    if(isset($post['seller'])) { $text=str_replace("[selleradr]", $post['seller'], $text);
+    if(isset($post['seller'])) { 
+        $text=str_replace("[selleradr]", $post['seller'], $text);
     }
 
-    if(isset($post['sellerusername'])) { $text=str_replace("[sellerusername]", $post['sellerusername'], $text);
+    if(isset($post['sellerusername'])) { 
+        $text=str_replace("[sellerusername]", $post['sellerusername'], $text);
     }
 
-    if(isset($post['product'])) { $text=str_replace("[product]", $post['product'], $text);
+    if(isset($post['product'])) { 
+        $text=str_replace("[product]", $post['product'], $text);
     }
 
-    if(isset($post['ccode'])) { $text=str_replace("[confcode]", $post['ccode'], $text);
+    if(isset($post['ccode'])) { 
+        $text=str_replace("[confcode]", $post['ccode'], $text);
     }
 
-    if(isset($post['chash'])) { $text=str_replace("[confhash]", $post['chash'], $text);
+    if(isset($post['chash'])) { 
+        $text=str_replace("[confhash]", $post['chash'], $text);
     }
 
-    if(isset($post['comments'])) { $text=str_replace("[comments]", $post['comments'], $text);
+    if(isset($post['comments'])) { 
+        $text=str_replace("[comments]", $post['comments'], $text);
 
-    } else { $text=str_replace("[comments]", '---', $text);
+    } else { 
+        $text=str_replace("[comments]", '---', $text);
     }
 
-    if(isset($post['uid'])) { $text=str_replace("[uid]", $post['uid'], $text);
+    if(isset($post['uid'])) { 
+        $text=str_replace("[uid]", $post['uid'], $text);
     }
 
-    if(isset($post['nom'])) { $text=str_replace("[contact_nom]", $post['nom'], $text);
+    if(isset($post['nom'])) { 
+        $text=str_replace("[contact_nom]", $post['nom'], $text);
     }
 
-    if(isset($post['mail'])) { $text=str_replace("[contact_email]", $post['mail'], $text);
+    if(isset($post['mail'])) { 
+        $text=str_replace("[contact_email]", $post['mail'], $text);
     }
 
-    if(isset($post['phone'])) { $text=str_replace("[contact_phone]", $post['phone'], $text);
+    if(isset($post['phone'])) { 
+        $text=str_replace("[contact_phone]", $post['phone'], $text);
     }
 
-    if(isset($post['msg'])) { $text=str_replace("[contact_msg]", $post['msg'], $text);
+    if(isset($post['msg'])) { 
+        $text=str_replace("[contact_msg]", $post['msg'], $text);
     }
 
-    $text=str_replace("[fullname]", $post['fullname'] ?? 'null', $text);
+    if(isset($post['fullname'])) { 
+        $text=str_replace("[fullname]", $post['fullname'], $text);
+    }
 
     $text=str_replace("[date]", date("d/m/Y H:i:s"), $text);
 
@@ -1162,7 +1178,7 @@ function send_email($key, $post)
     }
 
     insert_sent_email($post['email-id'], $post['email'], stripslashes($subject), htmlspecialchars($text, ENT_QUOTES));
-    return sendMail($post['email'], stripslashes($subject), stripslashes($text));
+    return sendMail($post['email'], utf8_decode(stripslashes($subject)), utf8_decode(stripslashes($text)));
 }
 
 function send_mass_email($subject, $message, $active=-1)
@@ -2339,7 +2355,8 @@ function get_member_username($uid)
 
     global $data;
 
-    if($uid<0) { return 'System';
+    if($uid < 0) { 
+        return 'System';
     }
 
     $result=db_rows(
@@ -2357,16 +2374,15 @@ function get_member_username_pincode($uid)
 
     global $data;
 
-    if($uid<0) { return 'System';
+    if($uid < 0) { 
+        return 'System';
     }
 
     $sql = "SELECT `mem_id` FROM `{$data['DbPrefix']}members`".
           " WHERE `id`={$uid} LIMIT 1";
-    //echo $sql;
     $result = db_rows($sql);
 
     return $result[0]['mem_id'];
-
 }
 
 
@@ -3974,49 +3990,58 @@ function transaction($trxid ,$sender, $receiver, $amount, $fees, $type, $status,
 
 function update_transaction_status($uid, $id, $status)
 {
-
     global $data;
-    if($uid>0) {
-        $user=get_member_info($uid);
-        $name="{$user['fname']} {$user['lname']} ({$user['username']})";
-    }else{
-        $name='System Administrator (system)';
+
+    $name = 'System Administrator (system)';
+
+    if($uid > 0) {
+        $user    = get_member_info($uid);
+        $name    = "{$user['fname']} {$user['lname']}";
+        $name   .= !empty($user['username']) ? " ({$user['username']})" : "";
     }
-    $tran=get_transaction_detail($id, $uid);
-    $post['email']=get_member_email($tran['receiver']);
-    $where='';
-    $comments='';
+
+    $tran           = get_transaction_detail($id, $uid);
+    $post['email']  = get_member_email($tran['receiver']);
+    $where          = '';
+    $comments       = '';
+
     switch($status){
     case 1:
-        if($uid>0) { $where=" AND `sender`={$uid}";
+        if($uid > 0) { 
+            $where=" AND `sender`={$uid}";
         }
         $comments="La transaction a &eacute;t&eacute; confirm&eacute;e par {$name}";
 
         if($tran['otype']==1||$tran['otype']==3) {
-            if($data['ReferralPays']) { insert_commissions($tran['receiver'], $tran['ofees']);
+            if($data['ReferralPays']) { 
+                insert_commissions($tran['receiver'], $tran['ofees']);
             }
         }
-        if($tran['otype']==3) { send_email('CONFIRM-ESCROW', $post);
+        if($tran['otype']==3) { 
+            send_email('CONFIRM-ESCROW', $post);
         }
         break;
     case 2:
-        if(($uid>0)&&($uid==$tran['sender'])) {
+        if(($uid > 0 ) && ( $uid == $tran['sender'])) {
             unset($status);
             break;
         }
         $comments="La transaction a &eacute;t&eacute; annul&eacute;e par {$name}";
-        if($tran['otype']==3) { send_email('CANCEL-ESCROW', $post);
+        if($tran['otype']==3) { 
+            send_email('CANCEL-ESCROW', $post);
         }
         break;
     case 3:
         $comments="La transaction a &eacute;t&eacute; rembours&eacute;e par {$name}";
-        if($tran['otype']==3) { send_email('REFUND-ESCROW', $post);
+        if($tran['otype']==3) { 
+            send_email('REFUND-ESCROW', $post);
         }
         break;
     }
+
     $update = db_query(
         "UPDATE `{$data['DbPrefix']}transactions`".
-        " SET `tdate`=NOW(),`status`={$status},`comments`='{$comments}'".
+        " SET `tdate`=NOW(),`status`='{$status}',`comments`='{$comments}'".
         " WHERE `id`={$id}{$where}"
     );
 
@@ -5262,24 +5287,36 @@ function encrypt_pages($content)
     return $r.encrypt($content);
 }
 
-function encryptPerHashKey($keypwd ,$hachkey)
+/**
+ * ecrypt pre hash key helper
+ *
+ * @param  string $strToEncrypt
+ * @param  string $hash
+ * @return string
+ */
+function encryptPerHashKey(string $strToEncrypt ,string $hash): string
 {
-    // echo $keypwd." <- keypwd";
-    $Cryptkey  = trim(base64_encode(@mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $keypwd, $hachkey, MCRYPT_MODE_ECB)));
-    return str_replace(array('+','/','='), array('-','_',''), $Cryptkey);
+    global $openssl_hash_method, $open_ssl_iv;
+    return openssl_encrypt($strToEncrypt, $openssl_hash_method, $hash, 0, $open_ssl_iv);
 }
 
-function decryptPerHashKey($keypwd ,$hachkey)
-{
-    $hachkey = str_replace(array('-','_'), array('+','/'), $hachkey);
-    return trim(@mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $keypwd, base64_decode($hachkey), MCRYPT_MODE_ECB));
+/**
+ * decrypt pre hash key helper
+ *
+ * @param  string $strToDecrypt
+ * @param  string $hash
+ * @return string
+ */
+function decryptPerHashKey(string $strToDecrypt ,string $hash): string
+{   
+    global $openssl_hash_method, $open_ssl_iv;
+    return openssl_decrypt($strToDecrypt, $openssl_hash_method, $hash, 0, $open_ssl_iv);
 }
 
 
 
 function generate_pin_code($size=7)
 {
-
     $code      = str_split(strrev(md5(microtime())));
     $index     = 0;
     $key      = '';
@@ -5526,13 +5563,7 @@ header("Cache-control: private");
 // CSRF ###########################################
 function generate_csrf_token()
 {
-    if (function_exists('mcrypt_create_iv')) {
-        $csrf_token = bin2hex(@mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
-    } else {
-        $csrf_token = bin2hex(openssl_random_pseudo_bytes(32));
-    }
-
-    return $csrf_token;
+    return bin2hex(openssl_random_pseudo_bytes(32));
 }
 
 function update_csrf_token($user_id, $csrf_token)
