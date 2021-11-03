@@ -4040,8 +4040,7 @@ function update_transaction_status($uid, $id, $status)
         }
         break;
     case 2:
-        if(($uid > 0 ) && ( $uid == $tran['sender'])) {
-            unset($status);
+        if(($uid>0)&&($uid==$tran['sender'])) {
             break;
         }
         $comments="La transaction a &eacute;t&eacute; annul&eacute;e par {$name}";

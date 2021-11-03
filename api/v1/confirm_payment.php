@@ -49,7 +49,7 @@ if(!$code_pin || !verify_user_pincode($code_pin)) {
 
 // --> Output
 if($array_reponse['success'] == "yes") {
-    $update = update_transaction_status($user_id, $transaction[0]["id"], 1);
+    $update = update_transaction_status($user_id, $transaction[0]["id"], 2);
 
     if($update) {
         $transaction = get_transaction_trx_id($trx_id);
