@@ -47,8 +47,6 @@ if ($message == '') {
 
 //envoyer email ()
 if ($array['success'] == "yes") {
-    $to     = 'contact@erecovery.net';
-    // $to  = 'yacineaitchalal@gmail.com';
 
     // Sujet
     $message = str_replace("\r\n", "<br>", $message);
@@ -69,7 +67,7 @@ if ($array['success'] == "yes") {
   </html>
   ';
     // Envoi
-    sendMail($to, $subject, $message_html);
+    sendMail($contact_us_email, $subject, $message_html);
 }
 
 echo json_encode($array);

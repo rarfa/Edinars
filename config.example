@@ -140,6 +140,8 @@ $smtp_encryption='ssl';
 $smtp_from_address='setup@cpower.software';
 $smtp_from_name=$site_name;
 
+$contact_us_email = 'contact@erecovery.tech';
+
 // 
 require 'consts.php';
 require 'api/v1/mail.php';
