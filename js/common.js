@@ -114,8 +114,20 @@ function reset_error_form()
 // ############################ logout ############################
 function logout()
 {
-    localStorage.removeItem("access_token");
-    location.href = root_path;
+    $.ajax(
+        {
+            url: base_url + "api/v1/logout.php",
+            cache: false,
+            type:"post",
+            dataType: 'json',
+            success: function (res) {
+                if (res.success == 'yes') {
+                    localStorage.removeItem("access_token");
+                    location.href = root_path;
+                }
+            }
+        }
+    );
 }
 
 // ############################ login ############################
