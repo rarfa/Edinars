@@ -53,7 +53,7 @@ $esc_url = $base_url . 'espace_client/';
                 <input type="hidden" id="pincode" name="pincode" value="<?=$post['pincode']?>">
                 <input type="hidden" id="prehashkey" name="prehashkey" value="<?=$post['prehashkey']?>">
                 <input type="hidden" id="crypt" name="crypt" value="<?=$post['crypt']?>">
-                <input type="hidden" id="quantite" name="quantite" value="<?=$post['quantite']?>">
+                <input type="hidden" id="quantite" name="quantite" value="<?=$post['quantite'] ?? 1 ?>">
               </form>
             </div>
             <!-- END PAGE CONTENT WRAPPER -->
@@ -120,7 +120,7 @@ $esc_url = $base_url . 'espace_client/';
         <script type="text/javascript">
           load_include_page("checkout", false);
 
-          //init_mb();
+          init_mb();
           setTimeout(function(){
             $('.page-content').attr('style', '');
           }, 1000);
