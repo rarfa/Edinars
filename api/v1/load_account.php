@@ -1,7 +1,7 @@
 <?php
 // Created by: Acher Adlane
 // Revised by: Yacine Ait Chalal -> 25/05/2017
-// 
+//
 header('Content-Type: application/json');
 
 define("DIR_ROOT", "../../");
@@ -71,15 +71,15 @@ if(!$code_pin || !(get_member_pin_code($user_id)==$code_pin)) {
      $array_reponse['success']="no";
 }
 
-if($array_reponse['success']=="yes") {
+if ($array_reponse['success'] == "yes") {
 
     $get_trx_id = get_trx_id();
 
-    $mcheckinfo  =" Montant : ".$amount." \n" ;
-    $mcheckinfo .=" Identifinat : ".prnuser($array_info_reciever['id'])." \n " ;
-    $mcheckinfo .=" Réference : ".$get_trx_id;
+    $mcheckinfo  = " Montant : " . $amount . " \n" ;
+    $mcheckinfo .= " Identifinat : " . prnuser($array_info_reciever['id']) . " \n " ;
+    $mcheckinfo .= " Réference : " . $get_trx_id;
 
-    $data['success'] ="yes";
+    $data['success'] = "yes";
 
     transaction(
         $get_trx_id,
@@ -90,41 +90,35 @@ if($array_reponse['success']=="yes") {
         1, // type Depot
         2, // status
         'DEPOT PAR APPLICATION',
-        "Details de la transaction:\n".$mcheckinfo
+        "Details de la transaction:\n" . $mcheckinfo
     );
 
     $transaction = get_transaction_trx_id($get_trx_id);
 
     //insert notification
-    $array_infos['member_id'] = $array_info_reciever['id'];
-    $array_infos['transaction_id'] = $transaction[0]['id'];
-    $array_infos['type'] = "transaction";
+    $array_infos['member_id']       = $array_info_reciever['id'];
+    $array_infos['sender_id']       = $user_id;
+    $array_infos['transaction_id']  = $transaction[0]['id'];
+    $array_infos['message']         = 'Payment received';
+    $array_infos['type']            = "transaction";
 
     insert_notification($array_infos);
 
-    $mcheckinfo  ="";
+    /*$mcheckinfo  ="";
     $mcheckinfo .=" Montant : <b>".$amount_fees." DA</b> <br />" ;
     $mcheckinfo .=" Identifinat    : <b>".prnuser($uid)."</b> <br /> " ;
     $mcheckinfo .=" Adresse E-Mail : <b>".get_member_email($uid)."</b> <br /> " ;
-    $mcheckinfo .=" Réference : <b>".$get_trx_id."</b>";
+    $mcheckinfo .=" Réference : <b>".$get_trx_id."</b>";*/
 
-    $post['email'] = get_member_email($array_info_reciever['id']);
+    $post['email']    = $array_info_reciever['email'];
+    $post['username'] = $array_info_sender['username'];
+    $post['emailadr'] = $array_info_sender['email'];
+    $post['fullname'] = $array_info_reciever['lname'] . " " . $array_info_reciever['fname'];
+    $post['amount']   = $amount;
     send_email('SEND-MONEY', $post);
-    // 
-    // transaction(get_trx_id(),
-    //             $user_id,
-    //             -1,
-    //             $amount_fees,
-    //             0,
-    //             5,
-    //             2,
-    //             'DEPOT PAR APPLICATION',
-    //             "Details de la transaction:\n".$mcheckinfo
-    //);
 
     $array_reponse["new_balance"] = select_balance_disponible($user_id);
     $array_reponse["transaction"] = get_transaction_trx_id($get_trx_id);
-
 }
 
 echo json_encode($array_reponse);

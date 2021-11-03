@@ -1047,7 +1047,7 @@ function send_email($key, $post)
         $text=str_replace("[comments]", $post['comments'], $text);
 
     } else {
-        $text=str_replace("[comments]", '---', $text);
+        $text=str_replace("[comments]", ' N/A ', $text);
     }
 
     if(isset($post['uid'])) {
@@ -1072,6 +1072,10 @@ function send_email($key, $post)
 
     if(isset($post['fullname'])) {
         $text=str_replace("[fullname]", $post['fullname'], $text);
+    }
+
+    if(isset($post['amount'])) {
+        $text=str_replace("[amount]",  $post['amount'] .' '.$data['Currency'], $text);
     }
 
     $text=str_replace("[date]", date("d/m/Y H:i:s"), $text);
@@ -1915,7 +1919,7 @@ function get_member_email($uid, $primary=false, $confirmed=true)
         " ORDER BY `primary` DESC"
     );
 
-    return $result[0]['email'];
+    return isset($result[0]) ? $result[0]['email'] : null;
 
 }
 function get_member_email_by_username($username)
