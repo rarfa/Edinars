@@ -276,10 +276,6 @@ body {
 }
 .page-container.page-container-wide .page-content {
   margin-left: 50px;
-  -webkit-transition: all 200ms ease;
-  -moz-transition: all 200ms ease;
-  -ms-transition: all 200ms ease;
-  -o-transition: all 200ms ease;
   transition: all 200ms ease;
 }
 .page-container.page-navigation-toggled .page-content {
@@ -424,7 +420,6 @@ body.page-container-boxed .page-container {
   border-bottom-color: #bdbdbd;
 }
 .x-navigation li > ul li > a:hover {
-  background: #.x-navigation li > ul li > a;
   color: #ffffff;
 }
 .x-navigation li > ul li.active > a {
