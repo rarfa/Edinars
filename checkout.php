@@ -3,7 +3,7 @@ define("DIR_ROOT", "");
 // include('config.php');
 require 'includes/All_files.php';
 
-// var_dump($post);
+$esc_url = $base_url . 'espace_client/';
 
 ?>
 
@@ -12,24 +12,25 @@ require 'includes/All_files.php';
     <head>
         <!-- META SECTION -->
         <title>Edinars - Services de paiements enline</title>
-        <meta name="csrf_token" content="<?php echo $_SESSION['csrf_token'] ?>">
+        <meta name="csrf_token" content="<?=$_SESSION['csrf_token'] ?>">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <meta name="theme-color" content="#e30613" />
 
-        <base href="<?php echo $data['Host'] ?>/" >
+        <base href="<?=$data['Host'] ?>/" >
 
-        <link rel="icon" href="images/ico/favicon_last.ico" type="image/x-icon" />
+        <link rel="icon" href="<?=$base_url?>images/ico/favicon_last.ico" type="image/x-icon" />
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="espace_client/css/theme-default.css?update=<?php echo time()?>"/>
-        <link rel="stylesheet" type="text/css" href="espace_client/css/fontawesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="<?=$esc_url?>css/theme-default.css?update=<?php echo time()?>"/>
+        <link rel="stylesheet" type="text/css" href="<?=$esc_url?>css/fontawesome/css/font-awesome.min.css"/>
         <!-- EOF CSS INCLUDE -->
-
-        <script type="text/javascript" src="espace_client/js/plugins/jquery/jquery.min.js"></script>
+        <script> var base_url = '<?=$base_url?>'; </script>
+        <script> var esc_url  = base_url + 'espace_client/'; </script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/jquery/jquery.min.js"></script>
     </head>
     <body>
         <?php require "includes/header.login.php"; ?>
@@ -43,7 +44,7 @@ require 'includes/All_files.php';
               </div>
               <div class="row">
                 <div class="col-md-6 col-xs-10 col-md-offset-3 col-xs-offset-1 text-center margin-top-3-perc">
-                  <img src="https://v2.edinars.net/images/logo.png" alt="" height="100">
+                  <img src="<?=$base_url?>images/logo.png" alt="" height="100">
                 </div>
               </div>
               <div id="included_page" class="margin-top-3-perc">
@@ -59,65 +60,64 @@ require 'includes/All_files.php';
         </div>
         <!-- END PAGE CONTAINER -->
         <footer class="text-center">
-          Copyright © <?php echo date("Y")?> Edinars. Tous droits réservés
+          Copyright © <?php echo date("Y")?> Erecovery. Tous droits réservés
         </footer>
         <!-- START PRELOADS -->
-        <audio id="audio-alert" src="espace_client/audio/alert.mp3" preload="auto"></audio>
-        <audio id="audio-fail" src="espace_client/audio/fail.mp3" preload="auto"></audio>
+        <audio id="audio-alert" src="<?=$esc_url?>audio/alert.mp3" preload="auto"></audio>
+        <audio id="audio-fail" src="<?=$esc_url?>audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->
 
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
 
-        <script type="text/javascript" src="espace_client/js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="espace_client/js/plugins/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/bootstrap/bootstrap.min.js"></script>
         <!-- END PLUGINS -->
 
         <!-- START THIS PAGE PLUGINS-->
-        <script type='text/javascript' src='espace_client/js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="espace_client/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-        <script type="text/javascript" src="espace_client/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/scrolltotop/scrolltopcontrol.js"></script>
 
-        <script type="text/javascript" src="espace_client/js/plugins/morris/raphael-min.js"></script>
-        <script type="text/javascript" src="espace_client/js/plugins/morris/morris.min.js"></script>
-        <script type="text/javascript" src="espace_client/js/plugins/rickshaw/d3.v3.js"></script>
-        <script type="text/javascript" src="espace_client/js/plugins/rickshaw/rickshaw.min.js"></script>
-        <script type='text/javascript' src='espace_client/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-        <script type='text/javascript' src='espace_client/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
-        <script type='text/javascript' src='espace_client/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
-        <script type="text/javascript" src="espace_client/js/plugins/owl/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/morris/raphael-min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/morris/morris.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/rickshaw/d3.v3.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/rickshaw/rickshaw.min.js"></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/owl/owl.carousel.min.js"></script>
 
-        <script type="text/javascript" src="espace_client/js/plugins/moment.min.js"></script>
-        <script type="text/javascript" src="espace_client/js/plugins/daterangepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/moment.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins/daterangepicker/daterangepicker.js"></script>
         <!-- END THIS PAGE PLUGINS-->
 
         <!-- START TEMPLATE -->
         <!-- <script type="text/javascript" src="js/settings.js"></script> -->
 
-        <script type="text/javascript" src="espace_client/js/plugins.js"></script>
-        <script type="text/javascript" src="espace_client/js/actions.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/plugins.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/actions.js"></script>
 
         <!-- <script type="text/javascript" src="js/demo_dashboard.js"></script> -->
 
-        <script type='text/javascript' src='espace_client/js/plugins/noty/jquery.noty.js'></script>
-        <script type='text/javascript' src='espace_client/js/plugins/noty/layouts/center.js'></script>
-        <script type='text/javascript' src='espace_client/js/plugins/noty/themes/default.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/noty/jquery.noty.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/noty/layouts/center.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/noty/themes/default.js'></script>
 
-        <script type='text/javascript' src='espace_client/js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
+        <script type='text/javascript' src='<?=$esc_url?>js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
 
-        <script src="espace_client/js/plugins/sweet_alert/sweetalert2.min.js"></script>
-        <link rel="stylesheet" href="espace_client/js/plugins/sweet_alert/sweetalert2.min.css">
+        <script src="<?=$esc_url?>js/plugins/sweet_alert/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="<?=$esc_url?>js/plugins/sweet_alert/sweetalert2.min.css">
 
-        <script type="text/javascript" src="espace_client/js/faq.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/faq.js"></script>
 
-        <script type="text/javascript" src="espace_client/js/sammy-latest.min.js"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/sammy-latest.min.js"></script>
         <!-- <script type="text/javascript" src="js/angular.min.js"></script> -->
 
-        <script type="text/javascript" src="espace_client/js/espace_client.js?update=<?php echo time()?>"></script>
-        <script type="text/javascript" src="js/common.js?update=<?php echo time()?>"></script>
+        <script type="text/javascript" src="<?=$esc_url?>js/espace_client.js?update=<?php echo time()?>"></script>
+        <script type="text/javascript" src="<?=$base_url?>js/common.js?update=<?php echo time()?>"></script>
 
         <script type="text/javascript">
-          espace_client_dir ="./espace_client/";
           load_include_page("checkout", false);
 
           init_mb();

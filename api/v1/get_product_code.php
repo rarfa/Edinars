@@ -29,21 +29,24 @@ if($product_id=="") {
 if($array_reponse['success']=="yes") {
     //code
 
-    $paths=array(0=>$data['SinBtns'],1=>$data['SubBtns'],2=>$data['DonBtns']);
+    $paths = array(
+        $data['SinBtns'],
+        $data['SubBtns'],
+        $data['DonBtns']
+    );
 
-    $type=select_type($product_id);
-    $tname=$data['PaymentType'][$type];
+    $type   = select_type($product_id);
+    $tname  = $data['PaymentType'][$type];
+    $button = select_button($product_id);
 
-    $button=select_button($product_id);
 
     $strToCrypt  = "action={$tname}|" ;
     $strToCrypt .= "identifiant=".get_member_username($user_id)."|" ;
     $strToCrypt .= "produit=".$product_id ;
 
-    $strToCrypt = encryptPerHashKey(get_member_username_pincode($user_id), $strToCrypt);
+    $res = encryptPerHashKey(get_member_username_pincode($user_id), $strToCrypt);
 
-
-    $post['PostHtmlCode']=
+    $post['PostHtmlCode']   =
     "<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT METHODE POST-->\n".
     "<form method='post' action='{$data['Host']}/edinars-paiments.html' target='new'>\n".
     "<input type='hidden' name='pincode'  value='".get_member_username_pincode($user_id)."'>\n".
@@ -54,16 +57,19 @@ if($array_reponse['success']=="yes") {
     "<!-- {$data['SiteName']}  FORMULAIRE DE PAIEMENT -->"
     ;
 
-    $post['OrgPostHtml']=$post['PostHtmlCode'];
-    $post['PostHtmlCode']=htmlspecialchars($post['PostHtmlCode'], ENT_QUOTES);
-    $post['GetHtmlCode']=
+    $post['OrgPostHtml']    =   $post['PostHtmlCode'];
+    $post['PostHtmlCode']   =   htmlspecialchars($post['PostHtmlCode'], ENT_QUOTES);
+
+    $post['GetHtmlCode']    =
     "<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT  METHODE GET-->\n".
     "<a href={$data['Host']}/edinars-paiments.html?pincode=".get_member_username_pincode($user_id)."&prehashkey=".get_member_username_hashkey($user_id)."&crypt=".$strToCrypt."&send=yes target=new>\n".
     "<img src={$paths[$type]}/{$button} >\n".
     "</a>".
     "\n<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->"
     ;
-    $post['OrgGetHtml']=$post['GetHtmlCode'];
+
+    $post['OrgGetHtml'] = $post['GetHtmlCode'];
+
     if(isset($post['status']) && $post['status']=='crypt') {
         $post['GetHtmlCode']=
         "<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->\n".
@@ -71,11 +77,11 @@ if($array_reponse['success']=="yes") {
         "\n<!-- {$data['SiteName']} FORMULAIRE DE PAIEMENT -->"
         ;
     }
-    $post['GetHtmlCode']=htmlspecialchars($post['GetHtmlCode'], ENT_QUOTES);
+    $post['GetHtmlCode'] = htmlspecialchars($post['GetHtmlCode'], ENT_QUOTES);
     //$post['BackPage']=$post['action'];
 
     $array_reponse['code_post'] = $post['PostHtmlCode'];
-    $array_reponse['code_get'] = $post['GetHtmlCode'];
+    $array_reponse['code_get']  = $post['GetHtmlCode'];
 
 }
 
