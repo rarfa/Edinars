@@ -242,7 +242,7 @@ if($ii>0) {
   </script>
 
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMs8sEU2bIJdciaxhFrc6YHDSW9XMT2DI&v=3">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBqTWV-iJ-RttPwxj4pmUlnlhgOJoTO_0">
   </script>
   <script type="text/javascript" src="js/infobox.js"></script>
 
