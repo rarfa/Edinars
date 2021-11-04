@@ -2,21 +2,23 @@
 $page_par_defaut = "includes/page.index.php";
 
 //include
-$page     = isset($_GET['page'])    ? clean_var($_GET['page'])    : ''; // accessible par tous le monde
-$process  = isset($_GET['process']) ? clean_var($_GET['process']) : ''; // Pour les traitement ajax
-$form     = isset($_GET['form'])    ? clean_var($_GET['form'])    : ''; //inclure un form
+$page     = isset($_REQUEST['page'])    ? clean_var($_REQUEST['page'])    : ''; // accessible par tous le monde
+$process  = isset($_REQUEST['process']) ? clean_var($_REQUEST['process']) : ''; // Pour les traitement ajax
+$form     = isset($_REQUEST['form'])    ? clean_var($_REQUEST['form'])    : ''; //inclure un form
 
-if($page && file_exists("includes/page.".$page.".php")) {
+$includes = dirname(__DIR__) . "/includes/";
 
-    include "includes/page.".$page.".php";
+if($page && file_exists($includes . "page.".$page.".php")) {
 
-}elseif($process && file_exists("includes/process.".$process.".php")) {
+    include $includes . "page.".$page.".php";
 
-    include "includes/process.".$process.".php";
+}elseif($process && file_exists($includes . "process.".$process.".php")) {
 
-}elseif($form && file_exists("includes/form.".$form.".php")) {
+    include $includes . "process.".$process.".php";
 
-    include "includes/form.".$form.".php";
+}elseif($form && file_exists($includes . "form.".$form.".php")) {
+
+    include $includes . "form.".$form.".php";
 
 }elseif($page_par_defaut && file_exists($page_par_defaut)) {
 

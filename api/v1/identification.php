@@ -50,13 +50,11 @@ if($array_reponse['success']=="yes") {
         //get access_token
         $array_reponse['access_token'] = insert_member_id_session($return_identification);
 
-        // $_SESSION['access_token'] = $array_reponse['access_token'];
-        // $_SESSION['uid'] = $return_identification;
-        // $_SESSION['login']=true;
-        // $_SESSION['login_time']=true;
+        $_SESSION['access_token'] = $array_reponse['access_token'];
+        $_SESSION['uid']          = $return_identification;
+        $_SESSION['login']        = true;
+        $_SESSION['login_time']   = date("Y-m-d H:i:s");
     }
 }
-//error = 0
-
 
 echo json_encode($array_reponse);

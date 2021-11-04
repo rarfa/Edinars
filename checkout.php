@@ -50,17 +50,17 @@ $esc_url = $base_url . 'espace_client/';
               <div id="included_page" class="margin-top-3-perc">
               </div>
               <form class="" id="get_checkout_form" name="get_checkout_form" action="" method="get" onsubmit="return false;">
-                <input type="hidden" id="pincode" name="pincode" value="<?php echo $post['pincode']?>">
-                <input type="hidden" id="prehashkey" name="prehashkey" value="<?php echo $post['prehashkey']?>">
-                <input type="hidden" id="crypt" name="crypt" value="<?php echo $post['crypt']?>">
-                <input type="hidden" id="quantite" name="quantite" value="<?php echo $post['quantite']?>">
+                <input type="hidden" id="pincode" name="pincode" value="<?=$post['pincode']?>">
+                <input type="hidden" id="prehashkey" name="prehashkey" value="<?=$post['prehashkey']?>">
+                <input type="hidden" id="crypt" name="crypt" value="<?=$post['crypt']?>">
+                <input type="hidden" id="quantite" name="quantite" value="<?=$post['quantite'] ?? 1 ?>">
               </form>
             </div>
             <!-- END PAGE CONTENT WRAPPER -->
         </div>
         <!-- END PAGE CONTAINER -->
         <footer class="text-center">
-          Copyright © <?php echo date("Y")?> Erecovery. Tous droits réservés
+          Copyright © <?=date("Y")?> Erecovery. Tous droits réservés
         </footer>
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="<?=$esc_url?>audio/alert.mp3" preload="auto"></audio>

@@ -2,12 +2,12 @@
 $page_par_defaut = DIR_ROOT."includes/page.index.php";
 
 //include
-$page     = isset($_GET['page'])      ? clean_var($_GET['page'])       : ''; // accessible par tous le monde
-$process  =  isset($_GET['process'])  ? clean_var($_GET['process'])    : ''; // Pour les traitement ajax
-$form     =  isset($_GET['form'])     ? clean_var($_GET['form'])       : ''; //inclure un form
-$user     =  isset($_GET['user'])     ? clean_var($_GET['user'])       : ''; //Accès réservé aux users
-$admin    =  isset($_GET['admin'])    ? clean_var($_GET['admin'])      : ''; //Accès réservé aux admins
-$services =  isset($_GET['services']) ? clean_var($_GET['services'])   : ''; //Accès réservé aux services
+$page     =  isset($_REQUEST['page'])     ? clean_var($_REQUEST['page'])       : ''; // accessible par tous le monde
+$process  =  isset($_REQUEST['process'])  ? clean_var($_REQUEST['process'])    : ''; // Pour les traitement ajax
+$form     =  isset($_REQUEST['form'])     ? clean_var($_REQUEST['form'])       : ''; //inclure un form
+$user     =  isset($_REQUEST['user'])     ? clean_var($_REQUEST['user'])       : ''; //Accès réservé aux users
+$admin    =  isset($_REQUEST['admin'])    ? clean_var($_REQUEST['admin'])      : ''; //Accès réservé aux admins
+$services =  isset($_REQUEST['services']) ? clean_var($_REQUEST['services'])   : ''; //Accès réservé aux services
 
 
 if($page && file_exists(DIR_ROOT."includes/page.".$page.".php")) {

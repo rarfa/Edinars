@@ -3,6 +3,11 @@ require '../config.php';
 require '../includes/functions.php';
 
 $esc_url = $base_url . 'espace_client/';
+
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+  header('location:/');
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

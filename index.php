@@ -4,6 +4,10 @@
 define("DIR_ROOT", "./");
 require DIR_ROOT . 'includes/All_files.php';
 
+if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+    header('location:/espace_client');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

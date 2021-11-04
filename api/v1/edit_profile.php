@@ -68,9 +68,10 @@ if($mobile == '') {
 if($array_reponse['success']=="yes") {//if no errors
 
     if($info_user["empty"]!="0") {
-        $post['fname'] = $firstname;
-        $post['lname'] = $lastname;
-        $post['type'] = $type_account;
+        $post['fname']    = $firstname;
+        $post['lname']    = $lastname;
+        $post['type']     = $type_account;
+        $post['fullname'] = $lastname . " " . $firstname;
     }
 
     $post['phone'] = $phone;

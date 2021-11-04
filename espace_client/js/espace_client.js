@@ -33,7 +33,7 @@ function load_include_page(page, check_loged=true)
 {
     var str;
 
-    $('#included_page').hide();
+    $('#included_page').html("");
     $('#included_loading').show();
 
     $.ajax(
@@ -42,6 +42,7 @@ function load_include_page(page, check_loged=true)
             cache: false,
             data: str,
             success: function (html) {
+
                 $('#included_page').html(html);
 
                 refresh_user_datas(
