@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div><!--/.item-->
-        <div class="item" style="background-image: url(images/slides/Microsoft.jpg);background-position: 50% 0;background-size: cover;height:500px;">
+        <div class="item" style="background-image: url(images/slides/slid_mobilis.jpg);background-position: 50% 0;background-size: cover;height:500px;">
            <div class="slider-inner">
                <div class="container">
                    <div class="row">
@@ -41,7 +41,7 @@
                </div>
            </div>
        </div><!--/.item-->
-       <div class="item" style="background-image: url(images/slides/Symantec.jpg);background-position: 50% 0;background-size: cover;height:500px;">
+       <div class="item" style="background-image: url(images/slides/slide_ooredoo.jpg);background-position: 50% 0;background-size: cover;height:500px;">
           <div class="slider-inner">
               <div class="container">
                   <div class="row">
@@ -54,7 +54,7 @@
               </div>
           </div>
       </div><!--/.item-->
-      <div class="item" style="background-image: url(images/slides/AVG.jpg);background-position: 50% 0;background-size: cover;height:500px;">
+      <div class="item" style="background-image: url(images/slides/slide_djezzy.jpg);background-position: 50% 0;background-size: cover;height:500px;">
          <div class="slider-inner">
              <div class="container">
                  <div class="row">
@@ -74,9 +74,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-                <h2>A propos de Edinars</h2>
+                <h2>A propos de Erecovery</h2>
                 <p>
-                  Edinars est une entreprise Algérienne spécialisé dans les paiements en ligne et qui offre une méthode pour payer vos achats de biens et services sur internet. Edinars propose une méthode de paiement simple et efficace qui repose principalement sur une offre de carte à gratter, Vous n'avez besoin d'utiliser ni carte de crédit ni carte de débit. Pour les professionnel ils bénéficie quant à eux de la possibilité de conquérir de nouveaux part de marché, ainsi que de surpassé les difficultés géographique qui entrave le développement de leurs entreprises. Edinars s'inscrit dans une vision global de ce qui sera le web Algérien dans un avenir proche, nous estiment qu'il est urgent de proposer aux internautes Algérien des contenus et des services digne de la révolution du web 2.0, ce la pour passées ensuite à une autre étape, celle de l'innovation pure qui permettra de mettre sur pied une industrie numérique Algérienne compétitive.
+                    Erecovery est une entreprise algérienne spécialisée dans le recouvrement des factures qui offre une solution 2.0 pour payer vos abonnements, vos forfaits, vos factures, et vos achats et services sur internet.
+                </p>
+                <p>
+                    Erecovery propose une méthode de recouvrement de factures 2.0 simple, sûre, et efficace qui permet au particuliers de payer leurs factures en utilisant leur carte CIB, DAHABIA ou leur compte Erecovery, et aux professionnels e-marchants de recouvrir leurs factures via les solutions citer ci-dessus -même en absence d’un site web- grâce à notre API Speed Link Recovery, essentielle pour conquérir de nouvelles parts de marché, et de surpasser les difficultés géographiques qui entravent le développement de leur entreprise.
+                </p>
+                <p>
+                    Erecovery s'inscrit dans une vision globale de ce qui sera le web algérien dans un avenir proche, nous estimons qu'il est urgent de proposer aux internautes algériens des contenus et des services dignes de la révolution du web 4.0, cela pour passer ensuite à une autre étape, celle de l'innovation pure qui permettra de mettre sur pied une industrie numérique algérienne compétitive basée sur la technologie blockchain.
                 </p>
             </div>
             <div class="col-sm-3 text-right">
@@ -89,7 +95,7 @@
 <section id="features">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">PARTICULIERS</h2>
+            <h2 class="section-title text-center wow fadeInDown">VOUS ÊTES UN PARTICULIER ?</h2>
             <p class="text-center wow fadeInDown"></p>
         </div>
         <div class="row">
@@ -99,21 +105,27 @@
             <div class="col-sm-6">
                 <div class="media service-box wow fadeInRight">
                     <div class="pull-left">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-credit-card-alt"></i>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">Comment acheter avec Edinars</h4>
-                        <p>Le e-commerce et enfin une réalité en Algérie, grâce à la solution Edinars vous pouvez commencer à Acheter en ligne. Grasse à son système, Edinars vous offre la possibilité d’effectuer des achat avec une grande facilité, puisque une carte de recharge et 2 clic vous suffise pour profiter pleinement des avantages du e-commerce. Pas besoin de vous inquiéter pour votre budget, contrairement à une carte de débit la carte de recharge Edinars et une carte prépayer, donc le solde contenu dans la carte et connu d’avance ce qui permettra de contrôlé votre budget.</p>
-                    </div>
-                </div>
-
-                <div class="media service-box wow fadeInRight">
-                    <div class="pull-left">
-                        <i class="fa fa-map-marker"></i>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Ou acheter avec Edianrs</h4>
-                        <p>Bienvenue sur l’espace shopping Edinars, découvrez les meilleures offres et les meilleurs services proposer par nos partenaires.</p>
+                        <h4 class="media-heading">Payer vos factures avec Erecovery</h4>
+                        <p>
+                            Grâce la solution de recouvrement 2.0 Erecovery, vous pouvez commencer à payer vos factures et services, et d’effectuer des achats avec une grande sûreté, sécurité, et facilité, car un simple scan de QR Code vous suffit pour profiter pleinement des avantages du e-commerce.
+                        </p>
+                        <p>
+                            L’alimentation  de votre compte Erecovery se fera dans l’immédiat chez un de nos agents de recouvrement à travers nos divers points de vente, et vous permet le choix entre trois méthodes de rechargement :
+                            <ul>
+                                <li>
+                                    Débours dans un point de recouvrement Erecovery.
+                                </li>
+                                <li>
+                                    Votre carte CIB.
+                                </li>
+                                <li>
+                                    Votre carte DAHABIA.
+                                </li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -137,8 +149,9 @@
                         <i class="fa fa-mobile"></i>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">Recharger Mobile</h4>
-                        <p>Votre mobile et à sec ?!! , Ne vous déplacez plus pour recharger votre mobile, Profité de notre service de recharge pour alimenter votre solde mobile instantanément, 24H/24, 7J/7 et en toute sécurité. Le rechargement est immédiat et gratuit (hors coût de la recharge) et vous permet de bénéficier des avantages et bonus offerts par votre opérateur.</p>
+                        <h4 class="media-heading">Recharge du crédit mobile</h4>
+                        <p>
+                            Votre crédit mobile est à sec ?!! , ne vous déplacez plus pour recharger votre crédit mobile, et profitez de notre service de recharge pour alimenter votre solde mobile instantanément, 24H/24 7J/7 et en toute sécurité. Le rechargement est immédiat et vous permet de bénéficier des avantages et bonus offerts par votre opérateur.                        </p>
                     </div>
                 </div>
 
@@ -149,7 +162,12 @@
                     <div class="media-body">
                         <h4 class="media-heading">Site E-Commerce</h4>
                         <p>Vous voulez vous lancer dans le e-commerce?</p>
-                        <p>Edinars vous accompagne pour développer votre activité sur internet. L’équipe Edinars vous offre la possibilité de profité de sa solution clé en main complète de commerce en ligne, spécialement conçu pour vous permettre de commercialiser vos produit et services en ligne avec une facilité déconcertante. Vous souhaitez en savoir plus sur nos solutions ? Contactez-nous au ou par le biais du formulaire de contact, notre équipe vous aidera à mieux comprendre les enjeux du commerce en ligne et choisir la solution la plus adaptée pour vous.</p>
+                        <p>
+                            L’équipe Erecovery vous accompagne pour développer votre activité commerciale sur internet et vous offre la possibilité de profiter de sa solution de recouvrement 2.0 en l’intégrant comme méthode de recouvrement des factures, achats, et services  à travers de votre site e-commerce, toute fois, si vous n’avez pas encore de site web, Erecovery vous propose (Power seller) ; une solution clé en main déjà prête et spécialement conçue pour vous permettre de mieux commercialiser vos produits et services en ligne avec une facilité déconcertante, et d’élargir votre éventail client.
+                        </p>
+                        <p>
+                            Vous souhaitez en savoir plus sur nos solutions ? Contactez-nous au :0542 088 093, ou par le biais du formulaire de contact, notre équipe vous aidera à mieux comprendre les enjeux du commerce en ligne, et choisir la solution la plus adaptée pour vous.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -204,7 +222,7 @@
                         <span>2</span>
                         <i class="fa fa-check-square-o fa-2x"></i>
                     </div>
-                    <h3>Sélectionnez votre solution. Vous pourrez la modifier par la suite</h3>
+                    <h3>Sélectionnez votre solution.</h3>
                 </div>
             </div>
             <div class="col-md-4 col-md-4 col-xs-6">
@@ -213,23 +231,37 @@
                         <span>3</span>
                         <i class="fa fa-code fa-2x"></i>
                     </div>
-                    <h3>Intégrez Edinars vous-même, avec un partenaire ou un développeur</h3>
+                    <h3>Intégrez  Erecovery  vous-même ou avec un partenaire</h3>
                 </div>
             </div>
-
-
         </div>
     </div>
 </section><!--/#work-process-->
 
-<section id="get-in-touch">
+<section id="debours" >
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">Contacter E-Recovery</h2>
+            <h2 class="section-title text-center wow fadeInDown under-professionnels">OÙ DÉPOSER UN DÉBOURS ?</h2>
             <p class="text-center wow fadeInDown"></p>
         </div>
-    </div>
-</section><!--/#get-in-touch-->
+        <div class="row">
+            <div class="features">
+                <div class="col-sm-12">
+                    <div class="media service-box wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;">
+                        <div class="media-body text-center">
+                            <p>
+                                Bienvenue dans l’espace d’alimentation de compte Erecovery via un dépôt de débours.
+                            </p>
+                            <p>
+                                Découvrez toutes nos meilleures offres et nos meilleurs services proposés par nos agents de recouvrement à travers leurs divers points de vente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.row-->
+    </div><!--/.container-->
+</section><!--/#services-->
 
 <?php
 require "includes/section_contact.php";

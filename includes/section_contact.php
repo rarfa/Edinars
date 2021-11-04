@@ -29,8 +29,8 @@
 }
 .map-pager .inner-list {            padding:21px 20px 20px; #padding-top:14px; #padding-bottom:0px; border-top:1px solid;}
 .map-pager a {                      text-shadow:0 1px 1px #fff; display:block;}
-.map-pager .pager-list-prev {       float:left;font-size:24px}
-.map-pager .pager-list-next {       float:right;font-size:24px}
+.map-pager .pager-list-prev {       float:left;font-size:24px;color: black;}
+.map-pager .pager-list-next {       float:right;font-size:24px;color: black;}
 .map-pager .disable {               opacity:.6;filter : alpha(opacity=60);}
 
 </style>
@@ -105,8 +105,17 @@ if($ii>0) {
         </div>
       </div>
     </div>
-    <div class="container" style="padding-top:30px;padding-bottom:30px">
-      <div class="col-sm-12">
+      <section id="get-in-touch">
+          <div class="container">
+              <div class="section-header">
+                  <h2 class="section-title text-center wow fadeInDown">Contacter E-Recovery</h2>
+                  <p class="text-center wow fadeInDown"></p>
+              </div>
+          </div>
+      </section><!--/#get-in-touch-->
+
+      <div class="container" style="padding-top:30px;padding-bottom:30px">
+      <div id="contactus" class="col-sm-12">
           <h3>Contact</h3>
           Tél.: <b>0560 20 30 71</b><br>
           Email: <b>info@edinars.net</b><br>
@@ -233,7 +242,7 @@ if($ii>0) {
   </script>
 
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMs8sEU2bIJdciaxhFrc6YHDSW9XMT2DI&v=3">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBqTWV-iJ-RttPwxj4pmUlnlhgOJoTO_0">
   </script>
   <script type="text/javascript" src="js/infobox.js"></script>
 

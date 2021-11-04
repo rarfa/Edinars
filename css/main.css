@@ -101,7 +101,7 @@ hr {
   height: 1px;
   background: #ebebeb;
 }
-.section-header .section-title:after {
+.section-header .section-title:not(.under-professionnels)::after {
   content: "";
   position: absolute;
   width: 24px;
@@ -1114,4 +1114,9 @@ ul.nostyle i {
   padding-left: 20px;
   margin: 10px;
 }
+
+.under-professsionnels {
+  padding-top: 20px;
+}
+
 /*******************Yacine ***************************/
