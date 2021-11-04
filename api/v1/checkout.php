@@ -23,6 +23,11 @@ $crypt      = isset($_REQUEST['crypt'])      ?  prntext($_REQUEST['crypt']) : ''
 $quantite   = isset($_REQUEST['quantite'])   ?  prntext($_REQUEST['quantite']) : '';
 $note       = isset($_REQUEST['note'])       ?  prntext($_REQUEST['note']) : '';
 
+// if facture
+$facture_id = isset($_REQUEST['facture_id']) ? prntext($_REQUEST['facture_id']) : '';
+$tva        = isset($_REQUEST['tva']) ? prntext($_REQUEST['tva']) : '';
+$prix_total = isset($_REQUEST['prix_total']) ? prntext($_REQUEST['prix_total']) : 0;
+
 
 $array_reponse = array('errors'=>[
     'pincode' => '',
@@ -62,8 +67,53 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
     $array_reponse['errors']['strToDeCrypt']      = $strToDeCrypt;
     $array_reponse['errors']['decryptPerHashKey'] = $crypt; // decryptPerHashKey
 
+    // action for facture 
+    if(isset($checkout['action']) && $checkout['action'] == 'facture') { // --------------------------------------------------------------------------------------
+        
+        // validate variables
+        if(!$facture_id) {
 
-    if($checkout['identifiant'] == "" || $checkout['action'] == "" || $checkout['produit'] == "") {
+            $array_reponse['errors']['get_checkout'] = "L'identifiant de la facture est manquant";
+            $array_reponse['success'] = "no";
+
+        }else {
+
+            // check if owner correct 
+            $owner = get_member_info_by_mem_id($pincode);
+
+            if(!$owner) {
+                $array_reponse['errors']['get_checkout'] = "Code pin incorrect, propriétaire introuvable";
+                $array_reponse['success'] = "no";
+            }else{
+
+                $checkout['action']     = 'facture';
+                $checkout['quantite']   = 1; // facture wahda
+                $checkout['facture_id'] = $facture_id; // facture wahda
+                $checkout['owner']      = $owner['username'];
+                $checkout['total']      = $prix_total;
+                $checkout['product']    = [];
+
+                $checkout['product']['nom']   = $facture_id;
+                $checkout['product']['owner'] = $owner['id'];
+                $checkout['product']['tva']   = $tva;
+                $checkout['product']['_prix']  = $prix_total;
+
+                //process
+                if(!isset($checkout['product']['ureturn'])) {
+                    $checkout['product']['ureturn'] = "{$data['Host']}";
+                }
+                if(!isset($checkout['product']['ucancel'])) {
+                    $checkout['product']['ucancel'] = "{$data['Host']}";
+                }
+                //$checkout['product']['_prix']       = prnsumm($checkout['product']['prix']);
+                $checkout['_total']                 = prnsumm($checkout['total']);
+                //$checkout['product']['_comments']   = nl2br($checkout['product']['comments']);
+                $checkout['currency']               = "DA";//prntext($post['Currency']);
+
+            }
+        }
+
+    } elseif(!isset($checkout['identifiant']) || !isset($checkout['action']) || !isset($checkout['produit'])) {  // ------------------------------------------------------------------------
 
         $array_reponse['errors']['get_checkout'] = "Erreur!! 0x0002";
         $array_reponse['success'] = "no";
@@ -226,7 +276,7 @@ if($array_reponse['success'] == "yes") {
 
                 // Send info & back now
                 $back['trxid']      = $array_reponse['trxid'];
-                $back['pid']        = $array_reponse['product']['id'];
+                $back['pid']        = $array_reponse['product']['id'] ?? 'facture';
                 $back['commande']   = $_SESSION['commande'] ?? '';
                 $back['pname']      = $array_reponse['product']['nom'];
                 $back['acheteur']   = get_member_username($array_reponse['buyer']);
@@ -237,7 +287,7 @@ if($array_reponse['success'] == "yes") {
                 $back['refrence']   = $data['Host']; // ??? missing something
                 $back['statut']     = 'termine';
 
-                $unotify = $product['unotify'];
+                $unotify = $product['unotify'] ?? 'yes';
                 $ureturn = $checkout['product']['ureturn'];
                 $ucancel = $checkout['product']['ucancel'];
 

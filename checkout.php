@@ -4,7 +4,7 @@ define("DIR_ROOT", "");
 require 'includes/All_files.php';
 
 $esc_url = $base_url . 'espace_client/';
-
+$post    = $_REQUEST;
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +54,10 @@ $esc_url = $base_url . 'espace_client/';
                 <input type="hidden" id="prehashkey" name="prehashkey" value="<?=$post['prehashkey']?>">
                 <input type="hidden" id="crypt" name="crypt" value="<?=$post['crypt']?>">
                 <input type="hidden" id="quantite" name="quantite" value="<?=$post['quantite'] ?? 1 ?>">
+
+                <input type="hidden" id="facture_id" name="facture_id" value="<?=$post['facture_id'] ?? null ?>">
+                <input type="hidden" id="prix_total" name="prix_total" value="<?=$post['prix_total'] ?? null ?>">
+                <input type="hidden" id="tva" name="tva" value="<?=$post['tva'] ?? null ?>">
               </form>
             </div>
             <!-- END PAGE CONTENT WRAPPER -->

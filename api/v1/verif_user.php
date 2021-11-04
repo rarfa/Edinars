@@ -21,7 +21,7 @@ if($access_token == '') {
                                 LIMIT 1"
     );
 
-    if ($result_access_token[0]["member_id"]=='') {
+    if (!isset($result_access_token[0]) || $result_access_token[0]["member_id"] == '') {
         $array_reponse['errors']['access_token'] =  'Votre Identification ne peut pas être valider!';
         $array_reponse['success'] = "no";
     }else{
