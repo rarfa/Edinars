@@ -74,9 +74,9 @@ s0.parentNode.insertBefore(s1,s0);
                         <li class="scroll"><a href="<?=$base_url?>#features">Particuliers</a></li>
                         <li class="scroll"><a href="<?=$base_url?>#work-process">Professionnels</a></li>
                         <li class="scroll"><a href="<?=$base_url?>#services">Services</a></li>
-                        <li class="scroll"><a href="#" data-toggle="modal" data-target="#login-modal" role="button" class="login_btn">Mon Compte</a></li>
+                        <li class="scroll"><a href="#" data-toggle="modal" data-target="#login-modal" role="button" class="login_btn">Se Connecter</a></li>
                         <!-- <li class="scroll"><a href="./#animated-number">Mon Compte</a></li> -->
-                        <li class="scroll"><a href="<?=$base_url?>#contact">Contact</a></li>
+                        <li class="scroll"><a href="<?=$base_url?>#contactus">Contact</a></li>
                     </ul>
                 </div>
             </div><!--/.container-->
