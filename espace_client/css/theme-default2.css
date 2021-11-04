@@ -3083,10 +3083,13 @@ blockquote.pull-right {
   -ms-transition: all 200ms ease;
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
+  background: #e30613;
+  color: white;
 }
 .nav-tabs.nav-justified > li > a:hover {
-  border-color: #1b1e24;
-  background: rgba(115, 190, 40, 1);
+  border-color: #272c33;
+  background: #b4050d;
+  color: white;
 }
 .nav-tabs.nav-justified > .active > a,
 .nav-tabs.nav-justified > .active > a:hover,

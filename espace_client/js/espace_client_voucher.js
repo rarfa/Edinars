@@ -51,7 +51,7 @@ function show_voucher(action="", type_id=""){
         if(voucher_infos.offers[key].count_vouchers>0){
           offers_html += '<a class="btn btn-primary btn-voucher" onclick="confirm_purchase_voucher(\''+key+'\');"><img src="../images/voucher/idoom.png"><br><h2>'+voucher_infos.offers[key].price+' DA</h2></a>';
         }else{
-          offers_html += '<a class="btn btn-primary btn-voucher" onclick="javascript:;"><img src="../images/voucher/idoom.png" style="opacity: 0.4" ><br><h2 style="opacity: 0.4" >'+voucher_infos.offers[key].price+' DA</h2></a>';
+          offers_html += '<a class="btn btn-primary btn-voucher" onclick="javascript:;"><img src="../images/voucher/idoom.png" ><br><h2  >'+voucher_infos.offers[key].price+' DA</h2></a>';
         }
       }
     }
