@@ -111,7 +111,7 @@
 
     	console.log("process_generate_order() "+reponse.success);
     	if(reponse.success=="yes"){
-        var url_qrcode_img = api_url+"qr.php?qr_type=order&trx_id="+reponse.trx_id;
+        var url_qrcode_img = api_url+"qr.php?qr_type=order&trx_id="+reponse.trx_id+"&access_token="+append_access_token();
     		swal({
     		  title: 'La commande a été généré',
     		  html: reponse.transaction_description+"<br>"
