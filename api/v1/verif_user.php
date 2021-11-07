@@ -38,7 +38,7 @@ if($access_token == '') {
         );
 
         $user_infos = db_rows(
-            "SELECT * FROM `{$data['DbPrefix']}members`" .
+            "SELECT * FROM `{$data['DbPrefix']}members`".
             "WHERE `id`={$user_id}"
         )[0];
     }
