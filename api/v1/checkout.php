@@ -98,18 +98,12 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
                 $checkout['product']['tva']   = $tva;
                 $checkout['product']['_prix']  = $prix_total;
 
-                $checkout['product']['ureturn'] = $checkout['ureturn'] ?? null;
-                $checkout['product']['unotify'] = $checkout['unotify'] ?? null;
-                $checkout['product']['ucancel'] = $checkout['ucancel'] ?? null;
-                $checkout['product']['image']   = $checkout['image']   ?? null;
+                $checkout['product']['ureturn'] = $_REQUEST['ureturn'] ?? null;
+                $checkout['product']['unotify'] = $_REQUEST['unotify'] ?? null;
+                $checkout['product']['ucancel'] = $_REQUEST['ucancel'] ?? null;
+                $checkout['product']['image']   = $_REQUEST['image']   ?? null;
+                
 
-                //process
-                if(!isset($checkout['product']['ureturn'])) {
-                    $checkout['product']['ureturn'] = "{$data['Host']}";
-                }
-                if(!isset($checkout['product']['ucancel'])) {
-                    $checkout['product']['ucancel'] = "{$data['Host']}";
-                }
                 //$checkout['product']['_prix']       = prnsumm($checkout['product']['prix']);
                 $checkout['_total']                 = prnsumm($checkout['total']);
                 //$checkout['product']['_comments']   = nl2br($checkout['product']['comments']);
@@ -236,7 +230,7 @@ if($array_reponse['success'] == "yes") {
 
                 insert_notification($array_infos);
 
-                if($array_reponse['action'] == 'produit' || $array_reponse['action'] == 'donation' || $array_reponse['action'] == 'abonnement') {
+                if($array_reponse['action'] == 'produit' || $array_reponse['action'] == 'donation' || $array_reponse['action'] == 'abonnement' || $array_reponse['action'] == 'facture') {
                     update_sold($array_reponse['product']['id'], $array_reponse['quantite']);
                     if($array_reponse['action'] == 'abonnement') {
                         insert_subscription($array_reponse['product']['owner'], $array_reponse['buyer'], $array_reponse['product']['id']);
