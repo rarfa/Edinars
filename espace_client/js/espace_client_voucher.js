@@ -115,7 +115,7 @@ function confirm_purchase_voucher(offer_id){
     showCancelButton: true,
     cancelButtonText: "Anuller",
     showConfirmButton: true,
-    confirmButtonText: "Oui, Confirmer",
+    confirmButtonText: "Confirmer",
     showLoaderOnConfirm: false,
     allowOutsideClick: false,
     width : 650

@@ -26,7 +26,7 @@
                           <span class="input-group-addon"><span class="fa fa-mobile"></span></span>
                           <input type="text" class="form-control" id="phone" name="phone" required>
                         </div>
-                        <span class="help-block">Entrer votre numéro de téléphone, ex: 0550000000</span>
+                        <span class="help-block">Entrez votre numéro de téléphone, ex: 0550000000</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -36,7 +36,7 @@
                           <span class="input-group-addon"><span class="fa fa-money"></span></span>
                           <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
-                        <span class="help-block">Entrer le montant en DA</span>
+                        <span class="help-block">Entrez le montant en DA</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -46,7 +46,7 @@
                           <span class="input-group-addon"><span class="fa fa-lock"></span></span>
                           <input type="password" class="form-control" id="code_pin" name="code_pin" required>
                         </div>
-                        <span class="help-block">Entrer votre code pin</span>
+                        <span class="help-block">Entrez votre code pin</span>
                       </div>
                     </div>
 
@@ -60,7 +60,7 @@
                           </select>
                           <!-- <input type="text" class="form-control input_user_data_type_account" readonly> -->
                         </div>
-                        <span class="help-block">Sélectionner le type de votre recharge</span>
+                        <span class="help-block">Sélectionnez le type de votre recharge</span>
                       </div>
                     </div>
                     <div class="form-group">

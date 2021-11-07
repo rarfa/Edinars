@@ -26,8 +26,8 @@
                   <!-- Remarque -->
                   <div class="alert alert-warning" role="alert" id="confidentiality_note" >
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <p><strong>Remarque:</strong> Votre mot de passe est sensible à la casse et doit être d'au moins 9 caractères,</p>
-                    <p>y compris au moins une lettre (A-Z), un chiffre (0-9) et l'un des caractères spèciaux suivants: <b>!=+*;:-,._{[()]}#%?@</b></p>
+                    <p><strong>Remarque:</strong> Votre mot de passe est sensible aux majuscules et minuscules, et doit contenir au moins 9 caractères,</p>
+                      <p>dont au moins une lettre en majuscule (A-Z),un chiffre (0-9) et l'un des caractères spéciaux suivants:<b> !=+*;:-,._{[()]}#%?@</b>.</p>
                   </div>
                   <!-- END Remarque -->
                   <form class="form-horizontal" id="edit_password_form" name="edit_password_form" method="post" onsubmit="edit_password();return false;">
@@ -50,7 +50,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-md-3 col-xs-12 control-label">Re-enter Nouveau mot de passe*</label>
+                      <label class="col-md-3 col-xs-12 control-label">Re-entrez le Nouveau mot de passe*</label>
                       <div class="col-md-6 col-xs-12">
                         <div class="input-group">
                           <span class="input-group-addon"><span class="fa fa-key"></span></span>
@@ -61,7 +61,7 @@
                     <div class="form-group">
                       <div class="col-md-12 col-xs-12" style="text-align:center">
                         <div class="loader" id="loading_edit_password" name="loading_edit_password" style="float: right; display: none;"></div>
-                        <button class="btn btn-primary" type="submit" id="btn_edit_password" name="btn_edit_password" disabled><span class="fa fa-pencil"></span>Modifier</button>
+                        <button class="btn btn-primary" type="submit" id="btn_edit_password" name="btn_edit_password" disabled><span class="fa fa-pencil"></span>Enregistrer</button>
                       </div>
                     </div>
                   </form>
@@ -72,7 +72,7 @@
                   <div class="alert alert-warning" role="alert" id="confidentiality_note" >
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <p><strong>Remarque:</strong> Si vous oubliez votre mot de passe, nous allons vous poser la question que vous soumettez ci-dessous.</p>
-                    <p>S'il vous plaît, essayez de trouver une question personnelle et une rèponse qui vous seul connaissez.</p>
+                    <p>S'il vous plaît, essayez de trouver une question personnelle et une réponse que vous seul connaissez.</p>
                   </div>
                   <!-- END Remarque -->
                   <form class="form-horizontal" id="edit_security_question_form" name="edit_security_question_form" method="post" onsubmit="edit_security_question();return false;">
@@ -108,7 +108,7 @@
 
                 </div>
                 <div class="tab-pane" id="confidentiality_tab3">
-                  <h2>Afficher code PIN</h2>
+                  <h2>Afficher le code PIN</h2>
                   <div class="alert alert-warning" role="alert" id="confidentiality_note" >
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <p><strong>Remarque:</strong> En raison de sécurité votre mot de passe est indispensable pour pouvoir afficher votre code pin </p>
@@ -131,7 +131,7 @@
                     </div>
                   </form>
                   <hr>
-                  <h2>Réinitialiser code PIN</h2>
+                  <h2>Réinitialiser le code PIN</h2>
                   <div class="alert alert-warning" role="alert" id="confidentiality_note" >
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <p><strong>Remarque:</strong> En raison de sécurité votre mot de passe est indispensable pour pouvoir réinitialiser votre code pin </p>
