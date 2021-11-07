@@ -58,6 +58,13 @@ $post    = $_REQUEST;
                 <input type="hidden" id="facture_id" name="facture_id" value="<?=$post['facture_id'] ?? null ?>">
                 <input type="hidden" id="prix_total" name="prix_total" value="<?=$post['prix_total'] ?? null ?>">
                 <input type="hidden" id="tva" name="tva" value="<?=$post['tva'] ?? null ?>">
+
+                <input type="hidden" id="ureturn" name="ureturn" value="<?=$post['ureturn'] ?? null ?>">
+                <input type="hidden" id="unotify" name="unotify" value="<?=$post['unotify'] ?? null ?>">
+                <input type="hidden" id="ucancel" name="ucancel" value="<?=$post['ucancel'] ?? null ?>">
+                <input type="hidden" id="image" name="image" value="<?=$post['image'] ?? null ?>">
+
+
               </form>
             </div>
             <!-- END PAGE CONTENT WRAPPER -->

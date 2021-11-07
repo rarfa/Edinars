@@ -87,13 +87,13 @@ function process_get_checkout(reponse){
 
     var str_to, object_str, price_str, total_str;
     total_str = '<b>'+reponse._total+' '+reponse.currency+'</b>';
-    if(reponse.action!="donation"){
+    if(reponse.action != "donation" && reponse.action != "facture"){
       str_to = "Faire une donation pour";
       object_str = "Objet";
       price_str = "Montant";
     }else{
        str_to = "Paiement pour";
-       object_str = "Objet";
+       object_str = "Facture N";
        price_str = "Prix";
     }
 
@@ -104,7 +104,7 @@ function process_get_checkout(reponse){
     $('#tbody_checkout_info').append('<tr><td>'+str_to+'</td><td>'+reponse.owner+'</td></tr>');
     $('#tbody_checkout_info').append('<tr><td>'+object_str+'</td><td>'+reponse.product.nom+'</td></tr>');
     $('#tbody_checkout_info').append('<tr><td>'+price_str+'</td><td>'+reponse.product._prix+' '+reponse.currency+'</td></tr>');
-    if(reponse.action!="donation"){
+    if(reponse.action != "donation" && reponse.action != "facture"){
         $('#tbody_checkout_info').append('<tr><td>Quantitè :</td><td>'+reponse.quantite+'</td></tr>');
     }
 
@@ -112,7 +112,7 @@ function process_get_checkout(reponse){
       $('#tbody_checkout_info').append('<tr><td>Frais d\'installation :</td><td>'+reponse.product.installation+'</td></tr>');
     }
 
-    if(reponse.product.tva>0){
+    if(reponse.action != "facture" && reponse.product.tva> 0 ){
       $('#tbody_checkout_info').append('<tr><td>TVA</td><td>'+reponse.product.tva+' '+reponse.currency+'</td></tr>');
     }
 

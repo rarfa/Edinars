@@ -1,5 +1,5 @@
 var root_path="/";
-var api_url = "api/v1/";
+var api_url = base_url + "api/v1/";
 var espace_client_dir ="/espace_client/";
 
 // ############################ Global_functions ############################

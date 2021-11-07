@@ -98,6 +98,11 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
                 $checkout['product']['tva']   = $tva;
                 $checkout['product']['_prix']  = $prix_total;
 
+                $checkout['product']['ureturn'] = $checkout['ureturn'] ?? null;
+                $checkout['product']['unotify'] = $checkout['unotify'] ?? null;
+                $checkout['product']['ucancel'] = $checkout['ucancel'] ?? null;
+                $checkout['product']['image']   = $checkout['image']   ?? null;
+
                 //process
                 if(!isset($checkout['product']['ureturn'])) {
                     $checkout['product']['ureturn'] = "{$data['Host']}";
@@ -287,9 +292,9 @@ if($array_reponse['success'] == "yes") {
                 $back['refrence']   = $data['Host']; // ??? missing something
                 $back['statut']     = 'termine';
 
-                $unotify = $product['unotify'] ?? 'yes';
-                $ureturn = $checkout['product']['ureturn'];
-                $ucancel = $checkout['product']['ucancel'];
+                $unotify = $checkout['product']['unotify'] ?? $data['Host'];
+                $ureturn = $checkout['product']['ureturn'] ?? $data['Host'];
+                $ucancel = $checkout['product']['ucancel'] ?? $data['Host'];
 
                 if ($unotify) { // if website asks for notification after payment
                     use_curl($unotify, $back);
