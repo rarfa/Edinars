@@ -8,7 +8,7 @@ require DIR_ROOT.'includes/All_files.php';
 
 // security
 // include('verif_csrf_token.php');
-//require 'verif_user.php';
+require 'verif_user.php';
 
 
 if(isset($_GET["qr_type"]) && $_GET["qr_type"] == "identity") {
