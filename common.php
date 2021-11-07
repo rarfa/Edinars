@@ -1115,17 +1115,17 @@ function send_email($key, $post)
 
     case 'DEPOT-PAYMENT-CCP-ADMIN' :
         insert_sent_email ($post['email-id'],$data['CCP_email'],stripslashes($subject),htmlspecialchars($text,ENT_QUOTES) );
-        return sendMail($data['CCP_email'], stripslashes($subject), stripslashes($text)); break ;
+        return sendMail($data['CCP_email'], $subject, $text); break ;
     case 'WITHDRAW-PAYMENT-ADMIN' :
         insert_sent_email ($post['email-id'],$data['withdraw_email'],stripslashes($subject), htmlspecialchars( $text, ENT_QUOTES) );
-        return sendMail($data['withdraw_email'], stripslashes($subject), stripslashes($text));
+        return sendMail($data['withdraw_email'], $subject, $text);
     case 'ERROR-EMAIL-ADMIN' :
         insert_sent_email ($post['email-id'],$data['error_email'],stripslashes($subject),htmlspecialchars($text, ENT_QUOTES) ) ;
-        return sendMail($data['error_email'], stripslashes($subject), stripslashes($text));
+        return sendMail($data['error_email'], $subject, $text);
     }
 
     insert_sent_email($post['email-id'], $post['email'], stripslashes($subject), htmlspecialchars($text, ENT_QUOTES));
-    return sendMail($post['email'], utf8_decode(stripslashes($subject)), utf8_decode(stripslashes($text)));
+    return sendMail($post['email'], $subject, $text);
 }
 
 function send_mass_email($subject, $message, $active=-1)
