@@ -21,6 +21,7 @@ $array_reponse = array( 'errors' => array(
 
 $trx_id     = isset($_REQUEST['trx_id']) ? clean_var($_REQUEST['trx_id']) : '' ;
 $code_pin   = isset($_REQUEST['code_pin']) ? clean_var($_REQUEST['code_pin']) : '' ;
+$reject     = isset($_REQUEST['reject']) ?? null;
 
 
 $transaction         = get_transaction_trx_id($trx_id);
@@ -49,7 +50,11 @@ if(!$code_pin || !verify_user_pincode($code_pin)) {
 
 // --> Output
 if($array_reponse['success'] == "yes") {
-    $update = update_transaction_status($user_id, $transaction[0]["id"], 2);
+    if($reject == 'yes'){
+        $update = update_transaction_status($user_id, $transaction[0]["id"], 3);
+    }else{
+        $update = update_transaction_status($user_id, $transaction[0]["id"], 2);
+    }
 
     if($update) {
         $transaction = get_transaction_trx_id($trx_id);

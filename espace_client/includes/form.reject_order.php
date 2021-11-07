@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <p> Entrer votre code PIN pour confirmer le paiement suivant.</p>
+    <p> Entrer votre code PIN pour rejeter le paiement suivant.</p>
     <p>N°: <b id="order_trxid"></b></p>
     <p>Montant: <b id="order_nets"></b></p>
 
@@ -11,6 +11,7 @@
           <div class="input-group">
             <span class="input-group-addon"><span class="fa fa-lock"></span></span>
             <input type="text" class="form-control" id="code_pin" name="code_pin" required placeholder="Code pin ****">
+            <input type="hidden" name="reject" value="yes">
           </div>
         </div>
       </div>
@@ -18,7 +19,7 @@
         <div class="col-md-12 col-xs-12" style="text-align:center">
           <input type="hidden" name="trx_id" id="trx_id" value="">
           <div class="loader" id="loading_pay_order" name="loading_pay_order" style="float: right; display: none;"></div>
-          <button class="btn btn-primary" type="submit" id="btn_pay_order" name="btn_pay_order"><span class="fa fa-paper-plane"></span>Payer</button>
+          <button class="btn btn-danger" type="submit" id="btn_pay_order" name="btn_pay_order"><span class="fa fa-paper-plane"></span>Rejeter</button>
         </div>
       </div>
     </form>

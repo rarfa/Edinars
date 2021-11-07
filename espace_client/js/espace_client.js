@@ -511,7 +511,8 @@ function get_transactions_icon(json_array)
 function get_transactions_actions(json_array)
 {
     if(json_array.ostatus==1 && json_array.type!='RECHARGE' && json_array.sender==user_datas.user_id) { // action payer
-        return '<button class="btn btn-success btn-rounded btn-lg" onclick="show_pay_order_form(\''+json_array.trxid+'\', \''+json_array.nets+'\');">Payer</button>';
+        return '<button class="btn btn-success btn-rounded btn-lg" onclick="show_pay_order_form(\''+json_array.trxid+'\', \''+json_array.nets+'\');">Payer</button>' +
+            '<button class="btn btn-warning btn-rounded btn-lg" onclick="show_reject_order_form(\''+json_array.trxid+'\', \''+json_array.nets+'\');"> Rejeter </button>';
     }
     return "";
 }
@@ -739,12 +740,14 @@ function pay_order()
 
 function process_pay_order(reponse)
 {
-
-    console.log("process_pay_order() "+reponse.success);
     if(reponse.success=="yes") {
+        let pay = 'effectué';
+        if (reponse.transaction.status == "ANNULER"){
+            pay = 'annulé';
+        }
         swal(
             {
-                title:'Paiement effectué avec succes',
+                title:'Paiement '+pay+' avec succes',
                 html:'N° transaction:<b>'+reponse.transaction.trxid+'</b>'
                 +'<br>Montant: <b>'+reponse.transaction.oamount+' DA</b>',
                 timer: 4000,
@@ -769,4 +772,33 @@ function process_pay_order(reponse)
         }
 
     }
+}
+
+function show_reject_order_form(trxid, nets)
+{
+    swal(
+        {
+            title: "Annulation de commande",
+            html:'<div class="loader" id="loading_reject_order_form" ></div>'
+                +'<div id="div_reject_order_form"></div>',
+            showCancelButton: true,
+            cancelButtonText: "Annuler",
+            showConfirmButton: false,
+            showLoaderOnConfirm: false,
+            allowOutsideClick: false,
+            width : 650
+        }
+    )
+
+    load_form(
+        "reject_order",function () {
+            $("#loading_pay_order_form").hide();
+            $("#div_pay_order_form").show();
+
+            $('#order_trxid').html(trxid);
+            $('#order_nets').html(nets);
+            $('#trx_id').val(trxid);
+
+        }
+    );
 }
