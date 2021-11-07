@@ -21,12 +21,15 @@ if($access_token == '') {
                                 LIMIT 1"
     );
 
-    if ($result_access_token[0]["member_id"]=='') {
-        $array_reponse['errors']['access_token'] =  'Votre Identification ne peut pas être valider!';
+    if(empty($result_access_token)) {
+        $array_reponse['errors']['access_token'] = 'Votre Identification ne peut pas être valider!';
         $array_reponse['success'] = "no";
-    }else{
+    }elseif ($result_access_token[0]["member_id"] == '') {
+        $array_reponse['errors']['access_token'] = 'Votre Identification ne peut pas être valider!';
+        $array_reponse['success'] = "no";
+    } else {
         $user_id = $result_access_token[0]["member_id"];
-        $last_activity=  $result_access_token[0]["last_activity"];
+        $last_activity = $result_access_token[0]["last_activity"];
 
         db_query(
             "UPDATE `{$data['DbPrefix']}members_sessions`
@@ -35,7 +38,7 @@ if($access_token == '') {
         );
 
         $user_infos = db_rows(
-            "SELECT * FROM `{$data['DbPrefix']}members`".
+            "SELECT * FROM `{$data['DbPrefix']}members`" .
             "WHERE `id`={$user_id}"
         )[0];
     }
