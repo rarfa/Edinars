@@ -37,10 +37,13 @@ if($array['success']=="yes") {
         " LIMIT 1 "
     );
 
-    $post['chash'] = $chach[0]["token"];
-
-    send_email('RESTORE-PASSWORD', $post);
-
+    if($chach) {
+        $post['chash'] = $chach[0]["token"];
+        send_email('RESTORE-PASSWORD', $post);
+    }else{
+        $array['errors']['lost_email'] =" Votre email na pas eté confirmé";
+        $array['success']="no";
+    }
 }
 
 echo json_encode($array);
