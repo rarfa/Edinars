@@ -36,7 +36,7 @@
                           <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
                           <input type="email" class="form-control input_user_data_email" readonly>
                         </div>
-                        <span class="help-block">Entrer votre email</span>
+                        <span class="help-block">Entrez votre email</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -46,7 +46,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_lastname readonly_if_not_empty" id="lastname" name="lastname" required>
                         </div>
-                        <span class="help-block">Entrer votre nom</span>
+                        <span class="help-block">Entrez votre nom</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -56,7 +56,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_firstname readonly_if_not_empty" id="firstname" name="firstname" required>
                         </div>
-                        <span class="help-block">Entrer votre prénom</span>
+                        <span class="help-block">Entrez votre prénom</span>
                       </div>
                     </div>
 
@@ -66,13 +66,13 @@
                         <div class="">
                           <!-- <span class="input-group-addon"></span> -->
                           <select class="btn-group  form-control select input_user_data_type_account_id readonly_if_not_empty" id="type_account" name="type_account" required >
-                            <option value="">Sélectionner le type de compte</option>
+                            <option value="">Sélectionnez le type de compte</option>
                             <option value="0">Particuliers</option>
                             <option value="1">Professionnels</option>
                           </select>
                           <!-- <input type="text" class="form-control input_user_data_type_account" readonly> -->
                         </div>
-                        <span class="help-block">Sélectionner le type de votre compte</span>
+                        <span class="help-block">Sélectionnez le type de votre compte</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -82,7 +82,7 @@
                           <span class="input-group-addon"><span class="fa fa-phone"></span></span>
                           <input type="text" class="form-control mask_phone input_user_data_phone" id="phone" name="phone" >
                         </div>
-                        <span class="help-block">Entrer votre numéro de téléphone, ex: 021000000</span>
+                        <span class="help-block">Entrez votre numéro de téléphone, ex: 021000000</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -94,7 +94,7 @@
                           <span class="input-group-addon confirmed_mobile" ><span class="fa fa-check-circle-o"></span> Confirmé</span>
                           <span class="input-group-addon not_confirmed_mobile" style="background:red;border-color:red;cursor:pointer" onclick="show_confirmation_mobile();"><span class="fa fa-check-circle-o"></span> Non confirmé</span>
                         </div>
-                        <span class="help-block">Entrer votre numéro de mobile, ex: 0550000000</span>
+                        <span class="help-block">Entrez votre numéro de mobile, ex: 0550000000</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -104,13 +104,13 @@
                           <span class="input-group-addon"><span class="fa fa-fax"></span></span>
                           <input type="text" class="form-control input_user_data_fax" id="fax" name="fax">
                         </div>
-                        <span class="help-block">Entrer votre numéro de fax, ex: 021000000</span>
+                        <span class="help-block">Entrez votre numéro de fax, ex: 021000000</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-md-12 col-xs-12" style="text-align:center">
                         <div class="loader" id="loading_edit_profile" name="loading_edit_profile" style="float: right; display: none;"></div>
-                        <button class="btn btn-primary" type="submit" id="btn_edit_profile" name="btn_edit_profile" disabled><span class="fa fa-pencil"></span>Modifier</button>
+                        <button class="btn btn-primary" type="submit" id="btn_edit_profile" name="btn_edit_profile" disabled><span class="fa fa-pencil"></span>Enregistrer</button>
                       </div>
                     </div>
                   </form>
@@ -125,7 +125,7 @@
                           <span class="input-group-addon"><span class="fa fa-map-marker"></span></span>
                           <input type="text" class="form-control input_user_data_address" id="address" name="address" required>
                         </div>
-                        <span class="help-block">Entrer votre adresse</span>
+                        <span class="help-block">Entrez votre adresse</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -135,7 +135,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_city" id="city" name="city" required>
                         </div>
-                        <span class="help-block">Entrer votre Commune</span>
+                        <span class="help-block">Entrez votre Commune</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -145,7 +145,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_postcode" id="postcode" name="postcode" required>
                         </div>
-                        <span class="help-block">Entrer votre code postal</span>
+                        <span class="help-block">Entrez votre code postal</span>
                       </div>
                     </div>
 
@@ -159,13 +159,13 @@
                           </select>
                           <!-- <input type="text" class="form-control input_user_data_type_account" readonly> -->
                         </div>
-                        <span class="help-block">Sélectionner votre wilaya</span>
+                        <span class="help-block">Sélectionnez votre wilaya</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-md-12 col-xs-12" style="text-align:center">
                         <div class="loader" id="loading_edit_address" name="loading_edit_address" style="float: right; display: none;"></div>
-                        <button class="btn btn-primary" type="submit" id="btn_edit_address" name="btn_edit_address" disabled><span class="fa fa-pencil"></span>Modifier</button>
+                        <button class="btn btn-primary" type="submit" id="btn_edit_address" name="btn_edit_address" disabled><span class="fa fa-pencil"></span>Enregistrer</button>
                       </div>
                     </div>
                   </form>
@@ -180,7 +180,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_company" id="company" name="company" required>
                         </div>
-                        <span class="help-block">Entrer le Nom votre société</span>
+                        <span class="help-block">Entrez le Nom votre société</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -190,7 +190,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_nrc" id="nrc" name="nrc" required>
                         </div>
-                        <span class="help-block">Entrer votre N° RC</span>
+                        <span class="help-block">Entrez votre N° RC</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -200,7 +200,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_nnif" id="nnif" name="nnif" required>
                         </div>
-                        <span class="help-block">Entrer votre N° NIF</span>
+                        <span class="help-block">Entrez votre N° NIF</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -210,7 +210,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_nart" id="nart" name="nart" required>
                         </div>
-                        <span class="help-block">Entrer votre code N° ART</span>
+                        <span class="help-block">Entrez votre code N° ART</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -220,7 +220,7 @@
                           <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                           <input type="text" class="form-control input_user_data_nfis" id="nfis" name="nfis" required>
                         </div>
-                        <span class="help-block">Entrer votre code N° FIS</span>
+                        <span class="help-block">Entrez votre code N° FIS</span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -236,20 +236,20 @@
                     <div class="form-group">
                       <div class="col-md-12 col-xs-12" style="text-align:center">
                         <div class="loader" id="loading_edit_entreprise" name="loading_edit_entreprise" style="float: right; display: none;"></div>
-                        <button class="btn btn-primary" type="submit" id="btn_edit_entreprise" name="btn_edit_entreprise" disabled><span class="fa fa-pencil"></span>Modifier</button>
+                        <button class="btn btn-primary" type="submit" id="btn_edit_entreprise" name="btn_edit_entreprise" disabled><span class="fa fa-pencil"></span>Enregistrer</button>
                       </div>
                     </div>
                   </form>
                 </div>
                 <div class="tab-pane" id="my_profile_tab4">
-                  <p>Gèrer vos adresses emails</p>
+                  <p>Gérer les adresses emails</p>
                   <div class="table-responsive">
                     <table class="table table-bordered table-striped table-actions">
                         <thead>
                             <tr>
                                 <th width="50">Primaire</th>
                                 <th>Email</th>
-                                <th width="100">Status</th>
+                                <th width="100">Statut</th>
                                 <th width="100">Actions</th>
                             </tr>
                         </thead>
@@ -279,13 +279,13 @@
                           <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
                           <input type="email" class="form-control" id="newmail" name="newmail" required>
                         </div>
-                        <span class="help-block">Entrer votre email</span>
+                        <span class="help-block">Entrez votre email</span>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-md-12 col-xs-12" style="text-align:center">
                         <div class="loader" id="loading_add_email" name="loading_add_email" style="float: right; display: none;"></div>
-                        <button class="btn btn-primary" type="submit" id="btn_add_email" name="btn_add_email" disabled><span class="fa fa-plus"></span>Ajouter</button>
+                        <button class="btn btn-primary" type="submit" id="btn_add_email" name="btn_add_email" disabled><span class="fa fa-plus"></span>Enregistrer</button>
                       </div>
                     </div>
                   </form>

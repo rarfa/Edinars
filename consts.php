@@ -321,15 +321,15 @@ $data['direction']=array(
 
 $data['question']=array(
     ''=>'Choisir Question de Sécurité?',
-    2=>'Prénom de votre oncle préféré?',
-    3=>'Surnom de votre premier enfant?',
-    4=>'Prénom de votre tante préférée?',
-    5=>'Lieu de naissance de ma mére?',
+    2=>'Quel est le prénom de votre oncle préféré ?',
+    3=>'Quel est le surnom de votre premier enfant ?',
+    4=>'Quel est le prénom de votre tente préférée ?',
+    5=>'Quel est lieu de naissance de votre mère ?',
     6=>'Meilleur ami d\'enfance?',
-    7=>'Nom de mon premier animal de compagnie?',
-    8=>'Professeur préférer?',
-    9=>'Personnage historique préférer? ',
-    10=>'Métier de mon grand-pére?'
+    7=>'Quel est le nom de votre premier animal de compagnie ?',
+    8=>'Quel était le nom de votre professeur préféré ?',
+    9=>'Quel est le nom de votre personnage historique préféré ?',
+    10=>'Quel est le métier de votre grand-père ?'
 );
 
 $data['FlexyStatus']=array(

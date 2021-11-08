@@ -68,7 +68,7 @@
                         <li class="list-group-item">Email<span class="badge user_data_email">{email}</span></li>
                         <li class="list-group-item">Type de compte<span class="badge user_data_type_account">{type_account}</span></li>
                         <li class="list-group-item">Derniére connexion<span class="badge user_data_derniere_connexion">{derniere_connexion}</span></li>
-                        <li class="list-group-item">Status <span class="badge user_data_status ">{status}</span></li>
+                        <li class="list-group-item">Statut <span class="badge user_data_status ">{status}</span></li>
                     </ul>
                 </div>
 
@@ -103,13 +103,13 @@
           <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading ui-draggable-handle">
-                <h3 class="panel-title">5 Rècentes Transactions</h3>
+                <h3 class="panel-title">Les 05 dernières transactions</h3>
                 <ul class="panel-controls">
                     <li><a href="./#history/"><span class="fa fa-plus"></span> </a></li>
                 </ul>
               </div>
               <div class="panel-body">
-                <p>Liste des 5 Rècentes transactions, pour voir plus de transactions cliquer sur <code>Plus</code> a coté de titre</p>
+                  <p>Les 05 dernières transactions figurent ci-dessous,pour voir plus de transactions, il vous suffit de cliquer sur <code>Plus</code> à droit du titre.</p>
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -148,13 +148,13 @@
           <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading ui-draggable-handle">
-                <h3 class="panel-title">Paiements en instance</h3>
+                <h3 class="panel-title">Paiements en cours</h3>
                 <ul class="panel-controls">
                     <li><a href="#"><span class="fa fa-plus"></span> </a></li>
                 </ul>
               </div>
               <div class="panel-body">
-                <p>Liste des paiements en instance, pour voir plus de cliquer sur <code>Plus</code> a coté de titre</p>
+                  <p>Liste des paiements en cours, pour voir plus de paiements, il sous suffit de cliquer sur <code>Plus</code> à droit du titre.</p>
                 <table class="table table-striped">
                   <thead>
                     <tr>

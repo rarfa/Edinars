@@ -100,7 +100,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                             </a>
                         </div>
                         <div class="panel-footer text-center">
-                            <a href="<?=$esc_url?>#notifications/">Afficher toutes</a>
+                            <a href="<?=$esc_url?>#notifications/">Afficher toutes les notifications</a>
                         </div>
                     </div>
                 </li>
@@ -118,7 +118,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                   <div class="alert alert-danger" role="alert" id="confidentiality_note">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <p>Vous n'avez pas encore confirmé votre numéro de téléphone</p>
-                    <p>Vous devez confirmé votre numéro de mobile pour pouvoir utiliser les services de Edinars</p>
+                    <p>Vous devez confirmer votre numéro mobile pour pouvoir utiliser les services de Erecovery</p>
                     <div class="text-center">
                       <a class="btn btn-primary" onclick="show_confirmation_mobile();">Confirmer maintenant</a>
                     </div>
@@ -164,7 +164,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-qrcode"></span> QR Code</div>
                     <div class="mb-content" style="text-align:center">
-                      <p>Utiliser ce QR Code pour vos transfers</p>
+                      <p>Utilisez ce QR Code pour vos transferts</p>
                       <p><br></p>
                       <img height="210" src="img/qr.png" class="user_datas_img_qr_code" />
                       <hr>

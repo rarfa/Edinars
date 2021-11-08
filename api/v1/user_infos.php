@@ -123,7 +123,7 @@ if($array_imp[0]['type']==2 || $array_imp[0]['type']==3) { // grossiste ou déta
 $array_reponse['menu'] += [
   $mm++ => array("id" => "history", "title" => "Historique", "icon" => "fa-newspaper-o", "type" => "link", "action" => "./#history/"),
   $mm++ => array("id" => "settings", "title" => "Paramètres", "icon" => "fa-cog", "type" => "mb", "action" => "mb-settings"),
-  $mm++ => array("id" => "settings", "title" => "Identity", "icon" => "fa-qrcode", "type" => "mb", "action" => "mb-identity"),
+  $mm++ => array("id" => "settings", "title" => "Identité", "icon" => "fa-qrcode", "type" => "mb", "action" => "mb-identity"),
   $mm++ => array("id" => "logout", "title" => "Déconnexion", "icon" => "fa-sign-out", "type" => "mb", "action" => "mb-logout")
 ];
 
