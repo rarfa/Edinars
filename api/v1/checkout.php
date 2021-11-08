@@ -67,9 +67,9 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
     $array_reponse['errors']['strToDeCrypt']      = $strToDeCrypt;
     $array_reponse['errors']['decryptPerHashKey'] = $crypt; // decryptPerHashKey
 
-    // action for facture 
+    // action for facture
     if(isset($checkout['action']) && $checkout['action'] == 'facture') { // --------------------------------------------------------------------------------------
-        
+
         // validate variables
         if(!$facture_id) {
 
@@ -78,7 +78,7 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
 
         }else {
 
-            // check if owner correct 
+            // owner
             $owner = get_member_info_by_mem_id($pincode);
 
             if(!$owner) {
@@ -90,20 +90,19 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
                 $checkout['quantite']   = 1; // facture wahda
                 $checkout['facture_id'] = $facture_id; // facture wahda
                 $checkout['owner']      = $owner['username'];
-                $checkout['fullname']   = $owner['fname'] . " " . $owner['lname'];
                 $checkout['total']      = $prix_total;
                 $checkout['product']    = [];
 
-                $checkout['product']['nom']   = $facture_id;
-                $checkout['product']['owner'] = $owner['id'];
-                $checkout['product']['tva']   = $tva;
+                $checkout['product']['nom']    = $facture_id;
+                $checkout['product']['owner']  = $owner['id'];
+                $checkout['product']['tva']    = $tva;
                 $checkout['product']['_prix']  = $prix_total;
 
                 $checkout['product']['ureturn'] = $_REQUEST['ureturn'] ?? null;
                 $checkout['product']['unotify'] = $_REQUEST['unotify'] ?? null;
                 $checkout['product']['ucancel'] = $_REQUEST['ucancel'] ?? null;
                 $checkout['product']['image']   = $_REQUEST['image']   ?? null;
-                
+
 
                 //$checkout['product']['_prix']       = prnsumm($checkout['product']['prix']);
                 $checkout['_total']                 = prnsumm($checkout['total']);
@@ -231,13 +230,15 @@ if($array_reponse['success'] == "yes") {
 
                 insert_notification($array_infos);
 
-                if($array_reponse['action'] == 'produit' || $array_reponse['action'] == 'donation' || $array_reponse['action'] == 'abonnement' || $array_reponse['action'] == 'facture') {
+                if($array_reponse['action'] == 'produit' || $array_reponse['action'] == 'donation' || $array_reponse['action'] == 'abonnement') {
                     update_sold($array_reponse['product']['id'], $array_reponse['quantite']);
                     if($array_reponse['action'] == 'abonnement') {
                         insert_subscription($array_reponse['product']['owner'], $array_reponse['buyer'], $array_reponse['product']['id']);
                     }
                 }
 
+                $member                 = get_member_info($array_reponse['buyer']);
+                $post['fullname']       = $member['lname'] . " " . $member['fname'];
                 //prepare for send email
                 $post['trxid']          = $array_reponse['trxid'];
                 $post['fees']           = $fees;
@@ -250,7 +251,6 @@ if($array_reponse['success'] == "yes") {
                 $post['sellerusername'] = prnuser($array_reponse['product']['owner']);
                 $post['email-id']       = get_pin_id();
                 $post['commande']       = $_SESSION['commande'] ?? '';
-                $post['fullname']       = $array_reponse['fullname'];
 
 
 
