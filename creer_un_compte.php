@@ -74,10 +74,10 @@ if($data['Error']==""){//no errors
 				 <ol>
 				 <li>Vérifiez que votre boîte email n\'est pas pleine.</li>
 				 <li>Si vous ne recevez pas l\'email, vérifiez bien votre boite "Courrier indésirable" ou "SPAM" et pensez à autoriser
-				 les emails provenant de <b>Edinars</b>. </li>
+				 les emails provenant de <b>Erecovery</b>. </li>
 				 </ol>
 				 <p>Pour toute question ou problème, n\'hésitez pas à nous contacter.</p>
-				 <p>Merci pour votre patience et de l\'intérêt que vous portez à <b>Edinars</b>.</p><p>Cordialement,<br>L\'équipe <b>Edinars</b>.</p>
+				 <p>Merci pour votre patience et de l\'intérêt que vous portez à <b>Erecovery</b>.</p><p>Cordialement,<br>L\'équipe <b>Erecovery</b>.</p>
 				</div>';
 	echo "<script>
 					$('#hor-minimalist-a').hide();
@@ -95,8 +95,3 @@ if($data['Error']==""){//no errors
 				</script>";
 	//echo "Erreur: " . $data['Error'];
 }
-
-###############################################################################
-//display('secure');
-###############################################################################
-?>

@@ -6,7 +6,7 @@
 		<div class="col_title">Ou acheter avec Edianrs</div>
 		<div class="col_text">
 				<p class="pm">
-					Bienvenue sur l’espace shopping Edinars, découvrez les meilleures offres et les meilleurs services proposer par nos partenaires.  
+					Bienvenue sur lï¿½espace shopping Erecovery, dï¿½couvrez les meilleures offres et les meilleurs services proposer par nos partenaires.  
 				</p>
 				<BR>
 		</div>

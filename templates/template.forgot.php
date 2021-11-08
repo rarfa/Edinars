@@ -3,10 +3,10 @@
 <div class="content">
 
 <article class="col-1">
-<div class="col_title">Sècuritè</div>
+<div class="col_title">Sï¿½curitï¿½</div>
 <div class="col_text">
         <p class="pm">
-            Ne donnez jamais votre code de carte Edinars à des personnes qui vous demandent une avance de paiement.
+            Ne donnez jamais votre code de carte Erecovery ï¿½ des personnes qui vous demandent une avance de paiement.
                                 <BR>    
             </p>                
             <p class="pm" align="center">
@@ -156,11 +156,11 @@
                             <div class="col_title">Mot de passe oubli&egrave; Etape Final</div>
                             <div class="col_text">
                                 <p class="pm">
-                                        Vous avez modifié le mot de passe de votre compte avec succes.
+                                        Vous avez modifiï¿½ le mot de passe de votre compte avec succes.
                                     </p>
                                     
                                     <p class="pm">
-                                        Si vous n'avez pas demandé de modifier votre mot passe, veuillez contacter le service client imidiatement.</p>
+                                        Si vous n'avez pas demandï¿½ de modifier votre mot passe, veuillez contacter le service client imidiatement.</p>
                                     </p>
 
                             </div>

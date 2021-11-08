@@ -3,10 +3,10 @@
 <div class="content">
 
 <article class="col-1">
-<div class="col_title">Sècuritè</div>
+<div class="col_title">Sï¿½curitï¿½</div>
 <div class="col_text">
   <p class="pm">
-                    De ce fait nous vous invitent a ignorer les avertissements par email qui invitent à payer avec Edinars qui n’émane pas de nos partenaires certifier, Si des sites Internet, des mails ou autres activités en ligne vous paraissent suspects, veuillez les communiquer à l’équipe de sécurité Edinars à l’adresse email suivante : info@edinars.dz.
+                    De ce fait nous vous invitent a ignorer les avertissements par email qui invitent ï¿½ payer avec Erecovery qui nï¿½ï¿½mane pas de nos partenaires certifier, Si des sites Internet, des mails ou autres activitï¿½s en ligne vous paraissent suspects, veuillez les communiquer ï¿½ lï¿½ï¿½quipe de sï¿½curitï¿½ Erecovery ï¿½ lï¿½adresse email suivante : info@erecovery.dz.
             <BR>    
             </p>                
             <p class="pm" align="center">
@@ -21,7 +21,7 @@
     <?if(!$data['PostSent']){?>
         <form method=post id="sigup-form" >
         <article class="col-2">
-                <div class="col_title">Ouvrir un compte Edinars Etape 2</div>
+                <div class="col_title">Ouvrir un compte Erecovery Etape 2</div>
                 <div class="col_text">
                     <p class="pm">
                                     <?if($data['Error']){?>
@@ -56,22 +56,22 @@
         
 <?}else{?>
         <article class="col-2">
-                <div class="col_title">Ouvrir un compte Edinars Etape Final</div>
+                <div class="col_title">Ouvrir un compte Erecovery Etape Final</div>
                 <div class="col_text">
                     <p class="pm">
                                     Votre compte a &egrave;t&egrave; cr&egrave;&egrave;, <br> 
                                 </p>
                                 <p class="pm">
-                                    Vous venez de vous confirmer votre compte sur Edinars et nous vous souhaitons la bienvenue 
+                                    Vous venez de vous confirmer votre compte sur Erecovery et nous vous souhaitons la bienvenue 
                                 </p>
                                 <p class="pm">
-                                     Vous pouvez accéder à votre compte à tout moment à l'adresse:
+                                     Vous pouvez accï¿½der ï¿½ votre compte ï¿½ tout moment ï¿½ l'adresse:
                                 </p>
                                 <p class="pm">
                                     Nous vous souhaitons de profiter au mieux de nos services.
                                 </p>
                                 <p class="pm">
-                                    Merci d'avoir choisi Edinars.
+                                    Merci d'avoir choisi Erecovery.
                                 </p>
                     
                 </div>

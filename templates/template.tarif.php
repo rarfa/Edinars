@@ -3,10 +3,10 @@
 
 <div class="content">
     <article class="col-1">
-        <div class="col_title">Sècuritè</div>
+        <div class="col_title">Sï¿½curitï¿½</div>
         <div class="col_text">
             <p class="pm">
-                De ce fait nous vous invitent a ignorer les avertissements par email qui invitent à payer avec Edinars qui n’émane pas de nos partenaires certifier, Si des sites Internet, des mails ou autres activités en ligne vous paraissent suspects, veuillez les communiquer à l’équipe de sécurité Edinars à l’adresse email suivante : info@edinars.net.        
+                De ce fait nous vous invitent a ignorer les avertissements par email qui invitent ï¿½ payer avec Erecovery qui nï¿½ï¿½mane pas de nos partenaires certifier, Si des sites Internet, des mails ou autres activitï¿½s en ligne vous paraissent suspects, veuillez les communiquer ï¿½ lï¿½ï¿½quipe de sï¿½curitï¿½ Erecovery ï¿½ lï¿½adresse email suivante : info@Erecovery.net.        
             </p>                
             <p class="pm" align="center">
                 <a href="securite-Edinars.html" class="link">Plus information</a>
@@ -14,7 +14,7 @@
         </div>
     </article>
     <article class="col-2">
-        <div class="col_title">Les tarifs avec Edinars</div>
+        <div class="col_title">Les tarifs avec Erecovery</div>
         <div class="col_text">
                     <p class="pm" align="centre">
                                     <table id="hor-minimalist-a" summary="Informations Generales">
@@ -33,15 +33,15 @@
                                         
                                             </tr>
                                             <tr>
-                                                <th scope="col">Créditer de l'argent à partir de compte ccp :</th>
+                                                <th scope="col">Crï¿½diter de l'argent ï¿½ partir de compte ccp :</th>
                                                 <th scope="col"><?php echo prnsumm($data['DepositMethod']['CCP']['prcn'])?>% &nbsp;+&nbsp; <?php echo prnsumm($data['DepositMethod']['CCP']['fees'])?>&nbsp;<?php echo prntext($data['Currency'])?></th>
                                             </tr>
                                             <tr>
-                                                <th scope="col">Créditer de l'argent à partir de votre carte de recharge :</th>
+                                                <th scope="col">Crï¿½diter de l'argent ï¿½ partir de votre carte de recharge :</th>
                                                 <th scope="col"><?php echo prnsumm($data['DepositMethod']['topup']['prcn'])?>% &nbsp;+&nbsp; <?php echo prnsumm($data['DepositMethod']['topup']['fees'])?>&nbsp;<?php echo prntext($data['Currency'])?></th>
                                             </tr>
                                             <tr>
-                                                <th scope="col">Retirer de l'argent par chèque banquer :</th>
+                                                <th scope="col">Retirer de l'argent par chï¿½que banquer :</th>
                                                 <th scope="col"> <?php echo prnsumm($data['WithdrawMethod']['cheque']['fees'])?>&nbsp;<?php echo prntext($data['Currency'])?></th>
                                             </tr>
                                             <tr>

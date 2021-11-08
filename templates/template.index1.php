@@ -26,10 +26,10 @@
 <div class="blocks">
     <div class="block">
        <h1> <a href="#" class="block_title">Payer Avec E-Dinars</a></h1>
-        <p class="text">Edinars est une nouvelle solution de
+        <p class="text">Erecovery est une nouvelle solution de
 paiement en ligne en Algerie qui vous offre
-la possibilité de payer vos achat en ligne
-instantanément et en toute sécurité grâce à son system de recharge baser sur des  cartes a gratter....</p>
+la possibilitï¿½ de payer vos achat en ligne
+instantanï¿½ment et en toute sï¿½curitï¿½ grï¿½ce ï¿½ son system de recharge baser sur des  cartes a gratter....</p>
         <a href="../comment-acheter-Edinars.html" class="readmore">Lire Plus</a>
     </div>
 
@@ -38,16 +38,16 @@ instantanément et en toute sécurité grâce à son system de recharge baser sur des
        <h1> <a href="ou-acheter-Edinars" class="block_title">Acheter en Ligne</a></h1>
         <p class="text">Acheter librement et son limite avec la
 solution de paiement en ligne Edinars
-depuis n'importe qu'elle endroit en Algérie , il vous suffit juste de créditer votre compte et vous rendre chez un de nos partenaires
-certifié pour commencer à faire vos achats.</p>
+depuis n'importe qu'elle endroit en Algï¿½rie , il vous suffit juste de crï¿½diter votre compte et vous rendre chez un de nos partenaires
+certifiï¿½ pour commencer ï¿½ faire vos achats.</p>
         <a href="../ou-acheter-Edinars.html" class="readmore">Lire Plus</a>
     </div>
 
 
         <div class="block">
-       <h1> <a href="comment-vendre-Edinars" class="block_title">Developper Votre Activité</a></h1>
-        <p class="text">Vous êtes un commercent? Une entreprise? Et vous voulez vous lancer dans le
-E-commerce, Edinars vous offre la possibilité de dé velopper votre activité grâce à son service spécialement conçu pour vous permettre de...
+       <h1> <a href="comment-vendre-Edinars" class="block_title">Developper Votre Activitï¿½</a></h1>
+        <p class="text">Vous ï¿½tes un commercent? Une entreprise? Et vous voulez vous lancer dans le
+E-commerce, Edinars vous offre la possibilitï¿½ de dï¿½ velopper votre activitï¿½ grï¿½ce ï¿½ son service spï¿½cialement conï¿½u pour vous permettre de...
 </p>
         <a href="../comment-vendre-Edinars.html" class="readmore">Lire Plus</a>
     </div> 

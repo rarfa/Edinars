@@ -43,11 +43,11 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                   </li>
                   <li class="xn-profile">
                       <a href="#" class="profile-mini">
-                          <img src="<?=$base_url?>images/logo_icone.svg" alt="logo edinars" height="35"/>
+                          <img src="<?=$base_url?>images/logo_icone.svg" alt="logo Erecovery" height="35"/>
                       </a>
                       <div class="profile">
                           <div class="profile-image">
-                              <img src="<?=$base_url?>images/logo_text_blanc .svg" alt="logo edinars" height="50">
+                              <img src="<?=$base_url?>images/logo_text_blanc .svg" alt="logo Erecovery" height="50">
                           </div>
                           <div class="profile-data">
                             <div class="profile-data-name"><span class="user_data_firstname">{firstname}</span> <span class="user_data_lastname">{lastname}</span> </div>

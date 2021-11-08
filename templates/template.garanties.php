@@ -3,10 +3,10 @@
 
 <div class="content">
 	<article class="col-1">
-		<div class="col_title">Sècuritè</div>
+		<div class="col_title">Sï¿½curitï¿½</div>
 		<div class="col_text">
 			<p class="pm">
-				De ce fait nous vous invitent a ignorer les avertissements par email qui invitent à payer avec Edinars qui n’émane pas de nos partenaires certifier, Si des sites Internet, des mails ou autres activités en ligne vous paraissent suspects, veuillez les communiquer à l’équipe de sécurité Edinars à l’adresse email suivante : securite@edinars.net.
+				De ce fait nous vous invitent a ignorer les avertissements par email qui invitent ï¿½ payer avec Erecovery qui nï¿½ï¿½mane pas de nos partenaires certifier, Si des sites Internet, des mails ou autres activitï¿½s en ligne vous paraissent suspects, veuillez les communiquer ï¿½ lï¿½ï¿½quipe de sï¿½curitï¿½ Edinars ï¿½ lï¿½adresse email suivante : securite@edinars.net.
 			</p>				
 			<BR><BR><BR><BR>
 				<a href="securite-Edinars.html" class="link">Plus information</a>
@@ -14,25 +14,25 @@
 		</div>
 	</article>
 	<article class="col-2">
-		<div class="col_title">Les garanties avec Edinars</div>
+		<div class="col_title">Les garanties avec Erecovery</div>
 		<div class="col_text">
 				<p class="pm">
-						Dans un souci de transparence, Edinars met à la disposition de ces utilisateurs un système de réclamations dans le but est de permettre de réglé les problèmes qui peuvent surgir lors de l’acte d’achat.
+						Dans un souci de transparence, Erecovery met ï¿½ la disposition de ces utilisateurs un systï¿½me de rï¿½clamations dans le but est de permettre de rï¿½glï¿½ les problï¿½mes qui peuvent surgir lors de lï¿½acte dï¿½achat.
 				</p>
 				<p class="pm">
-						Edinars s’engage à garantir aux utilisateurs professionnels un paiement régulier selon l’échéancier indiqué dans le contrat d’utilisation.
+				Erecovery sï¿½engage ï¿½ garantir aux utilisateurs professionnels un paiement rï¿½gulier selon lï¿½ï¿½chï¿½ancier indiquï¿½ dans le contrat dï¿½utilisation.
 				</p>
 				<p class="pm">
-						En contrepartie, l’utilisateur professionnel (le vendeur) s’engage respecter les délais de livraison.
+						En contrepartie, lï¿½utilisateur professionnel (le vendeur) sï¿½engage respecter les dï¿½lais de livraison.
 				</p>
 				<p class="pm">
-						Dans le cas où le délai n’est pas respecté par le vendeur, ou si vous avez des doutes sur la nature de la transaction, l’acheteur à la possibilité de réclamer auprès de l’administration, pour cela rendez-vous à votre espace utilisateur, rubrique "Mon compte" puis "litiges".
+						Dans le cas oï¿½ le dï¿½lai nï¿½est pas respectï¿½ par le vendeur, ou si vous avez des doutes sur la nature de la transaction, lï¿½acheteur ï¿½ la possibilitï¿½ de rï¿½clamer auprï¿½s de lï¿½administration, pour cela rendez-vous ï¿½ votre espace utilisateur, rubrique "Mon compte" puis "litiges".
 				</p>
 				<p class="pm">
-						L’administration bloquera automatiquement tout virement pour le compte du vendeur jusqu’à ce que celui-ci présente tous les documents et les preuves demandé par l’administration.
+						Lï¿½administration bloquera automatiquement tout virement pour le compte du vendeur jusquï¿½ï¿½ ce que celui-ci prï¿½sente tous les documents et les preuves demandï¿½ par lï¿½administration.
 				</p>
 				<p class="pm">
-						Dans le cas où le vendeur est responsable de la non-conformité de la transaction, Edinars s’engage à rembourser la totalité de la somme déboursé par l’acheteur lors de la transaction. 
+						Dans le cas oï¿½ le vendeur est responsable de la non-conformitï¿½ de la transaction, Erecovery sï¿½engage ï¿½ rembourser la totalitï¿½ de la somme dï¿½boursï¿½ par lï¿½acheteur lors de la transaction. 
 				</p>
 				
 		</div>

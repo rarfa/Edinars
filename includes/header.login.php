@@ -88,10 +88,10 @@
 								 <ol>
 								 <li>Vérifiez que votre boîte email n\'est pas pleine.</li>
 								 <li>Si vous ne recevez pas l\'email, vérifiez bien votre boite "Courrier indésirable" ou "SPAM" et pensez à autoriser
-								 les emails provenant de <b>Edinars</b>. </li>
+								 les emails provenant de <b>Erecovery</b>. </li>
 								 </ol>
 								 <p>Pour toute question ou problème, n\'hésitez pas à nous contacter.</p>
-								 <p>Merci pour votre patience et de l\'intérêt que vous portez à <b>Edinars</b>.</p><p>Cordialement,<br>L\'équipe <b>Edinars</b>.</p>
+								 <p>Merci pour votre patience et de l\'intérêt que vous portez à <b>Erecovery</b>.</p><p>Cordialement,<br>L\'équipe <b>Erecovery</b>.</p>
 								</div>';
                     ?>
                 </div>
@@ -120,7 +120,7 @@
                             <p class="form-group has-feedback" align="center">
                                 <input id="terms" class="checkbox" type="checkbox" name="terms">
                                 OUI, J'ai lu les
-                                <a href="javascript:view('https://www.edinars.net/edinars/terms.htm',400,500)">Termes et Conditions</a>
+                                <a href="javascript:view('https://www.erecovery.dz/edinars/terms.htm',400,500)">Termes et Conditions</a>
                                 avant de vous inscrire.
                             </p>
                         </div>

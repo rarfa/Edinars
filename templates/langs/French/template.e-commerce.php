@@ -2,16 +2,16 @@
 
 <div class="content">
     <article class="col-1">
-        <div class="col_title">Sècuritè</div>
+        <div class="col_title">Sï¿½curitï¿½</div>
         <div class="col_text">
             <p class="pm">
-                    Ne donnez jamais votre code de carte Edinars à des personnes qui vous demandent une avance de paiement.
+                    Ne donnez jamais votre code de carte Erecovery ï¿½ des personnes qui vous demandent une avance de paiement.
             </p>                                        
             <p class="pm">
-                Ne saisissez jamais votre code PIN dans des logiciels inconnus, car il pourrait s’agir d’une tentative frauduleuse d’accéder à vos données et à votre compte Edinars.
+                Ne saisissez jamais votre code PIN dans des logiciels inconnus, car il pourrait sï¿½agir dï¿½une tentative frauduleuse dï¿½accï¿½der ï¿½ vos donnï¿½es et ï¿½ votre compte Erecovery.
             </p>
             <p class="pm">
-                Ne révélez jamais votre identifiant ou votre mot de passe à un tiers , et Sacher que Edinars ne vous demandera jamais de révéler votre mot de passe ou votre identifiant quelque soit les circonstance .
+                Ne rï¿½vï¿½lez jamais votre identifiant ou votre mot de passe ï¿½ un tiers , et Sacher que Erecovery ne vous demandera jamais de rï¿½vï¿½ler votre mot de passe ou votre identifiant quelque soit les circonstance .
                 
             </p>                
                 <br><br><a href="securite-Edinars.html" class="link">Plus information</a>
@@ -20,33 +20,33 @@
         </div>
     </article>
     <article class="col-2">
-        <div class="col_title">Site e-commerce avec Edinars</div>
+        <div class="col_title">Site e-commerce avec Erecovery</div>
         <div class="col_text">
                     <p class="pm">
                         Vous voulez vous lancer dans le e-commerce ? 
-                        <bR>Edinars vous accompagne pour développer votre activité sur internet.
+                        <bR>Erecovery vous accompagne pour dï¿½velopper votre activitï¿½ sur internet.
                     </p>    
                     <p class="pm">
-                        L’équipe Edinars vous offre la possibilité de profité de sa solution clé en main complète de commerce en ligne, spécialement conçu pour vous permettre de commercialiser vos produit et services en ligne avec une facilité déconcertante.
+                        Lï¿½ï¿½quipe Erecovery vous offre la possibilitï¿½ de profitï¿½ de sa solution clï¿½ en main complï¿½te de commerce en ligne, spï¿½cialement conï¿½u pour vous permettre de commercialiser vos produit et services en ligne avec une facilitï¿½ dï¿½concertante.
                         </p>
                         <p class="pm">
-                        Plus besoin de passer par des sites de vente, offrez-vous une autonomie pour gérer vos ventes en ligne, grâce à cette solution vous pourrez bénéficier de : 
+                        Plus besoin de passer par des sites de vente, offrez-vous une autonomie pour gï¿½rer vos ventes en ligne, grï¿½ce ï¿½ cette solution vous pourrez bï¿½nï¿½ficier de : 
                         </p>
                         <p class="pm">
-                        Mise à jour en temps réel             Choix de la gestion du stock          Frais de port par article<br>
-                        Gestion de la tva par article          Gestion du stock par article           Mise à jour en temps réel<br>
-                        Afficher les prix HT & TTC             Gestion multifournisseurs               Espaces clients personnalisés<br>
+                        Mise ï¿½ jour en temps rï¿½el             Choix de la gestion du stock          Frais de port par article<br>
+                        Gestion de la tva par article          Gestion du stock par article           Mise ï¿½ jour en temps rï¿½el<br>
+                        Afficher les prix HT & TTC             Gestion multifournisseurs               Espaces clients personnalisï¿½s<br>
                         Module d'avis de vos clients        Calcul des frais de port                    Historique de commandes<br>
                         Gestion d'abonnements                Achats hors stock                             Facturation automatique<br>
                         Statistiques de commande           Avertisseur de commandes            Gestion multi administrateurs<br>
-                        Gestion de newsletters                 Paiement via Edinars                        Avertisseur de commandes<br>
+                        Gestion de newsletters                 Paiement via Erecovery                        Avertisseur de commandes<br>
                         
                         </p>
                         <p class="pm">
                         Vous souhaitez en savoir plus sur nos solutions ? 
                         </p>
                         <p class="pm">
-                        Contactez-nous au <?php echo $data['ContactNumber'];?> ou par le biais du formulaire de contact, notre équipe vous aidera à mieux comprendre les enjeux du commerce en ligne et choisir la solution la plus adaptée pour vous.
+                        Contactez-nous au <?php echo $data['ContactNumber'];?> ou par le biais du formulaire de contact, notre ï¿½quipe vous aidera ï¿½ mieux comprendre les enjeux du commerce en ligne et choisir la solution la plus adaptï¿½e pour vous.
                         </p>
                         
         </div>

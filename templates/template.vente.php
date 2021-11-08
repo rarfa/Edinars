@@ -2,13 +2,13 @@
 
 <div class="content">
 	<article class="col-1">
-		<div class="col_title">Sècuritè</div>
+		<div class="col_title">Sï¿½curitï¿½</div>
 		<div class="col_text">
 			<p class="pm">
-				Ne saisissez jamais votre mot de pass dans des logiciels inconnus, car il pourrait s’agir d’une tentative frauduleuse d’accéder à vos données et à votre compte Edinars	
+				Ne saisissez jamais votre mot de pass dans des logiciels inconnus, car il pourrait sï¿½agir dï¿½une tentative frauduleuse dï¿½accï¿½der ï¿½ vos donnï¿½es et ï¿½ votre compte Erecovery	
 			</p>
 			<p class="pm">
-				Nous vous informant que les cartes Edinars  ne peuvent être utilisé comme mode de paiement en ligne uniquement auprès des partenaires contractuels certifiés par Edinars.
+				Nous vous informant que les cartes Erecovery  ne peuvent ï¿½tre utilisï¿½ comme mode de paiement en ligne uniquement auprï¿½s des partenaires contractuels certifiï¿½s par Erecovery.
 			</p>
 				<BR><BR><BR>
 			<a href="securite-Edinars.html" class="link">Plus information</a>
@@ -19,22 +19,22 @@
 		<div class="col_title">Comment vendre avec Edianrs</div>
 		<div class="col_text">
 				<p class="pm">
-					Vous êtes un commercent ? Une entreprise ? 
+					Vous ï¿½tes un commercent ? Une entreprise ? 
 				</p>
 				<p class="pm">
-					Et vous voulez vous lancer dans le E-commerce, Edinars vous offre la possibilité de développer votre activité.
+					Et vous voulez vous lancer dans le E-commerce, Erecovery vous offre la possibilitï¿½ de dï¿½velopper votre activitï¿½.
 				</p>
 				<p class="pm">
-					Grâce à son service spécialement conçu pour vous, bénéficier des fonctionnalités qui vous permette d’interagir avec vos clients en toute efficacité.
+					Grï¿½ce ï¿½ son service spï¿½cialement conï¿½u pour vous, bï¿½nï¿½ficier des fonctionnalitï¿½s qui vous permette dï¿½interagir avec vos clients en toute efficacitï¿½.
 				</p>
 				<p class="pm">
-					Profité des différents outils mit à votre disposition pour réussir vos opération de vente en ligne, rien de plus simple que d’ouvrir un compte Professionnelle, et commencer à vendre en toute sécurité.
+					Profitï¿½ des diffï¿½rents outils mit ï¿½ votre disposition pour rï¿½ussir vos opï¿½ration de vente en ligne, rien de plus simple que dï¿½ouvrir un compte Professionnelle, et commencer ï¿½ vendre en toute sï¿½curitï¿½.
 				</p>
 				<p class="pm">
-					Vous étés une association et vous voulez bénéficier des services Edinars ? Edinars met à votre disposition une offre spécialement conçu pour vous.
+					Vous ï¿½tï¿½s une association et vous voulez bï¿½nï¿½ficier des services Erecovery ? Erecovery met ï¿½ votre disposition une offre spï¿½cialement conï¿½u pour vous.
 				</p>
 				<p class="pm">
-					Dans un esprit d’entraide et de solidarité, Edinars vous permet grâce à son offre Twiza de collecter les fonds des donateurs gratuitement (hors coût de virement), et de vous les envoyer suivant le calendrier que vous choisissez.
+					Dans un esprit dï¿½entraide et de solidaritï¿½, Erecovery vous permet grï¿½ce ï¿½ son offre Twiza de collecter les fonds des donateurs gratuitement (hors coï¿½t de virement), et de vous les envoyer suivant le calendrier que vous choisissez.
 				</p>
 				<BR>
 		</div>

@@ -2,7 +2,7 @@
 <div class="content">
     
     <article class="col-3">
-        <div class="col_title">Error sure de Edinars</div>
+        <div class="col_title">Error sure de Erecovery</div>
         <div class="col_text">
                 <p class="pm">
                   <?php 

@@ -11,7 +11,7 @@ $post    = $_REQUEST;
 <html lang="fr">
     <head>
         <!-- META SECTION -->
-        <title>Edinars - Services de paiements enline</title>
+        <title>Erecovery - Services de paiements enline</title>
         <meta name="csrf_token" content="<?=$_SESSION['csrf_token'] ?>">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

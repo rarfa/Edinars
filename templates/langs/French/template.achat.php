@@ -2,10 +2,10 @@
 
 <div class="content">
 	<article class="col-1">
-		<div class="col_title">Sècuritè</div>
+		<div class="col_title">Sï¿½curitï¿½</div>
 		<div class="col_text">
 			<p class="pm">
-				Ne saisissez jamais votre mot de pass dans des logiciels inconnus, car il pourrait s’agir d’une tentative frauduleuse d’accéder à vos données et à votre compte Edinars	</p>
+				Ne saisissez jamais votre mot de pass dans des logiciels inconnus, car il pourrait sï¿½agir dï¿½une tentative frauduleuse dï¿½accï¿½der ï¿½ vos donnï¿½es et ï¿½ votre compte Erecovery	</p>
 			</p>
 			<BR><BR><BR>	
 				<a href="securite-Edinars.html" class="link">Plus information</a>
@@ -14,16 +14,16 @@
 		</div>
 	</article>
 	<article class="col-2">
-		<div class="col_title">Comment acheter avec Edinars</div>
+		<div class="col_title">Comment acheter avec Erecovery</div>
 		<div class="col_text">
 				<p class="pm">
-					Enfin !!! <BR>Le e-commerce et enfin une réalité en Algérie, grâce à la solution Edinars vous pouvez commencer à Acheter en ligne.
+					Enfin !!! <BR>Le e-commerce et enfin une rï¿½alitï¿½ en Algï¿½rie, grï¿½ce ï¿½ la solution Erecovery vous pouvez commencer ï¿½ Acheter en ligne.
 				</p>
 				<p class="pm">
-					Grace à son système, Edinars vous offre la possibilité d’effectuer des achat avec une grande facilité , puisque une carte de recharge et 2 clic vous suffise pour profiter pleinement des avantages du e-commerce.
+					Grace ï¿½ son systï¿½me, Erecovery vous offre la possibilitï¿½ dï¿½effectuer des achat avec une grande facilitï¿½ , puisque une carte de recharge et 2 clic vous suffise pour profiter pleinement des avantages du e-commerce.
 				</p>
 				<p class="pm">
-					Pas besoin de vous inquiéter pour votre budget, contrairement à une carte de débit la carte de recharge Edinars et une carte prépayer, donc le solde contenu dans la carte et connu d’avance ce qui permettra de contrôlé votre budget. 
+					Pas besoin de vous inquiï¿½ter pour votre budget, contrairement ï¿½ une carte de dï¿½bit la carte de recharge Erecovery et une carte prï¿½payer, donc le solde contenu dans la carte et connu dï¿½avance ce qui permettra de contrï¿½lï¿½ votre budget. 
 				</p>
 				<BR>
 		</div>
