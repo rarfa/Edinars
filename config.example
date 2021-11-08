@@ -141,7 +141,7 @@ $smtp_from_address='setup@cpower.software';
 $smtp_from_name=$site_name;
 
 // contact us email
-$contact_us_email = 'a.lakehal@createam-dz.com';
+$contact_us_email = 'info@erecovery.dz';
 
 // open ssl iv & hash method should be global 
 // inorder to be used both in encrypt & decrypt

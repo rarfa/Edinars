@@ -117,8 +117,8 @@ if($ii>0) {
       <div class="container" style="padding-top:30px;padding-bottom:30px">
       <div id="contactus" class="col-sm-12">
           <h3>Contact</h3>
-          Tél.: <b>0560 20 30 71</b><br>
-          Email: <b>info@edinars.net</b><br>
+          Tél.: <b>0542 08 80 93</b><br>
+          Email: <b>info@erecovery.dz</b><br>
           Adresse : <b>Coop les vergers 1 lot n°2 Birkhadem</b><br>
           <h4>Contact via formulaire</h4>
 
