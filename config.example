@@ -10,18 +10,16 @@ if ($host == "local") {
     $db_tbprefix='dp';
 
     define("BASE_URL", "");
-
     error_reporting(E_ALL);
+    
 } else {
     $db_hostname='shareddb1a.hosting.stackcp.net';
     $db_username='dbusername';
     $db_password='dbpasword001122';
     $db_database='ed1nar3_live';
     $db_tbprefix='dp';
-    // $db_username='sysAdmin';
-    // $db_password='TUalm1vc0F0g';
 
-    define("BASE_URL", "https://v2.edinars.dz");
+    define("BASE_URL", "https://beta.erecovery.dz");
 
     error_reporting(0);
 }
@@ -33,18 +31,18 @@ date_default_timezone_set('Africa/Algiers');
 // 
 // PLEASE DO NOT CHANGE ANY PARAMETERS MANUALLY! USE ADMIN AREA FOR IT   ###
 // 
-$site_name='Edinars';
-$site_title='Bienvenue - Edinars Services de Paiements en Algerie';
+$site_name='Erecovery';
+$site_title='Bienvenue - Erecovery Services de Paiements en Algerie';
 $site_charset='UTF-8';
-$site_copyrights='Edinars.com';
+$site_copyrights='Erecovery.dz';
 $site_keywords='payment, processor, payment gateway, paypal, pay online, escrow, send money, receive money, send cash online, online payment, start your own paypal, payment processor, pay money, ipn';
-$site_description='Edinars Enterprise - Services de paiements online';
+$site_description='Erecovery Enterprise - Services de paiements online';
 
-$admin_email='Services Edinars<no-replay@edinars.dz>';
-$admin_contact_email='Contact Edinars<support@edinars.dz>';
-$CCP_email = 'Services CCP Edinars<sales@hostdz.com>';
-$withdraw_email = 'Services de retirer Edinars<sales@hostdz.com>';
-$error_email = 'support Edinars<sales@hostdz.com>';
+$admin_email='Services Erecovery<no-replay@Erecovery.dz>';
+$admin_contact_email='Contact Erecovery<support@edinars.dz>';
+$CCP_email = 'Services CCP Erecovery<sales@hostdz.com>';
+$withdraw_email = 'Services de retirer Erecovery<sales@hostdz.com>';
+$error_email = 'support Erecovery<sales@hostdz.com>';
 
 $admin_username='admin';
 $admin_password='admin';

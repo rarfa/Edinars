@@ -90,6 +90,7 @@ if (strlen($pincode) <= 0 || strlen($prehashkey) <= 0 || strlen($crypt) <= 0) {
                 $checkout['quantite']   = 1; // facture wahda
                 $checkout['facture_id'] = $facture_id; // facture wahda
                 $checkout['owner']      = $owner['username'];
+                $checkout['fullname']   = $owner['fname'] . " " . $owner['lname'];
                 $checkout['total']      = $prix_total;
                 $checkout['product']    = [];
 
@@ -249,6 +250,7 @@ if($array_reponse['success'] == "yes") {
                 $post['sellerusername'] = prnuser($array_reponse['product']['owner']);
                 $post['email-id']       = get_pin_id();
                 $post['commande']       = $_SESSION['commande'] ?? '';
+                $post['fullname']       = $array_reponse['fullname'];
 
 
 

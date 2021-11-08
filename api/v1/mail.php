@@ -10,8 +10,8 @@ require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 function sendMail(string $to, string $subject, string $content): bool
 {
-    $subject = utf8_decode(stripslashes($subject));
-    $content = utf8_decode(stripslashes($content));
+    $subject = utf8_decode(htmlspecialchars_decode($subject));
+    $content = utf8_decode(htmlspecialchars_decode($content));
 
     global $smtp_mailer, $smtp_host, $smtp_port, $smtp_user, $smtp_password, $smtp_encryption, $smtp_from_address, $smtp_from_name;
 
