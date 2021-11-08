@@ -145,6 +145,50 @@ function get_user_notifications(callback)
     );
 }
 
+function get_user_flexy_status()
+{
+    console.log("get_user_flexy_status() ");
+
+    var str="";
+    str += append_access_token();
+    str += "&from=website" + append_csrf_token_to_form();
+    $.ajax(
+        {
+            url: api_url + "confirm_mobile_recharge.php",
+            cache: false,
+            data: str,
+            type:"post",
+            dataType: 'json',
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.error("xhr.status = "+xhr.status);
+                console.error("thrownError = "+thrownError);
+            },
+            success: function (reponse) {
+
+                if(reponse.updated_transactions !== undefined) {
+
+                    refresh_user_datas();
+
+                }
+            }
+        }
+    );
+}
+
+
+setInterval(
+    function () {
+
+        let uri = window.location.hash;
+        if(uri == '#/') {
+            get_user_flexy_status();
+        }
+
+    }, 5000
+);
+
+
+
 function process_get_user_notifications(reponse, callback=null)
 {
     console.log("refresh_user_datas() "+reponse.success);
