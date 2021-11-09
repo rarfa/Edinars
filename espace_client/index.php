@@ -191,7 +191,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                                 <a href="#load_account/" onclick="$('#mb-paiement').removeClass('open');"><span class="fa fa-chevron-right"></span> <span class="xn-text">Recharger un compte</span></a>
                             </li>
                             <li>
-                                <a href="#generate_order/" onclick="$('#mb-paiement').removeClass('open');"><span class="fa fa-chevron-right"></span> <span class="xn-text">Générer une commande</span></a>
+                                <a href="#generate_order/" onclick="$('#mb-paiement').removeClass('open');"><span class="fa fa-chevron-right"></span> <span class="xn-text">Générer une facture</span></a>
                             </li>
 
                         </ul>

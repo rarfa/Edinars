@@ -110,7 +110,7 @@ $array_reponse['menu'] = [
 if($array_imp[0]['type']==1) { //pro
     $array_reponse['menu'] += [
     $mm++ => array("id" => "traders", "title" => "Marchants", "icon" => "fa-shopping-basket", "type" => "mb", "action" => "mb-traders"),
-    $mm++ => array("id" => "generate_order", "title" => "Générer une commande", "icon" => "fa-shopping-bag", "type" => "link", "action" => "./#generate_order/"),
+    $mm++ => array("id" => "generate_order", "title" => "Générer une facture", "icon" => "fa-shopping-bag", "type" => "link", "action" => "./#generate_order/"),
     ];
 }
 if($array_imp[0]['type']==2 || $array_imp[0]['type']==3) { // grossiste ou détallant
@@ -139,7 +139,7 @@ $array_reponse['menu_app'] = [
 // ];
 if($array_imp[0]['type']==1) { //pro
     $array_reponse['menu_app'] += [
-    $mm++ => array("title" => "Générer une commande", "icon" => "md-basket", "page" => "GenerateOrderPage"),
+    $mm++ => array("title" => "Générer une facture", "icon" => "md-basket", "page" => "GenerateOrderPage"),
     ];
 }
 if($array_imp[0]['type']==2 || $array_imp[0]['type']==3) { // grossiste ou détallant
