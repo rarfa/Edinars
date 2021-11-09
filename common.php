@@ -44,7 +44,7 @@ setcookie("ln", $data['lang_ch']);
 
 $data['Path']=dirname(__FILE__);
 
-$data['Prot'] = $_SERVER["HTTPS"] ?? 'http';
+$data['Prot'] = ($_SERVER["HTTPS"] == 'on') ? 'https' : 'http';
 
 $data['Templates']="{$data['Path']}/templates";
 $data['BannersPath']="{$data['Path']}/images/banners";
