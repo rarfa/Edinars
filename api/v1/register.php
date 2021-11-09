@@ -4,13 +4,13 @@ header('Content-Type: application/json');
 define("DIR_ROOT", "../../");
 require DIR_ROOT.'includes/All_files.php';
 
-$newuser = isset($_POST['newuser']) ? clean_var($_POST['newuser']) : '';
-$newmail = isset($_POST['newmail']) ? clean_var($_POST['newmail']) : '';
-$newpass = isset($_POST['newpass']) ? clean_var($_POST['newpass']) : '';
-$cfmpass = isset($_POST['cfmpass']) ? clean_var($_POST['cfmpass']) : '';
-$newques = isset($_POST['newques']) ? clean_var($_POST['newques']) : '';
-$newansw = isset($_POST['newansw']) ? clean_var($_POST['newansw']) : '';
-$newtype = isset($_POST['newtype']) ? clean_var($_POST['newtype']) : '';
+$newuser = isset($_REQUEST['newuser']) ? clean_var($_REQUEST['newuser']) : '';
+$newmail = isset($_REQUEST['newmail']) ? clean_var($_REQUEST['newmail']) : '';
+$newpass = isset($_REQUEST['newpass']) ? clean_var($_REQUEST['newpass']) : '';
+$cfmpass = isset($_REQUEST['cfmpass']) ? clean_var($_REQUEST['cfmpass']) : '';
+$newques = isset($_REQUEST['newques']) ? clean_var($_REQUEST['newques']) : '';
+$newansw = isset($_REQUEST['newansw']) ? clean_var($_REQUEST['newansw']) : '';
+$newtype = isset($_REQUEST['newtype']) ? clean_var($_REQUEST['newtype']) : '';
 
 $array_reponse = array( 'errors' => array(
                           'newmail' => '',
