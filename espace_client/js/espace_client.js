@@ -184,7 +184,7 @@ setInterval(
             get_user_flexy_status();
         }
 
-    }, 5000
+    }, 10000
 );
 
 
