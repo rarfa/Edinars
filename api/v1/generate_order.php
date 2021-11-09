@@ -64,7 +64,7 @@ if($array_reponse['success']=="yes") {
         $user_id,
         $amount,
         0,
-        1,
+        0, // type
         1,
         'Demande de paiement',
         "Details de la transaction:\n".$description
