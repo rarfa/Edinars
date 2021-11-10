@@ -379,8 +379,13 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
           //check_login
           $( document ).ready(function() {
             check_login();
+              $('.page-sidebar').height(0).height($(document).height());
+              $('.page-sidebar ul').height("100%")
+              $(window).resize(function(){
+                  $('.page-sidebar').height(0).height($(document).height());
+                  $('.page-sidebar ul').height("100%")
+              });
           })
-
           var routing_app = $.sammy(function() {
 
             this.get('#/', function() {
