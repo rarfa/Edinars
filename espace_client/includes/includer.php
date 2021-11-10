@@ -8,6 +8,31 @@ $form     = isset($_REQUEST['form'])    ? clean_var($_REQUEST['form'])    : ''; 
 
 $includes = dirname(__DIR__) . "/includes/";
 
+
+$distributorPages = ['load_account'];
+$marchandPages    = ['generate_order', 'products', 'traders_simple_payment', 'subscriptions', 'donations'];
+
+$member = get_member_info($_SESSION['uid'] ?? 0);
+$type   = $member['type'] ?? 0;
+
+if($type == 0 && in_array($page, [...$distributorPages, ...$marchandPages]))
+{
+    include $includes . "page.error.php";
+    die;
+}
+//professionel marchand
+if($type == 1 && in_array($page, $distributorPages))
+{
+    include $includes . "page.error.php";
+    die;
+}
+// distributeur or detallant
+if(($type == 2 || $type == 3) && in_array($page, $marchandPages))
+{
+    include $includes . "page.error.php";
+    die;
+}
+
 if($page && file_exists($includes . "page.".$page.".php")) {
 
     include $includes . "page.".$page.".php";

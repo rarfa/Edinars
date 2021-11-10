@@ -1154,7 +1154,6 @@ body.page-container-boxed .page-container {
   margin-top: 10px;
   padding: 10px;
   /*border: 1px solid #f7f7f7;*/
-  box-shadow: 1px 1px 3px #565656 inset;
   border-radius: 6px;
   /*background: #ffffff4f;*/
 }
