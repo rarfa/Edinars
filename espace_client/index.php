@@ -410,3 +410,15 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
     <!-- END SCRIPTS -->
     </body>
 </html>
+<style>
+    .swal2-modal .swal2-styled {
+        width: 100% !important;
+        margin: unset;
+    }
+
+    .swal2-modal button {
+        height: 45px;
+        width: 100% !important;
+        border-radius: 3px;
+    }
+</style>
