@@ -1,0 +1,8 @@
+if type = recharge & status ENATTENTE ==> make an ajax call to check status  from 
+
+
+ // get transaction status 
+ // imei 
+ // pin
+ // trx_id
+ https://dzflex.edinars.dz/api/beta/transaction.php?pin=8163&imei=1111111111 (&trx_id=113549)

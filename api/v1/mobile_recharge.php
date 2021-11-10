@@ -89,11 +89,9 @@ if($array_reponse['success']=="yes") {
 
 
     // ediffuse API
-    $URL  = "http://dzflex.edinars.net/server/service.html?ussd=Recharge&type_recharge=";
+    $URL  = "http://dzflex.edinars.dz/server/service.html?ussd=Recharge&type_recharge=";
     $URL .= $post['recharge_type']."&imei=1111111111&code=8163&mobile=".$post['mobile_flexy']."&montant_ussd=".$post['montant'];
     
-
-  
     $Load_xml_ussd = simplexml_load_file($URL);
     // exit;
     if(!(string)$Load_xml_ussd->trx) {
@@ -116,7 +114,7 @@ if($array_reponse['success']=="yes") {
         // creating USSD Request
         ussd(
             $user_id,
-            mysql_insert_id(),
+            mysqli_insert_id($data['cid']),
             $post['operator'],
             $post['mobile_flexy'],
             $post['montant'],

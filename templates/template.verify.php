@@ -11,7 +11,7 @@
  <p class="title">Mon compte > Verifier</p>
 		<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Verifier Mon compte Edinars</a></li>
+					<li><a href="#tabs-1">Verifier Mon compte Erecovery</a></li>
 				</ul>
 				<div id="tabs-1">
 					Information what documents members should send to site administrator to verify his account...
@@ -21,7 +21,7 @@
  <p class="title">Mon compte > Certifie</p>
 		<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Certifier Mon compte Edinars</a></li>
+					<li><a href="#tabs-1">Certifier Mon compte Erecovery</a></li>
 				</ul>
 				<div id="tabs-1">
 					Information what documents members should send to site administrator to verify his account...

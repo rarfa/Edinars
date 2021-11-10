@@ -15,8 +15,8 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
     <meta charset="utf-8">
     <meta name="csrf_token" content="<?=$_SESSION['csrf_token']?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Edinars Enterprise - Services de paiements online">
-    <meta name="author" content="Sarl Edinars Enterprise">
+    <meta name="description" content="Erecovery Enterprise - Services de paiements online">
+    <meta name="author" content="Sarl Erecovery Enterprise">
     <title>E-Recovery - Services de Paiements en Algerie</title>
 
     <meta name="theme-color" content="#e30613" />

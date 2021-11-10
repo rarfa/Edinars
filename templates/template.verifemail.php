@@ -21,7 +21,7 @@
                                     <div class="right">
                                     
                                         <p class="pm">
-                                            Ne saisissez jamais votre mot de pass dans des logiciels inconnus, car il pourrait s’agir d’une tentative frauduleuse d’accéder à vos données et à votre compte Edinars    </p>
+                                            Ne saisissez jamais votre mot de pass dans des logiciels inconnus, car il pourrait sï¿½agir dï¿½une tentative frauduleuse dï¿½accï¿½der ï¿½ vos donnï¿½es et ï¿½ votre compte Erecovery    </p>
                                         </p>
                                         <div class="aligncenter">
                                                 <a href="securite-Edinars" class="link">Plus information</a>

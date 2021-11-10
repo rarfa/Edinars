@@ -11,11 +11,11 @@ $array_reponse = array( "errors" => [
                         'success'=>'yes' );
 
 //csrf_token
-if(($csrf_token == '') || ($csrf_token != $session_csrf_token)) {
+/*f(($csrf_token == '') || ($csrf_token != $session_csrf_token)) {
 
     $array_reponse["errors"]['csrf_token'] =  'Vous n\'avez pas de permission!';
     $array_reponse['success'] = "no";
-}
+}*/
 
 
 if($array_reponse['success']!="yes") {

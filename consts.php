@@ -40,7 +40,7 @@ $data['confirmation_mobile_number'] = "‎0541348000";
 
 //
 
-$data['SiteName']=stripslashes($site_name);
+$data['SiteName']= 'Erecovery';
 
 $data['SiteTitle']=stripslashes($site_title);
 

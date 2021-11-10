@@ -12,7 +12,7 @@
         </div>
     </article>
     <article class="col-2">
-        <div class="col_title">Contacter Edinars</div>
+        <div class="col_title">Contacter Erecovery</div>
         <div class="col_text">
             <form method=post id="sigup-form">
                 <?if(!$data['PostSent']){?>    

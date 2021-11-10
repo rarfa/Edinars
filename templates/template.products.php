@@ -16,7 +16,7 @@
                 <p>
                     <span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
                     Ce service est disponible que pour les Professionnels.
-                    <br>pour plus d'information contact L'&egrave;quipe Edinars.
+                    <br>pour plus d'information contact L'&egrave;quipe Erecovery.
                 </p>
             </div>
         </div>

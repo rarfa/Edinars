@@ -131,7 +131,7 @@
     	$('#loading_mobile_recharge').show();
 
       $.ajax({
-    	  url: api_url + "get_mobile_recharge_offers.php",//"http://dzflex.edinars.net/api/beta/offer_json.php",
+    	  url: api_url + "get_mobile_recharge_offers.php",
     	  cache: false,
     	  data: str,
     		type:"post",

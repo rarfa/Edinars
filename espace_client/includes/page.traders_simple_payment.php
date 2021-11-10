@@ -242,7 +242,7 @@
                       <div class="faq-item">
                           <div class="faq-title"><span class="fa fa-angle-down"></span>refrence</div>
                           <div class="faq-text">
-                              <p>Le système, URL de référence (https://www.edinars.net)</p>
+                              <p>Le système, URL de référence (https://www.Erecovery.dz)</p>
                           </div>
                       </div>
 

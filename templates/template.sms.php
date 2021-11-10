@@ -2,10 +2,10 @@
 
 <div class="content">
 	<article class="col-1">
-		<div class="col_title">Sècuritè</div>
+		<div class="col_title">Sï¿½curitï¿½</div>
 		<div class="col_text">
 			<p class="pm">
-				Ne révélez jamais un code de carte Edinars à un tiers.
+				Ne rï¿½vï¿½lez jamais un code de carte Erecovery ï¿½ un tiers.
 			</p>				
 			
 				<a href="securite-Edinars.html" class="link">Plus information</a>
@@ -15,11 +15,11 @@
 		</div>
 	</article>
 	<article class="col-2">
-		<div class="col_title">Envoyer un SMS avec Edinars</div>
+		<div class="col_title">Envoyer un SMS avec Erecovery</div>
 		<div class="col_text">
 				<p class="pm">
-					Envoyer des SMS à n’importe quel moment partout dans le monde, c'est simple, rapide, 
-										et à tarif unique pour seulement 8 DA !!!
+					Envoyer des SMS ï¿½ nï¿½importe quel moment partout dans le monde, c'est simple, rapide, 
+										et ï¿½ tarif unique pour seulement 8 DA !!!
 					<br><br>Veuillez suivre les Etape suivante :
 				</p>
 				

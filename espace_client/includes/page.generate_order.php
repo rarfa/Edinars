@@ -5,7 +5,7 @@
     <ul class="breadcrumb">
         <li><a href="#">Espace client</a></li>
         <li><a href="./#settings/">Paiement</a></li>
-        <li class="active">Générer une commande</li>
+        <li class="active">Générer une facture</li>
     </ul>
     <!-- END BREADCRUMB -->
 
@@ -14,7 +14,7 @@
       <div class="col-md-12">
         <div class="panel panel-default tabs">
             <ul class="nav nav-tabs nav-justified">
-                <li class="active" id="li_generate_order_tab1" ><a href="#generate_order_tab1" data-toggle="tab" aria-expanded="true">Générer une commande</a></li>
+                <li class="active" id="li_generate_order_tab1" ><a href="#generate_order_tab1" data-toggle="tab" aria-expanded="true">Générer une facture</a></li>
             </ul>
             <div class="panel-body tab-content">
                 <div class="tab-pane active" id="generate_order_tab1">

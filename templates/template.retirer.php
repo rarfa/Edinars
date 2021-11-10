@@ -19,7 +19,7 @@
                 <p>
                     <span class="ui-icon ui-icon-alert" style="float: centre; margin-right: .3em;"></span> 
                     Ce service est disponible que pour les Professionnels.
-                    <br>pour plus d'information contact L'&egrave;quipe Edinars.
+                    <br>pour plus d'information contact L'&egrave;quipe Erecovery.
                 </p>
             </div>
         </div>
@@ -256,10 +256,10 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <b>Votre demande de retirer le transfert a été envoyé.
+                                                <b>Votre demande de retirer le transfert a ï¿½tï¿½ envoyï¿½.
                                                 <br>Vous devriez recevoir une notification par e-mail au sujet de cette transaction.    
-                                                <br>Cette transaction sera traitée dans les 24 heures.
-                                                <br>S'il vous plaît être patient
+                                                <br>Cette transaction sera traitï¿½e dans les 24 heures.
+                                                <br>S'il vous plaï¿½t ï¿½tre patient
                                         </b>
                                             </td>
                                         </tr>

@@ -44,7 +44,7 @@ setcookie("ln", $data['lang_ch']);
 
 $data['Path']=dirname(__FILE__);
 
-$data['Prot'] = $_SERVER["HTTPS"] ?? 'http';
+$data['Prot'] = ($_SERVER["HTTPS"] == 'on') ? 'https' : 'http';
 
 $data['Templates']="{$data['Path']}/templates";
 $data['BannersPath']="{$data['Path']}/images/banners";
@@ -3547,16 +3547,28 @@ function get_transactions($uid, $dir='both', $type=-1, $status=-1, $start=0,$cou
     $limit=($start?($count?" LIMIT {$start},{$count}":" LIMIT {$start}"):
     ($count?" LIMIT {$count}":''));
 
-    $sql = "SELECT *,(TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`".
-    " FROM `{$data['DbPrefix']}transactions` ".
+    /*$sql = "SELECT *,(TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`, `dp_ussd`.`ussd_retries`".
+    " FROM `{$data['DbPrefix']}transactions` INNER JOIN `dp_ussd` ON `dp_ussd`.`ussd_trx_id` = `transactions`.`id`".
     " WHERE `{$data['DbPrefix']}transactions`.id !=0 ".
     ($uid?" AND ".set_trtype($uid, $dir):'').
     ($type<0? '' : " AND `type`={$type}").
     ($status<0? '' : " AND `status`={$status}").
     ($transaction_id == '' ? '' : " AND `id` = {$transaction_id}").
+    " {$order}{$limit}";*/
+
+    // added flexy status 
+    // each transaction has one record in dp_ussd (one to one)
+    $sql = "SELECT`dp_transactions`.*, (TO_DAYS(NOW())-TO_DAYS(`tdate`)) as `period`, `dp_ussd`.`ussd_retries`".
+
+    " FROM `dp_transactions` LEFT JOIN `dp_ussd` ON `dp_ussd`.`ussd_trx_id` = `dp_transactions`.`id`".
+
+    " WHERE `dp_transactions`.`id` != 0 ".
+    ($uid?" AND ".set_trtype($uid, $dir):'').
+    ($type<0? '' : " AND `dp_transactions`.`type`={$type}").
+    ($status<0? '' : " AND `dp_transactions`.`status`={$status}").
+    ($transaction_id == '' ? '' : " AND `dp_transactions`.`id` = {$transaction_id}").
     " {$order}{$limit}";
 
-    // echo nl2br($sql);
 
     $trans=db_rows($sql);
 
@@ -3611,6 +3623,7 @@ function get_transactions($uid, $dir='both', $type=-1, $status=-1, $start=0,$cou
         $result[$key]['canview']=($value['type']>=0&&$value['type']<=3);
         $result[$key]['canrefund']=can_refund($value['id'], $uid);
         $result[$key]['trxid']=$value['trxid'];
+        $result[$key]['ussd_retries'] = $value['ussd_retries'];
     }
     return $result;
 }
