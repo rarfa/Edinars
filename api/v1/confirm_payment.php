@@ -42,7 +42,7 @@ if(!$trx_id || !$transaction[0]['id']) {
 // echo '<br>--------------<br>'.$balance_disponible;
 // exit();
 
-if(!$code_pin || !verify_user_pincode($code_pin) && $_REQUEST['from'] !== 'website') {
+if((!$code_pin || !verify_user_pincode($code_pin)) && $_REQUEST['from'] == 'website') {
     $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
     $array_reponse['success']="no";
 }
