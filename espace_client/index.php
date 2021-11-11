@@ -416,7 +416,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
         margin: unset;
     }
 
-    .swal2-modal button {
+    .swal2-modal button:not(#show_transaction_actions > button){
         height: 45px;
         width: 100% !important;
         border-radius: 3px;

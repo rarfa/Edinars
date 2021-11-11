@@ -67,6 +67,19 @@
              </div>
          </div>
      </div><!--/.item-->
+        <div class="item" style="background-image: url(images/slides/hostdz.jpg);background-position: 50% 0;background-size: cover;height:500px;">
+            <div class="slider-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="carousel-content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.item-->
     </div><!--/.owl-carousel-->
 </section><!--/#main-slider-->
 
