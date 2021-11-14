@@ -44,7 +44,7 @@
                       <div class="col-md-6 col-xs-12">
                         <div class="input-group">
                           <span class="input-group-addon"><span class="fa fa-lock"></span></span>
-                          <input type="text" class="form-control" id="code_pin" name="code_pin" required>
+                          <input type="password" class="form-control" id="code_pin" name="code_pin" required>
                         </div>
                         <span class="help-block">Entrer votre code pin</span>
                       </div>
