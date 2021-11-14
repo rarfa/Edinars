@@ -3983,7 +3983,7 @@ function update_transaction_status($uid, $id, $status)
     $comments       = '';
 
     switch($status){
-    case 1:
+    case 2:
         if($uid > 0) {
             $where=" AND `sender`={$uid}";
         }
@@ -3998,16 +3998,13 @@ function update_transaction_status($uid, $id, $status)
             send_email('CONFIRM-ESCROW', $post);
         }
         break;
-    case 2:
-        if(($uid>0)&&($uid==$tran['sender'])) {
-            break;
-        }
+    case 3:
         $comments="La transaction a &eacute;t&eacute; annul&eacute;e par {$name}";
         if($tran['otype']==3) {
             send_email('CANCEL-ESCROW', $post);
         }
         break;
-    case 3:
+    case 4:
         $comments="La transaction a &eacute;t&eacute; rembours&eacute;e par {$name}";
         if($tran['otype']==3) {
             send_email('REFUND-ESCROW', $post);
