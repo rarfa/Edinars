@@ -66,7 +66,7 @@ if(!$amount) {
 }
 
 //verify valid pin_code
-if(!$code_pin || !(get_member_pin_code($user_id)==$code_pin)) {
+if((!$code_pin || !get_member_pin_code($user_id)==$code_pin) && $_REQUEST['from'] == 'website') {
      $array_reponse['errors']['code_pin'] = "Code PIN incorrect";
      $array_reponse['success']="no";
 }
