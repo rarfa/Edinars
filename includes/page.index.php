@@ -1,6 +1,6 @@
-<section id="main-slider">
-    <div class="owl-carousel">
-        <div class="item" style="background-image: url(images/slides/bg1.jpg);background-position: 50% 0;background-size: 100% 100%;">
+<section id="main-slider" style="height: 500px">
+    <div class="owl-carousel" style="height: 500px">
+        <div class="item" style="height: 500px;background-image: url(images/slides/bg1.jpg);background-position: 50% 0;background-size: 100% 100%;">
             <div class="slider-inner">
                 <div class="container">
                     <div class="row">
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div><!--/.item-->
-       <div class="item" style="background-image: url(images/slides/hostdz.jpg);background-position: 50% 0;background-size: 100% 100%;">
+       <div class="item" style="height: 500px;background-image: url(images/slides/hostdz.jpg);background-position: 50% 0;background-size: 100% 100%;">
             <div class="slider-inner">
                 <div class="container">
                     <div class="row">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div><!--/.item-->
-        <div class="item" style="background-image: url(images/slides/slid_mobilis.jpg);background-position: 50% 0;background-size: 100% 100%;">
+        <div class="item" style="height: 500px;background-image: url(images/slides/slid_mobilis.jpg);background-position: 50% 0;background-size: 100% 100%;">
            <div class="slider-inner">
                <div class="container">
                    <div class="row">
@@ -41,7 +41,7 @@
                </div>
            </div>
        </div><!--/.item-->
-       <div class="item" style="background-image: url(images/slides/slide_ooredoo.jpg);background-position: 50% 0;background-size: 100% 100%;">
+       <div class="item" style="height: 500px;background-image: url(images/slides/slide_ooredoo.jpg);background-position: 50% 0;background-size: 100% 100%;">
           <div class="slider-inner">
               <div class="container">
                   <div class="row">
@@ -54,7 +54,7 @@
               </div>
           </div>
       </div><!--/.item-->
-      <div class="item" style="background-image: url(images/slides/slide_djezzy.jpg);background-position: 50% 0;background-size: 100% 100%;">
+      <div class="item" style="height: 500px;background-image: url(images/slides/slide_djezzy.jpg);background-position: 50% 0;background-size: 100% 100%;">
          <div class="slider-inner">
              <div class="container">
                  <div class="row">

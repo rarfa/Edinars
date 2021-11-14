@@ -256,7 +256,7 @@ ul.nostyle i {
   overflow: hidden;
 }
 #main-slider .item {
-  height: 558px;
+  height: 500px;
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-size: contain;
@@ -1051,7 +1051,7 @@ ul.nostyle i {
 {
   #main-slider .item
   {
-     height: 558px;
+     height: 500px;
 
   }
 }
