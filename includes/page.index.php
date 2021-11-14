@@ -135,12 +135,6 @@
 
 <section id="services" >
     <div class="container">
-
-        <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">SERVICES</h2>
-            <p class="text-center wow fadeInDown"></p>
-        </div>
-
         <div class="row">
             <div class="features">
               <div class="col-sm-12">
