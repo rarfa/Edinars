@@ -86,7 +86,7 @@ if($ii>0) {
         </script> -->
       </div>
       <div class="col-sm-3">
-        <h4><?php echo $num_points; ?> Points de vente</h4>
+        <h4><?php echo $num_points; ?> Points de recouvrement</h4>
         <?php echo $html ?>
         <div class="map-pager">
             <div class="inner-list">
