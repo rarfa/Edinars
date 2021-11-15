@@ -92,7 +92,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                                 <!-- <span class="label label-danger"><span class="notifications_count">0</span> notification(s)</span> -->
                             </div>
                         </div>
-                        <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;" id="notifications_list">
+                        <div class="panel-body list-group list-group-contacts scroll" id="notifications_list">
                             <a href="#" class="list-group-item">
                                 <span  class="fa fa-bell fa-4x pull-left" style="color:#73be28"></span>
                                 <span class="contacts-title">Titre</span>

@@ -1412,6 +1412,7 @@ a.list-group-item:focus {
 .list-group-contacts .list-group-item p {
   margin-bottom: 0px;
   line-height: 20px;
+  margin-left: 58px;
 }
 .list-group-contacts .list-group-item.active {
   background: #F5F5F5;
@@ -7419,4 +7420,13 @@ display:none;
 
 .x-navigation.x-navigation-minimized li.xn-profile .profile-mini:hover {
   background: white;
+}
+
+.v-align-middle {
+  vertical-align: middle;
+}
+
+.mt-10 {
+  position: relative;
+  top: -15px
 }

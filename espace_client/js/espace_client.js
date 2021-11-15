@@ -209,16 +209,16 @@ function process_get_user_notifications(reponse, callback=null)
             // alert("type = "+reponse.notifications[key].type);
             if(reponse.notifications[key].type=="transaction") {
                 rows_notification += '<a href="javascript:;" class="list-group-item" onclick="show_transaction(\''+reponse.notifications[key].transaction_id+'\')">';
-                rows_notification += '<span  class="fa fa-bell fa-4x pull-left" style="color:#73be28"></span>';
-                rows_notification += '<span class="contacts-title">'+user_datas.transaction_types[reponse.notifications[key].transaction_type]+'</span>';
-                rows_notification += '<p>'+reponse.notifications[key].transaction_comments+'</p>';
+                rows_notification += '<span  class="fa fa-bell fa-4x v-align-middle" style="color:#e30613"></span>';
+                rows_notification += '<span class="contacts-title v-align-middle">'+user_datas.transaction_types[reponse.notifications[key].transaction_type]+'</span>';
+                rows_notification += '<p class="mt-10">'+reponse.notifications[key].transaction_comments+'</p>';
                 rows_notification += '</a>';
             }else if (reponse.notifications[key].type=="message") {
 
                 rows_notification += '<a href="javascript:;" class="list-group-item" onclick="show_notification(\''+reponse.notifications[key].id+'\')">';
-                rows_notification += '<span class="fa fa-envelope fa-4x pull-left" style="color:#73be28"></span>';
-                rows_notification += '<span class="contacts-title">Message</span>';
-                rows_notification += '<p>'+reponse.notifications[key].message+'</p>';
+                rows_notification += '<span class="fa fa-envelope fa-4x v-align-middle" style="color:#e30613"></span>';
+                rows_notification += '<span class="contacts-title v-align-middle">Message</span>';
+                rows_notification += '<p class="mt-10">'+reponse.notifications[key].message+'</p>';
                 rows_notification += '</a>';
             }
 
