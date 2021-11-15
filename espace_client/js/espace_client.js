@@ -180,7 +180,7 @@ setInterval(
     function () {
 
         let uri = window.location.hash;
-        if(uri == '#/') {
+        if((uri == '#/') || (uri == '#history/')) {
             get_user_flexy_status();
         }
 
