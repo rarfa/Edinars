@@ -33,7 +33,7 @@ $balance_disponible  = select_balance_disponible($transaction_details['sender'])
 if(!$trx_id || !$transaction[0]['id']) {
     $array_reponse['errors']['trx_id']="Numéro de transaction incorrect";
     $array_reponse['success'] = "no";
-}elseif(abs($transaction[0]['oamount']) > $balance_disponible) {
+}elseif((abs($transaction[0]['oamount']) > $balance_disponible ) && $reject!= 'yes') {
     $array_reponse['errors']['confirm_payment']="Votre solde est insuffisant pour effectuer cette transaction";
     $array_reponse['success'] = "no";
 }
