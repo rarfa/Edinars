@@ -44,8 +44,8 @@ if(!$phone) {
     $array_reponse['success']="no";
 }
 
-if(!$amount || $amount < 30) {
-    $array_reponse['errors']['amount']="Le montant est incorrect";
+if(!$amount || $amount < 30 || $amount > 100) {
+    $array_reponse['errors']['amount']="Le montant est limité entre 30 et 100 dzd pour cette version BETA";
     $array_reponse['success']="no";
 }elseif($amount+ $data['flexy_fee'] > $data['Balance-disponible']) {
     $array_reponse['errors']['mobile_recharge']="Votre solde est insuffisant pour effectuer cette transaction";
